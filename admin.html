@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Donation Admin | EduGM UniTools</title>
+<style>
+:root {
+  --blue:#1769e0; --dark:#12335b; --bg:#f4f7fc;
+  --border:#dce5f1; --text:#243449;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px}
+.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:20px;font-weight:bold;color:var(--dark)}
+.brand span{color:var(--blue)}
+main{max-width:1100px;margin:28px auto;padding:0 16px 40px}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:20px}
+.login{max-width:420px;margin:50px auto}
+h1,h2{color:var(--dark);margin-top:0}
+h1{font-size:25px}h2{font-size:19px}
+label{display:block;font-size:14px;margin:13px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px}
+button{border:0;border-radius:8px;padding:10px 13px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+.primary{background:var(--blue);color:white}
+.secondary{background:#edf2fa;color:var(--dark)}
+.verify{background:#e4f7e9;color:#176b35}
+.reject{background:#ffebeb;color:#a61b1b}
+.hold{background:#fff2d9;color:#805400}
+.logout{background:#edf2fa;color:var(--dark)}
+button:hover{filter:brightness(.97)}
+.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere}
+.error{color:#b42318}.success{color:#137333}
+.hidden{display:none!important}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{padding:16px;border:1px solid var(--border);border-radius:10px;background:#f9fbff}
+.stat span{display:block;color:#68778b;font-size:13px}
+.stat strong{display:block;font-size:25px;margin-top:6px;color:var(--dark)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar input{flex:1;min-width:180px}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px;vertical-align:top}
+th{background:#f7f9fd;color:var(--dark)}
+.status{display:inline-block;border-radius:20px;padding:4px 9px;font-size:12px;font-weight:bold}
+.pending{background:#edf2fa;color:#46566b}
+.verified{background:#e4f7e9;color:#176b35}
+.rejected{background:#ffebeb;color:#a61b1b}
+.hold-status{background:#fff2d9;color:#805400}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions button{font-size:12px;padding:8px}
+.small{color:#68778b;font-size:13px}
+footer{text-align:center;padding:20px;color:#68778b;font-size:13px}
+@media(max-width:650px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .card{padding:16px}.nav{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">EduGM <span>UniTools</span> <small>Admin</small></div>
+    <button id="logoutBtn" class="logout hidden">Logout</button>
+  </div>
+</header>
+
+<main>
+  <section id="loginSection" class="card login">
+    <h1>Admin Login</h1>
+    <p class="small">Authorized donation reviewers only.</p>
+    <form id="loginForm">
+      <label for="email">Admin email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button id="loginBtn" class="primary" type="submit" style="width:100%;margin-top:18px">Sign in</button>
+    </form>
+    <p id="loginMessage" class="message" role="status"></p>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="card">
+      <h1>Donation Dashboard</h1>
+      <p id="welcome" class="small"></p>
+      <div class="stats">
+        <div class="stat"><span>Total records</span><strong id="totalCount">0</strong></div>
+        <div class="stat"><span>Pending</span><strong id="pendingCount">0</strong></div>
+        <div class="stat"><span>Verified</span><strong id="verifiedCount">0</strong></div>
+        <div class="stat"><span>On hold / Rejected</span><strong id="otherCount">0</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Donation Records</h2>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search donor or transaction reference">
+        <select id="statusFilter" aria-label="Filter by status">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="verified">Verified</option>
+          <option value="rejected">Rejected</option>
+          <option value="hold">Hold</option>
+        </select>
+        <button id="refreshBtn" class="secondary">Refresh</button>
+      </div>
+      <p id="dashboardMessage" class="message" role="status"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Donor</th>
+              <th>Amount</th>
+              <th>Transaction reference</th>
+              <th>Status</th>
+              <th>Submitted</th>
+              <th>Review actions</th>
+            </tr>
+          </thead>
+          <tbody id="donationRows">
+            <tr><td colspan="6">Sign in to load donation records.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Verify a donation only after independently checking the payment. A submitted screenshot or transaction reference alone is not proof of successful payment.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 EduGM UniTools. Maintained and developed by CodeBihin.
+</footer>
+
+<script type="module">
+import {
+  auth, db,
+  signInWithEmailAndPassword, onAuthStateChanged, signOut,
+  collection, getDocs, doc, updateDoc, setDoc, deleteDoc,
+  addDoc, serverTimestamp
+} from "./firebase.js";
+
+const ADMIN_UID = "xrQ5oHinaAaddySn09V3k8CRAo52";
+
+const loginSection = document.getElementById("loginSection");
+const dashboard = document.getElementById("dashboard");
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+const dashboardMessage = document.getElementById("dashboardMessage");
+const logoutBtn = document.getElementById("logoutBtn");
+const rows = document.getElementById("donationRows");
+
+let donations = [];
+let busy = false;
+
+function message(element, text, isError = false) {
+  element.textContent = text;
+  element.className = "message " + (isError ? "error" : "success");
+}
+
+function clearMessage(element) {
+  element.textContent = "";
+  element.className = "message";
+}
+
+function formatDate(value) {
+  if (!value) return "—";
+  let date;
+
+  if (typeof value.toDate === "function") date = value.toDate();
+  else if (typeof value === "string" || typeof value === "number") date = new Date(value);
+  else return "—";
+
+  return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString();
+}
+
+function safeText(value) {
+  return value == null || value === "" ? "—" : String(value);
+}
+
+function statusClass(status) {
+  if (status === "verified") return "verified";
+  if (status === "rejected") return "rejected";
+  if (status === "hold") return "hold-status";
+  return "pending";
+}
+
+function render() {
+  document.getElementById("totalCount").textContent = donations.length;
+  document.getElementById("pendingCount").textContent =
+    donations.filter(d => (d.status || "pending") === "pending").length;
+  document.getElementById("verifiedCount").textContent =
+    donations.filter(d => d.status === "verified").length;
+  document.getElementById("otherCount").textContent =
+    donations.filter(d => ["hold", "rejected"].includes(d.status)).length;
+
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  const filter = document.getElementById("statusFilter").value;
+
+  const filtered = donations.filter(d => {
+    const status = d.status || "pending";
+    const searchable = [
+      d.donorName, d.transactionId, d.email
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    return (filter === "all" || status === filter) &&
+      searchable.includes(query);
+  });
+
+  rows.replaceChildren();
+
+  if (!filtered.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 6;
+    td.textContent = donations.length
+      ? "No donations match your search."
+      : "No donation records yet. Connect your Google Form integration to import submissions.";
+    tr.appendChild(td);
+    rows.appendChild(tr);
+    return;
+  }
+
+  for (const d of filtered) {
+    const tr = document.createElement("tr");
+
+    function cell(value) {
+      const td = document.createElement("td");
+      td.textContent = safeText(value);
+      tr.appendChild(td);
+      return td;
+    }
+
+    cell(d.donorName);
+    cell(d.amount == null ? "—" : "₹" + d.amount);
+    cell(d.transactionId);
+
+    const statusCell = cell("");
+    const badge = document.createElement("span");
+    badge.className = "status " + statusClass(d.status || "pending");
+    badge.textContent = d.status || "pending";
+    statusCell.appendChild(badge);
+
+    cell(formatDate(d.submittedAt));
+
+    const actionCell = cell("");
+    const actionBox = document.createElement("div");
+    actionBox.className = "actions";
+
+    for (const action of [
+      {status: "verified", label: "Verify", cls: "verify"},
+      {status: "hold", label: "Hold", cls: "hold"},
+      {status: "rejected", label: "Reject", cls: "reject"}
+    ]) {
+      const btn = document.createElement("button");
+      btn.textContent = action.label;
+      btn.className = action.cls;
+      btn.disabled = busy || d.status === action.status;
+      btn.addEventListener("click", () => changeStatus(d.id, action.status));
+      actionBox.appendChild(btn);
+    }
+
+    actionCell.appendChild(actionBox);
+    rows.appendChild(tr);
+  }
+}
+
+async function loadDonations() {
+  clearMessage(dashboardMessage);
+  rows.replaceChildren();
+
+  const loadingRow = document.createElement("tr");
+  const loadingCell = document.createElement("td");
+  loadingCell.colSpan = 6;
+  loadingCell.textContent = "Loading donations…";
+  loadingRow.appendChild(loadingCell);
+  rows.appendChild(loadingRow);
+
+  try {
+    const snapshot = await getDocs(collection(db, "donations"));
+    donations = snapshot.docs.map(item => ({id: item.id, ...item.data()}));
+
+    donations.sort((a, b) => {
+      const time = value => value?.toMillis ? value.toMillis() :
+        (Date.parse(value || "") || 0);
+      return time(b.submittedAt) - time(a.submittedAt);
+    });
+
+    render();
+    message(dashboardMessage, "Donation records loaded.");
+  } catch (error) {
+    donations = [];
+    render();
+    message(dashboardMessage,
+      "Could not load donations. Check Firestore rules and your admin UID. " +
+      error.message, true);
+  }
+}
+
+async function changeStatus(id, status) {
+  if (busy) return;
+
+  const donation = donations.find(item => item.id === id);
+  if (!donation) return;
+
+  if (status === "verified" &&
+      !confirm("Confirm that you independently checked this payment and want to publish the donation?")) {
+    return;
+  }
+
+  if (status === "rejected" &&
+      !confirm("Reject this donation submission?")) {
+    return;
+  }
+
+  busy = true;
+  render();
+  clearMessage(dashboardMessage);
+
+  try {
+    const user = auth.currentUser;
+    if (!user || user.uid !== ADMIN_UID) {
+      throw new Error("Administrator authorization required.");
+    }
+
+    const reviewTime = new Date().toISOString();
+
+    // Update the private donation record.
+    await updateDoc(doc(db, "donations", id), {
+      status,
+      reviewedAt: serverTimestamp(),
+      reviewedBy: user.uid
+    });
+
+    if (status === "verified") {
+      // Only safe display fields are copied to the public collection.
+      await setDoc(doc(db, "publicDonations", id), {
+        donorName: String(donation.donorName || "Anonymous").slice(0, 80),
+        amount: Number(donation.amount) || 0,
+        status: "verified",
+        verifiedAt: reviewTime
+      });
+    } else {
+      // A rejected or held donation must not remain public.
+      await deleteDoc(doc(db, "publicDonations", id));
+    }
+
+    await addDoc(collection(db, "auditLogs"), {
+      donationId: id,
+      action: status,
+      adminUid: user.uid,
+      createdAt: serverTimestamp()
+    });
+
+    message(dashboardMessage, "Donation status updated: " + status + ".");
+    await loadDonations();
+  } catch (error) {
+    message(dashboardMessage,
+      "The operation may not have completed fully. Check the record and public listing before retrying. " +
+      error.message, true);
+    await loadDonations();
+  } finally {
+    busy = false;
+    render();
+  }
+}
+
+loginForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  loginMessage.textContent = "";
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const loginBtn = document.getElementById("loginBtn");
+
+  loginBtn.disabled = true;
+
+  try {
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+
+    if (credential.user.uid !== ADMIN_UID) {
+      await signOut(auth);
+      throw new Error("This account is not authorized for the donation admin panel.");
+    }
+
+    message(loginMessage, "Login successful.");
+  } catch (error) {
+    message(loginMessage, "Login failed: " + error.message, true);
+  } finally {
+    loginBtn.disabled = false;
+  }
+});
+
+logoutBtn.addEventListener("click", () => signOut(auth));
+document.getElementById("refreshBtn").addEventListener("click", loadDonations);
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("statusFilter").addEventListener("change", render);
+
+onAuthStateChanged(auth, async user => {
+  if (user && user.uid === ADMIN_UID) {
+    loginSection.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+    logoutBtn.classList.remove("hidden");
+    document.getElementById("welcome").textContent = "Signed in as " + user.email;
+    await loadDonations();
+  } else {
+    dashboard.classList.add("hidden");
+    logoutBtn.classList.add("hidden");
+    loginSection.classList.remove("hidden");
+    if (user) await signOut(auth);
+  }
+});
+</script>
+</body>
+</html>
