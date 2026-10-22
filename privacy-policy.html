@@ -5,53 +5,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Privacy Policy - EduGM UniTools</title>
-
-    <meta name="description"
-          content="Privacy Policy for EduGM UniTools, an educational tools platform.">
+    <title>Privacy Policy | EduGM UniTools</title>
+    <meta name="description" content="Read the privacy policy of EduGM UniTools, an educational calculator and academic tools platform.">
 
     <style>
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            padding: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #ffffff;
-            color: #000000;
+            color: #171717;
             line-height: 1.8;
-            font-size: 16px;
         }
 
+        /* Header */
         header {
-            padding: 35px 20px;
-            text-align: center;
-            border-bottom: 1px solid #000000;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 6%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 30px;
+        .header-container {
+            max-width: 1150px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: #111827;
+            font-size: 23px;
             font-weight: bold;
+            white-space: nowrap;
         }
 
-        header p {
-            margin: 8px 0 0;
+        .brand span {
+            font-weight: normal;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #333333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #000000;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        /* Page heading */
+        .hero {
+            text-align: center;
+            padding: 45px 20px 25px;
+            background: #fafafa;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin: 0 0 8px;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #666666;
             font-size: 15px;
         }
 
+        /* Main content */
         main {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 30px 25px;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 24px 45px;
+        }
+
+        .updated {
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
         h2 {
             font-size: 21px;
             margin-top: 32px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         h3 {
@@ -61,47 +123,98 @@
 
         p {
             margin: 12px 0;
-            text-align: justify;
         }
 
         ul {
-            padding-left: 28px;
+            padding-left: 25px;
         }
 
         li {
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         a {
-            color: #000000;
-            text-decoration: underline;
             overflow-wrap: anywhere;
         }
 
-        .notice {
-            border: 1px solid #000000;
-            padding: 15px;
-            margin: 25px 0;
+        .contact-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            background: #fafafa;
         }
 
+        /* Footer */
         footer {
-            border-top: 1px solid #000000;
+            background: #f8f8f8;
+            border-top: 1px solid #e5e7eb;
+            padding: 30px 20px 20px;
             text-align: center;
-            padding: 25px 15px;
-            font-size: 14px;
         }
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 25px;
+        .footer-brand {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            color: #333333;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 14px;
+            margin-top: 18px;
+        }
+
+        .footer-note {
+            color: #666666;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 16px 20px;
+                position: static;
+            }
+
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 14px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px 18px;
+            }
+
+            .hero {
+                padding: 32px 16px 22px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
             }
 
             main {
-                padding: 20px 16px;
-            }
-
-            p {
-                text-align: left;
+                padding: 24px 18px 35px;
             }
 
             h2 {
@@ -113,425 +226,191 @@
 
 <body>
 
-<header>
-    <h1>EduGM UniTools</h1>
-    <p>Privacy Policy</p>
-</header>
-
-<main>
-
-    <p><strong>Last Updated:</strong> October 21, 2026</p>
-
-    <h2>1. Introduction</h2>
-
-    <p>
-        Welcome to EduGM UniTools. This Privacy Policy explains how
-        information may be collected, used, processed, stored, and
-        protected when you visit or use our website, educational
-        calculators, academic utilities, and other available services.
-    </p>
-
-    <p>
-        We understand that privacy is important to students, teachers,
-        visitors, and other users. We aim to handle personal information
-        responsibly and to explain our practices in a clear and simple way.
-    </p>
-
-    <p>
-        By accessing our website, you acknowledge that you have had the
-        opportunity to read this Privacy Policy. Where consent is legally
-        required, we will seek that consent separately when applicable.
-    </p>
-
-    <h2>2. Scope of This Policy</h2>
-
-    <p>
-        This policy applies to the EduGM UniTools website and the
-        educational services that link to this policy. It covers
-        information collected through website visits, contact messages,
-        and interactions with our tools, to the extent those activities
-        involve information covered by applicable privacy laws.
-    </p>
-
-    <p>
-        This policy does not automatically apply to external websites,
-        applications, or services operated by other organizations.
-        Those services may have their own privacy policies and terms.
-    </p>
-
-    <h2>3. Information We May Collect</h2>
-
-    <p>
-        The information collected depends on the features you use and
-        the technical configuration of our website. We may collect the
-        following categories of information where applicable.
-    </p>
-
-    <h3>3.1 Information You Provide</h3>
-
-    <p>
-        You may voluntarily provide information when contacting us,
-        submitting feedback, reporting an issue, or requesting support.
-        This information may include:
-    </p>
-
-    <ul>
-        <li>Your name, if you choose to provide it.</li>
-        <li>Your email address or other contact details.</li>
-        <li>The subject and content of your message.</li>
-        <li>Feedback, suggestions, or questions about our tools.</li>
-        <li>Other information you voluntarily include in your communication.</li>
-    </ul>
-
-    <h3>3.2 Technical Information</h3>
-
-    <p>
-        When you visit a website, the website server, hosting provider,
-        or other enabled technical services may automatically process
-        limited technical information, such as:
-    </p>
-
-    <ul>
-        <li>Internet Protocol (IP) address.</li>
-        <li>Browser name and version.</li>
-        <li>Device type and operating system.</li>
-        <li>Pages requested and approximate access times.</li>
-        <li>Referring webpage, where available.</li>
-        <li>Technical error reports and basic diagnostic information.</li>
-    </ul>
-
-    <p>
-        Whether this information is recorded, and how long it is retained,
-        depends on the services and server configuration in use.
-    </p>
-
-    <h2>4. Information Entered into Educational Tools</h2>
-
-    <p>
-        EduGM UniTools may provide academic calculators, percentage
-        calculators, SGPA and CGPA calculators, engineering utilities,
-        study resources, and other educational features.
-    </p>
-
-    <p>
-        Depending on the implementation of a particular tool, information
-        entered by a user may be processed directly in the browser or
-        transmitted to a server to provide the requested functionality.
-        We will describe additional data practices where appropriate.
-    </p>
-
-    <p>
-        We do not claim that all information entered into every tool is
-        automatically deleted or never stored. Data handling depends on
-        the design and configuration of that tool and its supporting
-        services.
-    </p>
-
-    <p>
-        Please do not enter passwords, banking details, government
-        identification numbers, confidential examination information,
-        or other sensitive personal data into general-purpose calculators.
-    </p>
-
-    <h2>5. How We Use Information</h2>
-
-    <p>
-        Information may be used for the following purposes, where
-        applicable:
-    </p>
-
-    <ul>
-        <li>To provide and operate website features.</li>
-        <li>To perform calculations and process user requests.</li>
-        <li>To answer questions and respond to support requests.</li>
-        <li>To identify and resolve technical problems.</li>
-        <li>To maintain website stability and security.</li>
-        <li>To understand website usage and improve user experience.</li>
-        <li>To detect abuse, spam, fraud, or unauthorized activity.</li>
-        <li>To comply with applicable legal obligations.</li>
-        <li>To protect our legitimate rights and the rights of others.</li>
-    </ul>
-
-    <p>
-        We aim to collect and use only information reasonably necessary
-        for the relevant purpose.
-    </p>
-
-    <h2>6. Legal Basis for Processing</h2>
-
-    <p>
-        Where applicable privacy laws require a legal basis for processing
-        personal information, we may rely on consent, providing a service
-        requested by the user, compliance with legal obligations, or
-        legitimate interests such as website security and maintenance.
-    </p>
-
-    <p>
-        Where processing relies on consent, you may withdraw your consent
-        as permitted by applicable law. Withdrawal does not necessarily
-        affect processing that was lawful before the withdrawal.
-    </p>
-
-    <h2>7. Cookies and Similar Technologies</h2>
-
-    <p>
-        Cookies are small files that websites may store on a user's
-        device. EduGM UniTools or its enabled service providers may use
-        cookies or similar technologies where required for functionality,
-        preferences, analytics, or advertising.
-    </p>
-
-    <p>
-        Essential cookies, where used, may support basic website
-        functionality. Optional analytics or advertising technologies
-        may be used only as permitted by applicable law and the relevant
-        consent requirements.
-    </p>
-
-    <p>
-        You can review your browser settings to manage or delete cookies.
-        Blocking certain cookies may affect some website features.
-    </p>
-
-    <p>
-        This policy does not mean that every type of cookie is currently
-        active on our website. Actual use depends on the services
-        installed and enabled.
-    </p>
-
-    <h2>8. Third-Party Services</h2>
-
-    <p>
-        We may use third-party providers to support hosting, website
-        security, email communication, analytics, content delivery,
-        or other website functions.
-    </p>
-
-    <p>
-        Such providers may process information when necessary to deliver
-        their services. Their processing is governed by their applicable
-        terms, privacy policies, and agreements with us.
-    </p>
-
-    <p>
-        We encourage users to review the privacy policies of third-party
-        services before interacting with them or providing information.
-    </p>
-
-    <h2>9. External Links</h2>
-
-    <p>
-        Our website may contain links to external websites, educational
-        resources, university pages, or other online services.
-        We do not control the content, security, or privacy practices
-        of websites operated by third parties.
-    </p>
-
-    <p>
-        Visiting an external website is your decision. Please review
-        that website's privacy policy before sharing personal information.
-    </p>
-
-    <h2>10. Data Sharing and Disclosure</h2>
-
-    <p>
-        We do not intend to make personal information publicly available
-        without a valid reason. However, information may be disclosed
-        in the following circumstances, where applicable:
-    </p>
-
-    <ul>
-        <li>
-            To service providers that help operate and maintain our website.
-        </li>
-        <li>
-            When necessary to respond to a lawful and valid legal request.
-        </li>
-        <li>
-            When reasonably necessary to investigate security incidents
-            or prevent fraud and abuse.
-        </li>
-        <li>
-            To protect the safety, rights, property, or security of users
-            and other affected parties.
-        </li>
-        <li>
-            In connection with a business transfer, where legally permitted
-            and subject to applicable safeguards.
-        </li>
-        <li>
-            When you specifically request or authorize a disclosure.
-        </li>
-    </ul>
-
-    <p>
-        Any disclosure remains subject to applicable legal requirements.
-    </p>
-
-    <h2>11. Data Retention</h2>
-
-    <p>
-        We retain personal information only for as long as reasonably
-        necessary for the purpose for which it was collected, unless
-        a longer retention period is required or permitted by law.
-    </p>
-
-    <p>
-        Retention periods may vary depending on the type of information,
-        the purpose of processing, security requirements, technical
-        limitations, and legal obligations.
-    </p>
-
-    <p>
-        Some information may remain temporarily in server logs, backups,
-        or service-provider systems after it is no longer actively used.
-    </p>
-
-    <h2>12. Data Security</h2>
-
-    <p>
-        We aim to implement reasonable technical and organizational
-        measures to protect information against unauthorized access,
-        alteration, disclosure, loss, or misuse.
-    </p>
-
-    <p>
-        Depending on the systems in use, these measures may include
-        access controls, software updates, security monitoring,
-        secure connections, and appropriate administrative practices.
-    </p>
-
-    <p>
-        No method of internet transmission, electronic storage, or
-        website security can guarantee absolute protection. Users
-        should also protect their devices and avoid sharing confidential
-        information through public or unsecured systems.
-    </p>
-
-    <h2>13. Your Privacy Rights</h2>
-
-    <p>
-        Depending on your location and applicable law, you may have
-        rights concerning your personal information. These rights may
-        include:
-    </p>
-
-    <ul>
-        <li>Requesting access to personal information about you.</li>
-        <li>Requesting correction of inaccurate information.</li>
-        <li>Requesting deletion of information, where applicable.</li>
-        <li>Withdrawing consent where processing relies on consent.</li>
-        <li>Objecting to or restricting certain processing activities.</li>
-        <li>Submitting a privacy-related complaint to the appropriate authority.</li>
-    </ul>
-
-    <p>
-        These rights are subject to applicable law, identity verification,
-        and any relevant legal exceptions. We may request sufficient
-        information to verify a privacy request before responding.
-    </p>
-
-    <h2>14. Children's Privacy</h2>
-
-    <p>
-        EduGM UniTools provides educational resources that may be useful
-        to students. We do not knowingly seek to collect unnecessary
-        personal information from children.
-    </p>
-
-    <p>
-        Where parental consent or other safeguards are required by law,
-        we will follow the applicable requirements. Parents or guardians
-        who believe that a child has provided personal information in
-       appropriately may contact us to request assistance.
-    </p>
-
-    <h2>15. Educational Information and Accuracy</h2>
-
-    <p>
-        Our tools are intended to assist with educational calculations
-        and general academic activities. Results may depend on the
-        information entered by the user and the calculation method used.
-    </p>
-
-    <p>
-        Users should independently verify important academic calculations
-        and consult the relevant university, institution, or official
-        source for authoritative rules, grading systems, examination
-        instructions, and academic decisions.
-    </p>
-
-    <p>
-        EduGM UniTools should not be assumed to be officially affiliated
-        with or endorsed by any university unless such affiliation has
-        been expressly established and authorized.
-    </p>
-
-    <h2>16. Changes to This Privacy Policy</h2>
-
-    <p>
-        We may update this Privacy Policy when our website, services,
-        technology, or legal obligations change.
-    </p>
-
-    <p>
-        Updated versions will be published on this page with a revised
-        "Last Updated" date. Where required by law, we will provide
-        additional notice or obtain consent for material changes.
-    </p>
-
-    <p>
-        We encourage users to review this page periodically to remain
-        informed about our privacy practices.
-    </p>
-
-    <h2>17. Contact Information</h2>
-
-    <p>
-        If you have questions, concerns, or requests relating to this
-        Privacy Policy or the handling of personal information, you
-        may contact us using the details below.
-    </p>
-
-    <div class="notice">
-        <p><strong>Website:</strong> EduGM UniTools</p>
-
-        <p>
-            <strong>Email:</strong>
-            <a href="mailto:admin@codebihin.in">
-                admin@codebihin.in
+    <!-- Website Header -->
+    <header>
+        <div class="header-container">
+            <a class="brand" href="index.html">
+                EduGM <span>UniTools</span>
             </a>
+
+            <nav aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact Us</a>
+                <a class="active"
+                   href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html"
+                   aria-current="page">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Heading -->
+    <section class="hero">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy matters to EduGM UniTools.</p>
+    </section>
+
+    <!-- Privacy Policy Content -->
+    <main>
+        <p class="updated">
+            <strong>Last Updated:</strong> October 22, 2026
         </p>
 
+        <h2>1. Introduction</h2>
         <p>
-            Please include "Privacy Request" in the subject line of
-            your email so that your enquiry can be identified easily.
+            Welcome to EduGM UniTools. We provide educational calculators,
+            academic utilities and other tools designed to support students
+            and learners. This Privacy Policy explains how information may
+            be collected, used and protected when you use our website.
         </p>
-    </div>
 
-    <h2>18. Final Statement</h2>
+        <h2>2. Information We Collect</h2>
+        <p>
+            Depending on the features you use, information may include
+            details you voluntarily provide, such as your name, email
+            address, feedback or support messages. Technical information,
+            such as browser type, device details and server logs, may also
+            be processed by our hosting or technical service providers.
+        </p>
 
-    <p>
-        We value the trust of our users and aim to handle information
-        responsibly, maintain appropriate safeguards, and communicate
-        clearly about our privacy practices.
-    </p>
+        <h2>3. Information Entered into Tools</h2>
+        <p>
+            Information entered into a calculator may be processed directly
+            in your browser or sent to a server, depending on how that tool
+            is implemented. Please avoid entering passwords, banking
+            details, government identification numbers or confidential
+            information into general-purpose educational tools.
+        </p>
 
-    <p>
-        By using EduGM UniTools, users are encouraged to read this policy
-        and exercise care when providing personal information online.
-    </p>
+        <h2>4. How We Use Information</h2>
+        <ul>
+            <li>To provide and operate educational tools.</li>
+            <li>To respond to enquiries and feedback.</li>
+            <li>To improve website performance and usability.</li>
+            <li>To troubleshoot technical problems.</li>
+            <li>To maintain website security and prevent misuse.</li>
+            <li>To comply with applicable legal requirements.</li>
+        </ul>
 
-</main>
+        <h2>5. Cookies and Third-Party Services</h2>
+        <p>
+            Our website or its service providers may use cookies or similar
+            technologies where enabled. Hosting, security, analytics or
+            other third-party services may process technical information
+            as needed to provide their services. Their own privacy policies
+            may also apply.
+        </p>
 
-<footer>
-    <p>
-        &copy; 2026 EduGM UniTools. All rights reserved.
-    </p>
-    <p>
-        Privacy Policy | EduGM UniTools
-    </p>
-</footer>
+        <h2>6. Data Sharing and Security</h2>
+        <p>
+            Information may be shared with service providers when necessary
+            to operate the website, or when disclosure is required or
+            permitted by applicable law. We aim to use reasonable measures
+            to protect information, but no online system can guarantee
+            absolute security.
+        </p>
+
+        <h2>7. Data Retention and Your Rights</h2>
+        <p>
+            Information may be retained for as long as reasonably necessary
+            for its intended purpose or as required by law. Depending on
+            applicable law, you may request access to, correction of or
+            deletion of your personal information.
+        </p>
+
+        <h2>8. Children's Privacy</h2>
+        <p>
+            EduGM UniTools provides educational resources that may be used
+            by students. We aim to handle personal information responsibly
+            and follow applicable requirements concerning children and
+            parental consent.
+        </p>
+
+        <h2>9. External Links</h2>
+        <p>
+            Our website may link to external websites and educational
+            resources. We do not control their content or privacy practices.
+            Please review the relevant policies before providing information
+            to an external service.
+        </p>
+
+        <h2>10. Educational Disclaimer</h2>
+        <p>
+            Our tools are intended to assist with academic calculations
+            and general educational activities. Always verify important
+            results with your university or another official source.
+            EduGM UniTools should not be assumed to be affiliated with or
+            endorsed by a university unless expressly authorized.
+        </p>
+
+        <h2>11. Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy as our services or legal
+            requirements change. Updated versions will be published on
+            this page with a revised date.
+        </p>
+
+        <h2>12. Contact Us</h2>
+        <p>
+            For privacy questions, support or requests, please contact us
+            using the email address below.
+        </p>
+
+        <div class="contact-box">
+            <p><strong>Platform:</strong> EduGM UniTools</p>
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:admin@codebihin.in">
+                    admin@codebihin.in
+                </a>
+            </p>
+            <p>
+                Please use the subject
+                <strong>Privacy Request</strong> for privacy-related enquiries.
+            </p>
+        </div>
+    </main>
+
+    <!-- Website Footer -->
+    <footer>
+        <div class="footer-brand">EduGM UniTools</div>
+
+        <p class="footer-note">
+            Educational calculators and academic tools for students.
+        </p>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+
+        <p class="copyright">
+            &copy; 2026 EduGM UniTools. All rights reserved.
+        </p>
+
+        <p class="footer-note">
+            Owned and operated by EduGM.
+        </p>
+
+        <p class="footer-note">
+            Maintained and developed by
+            <strong>CodeBihin</strong>.
+        </p>
+
+        <p class="footer-note">
+            All rights are reserved to their respective owners.
+            Third-party content remains the property of its respective owners.
+        </p>
+
+        <p class="footer-note">
+            Contact:
+            <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+        </p>
+    </footer>
 
 </body>
 </html>
