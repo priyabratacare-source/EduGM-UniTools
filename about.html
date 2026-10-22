@@ -1,0 +1,1138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | EduGM UniTools</title>
+
+    <meta name="description"
+          content="Discover the story, journey, mission and vision behind EduGM UniTools, an educational tools initiative developed by CodeBihin.">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        :root {
+            --blue: #1769e0;
+            --blue-dark: #0b2454;
+            --text: #202938;
+            --muted: #687386;
+            --border: #e8edf4;
+            --soft: #f5f8fd;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 30px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--white);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .site-header {
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .brand {
+            color: var(--blue-dark);
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .brand span {
+            color: var(--blue);
+        }
+
+        .brand-caption {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px 25px;
+        }
+
+        .nav-links a {
+            color: #394355;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--blue);
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 95px 0 90px;
+            background: var(--soft);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border: 1px solid #dce7fa;
+            border-radius: 50%;
+            right: -100px;
+            top: -130px;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #dce7fa;
+            border-radius: 50%;
+            right: 20px;
+            top: -55px;
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            margin: 18px 0 22px;
+            color: var(--blue-dark);
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 1.13;
+            letter-spacing: -2.5px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--blue);
+        }
+
+        .hero-description {
+            max-width: 720px;
+            color: #586579;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 22px;
+            border: 1px solid var(--blue);
+            border-radius: 6px;
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: .2s ease;
+        }
+
+        .button.primary {
+            color: white;
+            background: var(--blue);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* CONTENT */
+
+        .section {
+            padding: 78px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 32px;
+        }
+
+        .section-heading h2 {
+            margin: 8px 0 15px;
+            color: var(--blue-dark);
+            font-size: clamp(29px, 4vw, 42px);
+            line-height: 1.3;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .article {
+            max-width: 820px;
+        }
+
+        .article p {
+            margin: 0 0 23px;
+            font-size: 16px;
+            color: #455064;
+        }
+
+        .article p.lead {
+            color: #26364e;
+            font-size: 20px;
+            line-height: 1.9;
+        }
+
+        .dropcap:first-letter {
+            float: left;
+            font-size: 56px;
+            line-height: .95;
+            padding: 7px 10px 0 0;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        .pullquote {
+            margin: 38px 0;
+            padding: 10px 0 10px 25px;
+            border-left: 4px solid var(--blue);
+            color: var(--blue-dark);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        .note {
+            padding: 24px 26px;
+            background: var(--soft);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 28px 0;
+        }
+
+        .note strong {
+            color: var(--blue-dark);
+        }
+
+        /* MISSION / VISION */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .info-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .card-number {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .info-card h3 {
+            color: var(--blue-dark);
+            font-size: 23px;
+            margin: 10px 0;
+        }
+
+        .info-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        /* JOURNEY */
+
+        .timeline {
+            max-width: 850px;
+            border-left: 2px solid #dce7fa;
+            margin: 38px 0 0 8px;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 35px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -38px;
+            top: 9px;
+            width: 14px;
+            height: 14px;
+            background: var(--blue);
+            border: 3px solid white;
+            outline: 1px solid #dce7fa;
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timeline-item h3 {
+            margin: 5px 0 9px;
+            color: var(--blue-dark);
+            font-size: 22px;
+        }
+
+        .timeline-item p {
+            margin: 0;
+            color: #586579;
+        }
+
+        /* VALUES */
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .value {
+            padding: 22px;
+            border-top: 2px solid var(--blue);
+            background: var(--soft);
+        }
+
+        .value h3 {
+            color: var(--blue-dark);
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .value p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* CODEBIHIN */
+
+        .partner-panel {
+            padding: 38px;
+            background: var(--blue-dark);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .partner-panel .eyebrow {
+            color: #a9cbff;
+        }
+
+        .partner-panel h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.3;
+            margin: 12px 0;
+        }
+
+        .partner-panel p {
+            color: #d9e4f7;
+            max-width: 790px;
+        }
+
+        .partner-panel .button {
+            margin-top: 12px;
+            background: white;
+            border-color: white;
+            color: var(--blue-dark);
+        }
+
+        /* CTA */
+
+        .cta {
+            padding: 75px 0;
+            text-align: center;
+            background: var(--soft);
+        }
+
+        .cta h2 {
+            margin: 0 0 12px;
+            color: var(--blue-dark);
+            font-size: clamp(30px, 4vw, 42px);
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 0 22px;
+            border-top: 1px solid var(--border);
+            background: #fff;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 21px;
+            color: var(--blue-dark);
+            font-weight: 800;
+        }
+
+        .footer-brand span {
+            color: var(--blue);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 23px;
+            margin: 18px 0;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #455064;
+        }
+
+        .footer-links a:hover {
+            color: var(--blue);
+        }
+
+        .footer-note {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #7b8493;
+        }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                flex-direction: column;
+                justify-content: center;
+                padding: 17px 0;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 12px 17px;
+            }
+
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .cards,
+            .values {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-panel {
+                padding: 26px;
+            }
+
+            .pullquote {
+                font-size: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a class="brand" href="index.html">
+                EduGM<span> UniTools</span>
+                <small class="brand-caption">Learn · Calculate · Grow</small>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active" aria-current="page">About</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                    Privacy Policy
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+
+            <div class="eyebrow">The story behind EduGM UniTools</div>
+
+            <h1>
+                An idea from a student.
+                <br>
+                A journey towards <span>something useful.</span>
+            </h1>
+
+            <p class="hero-description">
+                EduGM UniTools began with a simple thought: what if useful
+                academic tools could be brought together in one accessible
+                place for students? What started as an idea during the first
+                year of engineering became a web-based project built around
+                learning, experimentation and the desire to create something
+                meaningful.
+            </p>
+
+            <div class="hero-links">
+                <a class="button primary" href="index.html">Explore UniTools</a>
+                <a class="button" href="#our-journey">Read Our Journey</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Who We Are</div>
+                <h2>More than a collection of calculators.</h2>
+                <p>
+                    We believe a useful digital product should make everyday
+                    tasks simpler, clearer and easier to access.
+                </p>
+            </div>
+
+            <article class="article">
+
+                <p class="lead dropcap">
+                    EduGM UniTools is an educational web-tools initiative
+                    created with students in mind. Its purpose is to bring
+                    helpful academic utilities together through a simple,
+                    organised and accessible online experience.
+                </p>
+
+                <p>
+                    Students regularly work with calculations, academic
+                    information, numerical results and different kinds of
+                    study-related tasks. Sometimes, finding a suitable tool
+                    means visiting several websites, navigating complicated
+                    interfaces or repeatedly entering information into
+                    different places.
+                </p>
+
+                <p>
+                    EduGM UniTools aims to make that experience more
+                    convenient. The idea is to develop a platform where
+                    students can discover useful tools without unnecessary
+                    complexity. Each tool should have a clear purpose, a
+                    straightforward interface and an experience that works
+                    well on both computers and mobile devices.
+                </p>
+
+                <p>
+                    We see educational technology not simply as software,
+                    but as a way to make small parts of student life easier.
+                    A well-designed calculator, a clear result or a useful
+                    academic utility may appear simple. Yet, when designed
+                    thoughtfully, small improvements can save time and make
+                    digital learning more approachable.
+                </p>
+
+                <div class="pullquote">
+                    Good technology does not always need to be complicated.
+                    Sometimes, its greatest value is making something
+                    difficult feel simple.
+                </div>
+
+                <p>
+                    EduGM UniTools is a developing initiative. Its identity,
+                    features and direction will continue to evolve as new
+                    ideas are explored, tools are developed and the needs
+                    of students become clearer.
+                </p>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- OUR JOURNEY -->
+    <section class="section" id="our-journey">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Our Journey</div>
+                <h2>From an engineering student's idea to a web-based project.</h2>
+                <p>
+                    Every project has a beginning. Ours began with curiosity,
+                    the willingness to learn and the ambition to build.
+                </p>
+            </div>
+
+            <article class="article">
+
+                <p class="lead">
+                    The journey of EduGM UniTools is closely connected to
+                    the experience of being a student while exploring the
+                    world of technology.
+                </p>
+
+                <p>
+                    In 2026, during the first year of my engineering journey,
+                    I began thinking seriously about building something
+                    useful on the web. College introduced a new chapter of
+                    learning and personal development. Alongside academic
+                    responsibilities, I wanted to explore ideas beyond the
+                    classroom and understand how a simple concept could
+                    become a working digital product.
+                </p>
+
+                <p>
+                    I was interested in the possibilities of web-based
+                    development: creating interfaces, organising information,
+                    writing code and connecting different pieces into a
+                    useful experience. Instead of keeping the idea only in
+                    my mind, I decided to start building.
+                </p>
+
+                <p>
+                    The first important step was choosing a direction.
+                    Education was a natural area to explore because students
+                    often need practical tools for academic calculations and
+                    everyday study activities. This led to the idea of
+                    EduGM UniTools: a web-based destination focused on
+                    educational utilities.
+                </p>
+
+                <p>
+                    Building a project is different from imagining one.
+                    A design may look good in theory, but it needs to work
+                    in a real browser. Links must open correctly, layouts
+                    must adapt to different screens, forms must behave as
+                    expected and every feature must be tested. These details
+                    became part of the development journey.
+                </p>
+
+                <p>
+                    The process also created opportunities to learn through
+                    experimentation. Each page, design decision and new
+                    feature became a chance to understand more about
+                    building websites. The goal was not simply to put a
+                    name online, but to create a foundation that could be
+                    improved over time.
+                </p>
+
+            </article>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2026 · The Beginning</div>
+                    <h3>A decision to build</h3>
+                    <p>
+                        During my first year of engineering, I decided to
+                        explore a web-based project of my own. The ambition
+                        was to turn an idea into something practical and
+                        learn by building it.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">The Idea</div>
+                    <h3>Focusing on educational tools</h3>
+                    <p>
+                        The concept developed around academic utilities and
+                        calculators that could help students perform common
+                        tasks through a straightforward online interface.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Development</div>
+                    <h3>Designing and building for the web</h3>
+                    <p>
+                        The idea began taking shape through website design,
+                        page development, navigation, usability improvements
+                        and the planning of useful tool features.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">The Continuing Journey</div>
+                    <h3>Improving one step at a time</h3>
+                    <p>
+                        EduGM UniTools is intended to grow through
+                        experimentation, testing, feedback and new ideas.
+                        Its journey continues as the platform develops.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="note">
+                <strong>A note about our journey:</strong>
+                EduGM UniTools is a developing project. The timeline above
+                describes the idea and its development direction, rather
+                than claiming milestones or achievements that have not
+                been independently documented.
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WHY WE STARTED -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Why EduGM UniTools?</div>
+                <h2>Making useful tools easier to reach.</h2>
+            </div>
+
+            <article class="article">
+
+                <p>
+                    The internet provides access to an enormous amount of
+                    educational information. However, access alone does
+                    not always make a task easy. A useful platform must
+                    also present information clearly, reduce unnecessary
+                    steps and help users understand what to do next.
+                </p>
+
+                <p>
+                    This is the thinking behind EduGM UniTools. Rather than
+                    making every feature complicated, the focus is on
+                    practical functionality and a clean user experience.
+                    A student should be able to open a tool, understand
+                    its purpose and use it without having to learn an
+                    entirely new system.
+                </p>
+
+                <p>
+                    We also recognise that students use different devices
+                    and have different levels of technical experience.
+                    A platform should therefore aim to be readable,
+                    responsive and straightforward for a wide range of
+                    users.
+                </p>
+
+                <p>
+                    Our intention is to keep exploring tools that offer
+                    genuine educational value, while improving the
+                    reliability, accessibility and clarity of the
+                    platform as it develops.
+                </p>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- MISSION AND VISION -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Our Direction</div>
+                <h2>Our mission and vision.</h2>
+                <p>
+                    A clear purpose helps guide what we build and how we
+                    improve it.
+                </p>
+            </div>
+
+            <div class="cards">
+
+                <div class="info-card">
+                    <div class="card-number">01 / OUR MISSION</div>
+                    <h3>Make academic tasks simpler</h3>
+                    <p>
+                        Our mission is to develop accessible, practical
+                        and easy-to-use educational web tools that can
+                        help students with everyday academic calculations
+                        and related tasks.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-number">02 / OUR VISION</div>
+                    <h3>Build a useful student platform</h3>
+                    <p>
+                        Our vision is to develop EduGM UniTools into a
+                        well-organised collection of educational utilities
+                        that students can explore whenever they need
+                        practical digital assistance.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">What Guides Us</div>
+                <h2>The principles behind the project.</h2>
+            </div>
+
+            <div class="values">
+
+                <div class="value">
+                    <h3>Simplicity</h3>
+                    <p>
+                        Clear layouts, understandable instructions and
+                        fewer unnecessary steps.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <h3>Learning</h3>
+                    <p>
+                        Treating development as a continuous process of
+                        experimentation and improvement.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <h3>Accessibility</h3>
+                    <p>
+                        Designing with different devices, screens and
+                        user needs in mind.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <h3>Practicality</h3>
+                    <p>
+                        Prioritising features that solve real problems
+                        rather than adding complexity without purpose.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <h3>Responsibility</h3>
+                    <p>
+                        Working towards clear information, appropriate
+                        privacy practices and reliable tools.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <h3>Continuous Improvement</h3>
+                    <p>
+                        Using testing, feedback and new ideas to improve
+                        the platform over time.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR APPROACH -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Our Approach</div>
+                <h2>Built with curiosity. Improved through experience.</h2>
+            </div>
+
+            <article class="article">
+
+                <p>
+                    Every digital project requires more than a visual
+                    design. It needs a thoughtful structure, consistent
+                    navigation, careful testing and a clear understanding
+                    of the people who will use it.
+                </p>
+
+                <p>
+                    Our approach is to begin with a problem, consider a
+                    practical solution and build a user interface that
+                    makes that solution understandable. We then aim to
+                    test the experience, identify areas for improvement
+                    and refine the design.
+                </p>
+
+                <p>
+                    We believe that learning to build technology involves
+                    understanding both what works and what does not.
+                    Mistakes and technical challenges are part of the
+                    process, and each one can provide useful experience
+                    when handled carefully.
+                </p>
+
+                <p>
+                    As new features are considered, usability, performance,
+                    privacy and maintainability should remain important
+                    considerations. Our goal is to develop the platform
+                    thoughtfully rather than make promises that its
+                    current capabilities cannot support.
+                </p>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- CODEBIHIN -->
+    <section class="section">
+        <div class="container">
+
+            <div class="partner-panel">
+
+                <div class="eyebrow">Development & Maintenance</div>
+
+                <h2>EduGM UniTools × CodeBihin</h2>
+
+                <p>
+                    CodeBihin is the development and maintenance identity
+                    associated with EduGM UniTools. The project aims to
+                    use web technology to create practical digital
+                    experiences, and CodeBihin supports its development
+                    direction and technical presentation.
+                </p>
+
+                <p>
+                    Website development involves more than writing code.
+                    It also includes organising pages, improving the
+                    interface, maintaining links, addressing technical
+                    issues and working towards a consistent experience
+                    for visitors.
+                </p>
+
+                <p>
+                    EduGM UniTools is presented as the educational
+                    platform, while CodeBihin is credited for website
+                    development and maintenance. Their roles should be
+                    understood according to the actual ownership and
+                    arrangements of the project.
+                </p>
+
+                <a class="button" href="contact.html">
+                    Contact Our Team
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FUTURE -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="eyebrow">Looking Ahead</div>
+                <h2>The next chapter is still being written.</h2>
+            </div>
+
+            <article class="article">
+
+                <p class="lead">
+                    EduGM UniTools is not a finished story. It is an
+                    ongoing attempt to turn learning and ideas into
+                    something useful.
+                </p>
+
+                <p>
+                    As the project develops, new educational utilities
+                    may be considered, existing pages may be improved
+                    and the overall experience may evolve in response
+                    to practical needs. The direction will depend on
+                    careful development, available resources and the
+                    usefulness of each proposed feature.
+                </p>
+
+                <p>
+                    We want the platform to remain focused on its purpose:
+                    helping users access useful educational tools through
+                    a straightforward online experience. We also recognise
+                    that trust comes from being transparent about what
+                    a platform does, how it works and what it can
+                    realistically provide.
+                </p>
+
+                <p>
+                    For us, the most important part of the journey is
+                    the willingness to start, continue learning and
+                    improve the work one step at a time. A small idea
+                    can become a meaningful project when it is developed
+                    with patience, purpose and responsibility.
+                </p>
+
+                <div class="pullquote">
+                    The journey began with a decision to build.
+                    The future will be shaped by what we learn next.
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="cta">
+        <div class="container">
+
+            <h2>Be part of the journey.</h2>
+
+            <p>
+                Have a suggestion, discovered an issue or have an idea
+                for an educational tool? We welcome constructive feedback
+                that can help make EduGM UniTools better.
+            </p>
+
+            <a class="button primary" href="contact.html">
+                Contact Us
+            </a>
+
+            <a class="button" href="index.html">
+                Explore UniTools
+            </a>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+
+            <div class="footer-brand">
+                EduGM <span>UniTools</span>
+            </div>
+
+            <p class="footer-note">
+                Educational calculators and academic tools for students.
+            </p>
+
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                    Privacy Policy
+                </a>
+            </nav>
+
+            <p class="footer-note">
+                &copy; 2026 EduGM UniTools. All rights reserved.
+            </p>
+
+            <p class="footer-note">
+                Owned and operated by EduGM.
+            </p>
+
+            <p class="footer-note">
+                Maintained and developed by <strong>CodeBihin</strong>.
+            </p>
+
+            <p class="footer-note">
+                Third-party names and content remain the property of
+                their respective owners.
+            </p>
+
+            <p class="footer-note">
+                Contact:
+                <a href="mailto:admin@codebihin.in">
+                    admin@codebihin.in
+                </a>
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+</html>
