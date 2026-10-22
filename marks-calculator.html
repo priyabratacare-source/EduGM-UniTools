@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Marks Calculator | EduGM UniTools</title>
+<meta name="description" content="Calculate subject-wise marks, total marks, average and percentage using EduGM UniTools.">
+
+<style>
+:root {
+    --blue: #1769c2;
+    --navy: #102650;
+    --green: #43aa58;
+    --red: #dc2626;
+    --border: #dce4ef;
+    --muted: #667085;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6f8fc;
+    color: #273449;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 13px 16px;
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.brand span {
+    color: var(--blue);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+nav a {
+    color: #4b5563;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--blue);
+}
+
+main {
+    max-width: 900px;
+    margin: 22px auto;
+    padding: 0 14px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--navy);
+    font-size: 22px;
+    margin: 8px 0;
+}
+
+.intro {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 18px;
+    font-size: 12px;
+    color: #596579;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 7px #10265008;
+}
+
+.panel h2 {
+    color: var(--navy);
+    font-size: 15px;
+    margin: 0 0 10px;
+}
+
+fieldset {
+    border: 2px solid var(--blue);
+    border-radius: 3px;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+legend {
+    color: #16845f;
+    font-size: 11px;
+    padding: 0 5px;
+}
+
+.field {
+    min-width: 0;
+}
+
+label {
+    display: block;
+    font-size: 11px;
+    color: #46546a;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid #aebbd0;
+    border-radius: 3px;
+    font: inherit;
+    background: #fff;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #c9e0ff;
+    border-color: var(--blue);
+}
+
+.subject-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.subject-row:last-child {
+    border-bottom: 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 14px 0;
+}
+
+button {
+    border: 0;
+    border-radius: 18px;
+    padding: 8px 19px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(.93);
+}
+
+.calculate {
+    background: var(--green);
+}
+
+.reset {
+    background: var(--red);
+}
+
+.add {
+    background: var(--blue);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.result-card {
+    border: 1px dashed var(--blue);
+    background: #fff;
+    padding: 13px 8px;
+    text-align: center;
+}
+
+.result-label {
+    color: #536176;
+    font-size: 11px;
+}
+
+.result-value {
+    display: block;
+    color: var(--blue);
+    font-size: 23px;
+    font-weight: 800;
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.info {
+    background: #f1f6ff;
+    border-left: 3px solid var(--blue);
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    padding: 22px 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .header-inner {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 19px;
+    }
+
+    .panel {
+        padding: 11px;
+    }
+
+    .subject-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .subject-row .subject-name {
+        grid-column: 1 / -1;
+    }
+
+    .result-value {
+        font-size: 20px;
+    }
+}
+
+@media print {
+    header, footer, .actions, .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    main {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="brand">
+            EduGM <span>UniTools</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h1>Marks Calculator</h1>
+
+    <p class="intro">
+        Calculate your total marks, maximum marks, average marks
+        and overall percentage from multiple subjects.
+    </p>
+
+    <section class="panel">
+        <h2>Enter Subject Marks</h2>
+
+        <div class="field no-print">
+            <label for="subjectCount">Initial Number of Subjects</label>
+            <select id="subjectCount" onchange="renderSubjects()">
+                <option value="3">3 Subjects</option>
+                <option value="5" selected>5 Subjects</option>
+                <option value="6">6 Subjects</option>
+                <option value="8">8 Subjects</option>
+                <option value="10">10 Subjects</option>
+            </select>
+        </div>
+
+        <fieldset>
+            <legend>Subject Details</legend>
+
+            <div id="subjects"></div>
+        </fieldset>
+
+        <div class="actions no-print">
+            <button class="calculate" onclick="calculateMarks()" type="button">
+                Calculate
+            </button>
+
+            <button class="reset" onclick="resetCalculator()" type="button">
+                Reset
+            </button>
+
+            <button class="add" onclick="addSubject()" type="button">
+                + Add Subject
+            </button>
+        </div>
+
+        <div class="result-grid" aria-live="polite">
+            <div class="result-card">
+                <div class="result-label">Total Marks Obtained</div>
+                <span class="result-value" id="obtainedResult">—</span>
+            </div>
+
+            <div class="result-card">
+                <div class="result-label">Maximum Total Marks</div>
+                <span class="result-value" id="maximumResult">—</span>
+            </div>
+
+            <div class="result-card">
+                <div class="result-label">Average Marks</div>
+                <span class="result-value" id="averageResult">—</span>
+            </div>
+
+            <div class="result-card">
+                <div class="result-label">Overall Percentage</div>
+                <span class="result-value" id="percentageResult">—</span>
+            </div>
+        </div>
+
+        <p id="summary" class="note" aria-live="polite">
+            Enter subject marks to calculate your result.
+        </p>
+
+        <div class="actions no-print">
+            <button class="calculate" type="button" onclick="printResult()">
+                Print Result
+            </button>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Calculation Formula</h2>
+
+        <div class="info">
+            <strong>Total Obtained Marks</strong> = Sum of marks obtained
+            in all entered subjects.<br><br>
+
+            <strong>Average Marks</strong> = Total Obtained Marks ÷
+            Number of entered subjects.<br><br>
+
+            <strong>Percentage</strong> = (Total Obtained Marks ÷
+            Maximum Total Marks) × 100
+        </div>
+
+        <p class="note">
+            Enter each subject's actual maximum marks. This calculator
+            does not determine official pass/fail status or grade
+            classification.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <strong>EduGM UniTools</strong>
+
+    <p>© 2026 EduGM UniTools. All rights reserved.</p>
+    <p>Maintained and developed by <strong>CodeBihin</strong>.</p>
+
+    <p>
+        <a href="index.html">Home</a> ·
+        <a href="about.html">About</a> ·
+        <a href="contact.html">Contact Us</a> ·
+        <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+            Privacy Policy
+        </a>
+    </p>
+
+    <p>
+        Contact:
+        <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+    </p>
+</footer>
+
+<script>
+const subjectsContainer = document.getElementById("subjects");
+let subjectCount = 0;
+
+const MAX_SUBJECTS = 30;
+
+function addSubject() {
+    if (subjectCount >= MAX_SUBJECTS) {
+        alert("Maximum 30 subjects allowed.");
+        return;
+    }
+
+    subjectCount++;
+
+    const row = document.createElement("div");
+    row.className = "subject-row";
+
+    row.innerHTML = `
+        <div class="field subject-name">
+            <label for="name${subjectCount}">Subject ${subjectCount} Name</label>
+            <input
+                id="name${subjectCount}"
+                type="text"
+                maxlength="80"
+                placeholder="e.g. Mathematics"
+            >
+        </div>
+
+        <div class="field">
+            <label for="marks${subjectCount}">Marks Obtained</label>
+            <input
+                id="marks${subjectCount}"
+                type="number"
+                min="0"
+                step="any"
+                placeholder="e.g. 75"
+            >
+        </div>
+
+        <div class="field">
+            <label for="max${subjectCount}">Maximum Marks</label>
+            <input
+                id="max${subjectCount}"
+                type="number"
+                min="0.01"
+                step="any"
+                placeholder="e.g. 100"
+            >
+        </div>
+    `;
+
+    subjectsContainer.appendChild(row);
+}
+
+function renderSubjects() {
+    subjectsContainer.innerHTML = "";
+    subjectCount = 0;
+
+    const count = Number(
+        document.getElementById("subjectCount").value
+    );
+
+    for (let i = 0; i < count; i++) {
+        addSubject();
+    }
+
+    clearResults();
+}
+
+function clearResults() {
+    document.getElementById("obtainedResult").textContent = "—";
+    document.getElementById("maximumResult").textContent = "—";
+    document.getElementById("averageResult").textContent = "—";
+    document.getElementById("percentageResult").textContent = "—";
+
+    document.getElementById("summary").textContent =
+        "Enter subject marks to calculate your result.";
+}
+
+function calculateMarks() {
+    let obtainedTotal = 0;
+    let maximumTotal = 0;
+    let subjectTotal = 0;
+
+    for (let i = 1; i <= subjectCount; i++) {
+        const marksInput = document.getElementById("marks" + i);
+        const maxInput = document.getElementById("max" + i);
+
+        const marksText = marksInput.value.trim();
+        const maxText = maxInput.value.trim();
+
+        if (marksText === "" && maxText === "") {
+            continue;
+        }
+
+        if (marksText === "" || maxText === "") {
+            alert("Enter both obtained and maximum marks for each used subject.");
+            return;
+        }
+
+        const marks = Number(marksText);
+        const maxMarks = Number(maxText);
+
+        if (
+            !Number.isFinite(marks) ||
+            !Number.isFinite(maxMarks) ||
+            marks < 0 ||
+            maxMarks <= 0
+        ) {
+            alert("Please enter valid marks.");
+            return;
+        }
+
+        if (marks > maxMarks) {
+            alert("Obtained marks cannot exceed maximum marks.");
+            marksInput.focus();
+            return;
+        }
+
+        obtainedTotal += marks;
+        maximumTotal += maxMarks;
+        subjectTotal++;
+    }
+
+    if (subjectTotal === 0 || maximumTotal === 0) {
+        alert("Please enter marks for at least one subject.");
+        return;
+    }
+
+    const average = obtainedTotal / subjectTotal;
+    const percentage = (obtainedTotal / maximumTotal) * 100;
+
+    document.getElementById("obtainedResult").textContent =
+        Number(obtainedTotal.toFixed(4)).toString();
+
+    document.getElementById("maximumResult").textContent =
+        Number(maximumTotal.toFixed(4)).toString();
+
+    document.getElementById("averageResult").textContent =
+        average.toFixed(2);
+
+    document.getElementById("percentageResult").textContent =
+        percentage.toFixed(2) + "%";
+
+    document.getElementById("summary").textContent =
+        "Calculated successfully for " + subjectTotal + " subject(s).";
+}
+
+function resetCalculator() {
+    renderSubjects();
+}
+
+function printResult() {
+    if (document.getElementById("percentageResult").textContent === "—") {
+        alert("Please calculate your marks first.");
+        return;
+    }
+
+    window.print();
+}
+
+renderSubjects();
+</script>
+
+</body>
+</html>
