@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MAKAUT Calculator | EduGM UniTools</title>
+<meta name="description" content="MAKAUT student calculator for semester SGPA, yearly average, mid-semester percentage and grade-point reference.">
+
+<style>
+:root {
+    --blue: #1769c2;
+    --navy: #102650;
+    --green: #43aa58;
+    --red: #dc2626;
+    --border: #dce4ef;
+    --muted: #667085;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #f6f8fc;
+    color: #273449;
+    font: 13px/1.55 Arial, Helvetica, sans-serif;
+}
+
+header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 13px 16px;
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.brand span { color: var(--blue); }
+
+nav {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #4b5563;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+nav a:hover { color: var(--blue); }
+
+main {
+    max-width: 900px;
+    margin: 22px auto;
+    padding: 0 14px;
+}
+
+h1 {
+    color: var(--navy);
+    font-size: 22px;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.intro {
+    max-width: 650px;
+    margin: 0 auto 18px;
+    text-align: center;
+    color: #596579;
+    font-size: 12px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 7px #10265008;
+}
+
+.panel h2 {
+    font-size: 15px;
+    color: var(--navy);
+    margin: 0 0 10px;
+}
+
+fieldset {
+    border: 2px solid var(--blue);
+    padding: 12px;
+    margin: 15px 0;
+}
+
+legend {
+    color: #16845f;
+    font-size: 11px;
+    padding: 0 5px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+label {
+    display: block;
+    color: #46546a;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    min-width: 0;
+    padding: 9px;
+    border: 1px solid #aebbd0;
+    border-radius: 3px;
+    background: white;
+    font: inherit;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #c9e0ff;
+    border-color: var(--blue);
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 14px 0;
+}
+
+button {
+    border: 0;
+    border-radius: 18px;
+    padding: 8px 19px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover { filter: brightness(.93); }
+
+.calculate { background: var(--green); }
+.reset { background: var(--red); }
+
+.results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.result-card {
+    padding: 13px 8px;
+    text-align: center;
+    border: 1px dashed var(--blue);
+}
+
+.result-label {
+    color: #536176;
+    font-size: 11px;
+}
+
+.result-value {
+    display: block;
+    font-size: 23px;
+    font-weight: 800;
+    color: var(--blue);
+    overflow-wrap: anywhere;
+}
+
+.note {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.info {
+    background: #f1f6ff;
+    border-left: 3px solid var(--blue);
+    padding: 12px;
+    margin-top: 15px;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+th, td {
+    border: 1px solid var(--border);
+    padding: 9px;
+    text-align: left;
+}
+
+th {
+    background: #edf4ff;
+    color: var(--navy);
+}
+
+footer {
+    text-align: center;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 22px 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .header-inner { flex-direction: column; }
+    h1 { font-size: 19px; }
+    .panel { padding: 11px; }
+    .grid { gap: 9px; }
+    .results { gap: 7px; }
+}
+
+@media print {
+    header, footer, .actions, .no-print { display: none !important; }
+    body { background: white; }
+    main { margin: 0; }
+    .panel { box-shadow: none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="brand">EduGM <span>UniTools</span></a>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h1>MAKAUT Student Calculator</h1>
+
+    <p class="intro">
+        Calculate semester SGPA averages, estimate mid-semester
+        percentages and refer to the grade-point guide.
+    </p>
+
+    <section class="panel">
+        <h2>Semester SGPA Calculator</h2>
+
+        <p class="note">
+            Enter the SGPA values available to you. Leave other
+            semesters blank; only entered semesters are included.
+        </p>
+
+        <fieldset>
+            <legend>Academic Details</legend>
+
+            <div class="grid">
+                <div>
+                    <label for="year">Academic Year</label>
+                    <select id="year">
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="semCount">Semesters to Display</label>
+                    <select id="semCount" onchange="renderSemesters()">
+                        <option value="2">2 Semesters</option>
+                        <option value="4" selected>4 Semesters</option>
+                        <option value="6">6 Semesters</option>
+                        <option value="8">8 Semesters</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid" id="semesterInputs" style="margin-top:14px"></div>
+        </fieldset>
+
+        <div class="actions no-print">
+            <button class="calculate" type="button" onclick="calculateYear()">
+                Calculate Average
+            </button>
+
+            <button class="reset" type="button" onclick="resetYear()">
+                Reset
+            </button>
+        </div>
+
+        <div class="results" aria-live="polite">
+            <div class="result-card">
+                <div class="result-label">SGPA Average</div>
+                <span class="result-value" id="yearAverage">—</span>
+            </div>
+
+            <div class="result-card">
+                <div class="result-label">Semesters Entered</div>
+                <span class="result-value" id="semestersEntered">—</span>
+            </div>
+        </div>
+
+        <p class="note" id="yearMessage" aria-live="polite">
+            Enter semester results to calculate.
+        </p>
+
+        <div class="info">
+            <strong>Calculation:</strong> Simple SGPA average =
+            sum of entered semester SGPAs ÷ number of entered semesters.
+            <br>
+            This is an estimate and may differ from official CGPA
+            calculations when semester credits vary.
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Mid-Semester Marks Calculator</h2>
+
+        <p class="note">
+            Calculate the percentage from your mid-semester marks.
+            Enter the marks obtained and the maximum marks.
+        </p>
+
+        <fieldset>
+            <legend>Mid-Semester Marks</legend>
+
+            <div class="grid">
+                <div>
+                    <label for="midObtained">Marks Obtained</label>
+                    <input id="midObtained" type="number" min="0"
+                           step="any" placeholder="e.g. 18">
+                </div>
+
+                <div>
+                    <label for="midMaximum">Maximum Marks</label>
+                    <input id="midMaximum" type="number" min="0.01"
+                           step="any" placeholder="e.g. 20">
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="actions no-print">
+            <button class="calculate" type="button" onclick="calculateMid()">
+                Calculate Percentage
+            </button>
+
+            <button class="reset" type="button" onclick="resetMid()">
+                Reset
+            </button>
+        </div>
+
+        <div class="result-card" aria-live="polite">
+            <div class="result-label">Mid-Semester Percentage</div>
+            <span class="result-value" id="midResult">—</span>
+            <p class="note" id="midMessage">
+                Enter your marks to calculate.
+            </p>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Grade-Point Reference</h2>
+
+        <p class="note">
+            The table below is an illustrative reference only, not a
+            verified official MAKAUT grading table. Check the rules
+            applicable to your course and academic session.
+        </p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Illustrative Grade Point</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>O</td><td>10</td><td>Outstanding</td></tr>
+                    <tr><td>E</td><td>9</td><td>Excellent</td></tr>
+                    <tr><td>A</td><td>8</td><td>Very Good</td></tr>
+                    <tr><td>B</td><td>7</td><td>Good</td></tr>
+                    <tr><td>C</td><td>6</td><td>Above Average</td></tr>
+                    <tr><td>D</td><td>5</td><td>Average</td></tr>
+                    <tr><td>P</td><td>4</td><td>Pass</td></tr>
+                    <tr><td>F</td><td>0</td><td>Fail</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>About This Calculator</h2>
+
+        <p>
+            EduGM UniTools provides convenient academic calculation
+            tools for students. This page is intended for personal
+            estimation and study support.
+        </p>
+
+        <p class="note">
+            EduGM UniTools is not an official MAKAUT website.
+            Confirm all official results, grade points and academic
+            rules with the university or your institution.
+        </p>
+    </section>
+
+    <div class="actions no-print">
+        <button class="calculate" onclick="window.print()" type="button">
+            Print Page
+        </button>
+    </div>
+</main>
+
+<footer>
+    <strong>EduGM UniTools</strong>
+    <p>© 2026 EduGM UniTools. All rights reserved.</p>
+    <p>Maintained and developed by <strong>CodeBihin</strong>.</p>
+
+    <p>
+        <a href="index.html">Home</a> ·
+        <a href="about.html">About</a> ·
+        <a href="contact.html">Contact Us</a> ·
+        <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+            Privacy Policy
+        </a>
+    </p>
+
+    <p>
+        Contact:
+        <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+    </p>
+</footer>
+
+<script>
+const semesterInputs = document.getElementById("semesterInputs");
+
+function renderSemesters() {
+    const count = Number(document.getElementById("semCount").value);
+    semesterInputs.innerHTML = "";
+
+    for (let i = 1; i <= count; i++) {
+        const field = document.createElement("div");
+
+        field.innerHTML = `
+            <label for="sem${i}">Semester ${i} SGPA</label>
+            <input id="sem${i}" type="number"
+                   min="0" max="10" step="any"
+                   placeholder="0–10">
+        `;
+
+        semesterInputs.appendChild(field);
+    }
+
+    document.getElementById("yearAverage").textContent = "—";
+    document.getElementById("semestersEntered").textContent = "—";
+    document.getElementById("yearMessage").textContent =
+        "Enter semester results to calculate.";
+}
+
+function calculateYear() {
+    const count = Number(document.getElementById("semCount").value);
+    let total = 0;
+    let entered = 0;
+
+    for (let i = 1; i <= count; i++) {
+        const input = document.getElementById("sem" + i);
+        const value = input.value.trim();
+
+        if (value === "") continue;
+
+        const sgpa = Number(value);
+
+        if (!Number.isFinite(sgpa) || sgpa < 0 || sgpa > 10) {
+            alert("Each SGPA must be between 0 and 10.");
+            input.focus();
+            return;
+        }
+
+        total += sgpa;
+        entered++;
+    }
+
+    if (entered === 0) {
+        alert("Enter at least one semester SGPA.");
+        return;
+    }
+
+    document.getElementById("yearAverage").textContent =
+        (total / entered).toFixed(2);
+
+    document.getElementById("semestersEntered").textContent =
+        entered;
+
+    document.getElementById("yearMessage").textContent =
+        "Year " + document.getElementById("year").value +
+        " estimate calculated from " + entered + " semester(s).";
+}
+
+function resetYear() {
+    renderSemesters();
+}
+
+function calculateMid() {
+    const obtainedText = document.getElementById("midObtained").value.trim();
+    const maximumText = document.getElementById("midMaximum").value.trim();
+
+    if (obtainedText === "" || maximumText === "") {
+        alert("Enter both obtained marks and maximum marks.");
+        return;
+    }
+
+    const obtained = Number(obtainedText);
+    const maximum = Number(maximumText);
+
+    if (
+        !Number.isFinite(obtained) ||
+        !Number.isFinite(maximum) ||
+        obtained < 0 ||
+        maximum <= 0
+    ) {
+        alert("Enter valid marks.");
+        return;
+    }
+
+    if (obtained > maximum) {
+        alert("Obtained marks cannot exceed maximum marks.");
+        return;
+    }
+
+    const percentage = (obtained / maximum) * 100;
+
+    document.getElementById("midResult").textContent =
+        percentage.toFixed(2) + "%";
+
+    document.getElementById("midMessage").textContent =
+        obtained + " out of " + maximum + " marks.";
+}
+
+function resetMid() {
+    document.getElementById("midObtained").value = "";
+    document.getElementById("midMaximum").value = "";
+    document.getElementById("midResult").textContent = "—";
+    document.getElementById("midMessage").textContent =
+        "Enter your marks to calculate.";
+}
+
+renderSemesters();
+</script>
+
+</body>
+</html>
