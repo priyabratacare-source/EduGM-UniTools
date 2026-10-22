@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduGM UniTools | Academic Calculators</title>
+    <meta name="description" content="Explore EduGM UniTools academic calculators, SGPA and CGPA tools, percentage calculators and student utilities.">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        :root {
+            --blue: #1769e0;
+            --navy: #102650;
+            --text: #202938;
+            --muted: #6b7280;
+            --border: #e6ebf2;
+            --soft: #f5f8fd;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .header-inner {
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: var(--navy);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -.8px;
+            white-space: nowrap;
+        }
+
+        .brand span {
+            color: var(--blue);
+        }
+
+        .brand small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 23px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--blue);
+        }
+
+        /* HERO */
+
+        .hero {
+            background: var(--soft);
+            border-bottom: 1px solid var(--border);
+            padding: 68px 0;
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin: 13px 0;
+            font-size: clamp(36px, 5vw, 57px);
+            line-height: 1.17;
+            letter-spacing: -1.8px;
+            color: var(--navy);
+        }
+
+        .hero h1 span {
+            color: var(--blue);
+        }
+
+        .hero p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .button {
+            display: inline-block;
+            border: 1px solid var(--blue);
+            border-radius: 7px;
+            padding: 11px 19px;
+            text-decoration: none;
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .button.primary {
+            color: #fff;
+            background: var(--blue);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* SECTION */
+
+        .section {
+            padding: 58px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            margin: 7px 0;
+            color: var(--navy);
+            font-size: clamp(26px, 4vw, 35px);
+            letter-spacing: -.7px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* CALCULATOR CARDS */
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .calculator-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 205px;
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+            text-decoration: none;
+            transition: border-color .2s, transform .2s, box-shadow .2s;
+        }
+
+        .calculator-card:hover {
+            border-color: #a8c8ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(20, 50, 100, .06);
+        }
+
+        .tool-icon {
+            display: flex;
+            width: 43px;
+            height: 43px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: #edf4ff;
+            color: var(--blue);
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .calculator-card h3 {
+            margin: 16px 0 6px;
+            color: var(--navy);
+            font-size: 19px;
+        }
+
+        .calculator-card p {
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .open-tool {
+            margin-top: auto;
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* DONATION AREA */
+
+        .donation-section {
+            background: var(--soft);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .donation-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, 1.5fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        .donation-card,
+        .donor-card {
+            padding: 25px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .donation-card h3,
+        .donor-card h3 {
+            margin: 0 0 10px;
+            color: var(--navy);
+            font-size: 21px;
+        }
+
+        .donation-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .donate-button {
+            display: block;
+            margin-top: 20px;
+            padding: 13px 16px;
+            border-radius: 7px;
+            background: var(--blue);
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .donate-button:hover {
+            background: #0d51b5;
+        }
+
+        .small-note {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #374151;
+            white-space: nowrap;
+        }
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        .amount {
+            color: #147447;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .table-status {
+            color: var(--muted);
+            padding: 18px 0;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 32px 0 22px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .footer-brand span {
+            color: var(--blue);
+        }
+
+        .footer-links {
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            font-weight: 500;
+        }
+
+        .footer-note {
+            margin: 5px 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media (max-width: 850px) {
+            .calculator-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .donation-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                padding: 16px 0;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px 17px;
+            }
+
+            .hero {
+                padding: 48px 0;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 42px 0;
+            }
+
+            .donation-card,
+            .donor-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container header-inner">
+        <a class="brand" href="index.html">
+            EduGM <span>UniTools</span>
+            <small>Learn · Calculate · Grow</small>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a class="active" href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="eyebrow">Welcome to EduGM UniTools</div>
+
+        <h1>
+            Your academic tasks,<br>
+            made <span>simpler.</span>
+        </h1>
+
+        <p>
+            Explore educational calculators and academic utilities in
+            one convenient place. Choose a tool, enter your details and
+            get started with a clean, straightforward experience.
+        </p>
+
+        <a class="button primary" href="#calculators">Explore Calculators</a>
+        <a class="button" href="#donations">Support EduGM</a>
+    </div>
+</section>
+
+<!-- CALCULATORS -->
+<section class="section" id="calculators">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="eyebrow">Academic Utilities</div>
+            <h2>Choose your calculator</h2>
+            <p>
+                Select a tool below to open its dedicated page.
+            </p>
+        </div>
+
+        <div class="calculator-grid">
+
+            <a class="calculator-card" href="sgpa-calculator.html">
+                <div class="tool-icon">S</div>
+                <h3>SGPA Calculator</h3>
+                <p>Calculate your Semester Grade Point Average using your subject grades and credits.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+            <a class="calculator-card" href="cgpa-calculator.html">
+                <div class="tool-icon">C</div>
+                <h3>CGPA Calculator</h3>
+                <p>Calculate your Cumulative Grade Point Average using your academic results.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+            <a class="calculator-card" href="percentage-calculator.html">
+                <div class="tool-icon">%</div>
+                <h3>Percentage Calculator</h3>
+                <p>Work out percentages, marks obtained and percentage-based results.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+            <a class="calculator-card" href="marks-calculator.html">
+                <div class="tool-icon">M</div>
+                <h3>Marks Calculator</h3>
+                <p>Calculate marks and totals from your entered academic scores.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+            <a class="calculator-card" href="makaut-calculator.html">
+                <div class="tool-icon">U</div>
+                <h3>MAKAUT Calculator</h3>
+                <p>Access an academic calculator designed for relevant MAKAUT grading calculations.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+            <a class="calculator-card" href="engineering-calculator.html">
+                <div class="tool-icon">∑</div>
+                <h3>Engineering Calculator</h3>
+                <p>Explore mathematical and numerical utilities for engineering study.</p>
+                <span class="open-tool">Open Calculator →</span>
+            </a>
+
+        </div>
+
+        <p class="small-note" style="margin-top:22px">
+            Calculator availability and results depend on each tool's
+            implementation. Verify important academic results against
+            the applicable official rules.
+        </p>
+    </div>
+</section>
+
+<!-- DONATION SUPPORT -->
+<section class="section donation-section" id="donations">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="eyebrow">Community Support</div>
+            <h2>Support EduGM UniTools</h2>
+            <p>
+                Your voluntary support can help us work towards improving
+                educational utilities and the student experience.
+            </p>
+        </div>
+
+        <div class="donation-layout">
+
+            <!-- DONATION LINK -->
+            <div class="donation-card">
+                <h3>Donate Us</h3>
+
+                <p>
+                    If you would like to support this project, use our
+                    official donation-support form. Please follow the
+                    instructions provided in the form.
+                </p>
+
+                <a
+                    class="donate-button"
+                    href="https://forms.gle/zn6iFJGWES5Y5KC97"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Donate Us ↗
+                </a>
+
+                <p class="small-note">
+                    Donations are voluntary. A form submission alone
+                    does not confirm that a payment has been received.
+                </p>
+            </div>
+
+            <!-- DONOR LIST -->
+            <div class="donor-card">
+                <h3>Donation Supporters</h3>
+
+                <p class="small-note">
+                    Thank you to the supporters who have agreed to be
+                    listed. Only approved public entries should appear here.
+                </p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sl. No.</th>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Comment</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="donorTable">
+                            <tr>
+                                <td colspan="4" class="table-status">
+                                    Loading supporter list...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="small-note" id="donorStatus" aria-live="polite">
+                    Connecting to the supporter database...
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+
+        <div class="footer-brand">
+            EduGM <span>UniTools</span>
+        </div>
+
+        <p class="footer-note">
+            Educational calculators and academic tools for students.
+        </p>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+
+        <p class="footer-note">
+            &copy; 2026 EduGM UniTools. All rights reserved.
+        </p>
+
+        <p class="footer-note">Owned and operated by EduGM.</p>
+        <p class="footer-note">Maintained and developed by <strong>CodeBihin</strong>.</p>
+
+        <p class="footer-note">
+            Contact:
+            <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+        </p>
+
+    </div>
+</footer>
+
+<!-- FIREBASE DATABASE CONNECTION -->
+<script type="module">
+    /*
+      FIREBASE SETUP:
+      1. Create/use your Firebase project.
+      2. Register this website as a Web App.
+      3. Replace the placeholder config below with your project's config.
+      4. Create a Firestore collection named "publicDonations".
+      5. Add only donations that have been verified and approved for public display.
+
+      Expected fields:
+      name: string
+      amount: number
+      comment: string
+      approved: boolean
+
+      This page only reads public entries. Never put admin credentials
+      or private service-account keys in frontend JavaScript.
+    */
+
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_FIREBASE_APP_ID"
+    };
+
+    const donorTable = document.getElementById("donorTable");
+    const donorStatus = document.getElementById("donorStatus");
+
+    function showMessage(message) {
+        donorTable.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+
+        cell.colSpan = 4;
+        cell.className = "table-status";
+        cell.textContent = message;
+
+        row.appendChild(cell);
+        donorTable.appendChild(row);
+    }
+
+    function addCell(row, text, className = "") {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+
+        if (className) {
+            cell.className = className;
+        }
+
+        row.appendChild(cell);
+    }
+
+    const hasRealConfig =
+        firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY" &&
+        firebaseConfig.projectId !== "YOUR_PROJECT_ID" &&
+        firebaseConfig.appId !== "YOUR_FIREBASE_APP_ID";
+
+    if (hasRealConfig) {
+        try {
+            const { initializeApp } =
+                await import("https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js");
+
+            const { getFirestore, collection, query, where, orderBy,
+                    limit, onSnapshot } =
+                await import("https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js");
+
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            const donorsQuery = query(
+                collection(db, "publicDonations"),
+                where("approved", "==", true),
+                orderBy("createdAt", "desc"),
+                limit(50)
+            );
+
+            onSnapshot(donorsQuery, (snapshot) => {
+                donorTable.replaceChildren();
+
+                if (snapshot.empty) {
+                    showMessage("No approved supporters to display yet.");
+                    donorStatus.textContent =
+                        "The supporter list will appear here when approved entries are available.";
+                    return;
+                }
+
+                let serial = 1;
+
+                snapshot.forEach((docSnapshot) => {
+                    const donor = docSnapshot.data();
+                    const row = document.createElement("tr");
+
+                    addCell(row, String(serial++));
+                    addCell(row, String(donor.name || "Supporter"));
+
+                    const amount = Number(donor.amount);
+                    const formattedAmount =
+                        Number.isFinite(amount) && amount >= 0
+                            ? "₹" + amount.toLocaleString("en-IN")
+                            : "—";
+
+                    addCell(row, formattedAmount, "amount");
+                    addCell(row, String(donor.comment || "Thank you!"));
+
+                    donorTable.appendChild(row);
+                });
+
+                donorStatus.textContent =
+                    "Showing approved public entries. Latest updates may appear automatically.";
+            }, (error) => {
+                console.error("Donation list error:", error);
+                showMessage("The supporter list is temporarily unavailable.");
+                donorStatus.textContent =
+                    "Please try again later.";
+            });
+
+        } catch (error) {
+            console.error("Firebase setup error:", error);
+            showMessage("Could not connect to the supporter database.");
+            donorStatus.textContent =
+                "Please check the Firebase configuration and Firestore rules.";
+        }
+    } else {
+        showMessage("The supporter list will appear here after database setup.");
+        donorStatus.textContent =
+            "Firebase is not connected yet. Add your Firebase web configuration to enable the live list.";
+    }
+</script>
+
+</body>
+</html>
