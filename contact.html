@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | EduGM UniTools</title>
+    <meta name="description" content="Contact EduGM UniTools for support, feedback, suggestions and enquiries.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #171717;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 6%;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: #111827;
+            font-size: 23px;
+            font-weight: bold;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .brand span {
+            font-weight: normal;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 22px;
+        }
+
+        nav a {
+            color: #333333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav a:hover,
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 5px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 20px 25px;
+            background: #fafafa;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .hero h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #666666;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 35px auto 50px;
+            padding: 0 20px;
+        }
+
+        .contact-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 28px;
+            background: #ffffff;
+        }
+
+        .contact-card h2 {
+            margin-top: 0;
+            font-size: 23px;
+        }
+
+        .description {
+            color: #666666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font: inherit;
+            font-size: 15px;
+            background: #ffffff;
+            color: #171717;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px 18px;
+            background: #111827;
+            color: #ffffff;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .email-info {
+            margin-top: 22px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fafafa;
+            font-size: 14px;
+        }
+
+        .email-info a {
+            color: #111827;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px 16px;
+            border-top: 1px solid #e5e7eb;
+            background: #fafafa;
+        }
+
+        .footer-brand {
+            font-weight: bold;
+            font-size: 19px;
+        }
+
+        .footer-links {
+            justify-content: center;
+            margin: 12px 0;
+        }
+
+        .footer-links a {
+            font-weight: normal;
+        }
+
+        .footer-note {
+            color: #666666;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 700px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px 17px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .contact-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="brand" href="index.html">
+            EduGM <span>UniTools</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a class="active" href="contact.html" aria-current="page">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Contact Us</h1>
+    <p>We are happy to hear from you.</p>
+</section>
+
+<main>
+    <div class="contact-card">
+        <h2>Send Us a Message</h2>
+
+        <p class="description">
+            Have a question, suggestion, technical issue, or feedback
+            about EduGM UniTools? Fill in the form below to contact our team.
+        </p>
+
+        <form id="contactForm">
+
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    maxlength="100"
+                    autocomplete="name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email Address *</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    maxlength="254"
+                    autocomplete="email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="What is your enquiry about?"
+                    maxlength="150"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message *</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Write your message here..."
+                    maxlength="5000"
+                    required></textarea>
+            </div>
+
+            <button type="submit">Send Email</button>
+
+        </form>
+
+        <div class="email-info">
+            <strong>Official Contact Email</strong>
+            <p>
+                <a href="mailto:admin@codebihin.in">
+                    admin@codebihin.in
+                </a>
+            </p>
+            <p>
+                Clicking Send Email opens your configured email application.
+                Please review and send the email from that application.
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-brand">EduGM UniTools</div>
+
+    <p class="footer-note">
+        Educational calculators and academic tools for students.
+    </p>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+            Privacy Policy
+        </a>
+    </nav>
+
+    <p class="footer-note">
+        &copy; 2026 EduGM UniTools. All rights reserved.
+    </p>
+
+    <p class="footer-note">
+        Owned and operated by EduGM.
+    </p>
+
+    <p class="footer-note">
+        Maintained and developed by <strong>CodeBihin</strong>.
+    </p>
+
+    <p class="footer-note">
+        Contact: admin@codebihin.in
+    </p>
+</footer>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const subject = document.getElementById("subject").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !email || !subject || !message) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        const recipient = "admin@codebihin.in";
+
+        const emailSubject = "[EduGM UniTools] " + subject;
+
+        const emailBody =
+            "EduGM UniTools Contact Form Message\n\n" +
+            "Name: " + name + "\n" +
+            "Sender Email: " + email + "\n" +
+            "Subject: " + subject + "\n\n" +
+            "Message:\n" + message + "\n\n" +
+            "Sent through the EduGM UniTools Contact Us page.";
+
+        const mailtoLink =
+            "mailto:" + recipient +
+            "?subject=" + encodeURIComponent(emailSubject) +
+            "&body=" + encodeURIComponent(emailBody);
+
+        window.location.href = mailtoLink;
+    });
+</script>
+
+</body>
+</html>
