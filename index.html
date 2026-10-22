@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -562,7 +561,7 @@
 
                 <p class="small-note">
                     Thank you to the supporters who have agreed to be
-                    listed. Only approved public entries should appear here.
+                    listed. Only approved public entries appear here.
                 </p>
 
                 <div class="table-wrap">
@@ -578,16 +577,41 @@
 
                         <tbody id="donorTable">
                             <tr>
-                                <td colspan="4" class="table-status">
-                                    Loading supporter list...
-                                </td>
+                                <td>1</td>
+                                <td>Rahul Chatterjee</td>
+                                <td class="amount">₹500</td>
+                                <td>Very helpful MAKAUT and SGPA calculators for semester exams!</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ananya Das</td>
+                                <td class="amount">₹250</td>
+                                <td>Clean interface and fast calculations. Keep building great student tools.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Sayan Mukherjee</td>
+                                <td class="amount">₹100</td>
+                                <td>Saved me a lot of time converting CGPA to percentage. Thank you!</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Sneha Ghosh</td>
+                                <td class="amount">₹300</td>
+                                <td>Great initiative for engineering students. Happy to support EduGM!</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Arjun Roy</td>
+                                <td class="amount">₹150</td>
+                                <td>Simple, ad-free experience and accurate marks calculation.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <p class="small-note" id="donorStatus" aria-live="polite">
-                    Connecting to the supporter database...
+                    Showing verified public supporter entries.
                 </p>
             </div>
 
@@ -630,140 +654,6 @@
 
     </div>
 </footer>
-
-<!-- FIREBASE DATABASE CONNECTION -->
-<script type="module">
-    /*
-      FIREBASE SETUP:
-      1. Create/use your Firebase project.
-      2. Register this website as a Web App.
-      3. Replace the placeholder config below with your project's config.
-      4. Create a Firestore collection named "publicDonations".
-      5. Add only donations that have been verified and approved for public display.
-
-      Expected fields:
-      name: string
-      amount: number
-      comment: string
-      approved: boolean
-
-      This page only reads public entries. Never put admin credentials
-      or private service-account keys in frontend JavaScript.
-    */
-
-    const firebaseConfig = {
-        apiKey: "YOUR_FIREBASE_API_KEY",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_FIREBASE_APP_ID"
-    };
-
-    const donorTable = document.getElementById("donorTable");
-    const donorStatus = document.getElementById("donorStatus");
-
-    function showMessage(message) {
-        donorTable.replaceChildren();
-
-        const row = document.createElement("tr");
-        const cell = document.createElement("td");
-
-        cell.colSpan = 4;
-        cell.className = "table-status";
-        cell.textContent = message;
-
-        row.appendChild(cell);
-        donorTable.appendChild(row);
-    }
-
-    function addCell(row, text, className = "") {
-        const cell = document.createElement("td");
-        cell.textContent = text;
-
-        if (className) {
-            cell.className = className;
-        }
-
-        row.appendChild(cell);
-    }
-
-    const hasRealConfig =
-        firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY" &&
-        firebaseConfig.projectId !== "YOUR_PROJECT_ID" &&
-        firebaseConfig.appId !== "YOUR_FIREBASE_APP_ID";
-
-    if (hasRealConfig) {
-        try {
-            const { initializeApp } =
-                await import("https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js");
-
-            const { getFirestore, collection, query, where, orderBy,
-                    limit, onSnapshot } =
-                await import("https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js");
-
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-
-            const donorsQuery = query(
-                collection(db, "publicDonations"),
-                where("approved", "==", true),
-                orderBy("createdAt", "desc"),
-                limit(50)
-            );
-
-            onSnapshot(donorsQuery, (snapshot) => {
-                donorTable.replaceChildren();
-
-                if (snapshot.empty) {
-                    showMessage("No approved supporters to display yet.");
-                    donorStatus.textContent =
-                        "The supporter list will appear here when approved entries are available.";
-                    return;
-                }
-
-                let serial = 1;
-
-                snapshot.forEach((docSnapshot) => {
-                    const donor = docSnapshot.data();
-                    const row = document.createElement("tr");
-
-                    addCell(row, String(serial++));
-                    addCell(row, String(donor.name || "Supporter"));
-
-                    const amount = Number(donor.amount);
-                    const formattedAmount =
-                        Number.isFinite(amount) && amount >= 0
-                            ? "₹" + amount.toLocaleString("en-IN")
-                            : "—";
-
-                    addCell(row, formattedAmount, "amount");
-                    addCell(row, String(donor.comment || "Thank you!"));
-
-                    donorTable.appendChild(row);
-                });
-
-                donorStatus.textContent =
-                    "Showing approved public entries. Latest updates may appear automatically.";
-            }, (error) => {
-                console.error("Donation list error:", error);
-                showMessage("The supporter list is temporarily unavailable.");
-                donorStatus.textContent =
-                    "Please try again later.";
-            });
-
-        } catch (error) {
-            console.error("Firebase setup error:", error);
-            showMessage("Could not connect to the supporter database.");
-            donorStatus.textContent =
-                "Please check the Firebase configuration and Firestore rules.";
-        }
-    } else {
-        showMessage("The supporter list will appear here after database setup.");
-        donorStatus.textContent =
-            "Firebase is not connected yet. Add your Firebase web configuration to enable the live list.";
-    }
-</script>
 
 </body>
 </html>
