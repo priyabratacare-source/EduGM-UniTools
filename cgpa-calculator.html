@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGPA Calculator | EduGM UniTools</title>
+<meta name="description" content="Calculate CGPA from semester SGPA values with EduGM UniTools.">
+
+<style>
+:root {
+    --blue: #1769c2;
+    --navy: #102650;
+    --green: #43aa58;
+    --red: #dc2626;
+    --border: #dce4ef;
+    --muted: #667085;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #f6f8fc;
+    color: #273449;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 13px 16px;
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.brand span { color: var(--blue); }
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+nav a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #4b5563;
+}
+
+nav a:hover { color: var(--blue); }
+
+main {
+    max-width: 900px;
+    margin: 22px auto;
+    padding: 0 14px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--navy);
+    font-size: 22px;
+    margin: 8px 0;
+}
+
+.intro {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 18px;
+    color: #596579;
+    font-size: 12px;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 7px #10265008;
+}
+
+.panel h2 {
+    font-size: 15px;
+    color: var(--navy);
+    margin: 0 0 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.field { min-width: 0; }
+
+label {
+    display: block;
+    font-size: 11px;
+    color: #46546a;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aebbd0;
+    border-radius: 3px;
+    background: white;
+    font: inherit;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #c9e0ff;
+    border-color: var(--blue);
+}
+
+.semesters {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+}
+
+fieldset {
+    border: 2px solid var(--blue);
+    padding: 12px;
+    margin: 15px 0;
+}
+
+legend {
+    color: #16845f;
+    font-size: 11px;
+    padding: 0 5px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 14px 0;
+}
+
+button {
+    border: 0;
+    border-radius: 18px;
+    padding: 8px 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover { filter: brightness(.93); }
+
+.calculate { background: var(--green); }
+.reset { background: var(--red); }
+
+.result {
+    max-width: 400px;
+    margin: 16px auto;
+    padding: 14px;
+    border: 1px dashed var(--blue);
+    text-align: center;
+    background: white;
+}
+
+.result-label {
+    font-size: 12px;
+    color: #536176;
+    margin-top: 8px;
+}
+
+.result-value {
+    display: block;
+    color: var(--blue);
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.info {
+    background: #f1f6ff;
+    border-left: 3px solid var(--blue);
+    padding: 11px;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 22px 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .header-inner {
+        flex-direction: column;
+    }
+
+    h1 { font-size: 19px; }
+
+    .panel { padding: 11px; }
+
+    .grid, .semesters {
+        gap: 9px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="brand">
+            EduGM <span>UniTools</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                Privacy Policy
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <h1>CGPA Calculator</h1>
+
+    <p class="intro">
+        Calculate your Cumulative Grade Point Average from your
+        semester results and view an estimated percentage.
+    </p>
+
+    <section class="panel">
+        <h2>Enter Your Academic Details</h2>
+
+        <div class="grid">
+            <div class="field">
+                <label for="semesterCount">Number of Semesters</label>
+                <select id="semesterCount" onchange="renderSemesters()">
+                    <option value="2">2 Semesters</option>
+                    <option value="4">4 Semesters</option>
+                    <option value="6">6 Semesters</option>
+                    <option value="8" selected>8 Semesters</option>
+                    <option value="10">10 Semesters</option>
+                    <option value="12">12 Semesters</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="formula">Percentage Formula</label>
+                <select id="formula">
+                    <option value="multiply">CGPA × 10</option>
+                    <option value="makaut">(CGPA − 0.75) × 10</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset>
+            <legend>Semester SGPA Details</legend>
+            <div class="semesters" id="semesterFields"></div>
+        </fieldset>
+
+        <div class="actions">
+            <button class="calculate" type="button" onclick="calculateCGPA()">
+                Calculate
+            </button>
+
+            <button class="reset" type="button" onclick="resetCalculator()">
+                Reset
+            </button>
+        </div>
+
+        <div class="result" aria-live="polite">
+            <div class="result-label">Your CGPA is:</div>
+            <span class="result-value" id="cgpaResult">—</span>
+
+            <div class="result-label">Estimated Percentage:</div>
+            <span class="result-value" id="percentageResult">—</span>
+
+            <p class="note" id="details">
+                Enter semester SGPA values to calculate.
+            </p>
+        </div>
+
+        <div class="info">
+            <strong>Simple average formula:</strong><br>
+            CGPA = Sum of semester SGPA values ÷ Number of entered semesters.
+            <br><br>
+            If semester credits differ, an official credit-weighted CGPA
+            may be required instead.
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Important Information</h2>
+        <p>
+            This calculator estimates CGPA from the semester SGPA values
+            you enter. It treats each entered semester equally.
+        </p>
+        <p class="note">
+            The percentage formulas are selectable estimates, not a
+            guarantee of official MAKAUT conversion rules. Check the
+            latest applicable university regulations before using results
+            for scholarships, admissions or official submissions.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <strong>EduGM UniTools</strong>
+    <p>© 2026 EduGM UniTools. All rights reserved.</p>
+    <p>Maintained and developed by <strong>CodeBihin</strong>.</p>
+    <p>
+        <a href="index.html">Home</a> ·
+        <a href="about.html">About</a> ·
+        <a href="contact.html">Contact Us</a> ·
+        <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+            Privacy Policy
+        </a>
+    </p>
+    <p>
+        Contact:
+        <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+    </p>
+</footer>
+
+<script>
+const semesterFields = document.getElementById("semesterFields");
+
+function renderSemesters() {
+    const count = Number(
+        document.getElementById("semesterCount").value
+    );
+
+    semesterFields.innerHTML = "";
+
+    for (let i = 1; i <= count; i++) {
+        const field = document.createElement("div");
+        field.className = "field";
+
+        field.innerHTML = `
+            <label for="sgpa${i}">Semester ${i} SGPA</label>
+            <input
+                id="sgpa${i}"
+                type="number"
+                min="0"
+                max="10"
+                step="any"
+                placeholder="0–10"
+            >
+        `;
+
+        semesterFields.appendChild(field);
+    }
+
+    clearResults();
+}
+
+function clearResults() {
+    document.getElementById("cgpaResult").textContent = "—";
+    document.getElementById("percentageResult").textContent = "—";
+    document.getElementById("details").textContent =
+        "Enter semester SGPA values to calculate.";
+}
+
+function calculateCGPA() {
+    const count = Number(
+        document.getElementById("semesterCount").value
+    );
+
+    let total = 0;
+    let entered = 0;
+
+    for (let i = 1; i <= count; i++) {
+        const input = document.getElementById("sgpa" + i);
+        const value = input.value.trim();
+
+        // Blank semesters are ignored.
+        if (value === "") continue;
+
+        const sgpa = Number(value);
+
+        if (
+            !Number.isFinite(sgpa) ||
+            sgpa < 0 ||
+            sgpa > 10
+        ) {
+            alert("Each SGPA must be between 0 and 10.");
+            input.focus();
+            return;
+        }
+
+        total += sgpa;
+        entered++;
+    }
+
+    if (entered === 0) {
+        alert("Please enter at least one semester SGPA.");
+        return;
+    }
+
+    const cgpa = total / entered;
+    const formula = document.getElementById("formula").value;
+
+    let percentage;
+
+    if (formula === "makaut") {
+        percentage = (cgpa - 0.75) * 10;
+    } else {
+        percentage = cgpa * 10;
+    }
+
+    document.getElementById("cgpaResult").textContent =
+        cgpa.toFixed(2);
+
+    document.getElementById("percentageResult").textContent =
+        percentage.toFixed(2) + "%";
+
+    document.getElementById("details").textContent =
+        "Calculated from " + entered + " entered semester(s).";
+}
+
+function resetCalculator() {
+    renderSemesters();
+}
+
+renderSemesters();
+</script>
+
+</body>
+</html>
