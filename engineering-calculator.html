@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free scientific and engineering calculator by EduGM UniTools.">
+<title>Engineering Calculator | EduGM UniTools</title>
+
+<style>
+:root {
+  --blue: #1769e0;
+  --dark: #12335b;
+  --light: #f3f7ff;
+  --border: #dce6f5;
+  --text: #243449;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f7f9fc;
+  line-height: 1.6;
+}
+header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav {
+  max-width: 1050px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.brand { color: var(--dark); font-weight: 800; font-size: 20px; }
+.brand span { color: var(--blue); }
+nav { display: flex; gap: 16px; flex-wrap: wrap; }
+nav a { color: #42536b; text-decoration: none; font-size: 14px; }
+nav a:hover { color: var(--blue); }
+main { max-width: 1000px; margin: auto; padding: 28px 16px 45px; }
+.hero { text-align: center; margin-bottom: 24px; }
+.hero h1 { color: var(--dark); margin: 0 0 8px; font-size: 30px; }
+.hero p { margin: 0; color: #65758b; }
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 20px rgba(30,65,110,.04);
+}
+h2 { color: var(--dark); font-size: 21px; margin: 0 0 15px; }
+.display {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fbff;
+  color: var(--dark);
+  font-size: 25px;
+  text-align: right;
+  margin-bottom: 12px;
+}
+.mode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+select, input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd8ea;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+}
+.mode-row select { width: auto; }
+.keys {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 5px;
+  background: #edf3fc;
+  color: var(--dark);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { filter: brightness(.96); }
+button.operator { background: #dceaff; color: #1457bd; }
+button.primary { background: var(--blue); color: white; }
+button.danger { background: #ffeded; color: #b42318; }
+button.wide { grid-column: span 2; }
+.note { color: #718096; font-size: 13px; margin-top: 12px; }
+.status { min-height: 24px; color: #b42318; font-size: 14px; }
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.formula {
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.formula strong { color: var(--blue); display: block; margin-bottom: 4px; }
+footer {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 22px 16px;
+  text-align: center;
+  color: #718096;
+  font-size: 13px;
+}
+footer a { color: var(--blue); text-decoration: none; }
+.footer-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 9px; }
+@media (max-width: 560px) {
+  .hero h1 { font-size: 25px; }
+  .card { padding: 15px; }
+  .keys { gap: 6px; }
+  button { padding: 12px 2px; font-size: 13px; }
+  .formula-grid { grid-template-columns: 1fr; }
+  .display { font-size: 21px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">EduGM <span>UniTools</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Engineering Calculator</h1>
+    <p>A free scientific calculator for engineering students and everyday calculations.</p>
+  </section>
+
+  <section class="card">
+    <h2>Scientific Calculator</h2>
+
+    <div class="mode-row">
+      <label for="angleMode">Angle mode</label>
+      <select id="angleMode" aria-label="Angle mode">
+        <option value="DEG">Degrees (DEG)</option>
+        <option value="RAD">Radians (RAD)</option>
+      </select>
+      <button onclick="clearAll()" class="danger">Clear all</button>
+    </div>
+
+    <input id="display" class="display" type="text"
+      placeholder="Enter expression"
+      aria-label="Calculator expression"
+      autocomplete="off" spellcheck="false">
+
+    <div class="keys">
+      <button class="operator" onclick="insert('sin(')">sin</button>
+      <button class="operator" onclick="insert('cos(')">cos</button>
+      <button class="operator" onclick="insert('tan(')">tan</button>
+      <button class="operator" onclick="insert('sqrt(')">√</button>
+      <button class="operator" onclick="insert('^2')">x²</button>
+
+      <button class="operator" onclick="insert('log(')">log</button>
+      <button class="operator" onclick="insert('ln(')">ln</button>
+      <button class="operator" onclick="insert('^')">xʸ</button>
+      <button class="operator" onclick="insert('(')">(</button>
+      <button class="operator" onclick="insert(')')">)</button>
+
+      <button onclick="insert('7')">7</button>
+      <button onclick="insert('8')">8</button>
+      <button onclick="insert('9')">9</button>
+      <button class="operator" onclick="insert('/')">÷</button>
+      <button class="operator" onclick="insert('pi')">π</button>
+
+      <button onclick="insert('4')">4</button>
+      <button onclick="insert('5')">5</button>
+      <button onclick="insert('6')">6</button>
+      <button class="operator" onclick="insert('*')">×</button>
+      <button class="operator" onclick="insert('e')">e</button>
+
+      <button onclick="insert('1')">1</button>
+      <button onclick="insert('2')">2</button>
+      <button onclick="insert('3')">3</button>
+      <button class="operator" onclick="insert('-')">−</button>
+      <button class="operator" onclick="insert('!')">n!</button>
+
+      <button onclick="insert('0')">0</button>
+      <button onclick="insert('.')">.</button>
+      <button onclick="backspace()">⌫</button>
+      <button class="operator" onclick="insert('+')">+</button>
+      <button class="primary" onclick="calculate()">=</button>
+
+      <button class="wide" onclick="insert('abs(')">abs</button>
+      <button class="wide" onclick="insert('%')">%</button>
+      <button class="wide" onclick="insert('ans')">Ans</button>
+    </div>
+
+    <p id="status" class="status" role="status"></p>
+    <p class="note">
+      Examples: <code>sin(30)</code>, <code>sqrt(144)</code>,
+      <code>log(100)</code>, <code>2^8</code>, <code>5!</code>.
+      Use explicit multiplication, such as <code>2*pi</code>.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Common Engineering Formulas</h2>
+    <div class="formula-grid">
+      <div class="formula">
+        <strong>Ohm's Law</strong>
+        Voltage: V = I × R
+        <br><span class="note">V = voltage, I = current, R = resistance</span>
+      </div>
+      <div class="formula">
+        <strong>Electrical Power</strong>
+        P = V × I
+        <br><span class="note">P = power, V = voltage, I = current</span>
+      </div>
+      <div class="formula">
+        <strong>Density</strong>
+        ρ = m / V
+        <br><span class="note">Mass divided by volume</span>
+      </div>
+      <div class="formula">
+        <strong>Velocity</strong>
+        v = distance / time
+        <br><span class="note">For average speed along a path</span>
+      </div>
+      <div class="formula">
+        <strong>Mechanical Stress</strong>
+        σ = F / A
+        <br><span class="note">Force divided by cross-sectional area</span>
+      </div>
+      <div class="formula">
+        <strong>Mechanical Strain</strong>
+        ε = ΔL / L
+        <br><span class="note">Change in length divided by original length</span>
+      </div>
+      <div class="formula">
+        <strong>Rectangle Area</strong>
+        A = length × width
+      </div>
+      <div class="formula">
+        <strong>Circle Area</strong>
+        A = πr²
+        <br><span class="note">r = radius</span>
+      </div>
+    </div>
+    <p class="note">Check units and applicable assumptions before using a formula in an engineering design.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy Policy</a>
+  </div>
+  <div>© 2026 EduGM UniTools. All rights reserved.</div>
+  <div>Maintained and developed by <strong>CodeBihin</strong>.</div>
+  <div>Contact: <a href="mailto:admin@codebihin.in">admin@codebihin.in</a></div>
+</footer>
+
+<script>
+const display = document.getElementById("display");
+const statusBox = document.getElementById("status");
+let lastAnswer = 0;
+
+function insert(value) {
+  const start = display.selectionStart ?? display.value.length;
+  const end = display.selectionEnd ?? display.value.length;
+  display.setRangeText(value, start, end, "end");
+  display.focus();
+  statusBox.textContent = "";
+}
+
+function backspace() {
+  const start = display.selectionStart ?? display.value.length;
+  const end = display.selectionEnd ?? display.value.length;
+
+  if (start !== end) {
+    display.setRangeText("", start, end, "end");
+  } else if (start > 0) {
+    display.setRangeText("", start - 1, start, "end");
+  }
+  display.focus();
+}
+
+function clearAll() {
+  display.value = "";
+  statusBox.textContent = "";
+  display.focus();
+}
+
+/* Safe expression parser: does not use eval() or Function(). */
+function tokenize(source) {
+  const tokens = [];
+  let i = 0;
+
+  while (i < source.length) {
+    const rest = source.slice(i);
+    const whitespace = rest.match(/^\s+/);
+    if (whitespace) {
+      i += whitespace[0].length;
+      continue;
+    }
+
+    const number = rest.match(/^(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?/i);
+    if (number) {
+      tokens.push({ type: "number", value: Number(number[0]) });
+      i += number[0].length;
+      continue;
+    }
+
+    const word = rest.match(/^[a-zA-Z]+/);
+    if (word) {
+      tokens.push({ type: "name", value: word[0].toLowerCase() });
+      i += word[0].length;
+      continue;
+    }
+
+    if ("+-*/^()%!".includes(source[i])) {
+      tokens.push({ type: source[i], value: source[i] });
+      i++;
+      continue;
+    }
+
+    throw new Error("Invalid character: " + source[i]);
+  }
+
+  return tokens;
+}
+
+function evaluate(source) {
+  const tokens = tokenize(source);
+  let pos = 0;
+  const angleMode = document.getElementById("angleMode").value;
+
+  function peek(type) {
+    return tokens[pos] && tokens[pos].type === type;
+  }
+
+  function take(type) {
+    if (!peek(type)) throw new Error("Expected " + type);
+    return tokens[pos++];
+  }
+
+  function factorial(n) {
+    if (!Number.isInteger(n) || n < 0 || n > 170) {
+      throw new Error("Factorial requires an integer from 0 to 170");
+    }
+    let result = 1;
+    for (let k = 2; k <= n; k++) result *= k;
+    return result;
+  }
+
+  function primary() {
+    if (peek("number")) return take("number").value;
+
+    if (peek("+")) {
+      take("+");
+      return unary();
+    }
+    if (peek("-")) {
+      take("-");
+      return -unary();
+    }
+
+    if (peek("(")) {
+      take("(");
+      const value = expression();
+      take(")");
+      return value;
+    }
+
+    if (peek("name")) {
+      const name = take("name").value;
+
+      if (name === "pi") return Math.PI;
+      if (name === "e") return Math.E;
+      if (name === "ans") return lastAnswer;
+
+      const allowed = ["sin", "cos", "tan", "sqrt", "log", "ln", "abs"];
+      if (!allowed.includes(name)) throw new Error("Unknown function or constant: " + name);
+
+      take("(");
+      const value = expression();
+      take(")");
+
+      switch (name) {
+        case "sin":
+          return Math.sin(angleMode === "DEG" ? value * Math.PI / 180 : value);
+        case "cos":
+          return Math.cos(angleMode === "DEG" ? value * Math.PI / 180 : value);
+        case "tan": {
+          const radians = angleMode === "DEG" ? value * Math.PI / 180 : value;
+          if (Math.abs(Math.cos(radians)) < 1e-12) {
+            throw new Error("Tangent is undefined at this angle");
+          }
+          return Math.tan(radians);
+        }
+        case "sqrt":
+          if (value < 0) throw new Error("Square root needs a non-negative number");
+          return Math.sqrt(value);
+        case "log":
+          if (value <= 0) throw new Error("log requires a positive number");
+          return Math.log10(value);
+        case "ln":
+          if (value <= 0) throw new Error("ln requires a positive number");
+          return Math.log(value);
+        case "abs":
+          return Math.abs(value);
+      }
+    }
+
+    throw new Error("Check the expression");
+  }
+
+  function postfix() {
+    let value = primary();
+    while (peek("!")) {
+      take("!");
+      value = factorial(value);
+    }
+    return value;
+  }
+
+  function power() {
+    let value = postfix();
+    if (peek("^")) {
+      take("^");
+      value = Math.pow(value, unary());
+    }
+    return value;
+  }
+
+  function unary() {
+    return power();
+  }
+
+  function term() {
+    let value = unary();
+    while (peek("*") || peek("/") || peek("%")) {
+      const operator = tokens[pos++].type;
+      const right = unary();
+
+      if ((operator === "/" || operator === "%") && right === 0) {
+        throw new Error("Division by zero");
+      }
+
+      if (operator === "*") value *= right;
+      if (operator === "/") value /= right;
+      if (operator === "%") value %= right;
+    }
+    return value;
+  }
+
+  function expression() {
+    let value = term();
+    while (peek("+") || peek("-")) {
+      const operator = tokens[pos++].type;
+      const right = term();
+      value = operator === "+" ? value + right : value - right;
+    }
+    return value;
+  }
+
+  if (!tokens.length) throw new Error("Enter an expression first");
+
+  const result = expression();
+  if (pos !== tokens.length) throw new Error("Unexpected input near the end");
+
+  if (!Number.isFinite(result)) throw new Error("Result is outside the supported range");
+  return result;
+}
+
+function calculate() {
+  try {
+    const result = evaluate(display.value);
+    lastAnswer = result;
+    display.value = Number(result.toPrecision(12)).toString();
+    statusBox.style.color = "#1769e0";
+    statusBox.textContent = "Calculated successfully.";
+  } catch (error) {
+    statusBox.style.color = "#b42318";
+    statusBox.textContent = error.message || "Unable to calculate this expression.";
+  }
+}
+
+display.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    calculate();
+  }
+});
+</script>
+</body>
+</html>
