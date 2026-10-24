@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduGM UniTools | Fast, Simple Student Tools</title>
+    <meta name="description" content="Fast, easy-to-use academic calculators and image/PDF utilities for students. Mobile-friendly tools with simple navigation.">
+    <meta name="theme-color" content="#6d28d9">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    
+<style>
+:root{--primary:#6d28d9;--primary-hover:#5b21b6;--text-main:#172033;--text-muted:#667085;--bg-body:#f7f8fc;--card-bg:#fff;--radius-lg:18px;--radius-md:13px;--shadow-sm:0 3px 12px rgba(23,32,51,.05);--shadow-hover:0 16px 34px rgba(109,40,217,.13);--transition:all .2s ease}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg-body);color:var(--text-main);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.container{width:min(1160px,92%);margin:auto}
+header{background:rgba(255,255,255,.96);position:sticky;top:0;z-index:100;border-bottom:1px solid #e9eaf2;backdrop-filter:blur(14px)}
+.header-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-size:20px;font-weight:850;letter-spacing:-.5px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand-icon{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;font-weight:900;box-shadow:0 6px 14px #6d28d933}
+nav{display:flex;align-items:center;flex-wrap:wrap;gap:4px}nav a{font-size:13px;font-weight:650;color:var(--text-muted);padding:8px 11px;border-radius:9px;transition:var(--transition)}
+nav a:hover,nav a.active{color:var(--primary);background:#f1eafe}
+.menu-toggle{display:none;border:1px solid #e4e4ee;background:white;border-radius:10px;padding:8px 11px;cursor:pointer}
+.hero{padding:58px 0 42px;text-align:center;background:radial-gradient(ellipse at top,#ede9fe 0%,#f7f8fc 68%);border-bottom:1px solid #ececf4}
+.eyebrow{display:inline-block;background:#fff;border:1px solid #e8defe;border-radius:99px;padding:6px 12px;color:#6d28d9;font-size:12px;font-weight:750;margin-bottom:17px}
+.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.15;margin-bottom:14px;font-weight:850;letter-spacing:-1.3px}
+.hero p{color:var(--text-muted);font-size:16px;max-width:620px;margin:0 auto}
+.search-wrap{max-width:570px;margin:25px auto 0;position:relative}.search-wrap input{width:100%;border:1px solid #dedfea;border-radius:14px;padding:14px 16px 14px 46px;background:white;outline:none;box-shadow:0 5px 18px #22203408}
+.search-wrap input:focus{border-color:#a78bfa;box-shadow:0 0 0 4px #8b5cf626}.search-icon{position:absolute;left:16px;top:9px;font-size:22px;color:#7c3aed}
+main{padding:34px 0 62px}.quick-links{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:0 0 24px}
+.quick-links a{background:#fff;border:1px solid #e6e7ef;padding:8px 13px;border-radius:99px;font-size:13px;font-weight:700;color:#475467}
+.quick-links a:hover{border-color:#c4b5fd;color:var(--primary)}
+.section-title{font-size:21px;font-weight:800;margin:35px 0 17px;display:flex;align-items:center;gap:13px;scroll-margin-top:100px}
+.section-title:after{content:"";flex:1;height:1px;background:#e5e7ef}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:17px}
+.tool-card{background:#fff;border-radius:var(--radius-lg);padding:16px;display:flex;flex-direction:column;align-items:stretch;text-align:left;box-shadow:var(--shadow-sm);transition:var(--transition);border:1px solid #e9eaf2;min-width:0}
+.tool-card:hover,.tool-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#d8ccff;outline:none}
+.icon-box{width:100%;height:92px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:14px;color:#fff;font-size:29px;font-weight:800}
+.bg-pink{background:linear-gradient(135deg,#f472b6,#db2777)}.bg-blue{background:linear-gradient(135deg,#60a5fa,#2563eb)}.bg-purple{background:linear-gradient(135deg,#c084fc,#7e22ce)}.bg-orange{background:linear-gradient(135deg,#fdba74,#ea580c)}.bg-green{background:linear-gradient(135deg,#86efac,#15803d)}.bg-teal{background:linear-gradient(135deg,#5eead4,#0f766e)}.bg-indigo{background:linear-gradient(135deg,#a5b4fc,#4338ca)}
+.icon-box .sub-text{font-size:10px;font-weight:750;background:#ffffff36;padding:3px 9px;border-radius:20px;margin-top:5px}
+.tool-card h3{font-size:15px;font-weight:780;line-height:1.4;margin-bottom:5px}.tool-card p{font-size:12.5px;color:var(--text-muted);font-weight:500;flex:1}
+.tool-card:after{content:"Open tool ↗";font-size:12px;font-weight:750;color:var(--primary);margin-top:13px}
+.no-results{display:none;padding:24px;background:#fff;border:1px dashed #d0d5dd;border-radius:14px;text-align:center;color:var(--text-muted)}
+footer{background:#111827;color:#d0d5dd;padding:36px 0 20px;font-size:13px}
+.footer-top{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;text-align:left}.footer-brand{font-size:18px;font-weight:850;color:#fff;margin-bottom:7px}
+.footer-copy{max-width:390px;color:#aeb7c6}.footer-links{display:flex;flex-wrap:wrap;gap:10px 18px;align-content:flex-start}
+footer a{color:#e9d5ff;font-weight:650}footer a:hover{text-decoration:underline}
+.footer-bottom{border-top:1px solid #344052;margin-top:25px;padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#9ca3af}
+.back-top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border:0;border-radius:13px;background:#6d28d9;color:#fff;font-size:19px;box-shadow:0 8px 20px #6d28d944;cursor:pointer;display:none;z-index:80}.back-top.visible{display:block}
+@media(max-width:850px){.header-inner{min-height:64px;flex-wrap:wrap;padding:10px 0}.menu-toggle{display:block}nav{display:none;width:100%;padding:4px 0 8px;flex-direction:column;align-items:stretch}nav.open{display:flex}nav a{padding:10px 12px}.hero{padding:43px 0 34px}.tool-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:13px}}
+@media(max-width:480px){.container{width:91%}.brand{font-size:18px}.hero h1{letter-spacing:-.7px}.hero p{font-size:14px}.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tool-card{padding:10px;border-radius:14px}.icon-box{height:76px;font-size:25px;margin-bottom:10px}.tool-card h3{font-size:13px}.tool-card p{font-size:11.5px}.tool-card:after{font-size:11px}.section-title{font-size:18px;margin-top:29px}.footer-top{text-align:center;justify-content:center}.footer-links{justify-content:center}.footer-bottom{justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+
+<body id="top">
+
+<!-- HEADER -->
+<header>
+    <div class="container header-inner">
+        <a class="brand" href="index.html">
+            <div class="brand-icon">E</div>
+            EduGM UniTools
+        </a>
+
+        <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">☰ Menu</button>
+        <nav id="main-nav" aria-label="Main navigation">
+            <a class="active" href="index.html">Home</a>
+            <a href="age-calculator.html">Age Calculator</a>
+            <a href="percentage-calculator.html">Percentage</a>
+            <a href="cgpa-calculator.html">CGPA</a>
+            <a href="#academic-tools">Academic Tools</a>
+            <a href="#image-pdf-tools">Image & PDF</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="eyebrow">✦ STUDENT-FRIENDLY TOOLS</div>
+        <h1>All-in-One Student Utilities</h1>
+        <p>Simple, fast, and free tools for your everyday academic needs. No registration required.</p>
+        <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="tool-search" type="search" placeholder="Search tools (e.g. CGPA, age, PDF)…" aria-label="Search tools" autocomplete="off">
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+    <div class="quick-links" aria-label="Quick tool categories">
+        <a href="#academic-tools">🎓 Academic Tools</a>
+        <a href="#image-pdf-tools">🖼️ Image & PDF</a>
+    </div>
+    
+    <!-- ACADEMIC SECTION -->
+    <h2 class="section-title" id="academic-tools">Academic Calculators</h2>
+    <div class="tool-grid">
+
+        <a href="cgpa-calculator.html" class="tool-card" data-search="cgpa-calculator.html">
+            <div class="icon-box bg-pink">
+                🎓
+                <span class="sub-text">CGPA</span>
+            </div>
+            <h3>CGPA Calculator</h3>
+            <p>Calculate cumulative grade</p>
+        </a>
+
+        <a href="sgpa-calculator.html" class="tool-card" data-search="sgpa-calculator.html">
+            <div class="icon-box bg-purple">
+                🏫
+                <span class="sub-text">SGPA</span>
+            </div>
+            <h3>SGPA Calculator</h3>
+            <p>Semester grade point average</p>
+        </a>
+
+        <a href="marks-percentage-calculator.html" class="tool-card" data-search="marks-percentage-calculator.html">
+            <div class="icon-box bg-blue">
+                📊
+                <span class="sub-text">Marks %</span>
+            </div>
+            <h3>Marks Percentage Calculator</h3>
+            <p>Find percentage from marks</p>
+        </a>
+
+        <a href="madhyamik-percentage-calculator.html" class="tool-card" data-search="madhyamik-percentage-calculator.html">
+            <div class="icon-box bg-orange">
+                10
+                <span class="sub-text">Madhyamik</span>
+            </div>
+            <h3>Madhyamik Percentage Calculator</h3>
+            <p>Class 10 result percentage</p>
+        </a>
+
+        <a href="hs-percentage-calculator.html" class="tool-card" data-search="hs-percentage-calculator.html">
+            <div class="icon-box bg-green">
+                12
+                <span class="sub-text">HS Result</span>
+            </div>
+            <h3>HS Result Percentage Calculator</h3>
+            <p>Class 12 result percentage</p>
+        </a>
+
+        <a href="age-calculator.html" class="tool-card" data-search="age-calculator.html">
+            <div class="icon-box bg-teal">
+                🎂
+                <span class="sub-text">Age</span>
+            </div>
+            <h3>Age Calculator</h3>
+            <p>Calculate exact age from DOB</p>
+        </a>
+
+    </div>
+
+    <!-- IMAGE & PDF TOOLS SECTION -->
+    <h2 class="section-title" id="image-pdf-tools">Image & PDF Utilities</h2>
+    <div class="tool-grid">
+
+        <a href="background-remover.html" class="tool-card" data-search="background-remover.html">
+            <div class="icon-box bg-indigo">
+                ✂️
+                <span class="sub-text">Remove BG</span>
+            </div>
+            <h3>Image Background Remover</h3>
+            <p>Remove image backgrounds</p>
+        </a>
+
+        <a href="image-resize-crop.html" class="tool-card" data-search="image-resize-crop.html">
+            <div class="icon-box bg-blue">
+                📐
+                <span class="sub-text">Resize / Crop</span>
+            </div>
+            <h3>Image Resize / Crop</h3>
+            <p>Adjust dimensions easily</p>
+        </a>
+
+        <a href="pan-card-resizer.html" class="tool-card" data-search="pan-card-resizer.html">
+            <div class="icon-box bg-orange">
+                🪪
+                <span class="sub-text">PAN Card</span>
+            </div>
+            <h3>PAN Card Photo & Signature Resizer</h3>
+            <p>Format for official forms</p>
+        </a>
+
+        <a href="name-date-photo.html" class="tool-card" data-search="name-date-photo.html">
+            <div class="icon-box bg-pink">
+                📝
+                <span class="sub-text">Name & Date</span>
+            </div>
+            <h3>Name and Date on Photo</h3>
+            <p>Add text stamps to photos</p>
+        </a>
+
+        <a href="image-resizer-v2.html" class="tool-card" data-search="image-resizer-v2.html">
+            <div class="icon-box bg-purple">
+                🖼️
+                <span class="sub-text">Compress V2</span>
+            </div>
+            <h3>Image Resizer & Quality Compressor</h3>
+            <p>Shrink image file sizes</p>
+        </a>
+
+        <a href="image-to-pdf.html" class="tool-card" data-search="image-to-pdf.html">
+            <div class="icon-box bg-teal">
+                🖼️➡️📄
+                <span class="sub-text">To PDF</span>
+            </div>
+            <h3>Image to PDF Converter</h3>
+            <p>Combine images into one PDF</p>
+        </a>
+
+        <a href="pdf-to-image.html" class="tool-card" data-search="pdf-to-image.html">
+            <div class="icon-box bg-blue">
+                📄➡️🖼️
+                <span class="sub-text">To Image</span>
+            </div>
+            <h3>PDF to Image Converter</h3>
+            <p>Extract pages as images</p>
+        </a>
+
+        <a href="protect-pdf.html" class="tool-card" data-search="protect-pdf.html">
+            <div class="icon-box bg-indigo">
+                🔒
+                <span class="sub-text">Password</span>
+            </div>
+            <h3>Protect PDF with Password</h3>
+            <p>Secure your PDF documents</p>
+        </a>
+
+        <a href="pdf-page-remover.html" class="tool-card" data-search="pdf-page-remover.html">
+            <div class="icon-box bg-orange">
+                🗑️
+                <span class="sub-text">Remove Pages</span>
+            </div>
+            <h3>PDF Page Remover</h3>
+            <p>Delete unwanted PDF pages</p>
+        </a>
+
+        <a href="translate-online.html" class="tool-card" data-search="translate-online.html">
+            <div class="icon-box bg-green">
+                🌐
+                <span class="sub-text">Translate</span>
+            </div>
+            <h3>Translate Online</h3>
+            <p>Translate text instantly</p>
+        </a>
+
+    </div>
+
+<p class="no-results" id="no-results">No matching tools found. Try another keyword.</p>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">EduGM UniTools</div>
+        <p class="footer-copy">Simple, helpful online utilities for students. Calculate marks, manage academic tasks, and prepare images or PDFs with ease.</p>
+      </div>
+      <div class="footer-links" aria-label="Footer links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="current-year">2026</span> EduGM UniTools. All rights reserved.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+<button class="back-top" id="back-top" type="button" aria-label="Back to top">↑</button>
+
+
+<script>
+(() => {
+  const menuButton = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#main-nav');
+  const search = document.querySelector('#tool-search');
+  const cards = [...document.querySelectorAll('.tool-card')];
+  const noResults = document.querySelector('#no-results');
+  const backTop = document.querySelector('#back-top');
+
+  menuButton?.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.textContent = open ? '✕ Close' : '☰ Menu';
+  });
+  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    if (menuButton) menuButton.textContent = '☰ Menu';
+  }));
+  search?.addEventListener('input', () => {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const match = (card.textContent + ' ' + card.dataset.search + ' ' + card.href).toLowerCase().includes(query);
+      card.hidden = !match;
+      if (match) visible++;
+    });
+    document.querySelectorAll('.section-title').forEach(title => {
+      const grid = title.nextElementSibling;
+      if (grid?.classList.contains('tool-grid')) {
+        title.hidden = query.length > 0 && ![...grid.querySelectorAll('.tool-card')].some(card => !card.hidden);
+      }
+    });
+    noResults.style.display = visible ? 'none' : 'block';
+  });
+  document.querySelector('#current-year').textContent = new Date().getFullYear();
+  window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 450), {passive:true});
+  backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
+
+</body>
+</html>
