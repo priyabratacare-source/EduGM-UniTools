@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,7 @@
 
   <title>All Academic Tools | EduGM UniTools</title>
   <meta name="description" content="Explore free academic calculators, engineering tools, percentage calculators, grade calculators and student productivity tools with EduGM UniTools.">
-  <meta name="keywords" content="academic tools, SGPA calculator, CGPA calculator, percentage calculator, marks calculator, engineering calculator, student tools">
+  <meta name="keywords" content="academic tools, SGPA calculator, CGPA calculator, percentage calculator, marks calculator, engineering calculator, student tools, PDF tools, image tools">
   <meta name="author" content="EduGM UniTools">
 
   <link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png">
@@ -918,7 +917,7 @@
       <form class="hero-search" id="searchForm" role="search">
         <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         <input id="toolSearch" type="search"
-          placeholder="Search calculators, grades, marks..."
+          placeholder="Search calculators, grades, PDF, image..."
           aria-label="Search academic tools" autocomplete="off">
         <button class="search-button" type="submit">Search</button>
       </form>
@@ -938,21 +937,42 @@
         <h2>Explore all tools</h2>
         <p>Find the right tool for your academic needs.</p>
       </div>
-      <span class="result-count" id="resultCount">30+ tools</span>
+      <span class="result-count" id="resultCount">40+ tools</span>
     </div>
 
     <div class="filters" role="group" aria-label="Filter tools by category">
       <button class="filter-btn active" data-category="all" type="button">All Tools</button>
-      <button class="filter-btn" data-category="grades" type="button">Grades & GPA</button>
-      <button class="filter-btn" data-category="marks" type="button">Marks & Results</button>
+      <button class="filter-btn" data-category="grades" type="button">Grades &amp; GPA</button>
+      <button class="filter-btn" data-category="marks" type="button">Marks &amp; Results</button>
       <button class="filter-btn" data-category="engineering" type="button">Engineering</button>
-      <button class="filter-btn" data-category="math" type="button">Math & Science</button>
+      <button class="filter-btn" data-category="math" type="button">Math &amp; Science</button>
       <button class="filter-btn" data-category="student" type="button">Student Tools</button>
+      <button class="filter-btn" data-category="pdf" type="button">PDF &amp; Image Tools</button>
     </div>
 
     <div class="tools-grid" id="toolsGrid">
 
-      <!-- PDF SIZE REDUCER — FIRST TOOL -->
+      <!-- ============ IMAGE SIZE REDUCER — TOP TOOL ============ -->
+      <a class="tool-card" href="image-size-reducer.html"
+         data-category="student"
+         data-search="image size reducer compress image reduce image file size photo compressor jpg png">
+        <div class="tool-top">
+          <div class="tool-icon cyan">
+            <i class="fa-solid fa-image"></i>
+          </div>
+          <span class="tool-badge">
+            <i class="fa-solid fa-check"></i> Available
+          </span>
+        </div>
+        <h3>Image Size Reducer</h3>
+        <p>Reduce image file size directly in your browser. Upload an image, compress it, and download the smaller file.</p>
+        <div class="tool-action">
+          <span>Reduce Image Size</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </a>
+
+      <!-- ============ PDF SIZE REDUCER ============ -->
       <a class="tool-card" href="pdf-size-reducer.html"
          data-category="student"
          data-search="pdf size reducer compress pdf reduce pdf file size document compressor">
@@ -972,7 +992,7 @@
         </div>
       </a>
 
-      <!-- GRADES & GPA -->
+      <!-- ============ GRADES & GPA ============ -->
       <a class="tool-card" href="sgpa-calculator.html" data-category="grades" data-search="sgpa semester grade point average grade calculator">
         <div class="tool-top">
           <div class="tool-icon purple"><i class="fa-solid fa-chart-line"></i></div>
@@ -1033,7 +1053,7 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
-      <!-- MARKS & RESULTS -->
+      <!-- ============ MARKS & RESULTS ============ -->
       <a class="tool-card" href="marks-calculator.html" data-category="marks" data-search="marks calculator total obtained marks score">
         <div class="tool-top">
           <div class="tool-icon orange"><i class="fa-solid fa-calculator"></i></div>
@@ -1094,7 +1114,7 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
-      <!-- ENGINEERING -->
+      <!-- ============ ENGINEERING ============ -->
       <a class="tool-card" href="engineering-calculator.html" data-category="engineering" data-search="engineering calculator engineering student">
         <div class="tool-top">
           <div class="tool-icon cyan"><i class="fa-solid fa-gears"></i></div>
@@ -1155,7 +1175,7 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
-      <!-- MATH & SCIENCE -->
+      <!-- ============ MATH & SCIENCE ============ -->
       <a class="tool-card is-coming" href="#" data-coming="true" data-category="math" data-search="fraction calculator add subtract multiply divide">
         <div class="tool-top">
           <div class="tool-icon purple"><i class="fa-solid fa-divide"></i></div>
@@ -1171,7 +1191,7 @@
           <div class="tool-icon blue"><i class="fa-solid fa-scale-balanced"></i></div>
           <span class="tool-badge soon">Coming Soon</span>
         </div>
-        <h3>Ratio & Proportion</h3>
+        <h3>Ratio &amp; Proportion</h3>
         <p>Simplify ratios and solve basic proportion problems.</p>
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
@@ -1216,7 +1236,7 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
-      <!-- STUDENT TOOLS -->
+      <!-- ============ STUDENT TOOLS ============ -->
       <a class="tool-card is-coming" href="#" data-coming="true" data-category="student" data-search="attendance calculator attendance percentage classes">
         <div class="tool-top">
           <div class="tool-icon green"><i class="fa-solid fa-calendar-check"></i></div>
@@ -1287,17 +1307,6 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
-      <!-- Existing PDF Utility Tools placeholder retained -->
-      <a class="tool-card is-coming" href="#" data-coming="true" data-category="student" data-search="pdf tools merge split compress student documents">
-        <div class="tool-top">
-          <div class="tool-icon red"><i class="fa-solid fa-file-pdf"></i></div>
-          <span class="tool-badge soon">Coming Soon</span>
-        </div>
-        <h3>PDF Utility Tools</h3>
-        <p>Explore planned tools for managing academic PDF documents.</p>
-        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
-      </a>
-
       <a class="tool-card is-coming" href="#" data-coming="true" data-category="student" data-search="random number generator study practice">
         <div class="tool-top">
           <div class="tool-icon green"><i class="fa-solid fa-shuffle"></i></div>
@@ -1305,6 +1314,347 @@
         </div>
         <h3>Random Number Generator</h3>
         <p>Generate random numbers for practice and simple tasks.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <!-- ============ PDF & IMAGE TOOLS ============ -->
+      <a class="tool-card" href="organize-pdf.html" data-category="pdf" data-search="organize pdf arrange pages reorder sort pdf">
+        <div class="tool-top">
+          <div class="tool-icon blue"><i class="fa-solid fa-layer-group"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Organize PDF</h3>
+        <p>Rearrange, reorder or sort PDF pages into the order you need.</p>
+        <div class="tool-action"><span>Organize PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="merge-pdf.html" data-category="pdf" data-search="merge pdf combine pdf join pdf files">
+        <div class="tool-top">
+          <div class="tool-icon purple"><i class="fa-solid fa-object-group"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Merge PDF</h3>
+        <p>Combine multiple PDF files into one single document.</p>
+        <div class="tool-action"><span>Merge PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="split-pdf.html" data-category="pdf" data-search="split pdf separate pdf pages divide pdf">
+        <div class="tool-top">
+          <div class="tool-icon orange"><i class="fa-solid fa-scissors"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Split PDF</h3>
+        <p>Split a PDF into separate files or extract a page range.</p>
+        <div class="tool-action"><span>Split PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="remove-pages-pdf.html" data-category="pdf" data-search="remove pages pdf delete pages pdf">
+        <div class="tool-top">
+          <div class="tool-icon red"><i class="fa-solid fa-trash-can"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Remove Pages</h3>
+        <p>Delete unwanted pages from a PDF file quickly.</p>
+        <div class="tool-action"><span>Remove Pages</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="extract-pages-pdf.html" data-category="pdf" data-search="extract pages pdf select pages pdf">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-file-export"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Extract Pages</h3>
+        <p>Extract selected pages from a PDF into a new document.</p>
+        <div class="tool-action"><span>Extract Pages</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="scan-to-pdf.html" data-category="pdf" data-search="scan to pdf scanner document camera">
+        <div class="tool-top">
+          <div class="tool-icon cyan"><i class="fa-solid fa-camera"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Scan to PDF</h3>
+        <p>Turn scanned documents or photos into a PDF file.</p>
+        <div class="tool-action"><span>Scan to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="optimize-pdf.html" data-category="pdf" data-search="optimize pdf reduce pdf size improve pdf">
+        <div class="tool-top">
+          <div class="tool-icon yellow"><i class="fa-solid fa-gauge-high"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Optimize PDF</h3>
+        <p>Optimize PDF files for faster loading and sharing.</p>
+        <div class="tool-action"><span>Optimize PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="compress-pdf.html" data-category="pdf" data-search="compress pdf reduce pdf file size">
+        <div class="tool-top">
+          <div class="tool-icon pink"><i class="fa-solid fa-compress"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Compress PDF</h3>
+        <p>Shrink the size of a PDF while keeping it usable.</p>
+        <div class="tool-action"><span>Compress PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="repair-pdf.html" data-category="pdf" data-search="repair pdf fix pdf damaged pdf">
+        <div class="tool-top">
+          <div class="tool-icon purple"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Repair PDF</h3>
+        <p>Attempt to repair damaged or corrupted PDF files.</p>
+        <div class="tool-action"><span>Repair PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="ocr-pdf.html" data-category="pdf" data-search="ocr pdf optical character recognition text pdf">
+        <div class="tool-top">
+          <div class="tool-icon blue"><i class="fa-solid fa-text-height"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>OCR PDF</h3>
+        <p>Recognize text inside scanned PDF pages with OCR.</p>
+        <div class="tool-action"><span>OCR PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="jpg-to-pdf.html" data-category="pdf" data-search="jpg to pdf image to pdf convert jpg pdf">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-file-image"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>JPG to PDF</h3>
+        <p>Convert JPG images into a PDF document.</p>
+        <div class="tool-action"><span>JPG to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="word-to-pdf.html" data-category="pdf" data-search="word to pdf doc to pdf convert word pdf">
+        <div class="tool-top">
+          <div class="tool-icon orange"><i class="fa-solid fa-file-word"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>WORD to PDF</h3>
+        <p>Convert Word documents into PDF files.</p>
+        <div class="tool-action"><span>WORD to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="powerpoint-to-pdf.html" data-category="pdf" data-search="powerpoint to pdf ppt to pdf convert ppt pdf">
+        <div class="tool-top">
+          <div class="tool-icon red"><i class="fa-solid fa-file-powerpoint"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>POWERPOINT to PDF</h3>
+        <p>Convert PowerPoint presentations into PDF files.</p>
+        <div class="tool-action"><span>POWERPOINT to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="excel-to-pdf.html" data-category="pdf" data-search="excel to pdf xls to pdf convert excel pdf">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-file-excel"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>EXCEL to PDF</h3>
+        <p>Convert Excel spreadsheets into PDF documents.</p>
+        <div class="tool-action"><span>EXCEL to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="html-to-pdf.html" data-category="pdf" data-search="html to pdf web page to pdf">
+        <div class="tool-top">
+          <div class="tool-icon cyan"><i class="fa-solid fa-code"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>HTML to PDF</h3>
+        <p>Convert HTML pages or snippets into PDF files.</p>
+        <div class="tool-action"><span>HTML to PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="pdf-to-jpg.html" data-category="pdf" data-search="pdf to jpg pdf to image convert pdf jpg">
+        <div class="tool-top">
+          <div class="tool-icon purple"><i class="fa-solid fa-image"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>PDF to JPG</h3>
+        <p>Convert PDF pages into JPG images.</p>
+        <div class="tool-action"><span>PDF to JPG</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="pdf-to-word.html" data-category="pdf" data-search="pdf to word convert pdf docx">
+        <div class="tool-top">
+          <div class="tool-icon blue"><i class="fa-solid fa-file-word"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>PDF to WORD</h3>
+        <p>Convert PDF files into editable Word documents.</p>
+        <div class="tool-action"><span>PDF to WORD</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="pdf-to-powerpoint.html" data-category="pdf" data-search="pdf to powerpoint pdf to ppt">
+        <div class="tool-top">
+          <div class="tool-icon orange"><i class="fa-solid fa-file-powerpoint"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>PDF to POWERPOINT</h3>
+        <p>Turn PDF pages into editable PowerPoint slides.</p>
+        <div class="tool-action"><span>PDF to POWERPOINT</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="pdf-to-excel.html" data-category="pdf" data-search="pdf to excel pdf to spreadsheet">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-file-excel"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>PDF to EXCEL</h3>
+        <p>Convert PDF tables and data into Excel spreadsheets.</p>
+        <div class="tool-action"><span>PDF to EXCEL</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="pdf-to-pdfa.html" data-category="pdf" data-search="pdf to pdfa archive format">
+        <div class="tool-top">
+          <div class="tool-icon yellow"><i class="fa-solid fa-file-shield"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>PDF to PDF/A</h3>
+        <p>Convert PDF files to the PDF/A archive format.</p>
+        <div class="tool-action"><span>PDF to PDF/A</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="rotate-pdf.html" data-category="pdf" data-search="rotate pdf turn pages rotate">
+        <div class="tool-top">
+          <div class="tool-icon cyan"><i class="fa-solid fa-rotate"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Rotate PDF</h3>
+        <p>Rotate PDF pages to the correct orientation.</p>
+        <div class="tool-action"><span>Rotate PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="add-page-numbers-pdf.html" data-category="pdf" data-search="add page numbers pdf numbering pages">
+        <div class="tool-top">
+          <div class="tool-icon purple"><i class="fa-solid fa-list-ol"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Add Page Numbers</h3>
+        <p>Insert page numbers into your PDF document.</p>
+        <div class="tool-action"><span>Add Page Numbers</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="add-watermark-pdf.html" data-category="pdf" data-search="add watermark pdf stamp watermark">
+        <div class="tool-top">
+          <div class="tool-icon blue"><i class="fa-solid fa-droplet"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Add Watermark</h3>
+        <p>Add text or image watermarks to PDF pages.</p>
+        <div class="tool-action"><span>Add Watermark</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="crop-pdf.html" data-category="pdf" data-search="crop pdf trim margins crop pages">
+        <div class="tool-top">
+          <div class="tool-icon orange"><i class="fa-solid fa-crop"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Crop PDF</h3>
+        <p>Crop PDF pages or trim margins for a cleaner look.</p>
+        <div class="tool-action"><span>Crop PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="edit pdf text editor modify pdf">
+        <div class="tool-top">
+          <div class="tool-icon pink"><i class="fa-solid fa-pen-to-square"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>Edit PDF</h3>
+        <p>Edit text and content inside PDF documents.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="pdf forms fill forms create forms">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-square-check"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>PDF Forms</h3>
+        <p>Fill, create and manage interactive PDF forms.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card" href="unlock-pdf.html" data-category="pdf" data-search="unlock pdf remove password pdf">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-solid fa-lock-open"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Unlock PDF</h3>
+        <p>Remove password protection from PDF files you own.</p>
+        <div class="tool-action"><span>Unlock PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card" href="protect-pdf.html" data-category="pdf" data-search="protect pdf password lock pdf">
+        <div class="tool-top">
+          <div class="tool-icon red"><i class="fa-solid fa-lock"></i></div>
+          <span class="tool-badge"><i class="fa-solid fa-check"></i> Available</span>
+        </div>
+        <h3>Protect PDF</h3>
+        <p>Add password protection to keep PDF files secure.</p>
+        <div class="tool-action"><span>Protect PDF</span><i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="sign pdf electronic signature">
+        <div class="tool-top">
+          <div class="tool-icon blue"><i class="fa-solid fa-signature"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>Sign PDF</h3>
+        <p>Add electronic signatures to PDF documents.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="redact pdf black out sensitive text">
+        <div class="tool-top">
+          <div class="tool-icon yellow"><i class="fa-solid fa-highlighter"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>Redact PDF</h3>
+        <p>Black out sensitive information in PDF files.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="compare pdf diff two pdf files">
+        <div class="tool-top">
+          <div class="tool-icon purple"><i class="fa-solid fa-code-compare"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>Compare PDF</h3>
+        <p>Compare two PDF files and highlight differences.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="ai summarizer summarize pdf ai">
+        <div class="tool-top">
+          <div class="tool-icon cyan"><i class="fa-solid fa-robot"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>AI Summarizer</h3>
+        <p>Generate short summaries from PDF content using AI.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="translate pdf language translation">
+        <div class="tool-top">
+          <div class="tool-icon orange"><i class="fa-solid fa-language"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>Translate PDF</h3>
+        <p>Translate PDF text into another language.</p>
+        <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
+      </a>
+
+      <a class="tool-card is-coming" href="#" data-coming="true" data-category="pdf" data-search="pdf to markdown convert pdf markdown">
+        <div class="tool-top">
+          <div class="tool-icon green"><i class="fa-brands fa-markdown"></i></div>
+          <span class="tool-badge soon">Coming Soon</span>
+        </div>
+        <h3>PDF to Markdown</h3>
+        <p>Convert PDF content into clean Markdown text.</p>
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
@@ -1453,8 +1803,7 @@
         });
       });
 
-      // Do not let placeholder cards navigate to the top of the page.
-      // The new PDF Size Reducer card remains a normal working link.
+      // Prevent placeholder cards from navigating to the top of the page.
       cards.forEach(card => {
         if (card.dataset.coming === "true") {
           card.addEventListener("click", event => {
