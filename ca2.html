@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#312e81">
-<title>CA 2 Chemistry MCQ Quiz | AG Ma'am & AD Part</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EduGM system developed by CodeBihin - Examination Portal</title>
+<!-- MathJax for Chemistry & Math rendering -->
 <script>
 window.MathJax = {
   tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
@@ -15,537 +14,1419 @@ window.MathJax = {
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{color-scheme:light}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:Inter,system-ui,sans-serif;min-height:100vh;min-height:100dvh;-webkit-tap-highlight-color:transparent}
-button{touch-action:manipulation}
-#login-screen{background:radial-gradient(circle at top left,#4f46e5,#0f172a 70%)}
-#login-card{animation:appear .3s ease-out}
-@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.custom-scrollbar{scrollbar-width:thin;scrollbar-color:#cbd5e1 #f1f5f9}
-.custom-scrollbar::-webkit-scrollbar{width:6px;height:6px}
-.custom-scrollbar::-webkit-scrollbar-track{background:#f1f5f9}
-.custom-scrollbar::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
-.option-btn{width:100%;min-height:54px;text-align:left;padding:13px 15px;border:1px solid #e2e8f0;border-radius:14px;display:flex;align-items:center;gap:12px;transition:background .15s,border-color .15s;overflow-wrap:anywhere}
-.option-btn:focus-visible,button:focus-visible{outline:3px solid #a5b4fc;outline-offset:2px}
-.option-letter{width:32px;height:32px;flex:0 0 32px;border-radius:10px;display:grid;place-items:center;font-size:12px;font-weight:800;background:#f1f5f9;color:#475569}
-.palette-btn{height:40px;min-width:0;border-radius:9px;font-size:12px;font-weight:800;position:relative}
-#quiz-app:fullscreen{background:#f8fafc;overflow-y:auto}
-#quiz-app:-webkit-full-screen{background:#f8fafc;overflow-y:auto}
-body:fullscreen{overflow-y:auto}
-@media(max-width:640px){
- header{position:relative!important}
- header .brand-title{font-size:14px;line-height:1.45}
- header .header-controls{width:100%;flex-wrap:wrap}
- header .header-controls button{min-height:38px}
- main{padding:12px!important}
- #active-card{min-height:0!important;padding:16px!important}
- #question-text{font-size:17px;line-height:1.7;overflow-wrap:anywhere}
- #options-container{gap:9px}
- .option-btn{padding:11px;gap:10px;font-size:14px;line-height:1.55}
- #palette-grid{grid-template-columns:repeat(5,minmax(0,1fr));max-height:245px}
- #result-modal .result-metric{padding:8px 3px}
- #result-modal .result-value{font-size:17px}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  :root {
+    --tcs-blue-header: #2b3e50;
+    --tcs-blue-sub: #1e88e5;
+    --tcs-green: #4caf50;
+    --tcs-green-dark: #2e7d32;
+    --tcs-orange: #f57c00;
+    --tcs-purple: #6a1b9a;
+    --tcs-gray-btn: #e0e0e0;
+    --tcs-border: #d4d4d4;
+    --tcs-bg-gray: #f4f6f9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  body { background-color: var(--tcs-bg-gray); color: #222; font-size: 14px; user-select: none; }
+  
+  /* Top Banner */
+  .system-banner {
+    background: #1b2838;
+    color: #fff;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00bcd4;
+  }
+  .system-banner h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+  .system-banner .org-tag { font-size: 12px; color: #80deea; font-weight: normal; }
+
+  /* Candidate Header Bar */
+  .candidate-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--tcs-border);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .candidate-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .candidate-avatar {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #b0bec5;
+    background: #eceff1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .candidate-avatar i { font-size: 38px; color: #546e7a; }
+  .candidate-meta table { border-collapse: collapse; font-size: 12.5px; }
+  .candidate-meta td { padding: 1.5px 6px; }
+  .candidate-meta td.label { font-weight: bold; color: #444; }
+  .candidate-meta td.val { font-weight: 700; color: #d84315; }
+  .timer-pill {
+    background: #00bcd4;
+    color: #000;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  .lang-select-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .lang-select-box select {
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    background: #fff;
+    outline: none;
+  }
+
+  /* Main Test Layout */
+  .main-container {
+    display: flex;
+    height: calc(100vh - 128px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Left: Question Area */
+  .question-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-right: 1px solid var(--tcs-border);
+    overflow-y: auto;
+  }
+  .question-header {
+    background: #ffffff;
+    padding: 10px 16px;
+    border-bottom: 1.5px solid #0288d1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .question-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+  }
+  .question-body {
+    padding: 18px 24px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .question-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #111;
+    margin-bottom: 22px;
+  }
+  .options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .option-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    background: #fafafa;
+    transition: all 0.15s;
+  }
+  .option-row:hover { background: #f0f7ff; border-color: #90caf9; }
+  .option-row input[type="radio"] {
+    margin-top: 3px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+  }
+  .option-text {
+    font-size: 14px;
+    color: #222;
+    flex: 1;
+    cursor: pointer;
+  }
+
+  /* Bottom Action Controls */
+  .controls-panel {
+    border-top: 1px solid var(--tcs-border);
+    background: #fdfdfd;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .row-btn-1, .row-btn-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .left-btns, .right-btns { display: flex; gap: 8px; align-items: center; }
+
+  /* TCS Standard Action Buttons */
+  .btn-tcs {
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: opacity 0.15s;
+  }
+  .btn-tcs:hover { opacity: 0.9; }
+  .btn-save-next { background: #4caf50; color: #fff; }
+  .btn-clear { background: #ffffff; border: 1px solid #bdbdbd; color: #333; }
+  .btn-save-review { background: #f57c00; color: #fff; }
+  .btn-review-next { background: #1976d2; color: #fff; }
+  .btn-nav { background: #f5f5f5; border: 1px solid #bdbdbd; color: #333; }
+  .btn-submit { background: #2e7d32; color: #fff; padding: 9px 24px; font-size: 13px; font-weight: 800; }
+
+  /* Right Palette Area */
+  .palette-pane {
+    width: 320px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.25s ease;
+    border-left: 1px solid #cfd8dc;
+  }
+  .palette-pane.collapsed { width: 0; overflow: hidden; border-left: none; }
+  
+  .collapse-toggle {
+    position: absolute;
+    top: 48%;
+    right: 320px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 48px;
+    background: #2b3e50;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px 0 0 4px;
+    z-index: 20;
+    transition: right 0.25s ease;
+  }
+  .collapse-toggle.shifted { right: 0; border-radius: 0 4px 4px 0; }
+
+  /* TCS Status Indicators / Legend */
+  .palette-legend {
+    padding: 12px 14px;
+    border-bottom: 1px dashed #cfd8dc;
+    background: #fafafa;
+  }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 10px;
+    font-size: 11px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; color: #333; }
+
+  /* Authentic TCS Palette Shapes */
+  .badge-shape {
+    width: 30px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .badge-not-visited {
+    background: #e0e0e0;
+    color: #333;
+    border-radius: 4px;
+    border: 1px solid #bdbdbd;
+  }
+  .badge-not-answered {
+    background: #e65100;
+    clip-path: polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%);
+  }
+  .badge-answered {
+    background: #2e7d32;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+    border-radius: 2px;
+  }
+  .badge-review {
+    background: #6a1b9a;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+  }
+  .badge-ans-review {
+    background: #6a1b9a;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+  }
+  .badge-ans-review::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 9px;
+    height: 9px;
+    background: #00e676;
+    border: 1.5px solid #fff;
+    border-radius: 2px;
+  }
+
+  /* Question Grid */
+  .grid-container {
+    padding: 12px 14px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .section-tag {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1565c0;
+    background: #e3f2fd;
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .palette-buttons-box {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .palette-q-btn {
+    height: 34px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    outline: none;
+    transition: transform 0.1s;
+  }
+  .palette-q-btn:active { transform: scale(0.95); }
+  .palette-q-btn.active-q {
+    box-shadow: 0 0 0 2.5px #00bcd4 !important;
+  }
+
+  /* Candidate Login Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 25, 41, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+  }
+  .login-card {
+    background: #fff;
+    width: 100%;
+    max-width: 440px;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    border-top: 5px solid #1976d2;
+  }
+  .login-header {
+    background: #f8fafc;
+    padding: 18px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+  }
+  .login-header h2 { font-size: 17px; color: #1e293b; font-weight: 800; }
+  .login-header p { font-size: 12px; color: #0288d1; margin-top: 4px; font-weight: bold; }
+  .login-form { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 5px; }
+  .form-group input {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 13.5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    outline: none;
+  }
+  .form-group input:focus { border-color: #1976d2; box-shadow: 0 0 0 2px rgba(25,118,210,0.15); }
+  .btn-start-exam {
+    background: #1976d2;
+    color: #fff;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .btn-start-exam:hover { background: #1565c0; }
+
+  /* Submit Summary & Score Modal */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 16px 0;
+  }
+  .summary-table th, .summary-table td {
+    border: 1px solid #cfd8dc;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .summary-table th { background: #eceff1; font-weight: 700; color: #37474f; }
+  .summary-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+
+  /* Post Exam Review View */
+  .review-box {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    color: #1b5e20;
+    line-height: 1.5;
+  }
+  .review-box.wrong {
+    background: #ffebee;
+    border-color: #ef9a9a;
+    color: #b71c1c;
+  }
+  .review-box b { font-weight: 700; }
+
+  @media (max-width: 850px) {
+    .main-container { flex-direction: column; height: auto; }
+    .palette-pane { width: 100%; border-left: none; border-top: 1px solid #ccc; height: auto; }
+    .collapse-toggle { display: none; }
+  }
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-<section id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-5">
- <div id="login-card" class="w-full max-w-md rounded-3xl bg-white p-7 sm:p-9 shadow-2xl">
-  <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700"><i class="fa-solid fa-atom text-3xl"></i></div>
-  <div class="text-center">
-   <p class="text-xs font-bold uppercase tracking-[.2em] text-indigo-600">Secure Access</p>
-   <h1 class="mt-2 text-2xl font-extrabold text-slate-900">Chemistry CA 2 MCQ Quiz</h1>
-   <p class="mt-2 text-sm text-slate-500">Enter the password to continue to your quiz.</p>
-  </div>
-  <form id="password-form" class="mt-7 space-y-4">
-   <label for="quiz-password" class="block text-sm font-semibold text-slate-700">Password</label>
-   <div class="relative">
-    <input id="quiz-password" type="password" autocomplete="current-password" required class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="Enter password">
-    <button type="button" id="toggle-password" aria-label="Show password" class="absolute inset-y-0 right-0 px-4 text-slate-500 hover:text-indigo-600"><i id="password-eye" class="fa-regular fa-eye"></i></button>
-   </div>
-   <p id="password-error" class="hidden rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700" role="alert">Incorrect password. Please try again.</p>
-   <button type="submit" class="w-full rounded-xl bg-indigo-600 px-4 py-3 font-semibold text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700">Unlock Quiz <i class="fa-solid fa-arrow-right ml-2"></i></button>
-  </form>
-  <p class="mt-6 text-center text-xs text-slate-400">CA 2 Chemistry Preparation</p>
- </div>
-</section>
+<body>
 
-<div id="quiz-app" class="hidden min-h-screen min-h-[100dvh] flex-col">
-<header class="sticky top-0 z-40 bg-indigo-950 text-white shadow-lg">
- <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-  <div class="flex items-center gap-3">
-   <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-indigo-400/30 bg-indigo-500/30 text-indigo-200"><i class="fa-solid fa-atom text-xl"></i></div>
-   <div><h1 class="brand-title flex flex-wrap items-center gap-2 font-extrabold tracking-tight">Chemistry CA 2 MCQ Quiz <span class="rounded-full border border-emerald-500/30 bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">Study Quiz</span></h1><p class="text-xs text-indigo-200">AG Ma'am & AD Part · 25 MCQs</p></div>
+<!-- CANDIDATE LOGIN MODAL -->
+<div id="login-modal" class="modal-overlay">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>EduGM system developed by CodeBihin</h2>
+      <p>Computer Based Test (CBT) Assessment</p>
+    </div>
+    <form id="candidate-login-form" class="login-form">
+      <div class="form-group">
+        <label for="inp-candidate-name">Enter Candidate Name :</label>
+        <input type="text" id="inp-candidate-name" required placeholder="e.g. Priyabrata Patra" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="inp-candidate-roll">Roll No / Registration No :</label>
+        <input type="text" id="inp-candidate-roll" placeholder="e.g. 2026-CA2-CHEM-013" value="CA2-CHEM-013">
+      </div>
+      <div class="form-group">
+        <label>Exam Name :</label>
+        <input type="text" value="CA 2 Chemistry Examination (AG & AD Part)" disabled style="background:#f1f5f9; color:#475569;">
+      </div>
+      <button type="submit" class="btn-start-exam">Sign In & Start Test <i class="fa-solid fa-arrow-right"></i></button>
+      <p style="font-size: 11px; color:#64748b; text-align:center;">Exam Duration: 45 Mins · Total Questions: 25</p>
+    </form>
   </div>
-  <div class="header-controls flex items-center gap-2">
-   <div class="flex rounded-lg border border-indigo-700/50 bg-indigo-900 p-1 text-xs font-semibold">
-    <button id="btn-practice-mode" type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-white"><i class="fa-solid fa-graduation-cap mr-1"></i>Practice</button>
-    <button id="btn-exam-mode" type="button" class="rounded-md px-3 py-2 text-indigo-200"><i class="fa-solid fa-stopwatch mr-1"></i>Exam</button>
-   </div>
-   <button id="shuffle-btn" type="button" title="Shuffle questions" aria-label="Shuffle questions" class="rounded-lg bg-indigo-800 px-3 py-2 text-white hover:bg-indigo-700"><i class="fa-solid fa-shuffle"></i></button>
-   <button id="fullscreen-btn" type="button" title="Enter full screen" aria-label="Enter full screen" class="rounded-lg bg-indigo-800 px-3 py-2 text-white hover:bg-indigo-700"><i id="fullscreen-icon" class="fa-solid fa-expand"></i></button>
+</div>
+
+<!-- SUBMIT CONFIRMATION & RESULTS MODAL -->
+<div id="summary-modal" class="modal-overlay" style="display: none;">
+  <div class="login-card" style="max-width: 620px;">
+    <div class="login-header">
+      <h2>EduGM system developed by CodeBihin</h2>
+      <p id="summary-modal-subtitle">Exam Summary</p>
+    </div>
+    <div style="padding: 18px 22px;">
+      <div id="summary-stage-confirm">
+        <p style="font-size: 13.5px; font-weight: bold; color:#1e293b;">Are you sure you want to submit your test?</p>
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Total Qs</th>
+              <th>Answered</th>
+              <th>Not Answered</th>
+              <th>Marked Review</th>
+              <th>Ans & Marked</th>
+              <th>Not Visited</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="tbl-total">25</td>
+              <td id="tbl-ans" style="color:#2e7d32; font-weight:bold;">0</td>
+              <td id="tbl-not-ans" style="color:#e65100; font-weight:bold;">0</td>
+              <td id="tbl-rev" style="color:#6a1b9a; font-weight:bold;">0</td>
+              <td id="tbl-ans-rev" style="color:#6a1b9a; font-weight:bold;">0</td>
+              <td id="tbl-not-vis" style="color:#616161; font-weight:bold;">25</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 11.5px; color:#546e7a;">* Questions answered & marked for review will be considered for final scoring.</p>
+        <div class="summary-actions">
+          <button id="btn-summary-close" type="button" class="btn-tcs btn-clear">No, Return</button>
+          <button id="btn-final-submit" type="button" class="btn-tcs btn-submit">Yes, Submit Final</button>
+        </div>
+      </div>
+
+      <!-- Result Scorecard View -->
+      <div id="summary-stage-result" style="display: none;">
+        <div style="text-align: center; margin-bottom: 16px;">
+          <div style="display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; background:#e8f5e9; color:#2e7d32;" id="score-badge">Test Completed</div>
+          <h3 style="font-size: 26px; margin-top: 10px; color:#0d47a1;" id="score-text">0 / 25</h3>
+          <p style="font-size: 12px; color:#546e7a;" id="score-percent">Percentage: 0%</p>
+        </div>
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Subject Module</th>
+              <th>Total</th>
+              <th>Correct</th>
+              <th>Accuracy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AG Ma'am (Water & Thermo)</td>
+              <td>4</td>
+              <td id="res-ag-correct">0</td>
+              <td id="res-ag-pct">0%</td>
+            </tr>
+            <tr>
+              <td>AD Sir (Kinetics & Catalysis)</td>
+              <td>21</td>
+              <td id="res-ad-correct">0</td>
+              <td id="res-ad-pct">0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-actions" style="justify-content: center; gap: 12px;">
+          <button id="btn-view-review" type="button" class="btn-tcs btn-save-next" style="padding: 10px 22px;">Review Answers & Explanations</button>
+        </div>
+      </div>
+    </div>
   </div>
- </div>
+</div>
+
+<!-- SYSTEM HEADER BANNER -->
+<header class="system-banner">
+  <h1>EduGM system developed by CodeBihin</h1>
+  <span class="org-tag"><i class="fa-solid fa-graduation-cap"></i> CBT Assessment Console</span>
 </header>
 
-<main class="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
- <section class="mb-5 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-  <div class="flex flex-wrap items-center gap-2">
-   <span class="mr-1 text-xs font-bold uppercase tracking-wider text-slate-500">Filter:</span>
-   <button class="filter-chip rounded-full border border-indigo-200 bg-indigo-100 px-3 py-2 text-xs font-bold text-indigo-700" data-filter="all">All (25)</button>
-   <button class="filter-chip rounded-full border border-slate-200 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-600" data-filter="ag">AG: Water & Thermo (4)</button>
-   <button class="filter-chip rounded-full border border-slate-200 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-600" data-filter="kinetics">AD: Kinetics (15)</button>
-   <button class="filter-chip rounded-full border border-slate-200 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-600" data-filter="catalysis">AD: Catalysis (6)</button>
+<!-- CANDIDATE INFORMATION BAR -->
+<section class="candidate-bar">
+  <div class="candidate-info">
+    <div class="candidate-avatar">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div class="candidate-meta">
+      <table>
+        <tr>
+          <td class="label">Candidate Name</td>
+          <td>:</td>
+          <td class="val" id="disp-candidate-name">[Your Name]</td>
+        </tr>
+        <tr>
+          <td class="label">Exam Name</td>
+          <td>:</td>
+          <td style="font-weight: bold; color: #1565c0;">CA 2 Chemistry Examination</td>
+        </tr>
+        <tr>
+          <td class="label">Subject Name</td>
+          <td>:</td>
+          <td style="font-weight: bold; color: #455a64;">Chemistry (Dr. AG Ma'am & Dr. AD Part)</td>
+        </tr>
+        <tr>
+          <td class="label">Remaining Time</td>
+          <td>:</td>
+          <td><span class="timer-pill" id="disp-timer">00:45:00</span></td>
+        </tr>
+      </table>
+    </div>
   </div>
-  <div id="exam-timer-wrapper" class="hidden items-center gap-2">
-   <div class="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-bold text-amber-800"><i class="fa-regular fa-clock"></i><span id="exam-timer" aria-live="polite">25:00</span></div>
-   <button id="submit-exam-top" type="button" class="rounded-lg bg-rose-600 px-3 py-2 text-xs font-bold text-white hover:bg-rose-700"><i class="fa-solid fa-paper-plane mr-1"></i>Submit</button>
+  <div class="lang-select-box">
+    <span>View in:</span>
+    <select id="lang-select" title="Change Language">
+      <option value="en" selected>English</option>
+    </select>
   </div>
-  <div id="practice-stats" class="flex items-center gap-3 text-xs font-semibold text-slate-600"><span>Answered: <b id="stat-answered" class="text-indigo-600">0</b>/<span id="stat-total">25</span></span><div class="h-2 w-24 overflow-hidden rounded-full bg-slate-200"><div id="practice-progress-bar" class="h-full w-0 rounded-full bg-indigo-600 transition-all"></div></div></div>
- </section>
+</section>
 
- <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
-  <section class="flex flex-col space-y-4 lg:col-span-8">
-   <div id="active-card" class="relative flex min-h-[460px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-    <div>
-     <div class="mb-4 flex items-center justify-between gap-3">
-      <div class="flex flex-wrap items-center gap-2"><span id="badge-question-num" class="rounded-md border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-700">Question 1 of 25</span><span id="badge-source" class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Dr. AG Ma'am</span></div>
-      <button id="btn-flag" type="button" class="flex items-center gap-1 text-sm text-slate-400 hover:text-amber-500"><i class="fa-regular fa-bookmark"></i><span class="text-xs">Flag</span></button>
-     </div>
-     <h2 id="question-text" class="mb-6 text-lg font-bold leading-relaxed text-slate-800 md:text-xl">Loading question…</h2>
-     <div id="options-container" class="space-y-3"></div>
+<!-- MAIN EXAM ENVIRONMENT -->
+<main class="main-container">
+  
+  <!-- LEFT: QUESTION PANEL -->
+  <section class="question-pane">
+    <div class="question-header">
+      <span class="question-title" id="disp-q-title">Question 1:</span>
+      <span style="font-size: 12px; font-weight: bold; color: #0288d1;" id="disp-q-source">Section: AG Ma'am</span>
     </div>
-    <div id="explanation-box" class="mt-6 hidden rounded-xl border p-4 text-sm">
-     <div id="explanation-title" class="mb-1 flex items-center gap-2 font-bold"></div>
-     <p id="explanation-text" class="leading-relaxed"></p>
+
+    <div class="question-body">
+      <div class="question-text" id="disp-q-text">Loading question text...</div>
+      <div class="options-group" id="disp-options-box">
+        <!-- Radio options rendered here -->
+      </div>
+      <div id="explanation-box" class="review-box" style="display: none;"></div>
     </div>
-    <div class="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
-     <button id="btn-prev" type="button" class="flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-xs font-bold hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-     <div class="flex items-center gap-2"><button id="btn-clear" type="button" class="rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-500 hover:text-rose-600">Clear</button><button id="btn-next" type="button" class="flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-40">Next <i class="fa-solid fa-arrow-right"></i></button></div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="controls-panel">
+      <!-- Upper Action Row -->
+      <div class="row-btn-1">
+        <div class="left-btns">
+          <button type="button" id="btn-save-next" class="btn-tcs btn-save-next">SAVE & NEXT</button>
+          <button type="button" id="btn-clear" class="btn-tcs btn-clear">CLEAR</button>
+          <button type="button" id="btn-save-mark" class="btn-tcs btn-save-review">SAVE & MARK FOR REVIEW</button>
+          <button type="button" id="btn-mark-next" class="btn-tcs btn-review-next">MARK FOR REVIEW & NEXT</button>
+        </div>
+      </div>
+      <!-- Lower Action Row -->
+      <div class="row-btn-2">
+        <div class="left-btns">
+          <button type="button" id="btn-back" class="btn-tcs btn-nav">&lt;&lt; BACK</button>
+          <button type="button" id="btn-next" class="btn-tcs btn-nav">NEXT &gt;&gt;</button>
+        </div>
+        <div class="right-btns">
+          <button type="button" id="btn-submit" class="btn-tcs btn-submit">SUBMIT</button>
+        </div>
+      </div>
     </div>
-   </div>
-   <div id="review-summary" class="hidden rounded-2xl border border-indigo-100 bg-indigo-50 p-4 text-sm text-indigo-900"></div>
   </section>
 
-  <aside class="flex flex-col space-y-4 lg:col-span-4">
-   <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-    <div class="mb-4 flex items-center justify-between"><h3 class="flex items-center gap-2 text-sm font-extrabold"><i class="fa-solid fa-grip text-indigo-500"></i>Question Navigator</h3><span id="palette-count" class="text-xs font-semibold text-slate-500">25 items</span></div>
-    <div class="mb-4 grid grid-cols-3 gap-2 border-b border-slate-100 pb-3 text-[10px] text-slate-600 sm:text-[11px]"><span><i class="mr-1 text-emerald-500 fa-solid fa-circle"></i>Answered</span><span><i class="mr-1 text-amber-400 fa-solid fa-circle"></i>Flagged</span><span><i class="mr-1 text-slate-300 fa-solid fa-circle"></i>Unanswered</span></div>
-    <div id="palette-grid" class="custom-scrollbar grid max-h-[320px] grid-cols-5 gap-2 overflow-y-auto pr-1"></div>
-    <div class="mt-5 flex flex-col gap-2 border-t border-slate-100 pt-4"><button id="reset-btn" type="button" class="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50"><i class="fa-solid fa-rotate-right"></i>Reset Progress</button><button id="submit-exam-side" type="button" class="hidden w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-3 py-3 text-xs font-extrabold text-white hover:bg-emerald-700"><i class="fa-solid fa-circle-check"></i>Submit & View Score</button></div>
-   </section>
-   <section class="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 to-slate-50 p-5">
-    <h3 class="mb-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-indigo-900"><i class="fa-solid fa-bookmark text-indigo-600"></i>Syllabus Coverage</h3>
-    <ul class="space-y-2 text-xs leading-relaxed text-slate-600">
-     <li><i class="fa-solid fa-check mr-1 text-emerald-500"></i><b>Water Chemistry:</b> Hardness, dissolved oxygen</li>
-     <li><i class="fa-solid fa-check mr-1 text-emerald-500"></i><b>Thermodynamics:</b> Enthalpy, mass transfer</li>
-     <li><i class="fa-solid fa-check mr-1 text-emerald-500"></i><b>Chemical Kinetics:</b> Orders, half-lives, rates</li>
-     <li><i class="fa-solid fa-check mr-1 text-emerald-500"></i><b>Arrhenius Equation:</b> Activation energy, plots</li>
-     <li><i class="fa-solid fa-check mr-1 text-emerald-500"></i><b>Catalysis:</b> Homogeneous, poisoning, enzymes</li>
-    </ul>
-   </section>
+  <!-- COLLAPSE TOGGLE TAB -->
+  <div class="collapse-toggle" id="btn-toggle-palette" title="Toggle Question Palette">
+    <i class="fa-solid fa-chevron-right" id="collapse-icon"></i>
+  </div>
+
+  <!-- RIGHT: TCS PALETTE & LEGEND -->
+  <aside class="palette-pane" id="palette-pane">
+    <div class="palette-legend">
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="badge-shape badge-not-visited" id="leg-cnt-not-vis">24</span>
+          <span>Not Visited</span>
+        </div>
+        <div class="legend-item">
+          <span class="badge-shape badge-not-answered" id="leg-cnt-not-ans">1</span>
+          <span>Not Answered</span>
+        </div>
+        <div class="legend-item">
+          <span class="badge-shape badge-answered" id="leg-cnt-ans">0</span>
+          <span>Answered</span>
+        </div>
+        <div class="legend-item">
+          <span class="badge-shape badge-review" id="leg-cnt-rev">0</span>
+          <span>Marked for Review</span>
+        </div>
+        <div class="legend-item" style="grid-column: span 2;">
+          <span class="badge-shape badge-ans-review" id="leg-cnt-ans-rev">0</span>
+          <span style="font-size: 10.5px; line-height: 1.2;">Answered & Marked for Review (will be considered for evaluation)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="section-tag">
+        <span>Question Palette</span>
+        <span id="palette-total-info">25 Questions</span>
+      </div>
+      <div class="palette-buttons-box" id="palette-grid">
+        <!-- 25 TCS numbered buttons rendered here -->
+      </div>
+    </div>
   </aside>
- </div>
+
 </main>
-
-<footer class="border-t border-slate-200 bg-white px-4 py-4 text-center text-xs leading-relaxed text-slate-500">Chemistry CA 2 Preparation · AG Ma'am & AD Part · Educational practice tool</footer>
-
-<div id="result-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 p-3 backdrop-blur-sm sm:p-5" role="dialog" aria-modal="true" aria-labelledby="result-title">
- <div class="custom-scrollbar max-h-[94dvh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-slate-100 bg-white p-5 shadow-2xl sm:p-8">
-  <div class="border-b border-slate-100 pb-5 text-center"><div id="result-icon-badge" class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-100 text-3xl text-indigo-600"><i class="fa-solid fa-trophy"></i></div><h2 id="result-title" class="text-2xl font-extrabold text-slate-800">Exam Completed!</h2><p id="result-subtitle" class="mt-1 text-sm text-slate-500">Your result summary</p></div>
-  <div class="my-5 grid grid-cols-3 gap-2 text-center sm:gap-3">
-   <div class="result-metric rounded-2xl border border-slate-100 bg-slate-50 p-3"><span class="text-[10px] font-bold uppercase text-slate-400 sm:text-xs">Score</span><div id="modal-score" class="result-value mt-1 text-2xl font-black text-indigo-600">0 / 25</div></div>
-   <div class="result-metric rounded-2xl border border-slate-100 bg-slate-50 p-3"><span class="text-[10px] font-bold uppercase text-slate-400 sm:text-xs">Accuracy</span><div id="modal-accuracy" class="result-value mt-1 text-2xl font-black text-emerald-600">0%</div></div>
-   <div class="result-metric rounded-2xl border border-slate-100 bg-slate-50 p-3"><span class="text-[10px] font-bold uppercase text-slate-400 sm:text-xs">Time Spent</span><div id="modal-time" class="result-value mt-1 text-2xl font-black text-amber-600">00:00</div></div>
-  </div>
-  <h3 class="mb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500">Topic Breakdown</h3>
-  <div class="mb-5 space-y-2 text-xs">
-   <div class="flex justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3"><span>AG Ma'am · Water & Thermo</span><b id="breakdown-ag">0 / 4</b></div>
-   <div class="flex justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3"><span>AD Part · Chemical Kinetics</span><b id="breakdown-kinetics">0 / 15</b></div>
-   <div class="flex justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3"><span>AD Part · Catalysis</span><b id="breakdown-catalysis">0 / 6</b></div>
-  </div>
-  <div class="flex flex-col gap-2 border-t border-slate-100 pt-4 sm:flex-row">
-   <button id="review-answers-btn" type="button" class="flex-1 rounded-xl bg-indigo-600 px-4 py-3 text-xs font-extrabold text-white hover:bg-indigo-700"><i class="fa-solid fa-list-check mr-1"></i>Review All Answers</button>
-   <button id="retake-btn" type="button" class="rounded-xl border border-slate-300 px-5 py-3 text-xs font-bold text-slate-700 hover:bg-slate-50"><i class="fa-solid fa-arrow-rotate-left mr-1"></i>Retake Test</button>
-  </div>
- </div>
-</div>
-</div>
 
 <script>
 'use strict';
 
-const QUIZ_PASSWORD = '123456';
-const rawQuestionsData = [
-{id:1,source:"Dr. AG Ma'am",category:"ag",categoryName:"Water & Thermo",question:"The hardness of water is due to the presence of:",options:["Monovalent cation","Bivalent cation","Trivalent cation","Both b & c"],correctIndex:3,explanation:"Water hardness is primarily caused by multivalent metal cations, especially calcium and magnesium ions. Some trivalent metal ions can also contribute, although calcium and magnesium are the usual basis of conventional hardness measurements."},
-{id:2,source:"Dr. AG Ma'am",category:"ag",categoryName:"Water & Thermo",question:"Which thermodynamic law is most directly associated with the energy balance used when introducing enthalpy?",options:["First law of thermodynamics","Second law of thermodynamics","Third law of thermodynamics","None of the above"],correctIndex:0,explanation:"Enthalpy is defined as $H=U+PV$. The first law provides the energy-balance context; at constant pressure, under the usual conditions, heat transfer equals the enthalpy change, $q_p=\\Delta H$. Strictly, the first law does not itself define enthalpy."},
-{id:3,source:"Dr. AG Ma'am",category:"ag",categoryName:"Water & Thermo",question:"In which system does mass transfer occur across the system boundary?",options:["Isolated system","Closed system","Open system","None of the mentioned"],correctIndex:2,explanation:"An open system can exchange both matter and energy with its surroundings. A closed system exchanges energy but not mass, while an isolated system exchanges neither."},
-{id:4,source:"Dr. AG Ma'am",category:"ag",categoryName:"Water & Thermo",question:"With an increase in temperature, dissolved oxygen (DO) in water generally:",options:["Increases","Decreases","Remains the same","None of the above"],correctIndex:1,explanation:"The solubility of oxygen in water generally decreases as temperature rises, so saturation dissolved oxygen decreases."},
-{id:5,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The rate of a chemical reaction is generally expressed as:",options:["Change in concentration per unit time","Change in temperature per unit time","Change in pressure per unit volume","Change in volume per unit concentration"],correctIndex:0,explanation:"Reaction rate is the change in concentration of a reactant or product per unit time. For a reactant $R$, disappearance rate is $-d[R]/dt$."},
-{id:6,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The half-life ($t_{1/2}$) of a second-order reaction with initial concentration $a$ and rate constant $k$ is:",options:["$1/a$","$a/k$","$1/(a\\cdot k)$","$1/k$"],correctIndex:2,explanation:"For a second-order reaction with rate law $-d[A]/dt=k[A]^2$, $t_{1/2}=1/(ka)$."},
-{id:7,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"For $A\\rightarrow B$, if $[A]$ decreases from $0.80\\,\\mathrm{M}$ to $0.50\\,\\mathrm{M}$ in $10\\,\\mathrm{s}$, the average rate of disappearance of $A$ is:",options:["$0.003\\,\\mathrm{M\\,s^{-1}}$","$0.03\\,\\mathrm{M\\,s^{-1}}$","$0.30\\,\\mathrm{M\\,s^{-1}}$","$3.0\\,\\mathrm{M\\,s^{-1}}$"],correctIndex:1,explanation:"Average disappearance rate $=-\\Delta[A]/\\Delta t=-(0.50-0.80)/10=0.30/10=0.03\\,\\mathrm{M\\,s^{-1}}$."},
-{id:8,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The unit of the rate constant for a first-order reaction is:",options:["$\\mathrm{mol\\,L^{-1}\\,s^{-1}}$","$\\mathrm{L\\,mol^{-1}\\,s^{-1}}$","$\\mathrm{s^{-1}}$","$\\mathrm{L^2\\,mol^{-2}\\,s^{-1}}$"],correctIndex:2,explanation:"For a first-order reaction, rate $=k[A]$, so the rate constant has units of inverse time, usually $\\mathrm{s^{-1}}$."},
-{id:9,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The half-life of a first-order reaction is:",options:["Directly proportional to initial concentration","Inversely proportional to initial concentration","Independent of initial concentration","Proportional to the square of initial concentration"],correctIndex:2,explanation:"For a first-order reaction, $t_{1/2}=\\ln 2/k=0.693/k$, independent of initial concentration."},
-{id:10,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"For a first-order reaction, the integrated rate equation for $k$ is:",options:["$k=([A]_0-[A]_t)/t$","$k=(2.303/t)\\log([A]_0/[A]_t)$","$k=1/(t[A]_t)$","$k=[A]_t/([A]_0t)$"],correctIndex:1,explanation:"Integrating the first-order rate law gives $k=(2.303/t)\\log([A]_0/[A]_t)$ using common logarithms."},
-{id:11,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The half-life of a second-order reaction is proportional to:",options:["$[A]_0$","$1/[A]_0$","$[A]_0^2$","Independent of $[A]_0$"],correctIndex:1,explanation:"For a second-order reaction with rate law $k[A]^2$, $t_{1/2}=1/(k[A]_0)$, so it is inversely proportional to initial concentration."},
-{id:12,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"Which statement about reaction order is correct?",options:["It is always equal to molecularity","It can be zero, fractional, or integral","It is always a whole number","It can never be experimentally determined"],correctIndex:1,explanation:"Reaction order is determined experimentally and may be zero, fractional, or an integer. It is not necessarily equal to molecularity."},
-{id:13,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"According to the Arrhenius equation, the rate constant generally increases with temperature because:",options:["Activation energy increases","More molecules possess energy equal to or greater than the activation energy","Molecular mass decreases","Equilibrium constant always decreases"],correctIndex:1,explanation:"As temperature rises, a greater fraction of molecules has energy at least equal to the activation energy. The Arrhenius factor is $e^{-E_a/RT}$."},
-{id:14,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The Arrhenius equation is represented by:",options:["$k=Ae^{-E_a/RT}$","$k=Ae^{E_a/RT}$","$k=E_ae^{-A/RT}$","$k=RT/E_a$"],correctIndex:0,explanation:"The Arrhenius equation is $k=Ae^{-E_a/RT}$, where $A$ is the pre-exponential factor and $E_a$ is activation energy."},
-{id:15,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"A plot of $\\ln k$ versus $1/T$ gives a straight line whose slope is:",options:["$E_a/R$","$-E_a/R$","$-R/E_a$","$R/E_a$"],correctIndex:1,explanation:"Taking natural logarithms gives $\\ln k=\\ln A-(E_a/R)(1/T)$, so the slope is $-E_a/R$."},
-{id:16,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"If the activation energy of a reaction is zero ($E_a=0$), the rate constant in the Arrhenius model is:",options:["Independent of temperature if $A$ is constant","Always zero","Infinite","Equal to activation energy"],correctIndex:0,explanation:"If $E_a=0$, the Arrhenius equation gives $k=A$. In this model, if $A$ is constant, $k$ is independent of temperature."},
-{id:17,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"The molecularity of an elementary reaction refers to the:",options:["Number of products formed","Number of reactant particles participating in the elementary step","Number of atoms present in the reaction","Order of the overall reaction"],correctIndex:1,explanation:"Molecularity is the number of reactant particles that participate in a single elementary step."},
-{id:18,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"For a zero-order reaction, the rate is:",options:["$k[A]$","$k[A]^2$","$k$","$k/[A]$"],correctIndex:2,explanation:"For a zero-order reaction, rate $=k[A]^0=k$, independent of reactant concentration."},
-{id:19,source:"Dr. AD Part",category:"kinetics",categoryName:"Chemical Kinetics",question:"A reaction has the rate law $\\mathrm{Rate}=k[A]^2[B]$. The overall order is:",options:["1","2","3","4"],correctIndex:2,explanation:"The overall order is the sum of the exponents in the rate law: $2+1=3$."},
-{id:20,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"A catalyst increases reaction rate primarily by:",options:["Increasing reaction enthalpy","Providing an alternative pathway with lower activation energy","Increasing the equilibrium constant","Increasing product concentration"],correctIndex:1,explanation:"A catalyst provides an alternative reaction pathway with lower activation energy. It does not change the reaction's equilibrium constant."},
-{id:21,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"A catalyst affects the equilibrium constant of a reaction by:",options:["Increasing it","Decreasing it","Leaving it unchanged","Making it zero"],correctIndex:2,explanation:"A catalyst speeds up forward and reverse reactions and helps equilibrium be reached sooner, but does not change the equilibrium constant."},
-{id:22,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"Which is an example of homogeneous catalysis?",options:["Hydrogenation of an alkene using Ni","Haber process using Fe","Acid-catalysed hydrolysis of an ester in aqueous solution","Decomposition of $H_2O_2$ using $MnO_2$"],correctIndex:2,explanation:"In homogeneous catalysis, catalyst and reactants are in the same phase. In aqueous ester hydrolysis, the acid catalyst and reactants are in the liquid phase."},
-{id:23,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"In heterogeneous catalysis, the catalyst and reactants are generally:",options:["In the same phase","In different phases","Always gases","Always liquids"],correctIndex:1,explanation:"In heterogeneous catalysis, catalyst and reactants are in different phases, such as a solid catalyst with gaseous reactants."},
-{id:24,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"Which of the following is an enzyme catalyst?",options:["Fe","Ni","Platinum","Amylase"],correctIndex:3,explanation:"Amylase is a biological enzyme that catalyses the breakdown of starch. Iron, nickel, and platinum are inorganic catalysts."},
-{id:25,source:"Dr. AD Part",category:"catalysis",categoryName:"Catalysis",question:"When a substance strongly adsorbs onto a catalyst's active sites and reduces its activity, this is called:",options:["Autocatalysis","Catalyst poisoning","Promoter action","Photocatalysis"],correctIndex:1,explanation:"Catalyst poisoning occurs when impurities or other substances occupy active sites and reduce catalytic activity."}
+/**
+ * EXACT 25 MCQS FROM THE TWO PDFS:
+ * 1-4: Dr. Aishwarya Mukherjee (AG Ma'am)
+ * 5-25: Dr. AD Part
+ */
+const questionsData = [
+  // --- AG Ma'am Section (1 - 4) ---
+  {
+    id: 1,
+    source: "Dr. AG Ma'am",
+    section: "Water & Thermodynamics",
+    question: "The hardness of water is due to presence of",
+    options: [
+      "Monovalent cation",
+      "Bivalent cation",
+      "Trivalent cation",
+      "Both b & c"
+    ],
+    correct: 3, // Both b & c
+    explanation: "Hardness of water is caused mainly by multivalent metal cations (chiefly bivalent $\\text{Ca}^{2+}$, $\\text{Mg}^{2+}$ and occasionally trivalent cations like $\\text{Fe}^{3+}$, $\\text{Al}^{3+}$). Hence option (d) 'Both b & c' is correct."
+  },
+  {
+    id: 2,
+    source: "Dr. AG Ma'am",
+    section: "Water & Thermodynamics",
+    question: "Which of the following thermodynamic law gives the concept of enthalpy?",
+    options: [
+      "First law of thermodynamics",
+      "Second law of thermodynamics",
+      "Third law of thermodynamics",
+      "None of the above"
+    ],
+    correct: 0, // First law
+    explanation: "From the First Law of Thermodynamics, $q = \\Delta U + P\\Delta V$ at constant pressure. Defining enthalpy $H = U + PV$ yields $q_p = \\Delta H$."
+  },
+  {
+    id: 3,
+    source: "Dr. AG Ma'am",
+    section: "Water & Thermodynamics",
+    question: "In which of the following systems does mass transfer occur across the system boundary?",
+    options: [
+      "isolated system",
+      "closed system",
+      "open system",
+      "none of the mentioned"
+    ],
+    correct: 2, // open system
+    explanation: "An open system allows both matter (mass) and energy transfer across its boundaries. Closed systems allow energy only, and isolated systems allow neither."
+  },
+  {
+    id: 4,
+    source: "Dr. AG Ma'am",
+    section: "Water & Thermodynamics",
+    question: "With the increase in temperature Dissolved Oxygen",
+    options: [
+      "Increase",
+      "Remain same",
+      "Decrease",
+      "None of the above"
+    ],
+    correct: 2, // Decrease
+    explanation: "The solubility of gases like oxygen in water decreases as temperature rises, following Henry's law with exothermic dissolution. Thus DO decreases."
+  },
+
+  // --- AD Part Section (5 - 25) ---
+  {
+    id: 5,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The rate of a chemical reaction is generally expressed as:",
+    options: [
+      "Change in concentration per unit time",
+      "Change in temperature per unit time",
+      "Change in pressure per unit volume",
+      "Change in volume per unit concentration"
+    ],
+    correct: 0, // Change in conc
+    explanation: "Reaction rate is defined as the decrease in concentration of reactants or increase in concentration of products per unit time ($\\pm \\Delta C/\\Delta t$)."
+  },
+  {
+    id: 6,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The half-life of a second order reaction is-",
+    options: [
+      "$1/a$",
+      "$a/k$",
+      "$1/(a\\cdot k)$",
+      "$1/k$"
+    ],
+    correct: 2, // 1/(a.k)
+    explanation: "For a second-order reaction where both initial concentrations equal $a$, the integrated rate equation gives $t_{1/2} = \\frac{1}{k\\cdot a}$."
+  },
+  {
+    id: 7,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "For a reaction $A \\rightarrow B$ if the concentration of A decreases from $0.80\\text{ M}$ to $0.50\\text{ M}$ in $10\\text{ s}$, the average rate of disappearance of A is:",
+    options: [
+      "$0.003\\text{ M s}^{-1}$",
+      "$0.03\\text{ M s}^{-1}$",
+      "$0.30\\text{ M s}^{-1}$",
+      "$3.0\\text{ M s}^{-1}$"
+    ],
+    correct: 1, // 0.03
+    explanation: "Average rate $= -\\frac{\\Delta [A]}{\\Delta t} = -\\frac{0.50 - 0.80}{10} = \\frac{0.30}{10} = 0.03\\text{ M s}^{-1}$."
+  },
+  {
+    id: 8,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The unit of the rate constant for a first-order reaction is:",
+    options: [
+      "$\\text{mol L}^{-1}\\text{s}^{-1}$",
+      "$\\text{L mol}^{-1}\\text{s}^{-1}$",
+      "$\\text{s}^{-1}$",
+      "$\\text{L}^2\\text{mol}^{-2}\\text{s}^{-1}$"
+    ],
+    correct: 2, // s^-1
+    explanation: "Unit of $k = (\\text{mol/L})^{1-n} \\text{s}^{-1}$. For $n=1$, unit $= (\\text{mol/L})^0 \\text{s}^{-1} = \\text{s}^{-1}$."
+  },
+  {
+    id: 9,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The half-life of a first-order reaction is:",
+    options: [
+      "Directly proportional to initial concentration",
+      "Inversely proportional to initial concentration",
+      "Independent of initial concentration",
+      "Proportional to the square of initial concentration"
+    ],
+    correct: 2, // Independent
+    explanation: "For a first-order reaction, $t_{1/2} = \\frac{\\ln 2}{k} = \\frac{0.693}{k}$, which contains no concentration term."
+  },
+  {
+    id: 10,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "For a first-order reaction, the integrated rate equation is:",
+    options: [
+      "$k = ([A]_0 - [A]_t)/t$",
+      "$k = (2.303/t)\\log([A]_0 / [A]_t)$",
+      "$k = 1/(t[A]_t)$",
+      "$k = [A]_t / ([A]_0 t)$"
+    ],
+    correct: 1, // k = (2.303/t) log...
+    explanation: "Integrating $-\\frac{d[A]}{dt} = k[A]$ yields $\\ln\\left(\\frac{[A]_0}{[A]_t}\\right) = kt \\implies k = \\frac{2.303}{t}\\log\\left(\\frac{[A]_0}{[A]_t}\\right)$."
+  },
+  {
+    id: 11,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The half-life of a second-order reaction is proportional to:",
+    options: [
+      "$[A]_0$",
+      "$1/[A]_0$",
+      "$[A]_0^2$",
+      "Independent of $[A]_0$"
+    ],
+    correct: 1, // 1/[A]_0
+    explanation: "Because $t_{1/2} = \\frac{1}{k[A]_0}$, the half-life is inversely proportional to initial concentration $[A]_0$."
+  },
+  {
+    id: 12,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "Which statement about the order of a reaction is correct?",
+    options: [
+      "It is always equal to molecularity",
+      "It can be zero, fractional, or integral",
+      "It is always a whole number",
+      "It can never be experimentally determined"
+    ],
+    correct: 1, // zero, fractional, or integral
+    explanation: "Order of reaction is an experimental quantity that can be zero, an integer, or fractional, unlike molecularity which is always a positive integer."
+  },
+  {
+    id: 13,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "According to the Arrhenius equation, the rate constant increases with temperature because:",
+    options: [
+      "Activation energy increases",
+      "More molecules possess energy equal to or greater than the activation energy",
+      "Molecular mass decreases",
+      "Equilibrium constant always decreases"
+    ],
+    correct: 1, // More molecules possess...
+    explanation: "Raising temperature increases molecular kinetic energies, significantly increasing the fraction of collisions exceeding the activation energy threshold ($e^{-E_a/RT}$)."
+  },
+  {
+    id: 14,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The Arrhenius equation is represented by:",
+    options: [
+      "$k = A e^{-E_a/RT}$",
+      "$k = A e^{E_a/RT}$",
+      "$k = E_a e^{-A/RT}$",
+      "$k = RT/E_a$"
+    ],
+    correct: 0, // k = A e^(-E_a/RT)
+    explanation: "The Arrhenius equation is $k = A e^{-E_a/RT}$, where $A$ is the pre-exponential frequency factor and $E_a$ is the activation energy."
+  },
+  {
+    id: 15,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "A plot of $\\ln k$ versus $1/T$ gives a straight line whose slope is:",
+    options: [
+      "$E_a / R$",
+      "$-E_a / R$",
+      "$-R / E_a$",
+      "$R / E_a$"
+    ],
+    correct: 1, // -E_a/R
+    explanation: "Taking natural logs of the Arrhenius equation gives $\\ln k = \\ln A - \\frac{E_a}{R}\\left(\\frac{1}{T}\\right)$. Comparing with $y = mx + c$, slope $m = -E_a/R$."
+  },
+  {
+    id: 16,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "If the activation energy of a reaction is zero, the rate constant is:",
+    options: [
+      "Independent of temperature",
+      "Always zero",
+      "Infinite",
+      "Equal to the activation energy"
+    ],
+    correct: 0, // Independent of temperature
+    explanation: "When $E_a = 0$, $k = A e^0 = A$. The rate constant becomes equal to frequency factor $A$ and is independent of temperature."
+  },
+  {
+    id: 17,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "The molecularity of an elementary reaction refers to:",
+    options: [
+      "Number of products formed",
+      "Number of reactant molecules participating in the elementary step",
+      "Number of atoms present in the reaction",
+      "Order of the overall reaction"
+    ],
+    correct: 1, // reactant molecules
+    explanation: "Molecularity represents the number of reacting particles (atoms, molecules, or ions) colliding simultaneously in an elementary chemical reaction."
+  },
+  {
+    id: 18,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "For a zero-order reaction, the rate is:",
+    options: [
+      "$k[A]$",
+      "$k[A]^2$",
+      "$k$",
+      "$k/[A]$"
+    ],
+    correct: 2, // k
+    explanation: "For zero-order, rate $= k[A]^0 = k\\cdot 1 = k$. The rate is constant and independent of reactant concentration."
+  },
+  {
+    id: 19,
+    source: "Dr. AD Part",
+    section: "Chemical Kinetics",
+    question: "A reaction has the rate law $\\text{Rate} = k[A]^2[B]$. The overall order of the reaction is:",
+    options: [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    correct: 2, // 3
+    explanation: "Overall order is the sum of exponents of concentration terms in the experimental rate law: $2 + 1 = 3$."
+  },
+  {
+    id: 20,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "A catalyst increases the rate of a reaction primarily by:",
+    options: [
+      "Increasing the enthalpy of reaction",
+      "Decreasing the activation energy through an alternative pathway",
+      "Increasing the equilibrium constant",
+      "Increasing the concentration of products"
+    ],
+    correct: 1, // Decreasing activation energy
+    explanation: "A catalyst provides an alternate transition mechanism with lower activation energy ($E_a$), allowing more molecules to react per second."
+  },
+  {
+    id: 21,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "A catalyst affects the equilibrium constant of a reaction by:",
+    options: [
+      "Increasing it",
+      "Decreasing it",
+      "Leaving it unchanged",
+      "Making it zero"
+    ],
+    correct: 2, // Leaving it unchanged
+    explanation: "A catalyst speeds up both forward and backward reaction rates equally, helping achieve equilibrium faster without altering the equilibrium constant $K_{eq}$."
+  },
+  {
+    id: 22,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "Which of the following is an example of homogeneous catalysis?",
+    options: [
+      "Hydrogenation of an alkene using Ni",
+      "Haber process using Fe",
+      "Acid-catalysed hydrolysis of an ester in aqueous solution",
+      "Decomposition of $H_2O_2$ using $MnO_2$"
+    ],
+    correct: 2, // Acid-catalysed hydrolysis of an ester...
+    explanation: "In homogeneous catalysis, reactants and catalyst are in the identical physical phase. In ester hydrolysis, ester, water, and acid catalyst are in liquid phase."
+  },
+  {
+    id: 23,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "In heterogeneous catalysis, the catalyst and reactants are generally:",
+    options: [
+      "In the same phase",
+      "In different phases",
+      "Always gases",
+      "Always liquids"
+    ],
+    correct: 1, // In different phases
+    explanation: "Heterogeneous catalysis occurs when catalyst and reactants exist in distinct phases (typically solid catalyst with gas/liquid reactants)."
+  },
+  {
+    id: 24,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "Which of the following is an example of an enzyme catalyst?",
+    options: [
+      "Fe",
+      "Ni",
+      "Platinum",
+      "Amylase"
+    ],
+    correct: 3, // Amylase
+    explanation: "Amylase is a protein-based biological enzyme catalyst that converts starch into sugars. Fe, Ni, and Pt are inorganic metal catalysts."
+  },
+  {
+    id: 25,
+    source: "Dr. AD Part",
+    section: "Catalysis",
+    question: "The phenomenon in which a catalyst becomes temporarily inactive because another substance strongly adsorbs on its active sites is called:",
+    options: [
+      "Autocatalysis",
+      "Catalyst poisoning",
+      "Promoter action",
+      "Photocatalysis"
+    ],
+    correct: 1, // Catalyst poisoning
+    explanation: "Catalyst poisoning occurs when foreign substances (poisons) irreversibly or strongly adsorb onto active surface sites, blocking reactants."
+  }
 ];
 
-const $ = id => document.getElementById(id);
-let currentFilter = 'all';
-let filteredQuestions = [...rawQuestionsData];
-let currentIndex = 0;
-let userAnswers = {};
-let flaggedQuestions = new Set();
-let quizMode = 'practice';
-let examTimerInterval = null;
-let examTimeRemaining = 25 * 60;
-let examTimeElapsed = 0;
-let examStartedAt = null;
+// STATE MANAGEMENT
+let candidateName = "[Your Name]";
+let candidateRoll = "";
+let currentQIndex = 0; // 0-based
+let testDurationSeconds = 45 * 60; // 45 mins
+let timerInterval = null;
 let examSubmitted = false;
-let reviewMode = false;
-let order = rawQuestionsData.map(q => q.id);
+let isReviewView = false;
 
-function typesetMath() {
+// TCS Question Statuses:
+// 'not_visited', 'not_answered', 'answered', 'marked_review', 'ans_marked_review'
+const questionStatus = new Array(questionsData.length).fill('not_visited');
+const candidateAnswers = new Array(questionsData.length).fill(null);
+
+// MathJax typesetting helper
+function renderMath() {
   if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise().catch(() => {});
+    MathJax.typesetPromise().catch(err => console.error(err));
   }
 }
 
-$('password-form').addEventListener('submit', event => {
-  event.preventDefault();
-  if ($('quiz-password').value === QUIZ_PASSWORD) {
-    $('password-error').classList.add('hidden');
-    $('login-screen').classList.add('hidden');
-    $('quiz-app').classList.remove('hidden');
-    $('quiz-app').classList.add('flex');
-    $('quiz-password').value = '';
-    renderAll();
-  } else {
-    $('password-error').classList.remove('hidden');
-    $('quiz-password').value = '';
-    $('quiz-password').focus();
-  }
-});
-$('toggle-password').addEventListener('click', () => {
-  const input = $('quiz-password');
-  const show = input.type === 'password';
-  input.type = show ? 'text' : 'password';
-  $('password-eye').className = show ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
-  $('toggle-password').setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-});
-$('btn-practice-mode').addEventListener('click', () => switchMode('practice'));
-$('btn-exam-mode').addEventListener('click', () => switchMode('exam'));
-$('shuffle-btn').addEventListener('click', shuffleCurrentQuestions);
-$('fullscreen-btn').addEventListener('click', toggleFullscreen);
-$('btn-prev').addEventListener('click', prevQuestion);
-$('btn-next').addEventListener('click', nextQuestion);
-$('btn-clear').addEventListener('click', clearCurrentAnswer);
-$('btn-flag').addEventListener('click', toggleFlagCurrentQuestion);
-$('reset-btn').addEventListener('click', resetCurrentQuiz);
-$('submit-exam-top').addEventListener('click', submitExam);
-$('submit-exam-side').addEventListener('click', submitExam);
-$('review-answers-btn').addEventListener('click', reviewExamAnswers);
-$('retake-btn').addEventListener('click', restartExam);
-document.querySelectorAll('.filter-chip').forEach(btn => btn.addEventListener('click', () => setFilter(btn.dataset.filter)));
-document.addEventListener('fullscreenchange', updateFullscreenButton);
-document.addEventListener('keydown', event => {
-  if ($('login-screen').classList.contains('hidden') && $('result-modal').classList.contains('hidden')) {
-    if (event.key === 'ArrowLeft' && event.altKey) prevQuestion();
-    if (event.key === 'ArrowRight' && event.altKey) nextQuestion();
-  }
+// DOM Elements
+const dispCandidateName = document.getElementById('disp-candidate-name');
+const dispTimer = document.getElementById('disp-timer');
+const dispQTitle = document.getElementById('disp-q-title');
+const dispQSource = document.getElementById('disp-q-source');
+const dispQText = document.getElementById('disp-q-text');
+const dispOptionsBox = document.getElementById('disp-options-box');
+const explanationBox = document.getElementById('explanation-box');
+const paletteGrid = document.getElementById('palette-grid');
+
+// Legend Counters
+const legNotVis = document.getElementById('leg-cnt-not-vis');
+const legNotAns = document.getElementById('leg-cnt-not-ans');
+const legAns = document.getElementById('leg-cnt-ans');
+const legRev = document.getElementById('leg-cnt-rev');
+const legAnsRev = document.getElementById('leg-cnt-ans-rev');
+
+// Buttons
+const btnSaveNext = document.getElementById('btn-save-next');
+const btnClear = document.getElementById('btn-clear');
+const btnSaveMark = document.getElementById('btn-save-mark');
+const btnMarkNext = document.getElementById('btn-mark-next');
+const btnBack = document.getElementById('btn-back');
+const btnNext = document.getElementById('btn-next');
+const btnSubmit = document.getElementById('btn-submit');
+const btnTogglePalette = document.getElementById('btn-toggle-palette');
+const palettePane = document.getElementById('palette-pane');
+const collapseIcon = document.getElementById('collapse-icon');
+
+// Modals
+const loginModal = document.getElementById('login-modal');
+const loginForm = document.getElementById('candidate-login-form');
+const inpCandidateName = document.getElementById('inp-candidate-name');
+const inpCandidateRoll = document.getElementById('inp-candidate-roll');
+const summaryModal = document.getElementById('summary-modal');
+const summaryStageConfirm = document.getElementById('summary-stage-confirm');
+const summaryStageResult = document.getElementById('summary-stage-result');
+const btnSummaryClose = document.getElementById('btn-summary-close');
+const btnFinalSubmit = document.getElementById('btn-final-submit');
+const btnViewReview = document.getElementById('btn-view-review');
+
+// --- INIT APP ---
+window.addEventListener('DOMContentLoaded', () => {
+  loginModal.style.display = 'flex';
 });
 
-function getQuestionList() {
-  const data = order.map(id => rawQuestionsData.find(q => q.id === id));
-  return currentFilter === 'all' ? data : data.filter(q => q.category === currentFilter);
-}
-function setFilter(cat) {
-  currentFilter = cat;
-  filteredQuestions = getQuestionList();
-  currentIndex = 0;
-  document.querySelectorAll('.filter-chip').forEach(btn => {
-    const active = btn.dataset.filter === cat;
-    btn.className = `filter-chip rounded-full border px-3 py-2 text-xs font-semibold transition ${active ? 'border-indigo-200 bg-indigo-100 text-indigo-700' : 'border-slate-200 bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
-  });
-  renderAll();
-}
-function switchMode(mode) {
-  if (examSubmitted && mode === 'exam') return;
-  quizMode = mode;
-  $('btn-practice-mode').className = `rounded-md px-3 py-2 ${mode === 'practice' ? 'bg-indigo-600 text-white' : 'text-indigo-200'}`;
-  $('btn-exam-mode').className = `rounded-md px-3 py-2 ${mode === 'exam' ? 'bg-indigo-600 text-white' : 'text-indigo-200'}`;
-  $('exam-timer-wrapper').classList.toggle('hidden', mode !== 'exam');
-  $('exam-timer-wrapper').classList.toggle('flex', mode === 'exam');
-  $('practice-stats').classList.toggle('hidden', mode === 'exam');
-  $('submit-exam-side').classList.toggle('hidden', mode !== 'exam');
-  if (mode === 'exam' && !examSubmitted && !examTimerInterval) startExamTimer();
-  if (mode === 'practice') stopExamTimer();
-  renderAll();
-}
-function startExamTimer() {
-  stopExamTimer();
-  examTimeRemaining = 25 * 60;
-  examTimeElapsed = 0;
-  examStartedAt = Date.now();
+// Candidate Login
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const val = inpCandidateName.value.trim();
+  if (val) candidateName = val;
+  candidateRoll = inpCandidateRoll.value.trim();
+  dispCandidateName.textContent = candidateName;
+
+  loginModal.style.display = 'none';
+  
+  // Set first question to 'not_answered' as it's now loaded
+  questionStatus[0] = 'not_answered';
+  startTimer();
+  renderQuestion(0);
+  buildPalette();
+  updateLegendCounts();
+});
+
+// Timer Logic
+function startTimer() {
   updateTimerDisplay();
-  examTimerInterval = setInterval(() => {
-    if (examSubmitted) return;
-    examTimeElapsed = Math.min(25 * 60, Math.floor((Date.now() - examStartedAt) / 1000));
-    examTimeRemaining = Math.max(0, 25 * 60 - examTimeElapsed);
-    updateTimerDisplay();
-    if (examTimeRemaining <= 0) submitExam(true);
-  }, 250);
-}
-function stopExamTimer() {
-  if (examTimerInterval) clearInterval(examTimerInterval);
-  examTimerInterval = null;
-  if (examStartedAt && !examSubmitted) {
-    examTimeElapsed = Math.min(25 * 60, Math.floor((Date.now() - examStartedAt) / 1000));
-  }
-}
-function updateTimerDisplay() {
-  const m = Math.floor(examTimeRemaining / 60);
-  const s = examTimeRemaining % 60;
-  $('exam-timer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-function renderAll() {
-  filteredQuestions = getQuestionList();
-  if (currentIndex >= filteredQuestions.length) currentIndex = Math.max(0, filteredQuestions.length - 1);
-  renderCurrentQuestion();
-  renderPalette();
-  updateStats();
-}
-function renderCurrentQuestion() {
-  if (!filteredQuestions.length) return;
-  const q = filteredQuestions[currentIndex];
-  const selected = userAnswers[q.id];
-  $('badge-question-num').textContent = `Question ${currentIndex + 1} of ${filteredQuestions.length}`;
-  $('badge-source').textContent = `${q.source} · ${q.categoryName}`;
-  $('question-text').innerHTML = q.question;
-  const flagged = flaggedQuestions.has(q.id);
-  $('btn-flag').className = `flex items-center gap-1 text-sm ${flagged ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500'}`;
-  $('btn-flag').innerHTML = `<i class="${flagged ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i><span class="text-xs">${flagged ? 'Flagged' : 'Flag'}</span>`;
-  const container = $('options-container');
-  container.innerHTML = '';
-  q.options.forEach((option, idx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'option-btn';
-    let background = 'background:#fff;border-color:#e2e8f0;color:#334155;';
-    let letterStyle = '';
-    let trailing = '';
-    if (quizMode === 'practice' && selected !== undefined) {
-      if (idx === q.correctIndex) {
-        background = 'background:#ecfdf5;border-color:#6ee7b7;color:#064e3b;';
-        letterStyle = 'background:#10b981;color:#fff;';
-        trailing = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
-      } else if (idx === selected) {
-        background = 'background:#fff1f2;border-color:#fda4af;color:#881337;';
-        letterStyle = 'background:#f43f5e;color:#fff;';
-        trailing = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>';
-      } else {
-        background = 'background:#f8fafc;border-color:#e2e8f0;color:#94a3b8;';
-      }
-    } else if (quizMode === 'exam' && selected === idx) {
-      background = 'background:#eef2ff;border-color:#818cf8;color:#312e81;';
-      letterStyle = 'background:#4f46e5;color:#fff;';
-    } else if (reviewMode) {
-      if (idx === q.correctIndex) {
-        background = 'background:#ecfdf5;border-color:#6ee7b7;color:#064e3b;';
-        letterStyle = 'background:#10b981;color:#fff;';
-        trailing = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
-      } else if (idx === selected) {
-        background = 'background:#fff1f2;border-color:#fda4af;color:#881337;';
-        letterStyle = 'background:#f43f5e;color:#fff;';
-        trailing = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>';
-      }
-    }
-    btn.style.cssText = background;
-    btn.disabled = examSubmitted && !reviewMode;
-    btn.innerHTML = `<span class="option-letter" style="${letterStyle}">${String.fromCharCode(65+idx)}</span><span class="flex-1">${option}</span>${trailing}`;
-    btn.addEventListener('click', () => selectOption(q.id, idx));
-    container.appendChild(btn);
-  });
-  const exp = $('explanation-box');
-  const showExplanation = (quizMode === 'practice' && selected !== undefined) || reviewMode;
-  exp.classList.toggle('hidden', !showExplanation);
-  if (showExplanation) {
-    const correct = selected === q.correctIndex;
-    exp.className = `mt-6 rounded-xl border p-4 text-sm ${correct ? 'border-emerald-200 bg-emerald-50 text-emerald-950' : 'border-amber-200 bg-amber-50 text-amber-950'}`;
-    $('explanation-title').innerHTML = `<i class="fa-solid ${correct ? 'fa-circle-check text-emerald-600' : 'fa-circle-info text-amber-600'}"></i>${reviewMode ? (correct ? 'Correct answer' : 'Answer review') : (correct ? 'Correct! Conceptual rationale:' : 'Not quite. Conceptual rationale:')}`;
-    $('explanation-text').innerHTML = `<b>Correct answer: ${String.fromCharCode(65+q.correctIndex)}.</b> ${q.options[q.correctIndex]}<br><br>${q.explanation}${selected === undefined && reviewMode ? '<br><br><b>Your answer:</b> Not answered.' : ''}`;
-  }
-  $('btn-prev').disabled = currentIndex === 0;
-  $('btn-next').disabled = currentIndex === filteredQuestions.length - 1;
-  $('btn-clear').disabled = selected === undefined || examSubmitted;
-  $('btn-clear').classList.toggle('opacity-40', $('btn-clear').disabled);
-  $('btn-next').innerHTML = currentIndex === filteredQuestions.length - 1 ? 'Last question <i class="fa-solid fa-check ml-1"></i>' : 'Next <i class="fa-solid fa-arrow-right"></i>';
-  if (reviewMode) $('review-summary').classList.remove('hidden');
-  else $('review-summary').classList.add('hidden');
-  typesetMath();
-}
-function selectOption(qId, idx) {
-  if (examSubmitted || (quizMode === 'practice' && reviewMode)) return;
-  userAnswers[qId] = idx;
-  renderCurrentQuestion();
-  renderPalette();
-  updateStats();
-}
-function clearCurrentAnswer() {
-  const q = filteredQuestions[currentIndex];
-  if (q && userAnswers[q.id] !== undefined && !examSubmitted) {
-    delete userAnswers[q.id];
-    renderCurrentQuestion(); renderPalette(); updateStats();
-  }
-}
-function prevQuestion() { if (currentIndex > 0) { currentIndex--; renderAll(); } }
-function nextQuestion() { if (currentIndex < filteredQuestions.length - 1) { currentIndex++; renderAll(); } }
-function jumpToQuestion(idx) { currentIndex = idx; renderAll(); }
-function toggleFlagCurrentQuestion() {
-  if (!filteredQuestions.length) return;
-  const id = filteredQuestions[currentIndex].id;
-  flaggedQuestions.has(id) ? flaggedQuestions.delete(id) : flaggedQuestions.add(id);
-  renderCurrentQuestion(); renderPalette();
-}
-function renderPalette() {
-  const grid = $('palette-grid');
-  grid.innerHTML = '';
-  $('palette-count').textContent = `${filteredQuestions.length} items`;
-  filteredQuestions.forEach((q, idx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'palette-btn';
-    const answered = userAnswers[q.id] !== undefined;
-    const flagged = flaggedQuestions.has(q.id);
-    let style = answered ? 'background:#10b981;color:white;border:1px solid #10b981;' :
-      flagged ? 'background:#fbbf24;color:#78350f;border:1px solid #fbbf24;' :
-      'background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;';
-    if (idx === currentIndex) style += 'outline:2px solid #4f46e5;outline-offset:2px;';
-    btn.style.cssText = style;
-    btn.innerHTML = `${idx+1}${flagged ? '<span style="position:absolute;right:4px;top:3px;width:6px;height:6px;border-radius:50%;background:#f59e0b;border:1px solid white"></span>' : ''}`;
-    btn.setAttribute('aria-label', `Question ${idx+1}${answered ? ', answered' : ', unanswered'}${flagged ? ', flagged' : ''}`);
-    btn.addEventListener('click', () => jumpToQuestion(idx));
-    grid.appendChild(btn);
-  });
-}
-function updateStats() {
-  const ids = filteredQuestions.map(q => q.id);
-  const answered = ids.filter(id => userAnswers[id] !== undefined).length;
-  $('stat-answered').textContent = answered;
-  $('stat-total').textContent = filteredQuestions.length;
-  $('practice-progress-bar').style.width = `${filteredQuestions.length ? Math.round(answered/filteredQuestions.length*100) : 0}%`;
-}
-function shuffleCurrentQuestions() {
-  if (examSubmitted) return;
-  const ids = order.filter(id => currentFilter === 'all' || rawQuestionsData.find(q => q.id === id).category === currentFilter);
-  for (let i=ids.length-1;i>0;i--) {
-    const j=Math.floor(Math.random()*(i+1)); [ids[i],ids[j]]=[ids[j],ids[i]];
-  }
-  const set = new Set(ids);
-  let n=0;
-  order=order.map(id => set.has(id) ? ids[n++] : id);
-  currentIndex=0; renderAll();
-}
-function resetCurrentQuiz() {
-  if (!confirm('Reset all selected answers and flags and start again?')) return;
-  userAnswers={}; flaggedQuestions.clear(); currentIndex=0; reviewMode=false; examSubmitted=false;
-  $('result-modal').classList.add('hidden');
-  $('result-modal').classList.remove('flex');
-  if (quizMode === 'exam') startExamTimer(); else stopExamTimer();
-  renderAll();
-}
-function calculateResults() {
-  const total=rawQuestionsData.length;
-  let correct=0;
-  const breakdown={ag:{correct:0,total:0},kinetics:{correct:0,total:0},catalysis:{correct:0,total:0}};
-  rawQuestionsData.forEach(q=>{
-    breakdown[q.category].total++;
-    if(userAnswers[q.id]===q.correctIndex){correct++;breakdown[q.category].correct++;}
-  });
-  return {total,correct,accuracy:Math.round(correct/total*100),breakdown};
-}
-function submitExam(auto=false) {
-  if (examSubmitted) return;
-  if (!auto && !confirm('Submit the exam now? You will not be able to change answers after submission.')) return;
-  examSubmitted=true;
-  stopExamTimer();
-  if (examStartedAt) examTimeElapsed=Math.min(25*60,Math.floor((Date.now()-examStartedAt)/1000));
-  const r=calculateResults();
-  $('modal-score').textContent=`${r.correct} / ${r.total}`;
-  $('modal-accuracy').textContent=`${r.accuracy}%`;
-  const m=Math.floor(examTimeElapsed/60),s=examTimeElapsed%60;
-  $('modal-time').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  $('breakdown-ag').textContent=`${r.breakdown.ag.correct} / ${r.breakdown.ag.total} (${Math.round(r.breakdown.ag.correct/r.breakdown.ag.total*100)}%)`;
-  $('breakdown-kinetics').textContent=`${r.breakdown.kinetics.correct} / ${r.breakdown.kinetics.total} (${Math.round(r.breakdown.kinetics.correct/r.breakdown.kinetics.total*100)}%)`;
-  $('breakdown-catalysis').textContent=`${r.breakdown.catalysis.correct} / ${r.breakdown.catalysis.total} (${Math.round(r.breakdown.catalysis.correct/r.breakdown.catalysis.total*100)}%)`;
-  $('result-title').textContent=r.accuracy>=80?'Excellent Preparation!':r.accuracy>=50?'Good Effort! Keep Reviewing.':'Keep Practising!';
-  $('result-subtitle').textContent=auto?'Time is up. Your exam was submitted automatically.':'Your exam has been submitted. Here is your performance summary.';
-  $('result-icon-badge').className=`mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl text-3xl ${r.accuracy>=80?'bg-emerald-100 text-emerald-600':r.accuracy>=50?'bg-indigo-100 text-indigo-600':'bg-amber-100 text-amber-600'}`;
-  $('result-icon-badge').innerHTML=`<i class="fa-solid ${r.accuracy>=80?'fa-trophy':r.accuracy>=50?'fa-thumbs-up':'fa-book-open'}"></i>`;
-  $('result-modal').classList.remove('hidden'); $('result-modal').classList.add('flex');
-  renderAll();
-}
-function reviewExamAnswers() {
-  $('result-modal').classList.add('hidden'); $('result-modal').classList.remove('flex');
-  reviewMode=true; quizMode='practice';
-  $('btn-practice-mode').className='rounded-md bg-indigo-600 px-3 py-2 text-white';
-  $('btn-exam-mode').className='rounded-md px-3 py-2 text-indigo-200';
-  $('exam-timer-wrapper').classList.add('hidden'); $('practice-stats').classList.remove('hidden');
-  $('submit-exam-side').classList.add('hidden');
-  $('review-summary').innerHTML='<b>Exam review:</b> Correct answers and explanations are shown for every question. Use the navigator or topic filters to review. Your submitted answers are locked.';
-  renderAll();
-}
-function restartExam() {
-  $('result-modal').classList.add('hidden'); $('result-modal').classList.remove('flex');
-  userAnswers={}; flaggedQuestions.clear(); currentIndex=0; reviewMode=false; examSubmitted=false; currentFilter='all'; order=rawQuestionsData.map(q=>q.id);
-  document.querySelectorAll('.filter-chip').forEach(btn=>btn.className=`filter-chip rounded-full border px-3 py-2 text-xs font-semibold ${btn.dataset.filter==='all'?'border-indigo-200 bg-indigo-100 text-indigo-700':'border-slate-200 bg-slate-100 text-slate-600'}`);
-  quizMode='exam';
-  $('btn-practice-mode').className='rounded-md px-3 py-2 text-indigo-200';
-  $('btn-exam-mode').className='rounded-md bg-indigo-600 px-3 py-2 text-white';
-  $('exam-timer-wrapper').classList.remove('hidden'); $('exam-timer-wrapper').classList.add('flex');
-  $('practice-stats').classList.add('hidden'); $('submit-exam-side').classList.remove('hidden');
-  startExamTimer(); renderAll();
-}
-async function toggleFullscreen() {
-  try {
-    const target=$('quiz-app');
-    if (!document.fullscreenElement) {
-      if(target.requestFullscreen) await target.requestFullscreen();
-      else if(target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-      else alert('Full-screen mode is not supported by this browser.');
+  timerInterval = setInterval(() => {
+    if (testDurationSeconds > 0) {
+      testDurationSeconds--;
+      updateTimerDisplay();
     } else {
-      if(document.exitFullscreen) await document.exitFullscreen();
-      else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+      clearInterval(timerInterval);
+      alert('Time is up! Submitting your test automatically.');
+      openSubmitModal(true);
     }
-  } catch(e) { alert('Unable to change full-screen mode. Please use your browser full-screen controls.'); }
+  }, 1000);
 }
-function updateFullscreenButton() {
-  const active=!!(document.fullscreenElement || document.webkitFullscreenElement);
-  $('fullscreen-icon').className=active?'fa-solid fa-compress':'fa-solid fa-expand';
-  $('fullscreen-btn').title=active?'Exit full screen':'Enter full screen';
-  $('fullscreen-btn').setAttribute('aria-label',$('fullscreen-btn').title);
+
+function updateTimerDisplay() {
+  const h = Math.floor(testDurationSeconds / 3600);
+  const m = Math.floor((testDurationSeconds % 3600) / 60);
+  const s = testDurationSeconds % 60;
+  dispTimer.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
+
+// Render Question & Options
+function renderQuestion(index) {
+  currentQIndex = index;
+  const q = questionsData[index];
+
+  dispQTitle.textContent = `Question ${index + 1}:`;
+  dispQSource.textContent = `Section: ${q.source} (${q.section})`;
+  dispQText.innerHTML = q.question;
+
+  dispOptionsBox.innerHTML = '';
+  q.options.forEach((optText, optIdx) => {
+    const row = document.createElement('label');
+    row.className = 'option-row';
+    const isChecked = candidateAnswers[index] === optIdx;
+    
+    row.innerHTML = `
+      <input type="radio" name="opt_q" value="${optIdx}" ${isChecked ? 'checked' : ''} ${examSubmitted ? 'disabled' : ''}>
+      <span class="option-text"><b>(${String.fromCharCode(65 + optIdx)})</b> ${optText}</span>
+    `;
+
+    row.querySelector('input').addEventListener('change', () => {
+      if (!examSubmitted) {
+        candidateAnswers[currentQIndex] = optIdx;
+      }
+    });
+
+    dispOptionsBox.appendChild(row);
+  });
+
+  // Review Mode Explanation
+  if (isReviewView) {
+    explanationBox.style.display = 'block';
+    const isCorrect = candidateAnswers[index] === q.correct;
+    explanationBox.className = `review-box ${isCorrect ? '' : 'wrong'}`;
+    const userSelected = candidateAnswers[index] !== null ? `(${String.fromCharCode(65 + candidateAnswers[index])}) ${q.options[candidateAnswers[index]]}` : '<i>Not Attempted</i>';
+    explanationBox.innerHTML = `
+      <div><b>Your Answer:</b> ${userSelected}</div>
+      <div style="margin-top: 4px;"><b>Correct Answer: (${String.fromCharCode(65 + q.correct)})</b> ${q.options[q.correct]}</div>
+      <div style="margin-top: 8px;"><b>Explanation:</b> ${q.explanation}</div>
+    `;
+  } else {
+    explanationBox.style.display = 'none';
+  }
+
+  // Update back / next button statuses
+  btnBack.disabled = index === 0;
+  btnNext.disabled = index === questionsData.length - 1;
+  btnBack.style.opacity = index === 0 ? '0.5' : '1';
+  btnNext.style.opacity = index === questionsData.length - 1 ? '0.5' : '1';
+
+  updatePaletteHighlight();
+  renderMath();
+}
+
+// Palette rendering
+function buildPalette() {
+  paletteGrid.innerHTML = '';
+  questionsData.forEach((_, idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = `palette-btn-${idx}`;
+    btn.className = 'palette-q-btn';
+    btn.textContent = String(idx + 1).padStart(2, '0');
+    
+    applyBadgeStyle(btn, questionStatus[idx]);
+
+    btn.addEventListener('click', () => {
+      if (currentQIndex !== idx) {
+        navigateToQuestion(idx);
+      }
+    });
+
+    paletteGrid.appendChild(btn);
+  });
+}
+
+function applyBadgeStyle(element, status) {
+  element.className = 'palette-q-btn';
+  if (status === 'not_visited') {
+    element.classList.add('badge-shape', 'badge-not-visited');
+  } else if (status === 'not_answered') {
+    element.classList.add('badge-shape', 'badge-not-answered');
+  } else if (status === 'answered') {
+    element.classList.add('badge-shape', 'badge-answered');
+  } else if (status === 'marked_review') {
+    element.classList.add('badge-shape', 'badge-review');
+  } else if (status === 'ans_marked_review') {
+    element.classList.add('badge-shape', 'badge-ans-review');
+  }
+}
+
+function updatePaletteHighlight() {
+  document.querySelectorAll('.palette-q-btn').forEach((b, i) => {
+    applyBadgeStyle(b, questionStatus[i]);
+    if (i === currentQIndex) {
+      b.classList.add('active-q');
+    } else {
+      b.classList.remove('active-q');
+    }
+  });
+}
+
+function updateLegendCounts() {
+  let notVis = 0, notAns = 0, ans = 0, rev = 0, ansRev = 0;
+  questionStatus.forEach(st => {
+    if (st === 'not_visited') notVis++;
+    else if (st === 'not_answered') notAns++;
+    else if (st === 'answered') ans++;
+    else if (st === 'marked_review') rev++;
+    else if (st === 'ans_marked_review') ansRev++;
+  });
+  legNotVis.textContent = notVis;
+  legNotAns.textContent = notAns;
+  legAns.textContent = ans;
+  legRev.textContent = rev;
+  legAnsRev.textContent = ansRev;
+}
+
+// Navigation Helper
+function navigateToQuestion(newIdx) {
+  if (newIdx < 0 || newIdx >= questionsData.length) return;
+  // If moving to a not_visited question, it now becomes not_answered
+  if (questionStatus[newIdx] === 'not_visited' && !examSubmitted) {
+    questionStatus[newIdx] = 'not_answered';
+  }
+  renderQuestion(newIdx);
+  updatePaletteHighlight();
+  updateLegendCounts();
+}
+
+// ACTION BUTTON 1: SAVE & NEXT
+btnSaveNext.addEventListener('click', () => {
+  if (examSubmitted) return;
+  const isSelected = candidateAnswers[currentQIndex] !== null;
+  if (isSelected) {
+    questionStatus[currentQIndex] = 'answered';
+  } else {
+    questionStatus[currentQIndex] = 'not_answered';
+  }
+  if (currentQIndex < questionsData.length - 1) {
+    navigateToQuestion(currentQIndex + 1);
+  } else {
+    updatePaletteHighlight();
+    updateLegendCounts();
+  }
+});
+
+// ACTION BUTTON 2: CLEAR
+btnClear.addEventListener('click', () => {
+  if (examSubmitted) return;
+  candidateAnswers[currentQIndex] = null;
+  questionStatus[currentQIndex] = 'not_answered';
+  renderQuestion(currentQIndex);
+  updatePaletteHighlight();
+  updateLegendCounts();
+});
+
+// ACTION BUTTON 3: SAVE & MARK FOR REVIEW
+btnSaveMark.addEventListener('click', () => {
+  if (examSubmitted) return;
+  const isSelected = candidateAnswers[currentQIndex] !== null;
+  if (isSelected) {
+    questionStatus[currentQIndex] = 'ans_marked_review';
+  } else {
+    questionStatus[currentQIndex] = 'marked_review';
+  }
+  if (currentQIndex < questionsData.length - 1) {
+    navigateToQuestion(currentQIndex + 1);
+  } else {
+    updatePaletteHighlight();
+    updateLegendCounts();
+  }
+});
+
+// ACTION BUTTON 4: MARK FOR REVIEW & NEXT
+btnMarkNext.addEventListener('click', () => {
+  if (examSubmitted) return;
+  questionStatus[currentQIndex] = 'marked_review';
+  if (currentQIndex < questionsData.length - 1) {
+    navigateToQuestion(currentQIndex + 1);
+  } else {
+    updatePaletteHighlight();
+    updateLegendCounts();
+  }
+});
+
+// NAVIGATION: BACK & NEXT
+btnBack.addEventListener('click', () => {
+  if (currentQIndex > 0) navigateToQuestion(currentQIndex - 1);
+});
+btnNext.addEventListener('click', () => {
+  if (currentQIndex < questionsData.length - 1) navigateToQuestion(currentQIndex + 1);
+});
+
+// TOGGLE PALETTE SIDEBAR
+btnTogglePalette.addEventListener('click', () => {
+  palettePane.classList.toggle('collapsed');
+  btnTogglePalette.classList.toggle('shifted');
+  const isCollapsed = palettePane.classList.contains('collapsed');
+  collapseIcon.className = isCollapsed ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right';
+});
+
+// EXAM SUBMISSION
+btnSubmit.addEventListener('click', () => openSubmitModal(false));
+btnSummaryClose.addEventListener('click', () => { summaryModal.style.display = 'none'; });
+
+function openSubmitModal(auto = false) {
+  let notVis = 0, notAns = 0, ans = 0, rev = 0, ansRev = 0;
+  questionStatus.forEach(st => {
+    if (st === 'not_visited') notVis++;
+    else if (st === 'not_answered') notAns++;
+    else if (st === 'answered') ans++;
+    else if (st === 'marked_review') rev++;
+    else if (st === 'ans_marked_review') ansRev++;
+  });
+
+  document.getElementById('tbl-total').textContent = questionsData.length;
+  document.getElementById('tbl-ans').textContent = ans;
+  document.getElementById('tbl-not-ans').textContent = notAns;
+  document.getElementById('tbl-rev').textContent = rev;
+  document.getElementById('tbl-ans-rev').textContent = ansRev;
+  document.getElementById('tbl-not-vis').textContent = notVis;
+
+  summaryStageConfirm.style.display = 'block';
+  summaryStageResult.style.display = 'none';
+  summaryModal.style.display = 'flex';
+
+  if (auto) {
+    executeFinalSubmit();
+  }
+}
+
+btnFinalSubmit.addEventListener('click', executeFinalSubmit);
+
+function executeFinalSubmit() {
+  examSubmitted = true;
+  clearInterval(timerInterval);
+  dispTimer.textContent = '00:00:00';
+
+  // Calculate Scores
+  // Answered & Marked for review (ans_marked_review) is officially counted in TCS
+  let totalScore = 0;
+  let agScore = 0;
+  let adScore = 0;
+
+  questionsData.forEach((q, idx) => {
+    const isConsidered = (questionStatus[idx] === 'answered' || questionStatus[idx] === 'ans_marked_review');
+    const userChoice = candidateAnswers[idx];
+    if (isConsidered && userChoice === q.correct) {
+      totalScore++;
+      if (q.source.includes("AG")) agScore++;
+      else adScore++;
+    }
+  });
+
+  document.getElementById('score-text').textContent = `${totalScore} / ${questionsData.length}`;
+  const pct = Math.round((totalScore / questionsData.length) * 100);
+  document.getElementById('score-percent').textContent = `Total Percentage: ${pct}%`;
+  document.getElementById('res-ag-correct').textContent = `${agScore} / 4`;
+  document.getElementById('res-ag-pct').textContent = `${Math.round((agScore / 4) * 100)}%`;
+  document.getElementById('res-ad-correct').textContent = `${adScore} / 21`;
+  document.getElementById('res-ad-pct').textContent = `${Math.round((adScore / 21) * 100)}%`;
+
+  summaryStageConfirm.style.display = 'none';
+  summaryStageResult.style.display = 'block';
+  document.getElementById('summary-modal-subtitle').textContent = "Exam Final Scorecard";
+}
+
+// REVIEW EXAM VIEW
+btnViewReview.addEventListener('click', () => {
+  summaryModal.style.display = 'none';
+  isReviewView = true;
+  // disable upper action buttons
+  btnSaveNext.disabled = true;
+  btnClear.disabled = true;
+  btnSaveMark.disabled = true;
+  btnMarkNext.disabled = true;
+  btnSubmit.style.display = 'none';
+
+  navigateToQuestion(0);
+});
 </script>
 </body>
 </html>
