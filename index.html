@@ -4,52 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6546e8">
 
     <title>EduGM UniTools | Academic Calculators</title>
-    <meta name="description" content="Explore EduGM UniTools academic calculators, SGPA and CGPA tools, percentage calculators and student utilities.">
-    <meta name="theme-color" content="#ffffff">
+
+    <meta name="description" content="Explore EduGM UniTools academic calculators, SGPA and CGPA tools, percentage calculators, marks calculators and student utilities.">
+    <meta name="keywords" content="EduGM UniTools, SGPA Calculator, CGPA Calculator, Percentage Calculator, MAKAUT Calculator, Student Tools">
+    <meta name="author" content="EduGM UniTools">
+
+    <meta property="og:title" content="EduGM UniTools | Academic Calculators">
+    <meta property="og:description" content="Academic calculators and student utilities designed to make everyday academic tasks easier.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://priyabratacare-source.github.io/EduGM-UniTools/">
+
+    <link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --blue: #1769e0;
-            --navy: #102650;
-            --text: #202938;
-            --muted: #6b7280;
-            --border: #e6ebf2;
-            --soft: #f5f8fd;
-            --white: #ffffff;
+            --primary: #6546e8;
+            --primary-dark: #4f32c7;
+            --primary-light: #f0edff;
+            --navy: #211747;
+            --text: #202036;
+            --muted: #77768b;
+            --background: #f8f9ff;
+            --surface: #ffffff;
+            --border: #e9e8f2;
+            --green: #138a60;
+            --shadow: 0 16px 45px rgba(39, 30, 91, 0.07);
+            --radius: 20px;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--text);
-            background: #fff;
+            background: var(--background);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
             color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button,
+        input {
+            font: inherit;
         }
 
         .container {
-            width: min(1160px, 92%);
-            margin: auto;
+            width: min(1160px, calc(100% - 40px));
+            margin: 0 auto;
         }
 
         /* HEADER */
 
-        header {
-            border-bottom: 1px solid var(--border);
-            background: #fff;
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(233, 232, 242, 0.9);
         }
 
         .header-inner {
@@ -57,127 +94,343 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 25px;
         }
 
         .brand {
-            text-decoration: none;
-            color: var(--navy);
-            font-size: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 19px;
             font-weight: 800;
-            letter-spacing: -.8px;
-            white-space: nowrap;
+            letter-spacing: -0.7px;
         }
 
-        .brand span {
-            color: var(--blue);
+        .brand-icon {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, #8c72ff, #5436d7);
+            box-shadow: 0 7px 18px rgba(101, 70, 232, 0.23);
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .brand-text {
+            color: var(--navy);
+        }
+
+        .brand-text span {
+            color: var(--primary);
         }
 
         .brand small {
             display: block;
+            margin-top: 1px;
             color: var(--muted);
-            font-size: 10px;
-            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
             font-weight: 600;
-            line-height: 1.3;
+            letter-spacing: 1.7px;
+            line-height: 1.4;
             text-transform: uppercase;
         }
 
-        nav {
+        .nav-links {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             flex-wrap: wrap;
             gap: 10px 23px;
         }
 
-        nav a {
-            text-decoration: none;
-            color: #374151;
-            font-size: 14px;
-            font-weight: 600;
+        .nav-links a {
+            color: #646277;
+            font-size: 12px;
+            font-weight: 700;
+            transition: color 0.2s ease;
         }
 
-        nav a:hover,
-        nav a.active {
-            color: var(--blue);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links .nav-cta {
+            padding: 10px 15px;
+            border-radius: 11px;
+            color: #fff;
+            background: var(--primary);
+        }
+
+        .nav-links .nav-cta:hover {
+            color: #fff;
+            background: var(--primary-dark);
         }
 
         /* HERO */
 
         .hero {
-            background: var(--soft);
+            position: relative;
+            overflow: hidden;
+            padding: 85px 0 78px;
+            background:
+                radial-gradient(ellipse at 8% 15%, rgba(174, 157, 255, 0.22), transparent 36%),
+                radial-gradient(ellipse at 95% 40%, rgba(166, 202, 255, 0.23), transparent 34%),
+                linear-gradient(180deg, #fff, #f7f8ff);
             border-bottom: 1px solid var(--border);
-            padding: 68px 0;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(101, 70, 232, 0.09);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            top: -180px;
+            right: 7%;
+            width: 360px;
+            height: 360px;
+        }
+
+        .hero::after {
+            bottom: -230px;
+            left: 2%;
+            width: 400px;
+            height: 400px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 790px;
         }
 
         .eyebrow {
-            color: var(--blue);
-            text-transform: uppercase;
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 13px;
+            border: 1px solid #e4deff;
+            border-radius: 999px;
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
             font-weight: 800;
-            letter-spacing: 2.5px;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px rgba(101, 70, 232, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.22;
+            letter-spacing: -1px;
         }
 
         .hero h1 {
-            max-width: 760px;
-            margin: 13px 0;
-            font-size: clamp(36px, 5vw, 57px);
-            line-height: 1.17;
-            letter-spacing: -1.8px;
+            max-width: 790px;
+            margin: 25px 0 19px;
             color: var(--navy);
+            font-size: clamp(40px, 6vw, 68px);
+            font-weight: 800;
+            letter-spacing: -2.5px;
         }
 
-        .hero h1 span {
-            color: var(--blue);
+        .gradient-text {
+            color: var(--primary);
+            background: linear-gradient(110deg, #6546e8, #a05ded, #4c7be8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            max-width: 680px;
+        .hero-description {
+            max-width: 670px;
             color: var(--muted);
-            font-size: 17px;
+            font-size: 15px;
+            line-height: 1.95;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
         }
 
         .button {
-            display: inline-block;
-            border: 1px solid var(--blue);
-            border-radius: 7px;
-            padding: 11px 19px;
-            text-decoration: none;
-            color: var(--blue);
-            font-size: 14px;
-            font-weight: 700;
-            transition: .2s;
-        }
-
-        .button.primary {
-            color: #fff;
-            background: var(--blue);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 46px;
+            padding: 12px 19px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .button:hover {
             transform: translateY(-2px);
         }
 
-        /* SECTION */
+        .button-primary {
+            color: #fff;
+            background: var(--primary);
+            box-shadow: 0 8px 20px rgba(101, 70, 232, 0.2);
+        }
+
+        .button-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .button-secondary {
+            color: var(--text);
+            border-color: var(--border);
+            background: #fff;
+        }
+
+        .button-secondary:hover {
+            box-shadow: 0 8px 20px rgba(39, 30, 91, 0.07);
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px 18px;
+            margin-top: 29px;
+            color: #77758a;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .hero-note span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .note-check {
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        /* SECTION COMMON */
 
         .section {
-            padding: 58px 0;
+            padding: 76px 0;
         }
 
         .section-heading {
-            margin-bottom: 28px;
+            max-width: 710px;
+            margin-bottom: 35px;
+        }
+
+        .section-heading.center {
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+        }
+
+        .section-label {
+            display: block;
+            margin-bottom: 11px;
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
         }
 
         .section-heading h2 {
-            margin: 7px 0;
+            margin-bottom: 13px;
             color: var(--navy);
-            font-size: clamp(26px, 4vw, 35px);
-            letter-spacing: -.7px;
+            font-size: clamp(29px, 4vw, 41px);
+            letter-spacing: -1.5px;
         }
 
         .section-heading p {
-            margin: 0;
             color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        /* TOOL SEARCH */
+
+        .tools-section {
+            background: var(--background);
+        }
+
+        .tools-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 17px;
+            margin-bottom: 25px;
+        }
+
+        .tools-toolbar h3 {
+            color: var(--navy);
+            font-size: 17px;
+            letter-spacing: -0.4px;
+        }
+
+        .search-box {
+            position: relative;
+            width: min(100%, 320px);
+        }
+
+        .search-box input {
+            width: 100%;
+            min-height: 45px;
+            padding: 11px 14px 11px 42px;
+            outline: none;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            background: #fff;
+            font-size: 12px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: #b8a9ff;
+            box-shadow: 0 0 0 4px rgba(101, 70, 232, 0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 14px;
+            color: #8a879e;
+            font-size: 17px;
+            transform: translateY(-50%);
+            pointer-events: none;
         }
 
         /* CALCULATOR CARDS */
@@ -189,187 +442,526 @@
         }
 
         .calculator-card {
+            position: relative;
             display: flex;
             flex-direction: column;
-            min-height: 205px;
-            padding: 23px;
+            min-height: 235px;
+            padding: 25px;
+            overflow: hidden;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            background: #fff;
-            text-decoration: none;
-            transition: border-color .2s, transform .2s, box-shadow .2s;
+            border-radius: 19px;
+            background: var(--surface);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .calculator-card::after {
+            content: "";
+            position: absolute;
+            right: -35px;
+            bottom: -45px;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(101, 70, 232, 0.035);
+            pointer-events: none;
         }
 
         .calculator-card:hover {
-            border-color: #a8c8ff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(20, 50, 100, .06);
+            transform: translateY(-5px);
+            border-color: #d2c7ff;
+            box-shadow: var(--shadow);
         }
 
         .tool-icon {
-            display: flex;
-            width: 43px;
-            height: 43px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9px;
-            background: #edf4ff;
-            color: var(--blue);
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 21px;
             font-weight: 800;
         }
 
         .calculator-card h3 {
-            margin: 16px 0 6px;
+            margin: 19px 0 8px;
             color: var(--navy);
-            font-size: 19px;
+            font-size: 17px;
+            letter-spacing: -0.5px;
         }
 
         .calculator-card p {
-            margin: 0 0 16px;
+            margin-bottom: 19px;
             color: var(--muted);
-            font-size: 14px;
+            font-size: 12px;
+            line-height: 1.9;
         }
 
         .open-tool {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             margin-top: auto;
-            color: var(--blue);
-            font-size: 14px;
-            font-weight: 700;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
         }
 
-        /* DONATION AREA */
+        .tool-arrow {
+            display: grid;
+            place-items: center;
+            width: 29px;
+            height: 29px;
+            border-radius: 9px;
+            color: var(--primary);
+            background: #f5f2ff;
+            font-size: 15px;
+            transition: transform 0.2s;
+        }
+
+        .calculator-card:hover .tool-arrow {
+            transform: translateX(3px);
+        }
+
+        .no-results {
+            display: none;
+            padding: 30px 15px;
+            border: 1px dashed #d7d1eb;
+            border-radius: 16px;
+            color: var(--muted);
+            background: #fff;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .tools-disclaimer {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        /* SUPPORT / DONATIONS */
 
         .donation-section {
-            background: var(--soft);
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(173, 157, 255, 0.12), transparent 38%),
+                #f1f3ff;
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
 
         .donation-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(300px, 1.5fr);
-            gap: 25px;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.45fr);
             align-items: start;
+            gap: 22px;
         }
 
         .donation-card,
         .donor-card {
-            padding: 25px;
-            background: #fff;
+            padding: 27px;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 21px;
+            background: #fff;
+            box-shadow: 0 8px 28px rgba(39, 30, 91, 0.035);
+        }
+
+        .donation-icon {
+            display: grid;
+            place-items: center;
+            width: 51px;
+            height: 51px;
+            margin-bottom: 19px;
+            border-radius: 16px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 24px;
         }
 
         .donation-card h3,
         .donor-card h3 {
-            margin: 0 0 10px;
+            margin-bottom: 11px;
             color: var(--navy);
-            font-size: 21px;
+            font-size: 20px;
+            letter-spacing: -0.7px;
         }
 
-        .donation-card p {
+        .donation-card > p,
+        .donor-card > p {
             color: var(--muted);
-            font-size: 14px;
+            font-size: 12px;
+            line-height: 1.9;
         }
 
         .donate-button {
-            display: block;
-            margin-top: 20px;
-            padding: 13px 16px;
-            border-radius: 7px;
-            background: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            width: 100%;
+            min-height: 47px;
+            margin-top: 21px;
+            padding: 12px 17px;
+            border-radius: 12px;
             color: #fff;
-            text-align: center;
-            font-weight: 700;
-            text-decoration: none;
+            background: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            transition: transform 0.2s, background 0.2s;
         }
 
         .donate-button:hover {
-            background: #0d51b5;
+            transform: translateY(-2px);
+            background: var(--primary-dark);
         }
 
         .small-note {
+            margin-top: 14px;
             color: var(--muted);
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 10px;
+            line-height: 1.8;
         }
 
         .table-wrap {
+            margin-top: 20px;
             overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 13px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 11px;
         }
 
         th,
         td {
-            padding: 12px 10px;
-            text-align: left;
+            padding: 13px 12px;
             border-bottom: 1px solid var(--border);
+            text-align: left;
             vertical-align: top;
         }
 
         th {
-            background: #f8fafc;
-            color: #374151;
+            color: #55536a;
+            background: #f8f7ff;
+            font-size: 10px;
+            font-weight: 800;
             white-space: nowrap;
         }
 
         td {
+            color: #56556b;
             overflow-wrap: anywhere;
         }
 
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
         .amount {
-            color: #147447;
-            font-weight: 700;
+            color: var(--green);
+            font-weight: 800;
             white-space: nowrap;
         }
 
-        .table-status {
+        .donor-empty {
+            padding: 27px 17px;
+            border: 1px dashed #d9d4eb;
+            border-radius: 13px;
             color: var(--muted);
-            padding: 18px 0;
+            background: #fcfbff;
+            font-size: 12px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .donor-empty strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--navy);
             font-size: 13px;
+        }
+
+        /* ABOUT STRIP */
+
+        .about-strip {
+            padding: 65px 0;
+            background: #fff;
+        }
+
+        .about-panel {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 25px;
+            padding: 35px;
+            border: 1px solid #e2dcff;
+            border-radius: 23px;
+            background: linear-gradient(115deg, #f0edff, #fff 72%);
+        }
+
+        .about-panel h2 {
+            margin-bottom: 12px;
+            color: var(--navy);
+            font-size: clamp(25px, 3vw, 33px);
+        }
+
+        .about-panel p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .about-symbol {
+            display: grid;
+            place-items: center;
+            width: 95px;
+            height: 95px;
+            border: 1px solid #e0d8ff;
+            border-radius: 26px;
+            color: var(--primary);
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(101, 70, 232, 0.08);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 37px;
+            font-weight: 800;
+        }
+
+        /* BRAND PARTNERSHIP */
+
+        .brand-section {
+            padding: 20px 0 75px;
+        }
+
+        .brand-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 43px 32px;
+            border-radius: 27px;
+            color: #fff;
+            background: linear-gradient(125deg, #241747, #4930a8 57%, #6546e8);
+            box-shadow: 0 18px 48px rgba(50, 34, 121, 0.17);
+        }
+
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            top: -145px;
+            right: -45px;
+            width: 340px;
+            height: 340px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+        }
+
+        .brand-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-heading {
+            max-width: 650px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+
+        .brand-heading .section-label {
+            color: #c9bcff;
+        }
+
+        .brand-heading h2 {
+            margin-bottom: 13px;
+            font-size: clamp(27px, 4vw, 39px);
+            letter-spacing: -1.3px;
+        }
+
+        .brand-heading p {
+            color: #ded8ff;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .brand-pair {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 23px;
+        }
+
+        .brand-tile {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: min(300px, 43%);
+            min-height: 87px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.19);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .brand-logo {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 47px;
+            height: 47px;
+            border-radius: 14px;
+            color: #4930a8;
+            background: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .brand-logo.codebihin {
+            color: #fff;
+            background: linear-gradient(135deg, #3bb5e9, #3876e9);
+        }
+
+        .brand-tile strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .brand-tile small {
+            display: block;
+            margin-top: 4px;
+            color: #d8d0ff;
+            font-size: 10px;
+        }
+
+        .brand-cross {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 39px;
+            height: 39px;
+            border: 1px solid rgba(255, 255, 255, 0.23);
+            border-radius: 50%;
+            font-size: 23px;
+        }
+
+        .brand-note {
+            margin-top: 23px;
+            color: #d8d0ff;
+            font-size: 10px;
+            text-align: center;
         }
 
         /* FOOTER */
 
-        footer {
-            padding: 32px 0 22px;
-            text-align: center;
+        .footer {
+            padding: 39px 0 23px;
+            border-top: 1px solid var(--border);
+            background: #fff;
         }
 
-        .footer-brand {
-            font-size: 21px;
-            font-weight: 800;
-            color: var(--navy);
+        .footer-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 35px;
+            padding-bottom: 27px;
         }
 
-        .footer-brand span {
-            color: var(--blue);
+        .footer-description {
+            max-width: 350px;
+            margin-top: 13px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.9;
         }
 
         .footer-links {
-            justify-content: center;
-            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 13px 20px;
         }
 
         .footer-links a {
-            font-weight: 500;
-        }
-
-        .footer-note {
-            margin: 5px 0;
             color: var(--muted);
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
-        /* RESPONSIVE DESIGN */
+        .footer-links a:hover {
+            color: var(--primary);
+        }
 
-        @media (max-width: 850px) {
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .footer-bottom strong {
+            color: var(--primary);
+        }
+
+        /* BACK TO TOP */
+
+        .back-to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 90;
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border: 0;
+            border-radius: 14px;
+            color: #fff;
+            background: var(--primary);
+            box-shadow: 0 7px 22px rgba(101, 70, 232, 0.28);
+            font-size: 19px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .header-inner {
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px 14px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
             .calculator-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -379,33 +971,140 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .header-inner {
-                padding: 16px 0;
-                flex-direction: column;
-                text-align: center;
+        @media (max-width: 650px) {
+            .container {
+                width: min(100% - 30px, 1160px);
             }
 
-            nav {
-                justify-content: center;
-                gap: 12px 17px;
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .brand {
+                align-self: flex-start;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+                gap: 11px 17px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 10px;
             }
 
             .hero {
-                padding: 48px 0;
+                padding: 61px 0 57px;
+            }
+
+            .hero h1 {
+                font-size: clamp(38px, 10vw, 53px);
+                letter-spacing: -1.8px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .hero-note {
+                gap: 10px 13px;
+            }
+
+            .section {
+                padding: 55px 0;
             }
 
             .calculator-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
             }
 
-            .section {
-                padding: 42px 0;
+            .calculator-card {
+                min-height: 210px;
+                padding: 22px;
+            }
+
+            .tools-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
             }
 
             .donation-card,
             .donor-card {
-                padding: 18px;
+                padding: 21px;
+            }
+
+            .about-panel {
+                grid-template-columns: 1fr;
+                padding: 25px;
+            }
+
+            .about-symbol {
+                width: 70px;
+                height: 70px;
+                border-radius: 20px;
+                font-size: 29px;
+            }
+
+            .brand-panel {
+                padding: 32px 19px;
+            }
+
+            .brand-pair {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .brand-tile {
+                width: 100%;
+            }
+
+            .brand-cross {
+                width: 34px;
+                height: 34px;
+                transform: rotate(90deg);
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 22px;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
+                gap: 12px 17px;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .back-to-top {
+                right: 14px;
+                bottom: 14px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -413,271 +1112,489 @@
 
 <body>
 
-<!-- HEADER -->
-<header>
-    <div class="container header-inner">
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="container header-inner">
 
-        <a class="brand" href="index.html">
-            EduGM <span>UniTools</span>
-            <small>Learn · Calculate · Grow</small>
-        </a>
-
-        <nav aria-label="Main navigation">
-            <a class="active" href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="founder.html">Founder</a>
-            <a href="contact.html">Contact Us</a>
-            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
-                Privacy Policy
-            </a>
-        </nav>
-
-    </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-    <div class="container">
-
-        <div class="eyebrow">Welcome to EduGM UniTools</div>
-
-        <h1>
-            Your academic tasks,<br>
-            made <span>simpler.</span>
-        </h1>
-
-        <p>
-            Explore educational calculators and academic utilities in
-            one convenient place. Choose a tool, enter your details and
-            get started with a clean, straightforward experience.
-        </p>
-
-        <a class="button primary" href="#calculators">
-            Explore Calculators
-        </a>
-
-        <a class="button" href="#donations">
-            Support EduGM
-        </a>
-
-    </div>
-</section>
-
-<!-- CALCULATORS -->
-<section class="section" id="calculators">
-    <div class="container">
-
-        <div class="section-heading">
-            <div class="eyebrow">Academic Utilities</div>
-            <h2>Choose your calculator</h2>
-            <p>
-                Select a tool below to open its dedicated page.
-            </p>
-        </div>
-
-        <div class="calculator-grid">
-
-            <a class="calculator-card" href="sgpa-calculator.html">
-                <div class="tool-icon">S</div>
-                <h3>SGPA Calculator</h3>
-                <p>Calculate your Semester Grade Point Average using your subject grades and credits.</p>
-                <span class="open-tool">Open Calculator →</span>
+            <a class="brand" href="index.html" aria-label="EduGM UniTools Home">
+                <span class="brand-icon">E</span>
+                <span class="brand-text">
+                    EduGM <span>UniTools</span>
+                    <small>Learn · Calculate · Grow</small>
+                </span>
             </a>
 
-            <a class="calculator-card" href="cgpa-calculator.html">
-                <div class="tool-icon">C</div>
-                <h3>CGPA Calculator</h3>
-                <p>Calculate your Cumulative Grade Point Average using your academic results.</p>
-                <span class="open-tool">Open Calculator →</span>
-            </a>
-
-            <a class="calculator-card" href="percentage-calculator.html">
-                <div class="tool-icon">%</div>
-                <h3>Percentage Calculator</h3>
-                <p>Work out percentages, marks obtained and percentage-based results.</p>
-                <span class="open-tool">Open Calculator →</span>
-            </a>
-
-            <a class="calculator-card" href="marks-calculator.html">
-                <div class="tool-icon">M</div>
-                <h3>Marks Calculator</h3>
-                <p>Calculate marks and totals from your entered academic scores.</p>
-                <span class="open-tool">Open Calculator →</span>
-            </a>
-
-            <a class="calculator-card" href="makaut-calculator.html">
-                <div class="tool-icon">U</div>
-                <h3>MAKAUT Calculator</h3>
-                <p>Access an academic calculator designed for relevant MAKAUT grading calculations.</p>
-                <span class="open-tool">Open Calculator →</span>
-            </a>
-
-            <a class="calculator-card" href="engineering-calculator.html">
-                <div class="tool-icon">∑</div>
-                <h3>Engineering Calculator</h3>
-                <p>Explore mathematical and numerical utilities for engineering study.</p>
-                <span class="open-tool">Open Calculator →</span>
-            </a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a class="active" href="index.html">Home</a>
+                <a href="#calculators">Tools</a>
+                <a href="about.html">About</a>
+                <a href="founder.html">Founder</a>
+                <a href="contact.html">Contact</a>
+                <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy</a>
+            </nav>
 
         </div>
+    </header>
 
-        <p class="small-note" style="margin-top:22px">
-            Calculator availability and results depend on each tool's
-            implementation. Verify important academic results against
-            the applicable official rules.
-        </p>
+    <main>
 
-    </div>
-</section>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
 
-<!-- DONATION SUPPORT -->
-<section class="section donation-section" id="donations">
-    <div class="container">
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        Welcome to EduGM UniTools
+                    </div>
 
-        <div class="section-heading">
-            <div class="eyebrow">Community Support</div>
-            <h2>Support EduGM UniTools</h2>
-            <p>
-                Your voluntary support can help us work towards improving
-                educational utilities and the student experience.
-            </p>
-        </div>
+                    <h1>
+                        Your academic tasks,<br>
+                        made <span class="gradient-text">simpler.</span>
+                    </h1>
 
-        <div class="donation-layout">
+                    <p class="hero-description">
+                        Discover a growing collection of academic calculators
+                        and student utilities in one convenient place. Calculate
+                        SGPA, CGPA, percentages, marks, and more with a clean,
+                        responsive, and easy-to-use experience.
+                    </p>
 
-            <!-- DONATION LINK -->
-            <div class="donation-card">
-                <h3>Donate Us</h3>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#calculators">
+                            Explore Calculators <span aria-hidden="true">↗</span>
+                        </a>
 
-                <p>
-                    If you would like to support this project, use our
-                    official donation-support form. Please follow the
-                    instructions provided in the form.
-                </p>
+                        <a class="button button-secondary" href="#donations">
+                            Support EduGM
+                        </a>
+                    </div>
 
-                <a
-                    class="donate-button"
-                    href="https://forms.gle/zn6iFJGWES5Y5KC97"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    Donate Us ↗
-                </a>
+                    <div class="hero-note">
+                        <span><span class="note-check">✓</span> Student-focused tools</span>
+                        <span><span class="note-check">✓</span> Mobile-friendly design</span>
+                        <span><span class="note-check">✓</span> Simple interface</span>
+                    </div>
 
-                <p class="small-note">
-                    Donations are voluntary. A form submission alone
-                    does not confirm that a payment has been received.
-                </p>
+                </div>
             </div>
+        </section>
 
-            <!-- DONOR LIST -->
-            <div class="donor-card">
-                <h3>Donation Supporters</h3>
+        <!-- CALCULATORS -->
+        <section class="section tools-section" id="calculators">
+            <div class="container">
 
-                <p class="small-note">
-                    Thank you to the supporters who have agreed to be
-                    listed. Only approved public entries appear here.
-                </p>
-
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Sl. No.</th>
-                                <th>Name</th>
-                                <th>Amount</th>
-                                <th>Comment</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="donorTable">
-                            <tr>
-                                <td>1</td>
-                                <td>Rahul Chatterjee</td>
-                                <td class="amount">₹500</td>
-                                <td>Very helpful MAKAUT and SGPA calculators for semester exams!</td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>Ananya Das</td>
-                                <td class="amount">₹250</td>
-                                <td>Clean interface and fast calculations. Keep building great student tools.</td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>Sayan Mukherjee</td>
-                                <td class="amount">₹100</td>
-                                <td>Saved me a lot of time converting CGPA to percentage. Thank you!</td>
-                            </tr>
-
-                            <tr>
-                                <td>4</td>
-                                <td>Sneha Ghosh</td>
-                                <td class="amount">₹300</td>
-                                <td>Great initiative for engineering students. Happy to support EduGM!</td>
-                            </tr>
-
-                            <tr>
-                                <td>5</td>
-                                <td>Arjun Roy</td>
-                                <td class="amount">₹150</td>
-                                <td>Simple, ad-free experience and accurate marks calculation.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="section-heading">
+                    <span class="section-label">Academic Utilities</span>
+                    <h2>Find the right tool for you</h2>
+                    <p>
+                        Choose a calculator to get started. Search by name
+                        to find the academic utility you need.
+                    </p>
                 </div>
 
-                <p class="small-note" id="donorStatus" aria-live="polite">
-                    Showing verified public supporter entries.
+                <div class="tools-toolbar">
+                    <h3>Explore All Calculators</h3>
+
+                    <label class="search-box">
+                        <span class="search-icon" aria-hidden="true">⌕</span>
+                        <input
+                            type="search"
+                            id="toolSearch"
+                            placeholder="Search calculators..."
+                            aria-label="Search calculators"
+                            autocomplete="off">
+                    </label>
+                </div>
+
+                <div class="calculator-grid" id="calculatorGrid">
+
+                    <a class="calculator-card" href="sgpa-calculator.html" data-search="sgpa semester grade point average calculator">
+                        <div class="tool-icon">S</div>
+                        <h3>SGPA Calculator</h3>
+                        <p>
+                            Calculate your Semester Grade Point Average
+                            using your subject grades and credits.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                    <a class="calculator-card" href="cgpa-calculator.html" data-search="cgpa cumulative grade point average calculator">
+                        <div class="tool-icon">C</div>
+                        <h3>CGPA Calculator</h3>
+                        <p>
+                            Calculate your Cumulative Grade Point Average
+                            using your academic semester results.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                    <a class="calculator-card" href="percentage-calculator.html" data-search="percentage marks percent calculator">
+                        <div class="tool-icon">%</div>
+                        <h3>Percentage Calculator</h3>
+                        <p>
+                            Calculate percentages, marks obtained,
+                            total marks, and percentage-based results.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                    <a class="calculator-card" href="marks-calculator.html" data-search="marks score total academic calculator">
+                        <div class="tool-icon">M</div>
+                        <h3>Marks Calculator</h3>
+                        <p>
+                            Work out your academic scores and totals
+                            from the marks you enter.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                    <a class="calculator-card" href="makaut-calculator.html" data-search="makaut university semester grading calculator">
+                        <div class="tool-icon">U</div>
+                        <h3>MAKAUT Calculator</h3>
+                        <p>
+                            Access a calculator for applicable MAKAUT
+                            academic and grading calculations.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                    <a class="calculator-card" href="engineering-calculator.html" data-search="engineering mathematics scientific numerical calculator">
+                        <div class="tool-icon">∑</div>
+                        <h3>Engineering Calculator</h3>
+                        <p>
+                            Explore mathematical and numerical utilities
+                            for engineering studies.
+                        </p>
+                        <span class="open-tool">
+                            Open Calculator
+                            <span class="tool-arrow" aria-hidden="true">↗</span>
+                        </span>
+                    </a>
+
+                </div>
+
+                <div class="no-results" id="noResults" aria-live="polite">
+                    No calculators found. Try another search term.
+                </div>
+
+                <p class="tools-disclaimer">
+                    Note: Calculator availability and results depend on each
+                    tool's implementation. Always check important academic
+                    calculations against the applicable official rules.
                 </p>
+
+            </div>
+        </section>
+
+        <!-- DONATIONS -->
+        <section class="section donation-section" id="donations">
+            <div class="container">
+
+                <div class="section-heading center">
+                    <span class="section-label">Community Support</span>
+                    <h2>Help Us Keep Building</h2>
+                    <p>
+                        Voluntary community support can help us work towards
+                        improving educational utilities and the student experience.
+                    </p>
+                </div>
+
+                <div class="donation-layout">
+
+                    <!-- DONATION CARD -->
+                    <article class="donation-card">
+                        <div class="donation-icon" aria-hidden="true">♡</div>
+
+                        <h3>Support EduGM UniTools</h3>
+
+                        <p>
+                            If you find these tools useful and would like to
+                            support the project, you can visit our donation
+                            form and follow the instructions provided there.
+                        </p>
+
+                        <a
+                            class="donate-button"
+                            href="https://forms.gle/zn6iFJGWES5Y5KC97"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Visit Donation Form <span aria-hidden="true">↗</span>
+                        </a>
+
+                        <p class="small-note">
+                            Donations are voluntary. Submitting a form does not
+                            by itself confirm that a payment has been received.
+                            Please verify all payment details before making a donation.
+                        </p>
+                    </article>
+
+                    <!-- DONOR LIST -->
+                    <article class="donor-card">
+                        <h3>Donation Supporters</h3>
+
+                        <p>
+                            We appreciate everyone who chooses to support
+                            the project. Public supporter details should be
+                            added only after donations are confirmed and
+                            permission to publish the information is obtained.
+                        </p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sl. No.</th>
+                                        <th scope="col">Supporter</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Message</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="donorTable">
+                                    <tr>
+                                        <td colspan="4">
+                                            <div class="donor-empty">
+                                                <strong>Thank you for your support!</strong>
+                                                Confirmed public supporter
+                                                entries will appear here when available.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="small-note">
+                            Supporter information is not collected or updated
+                            automatically by this static webpage.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT EDU GM -->
+        <section class="about-strip" id="about">
+            <div class="container">
+                <div class="about-panel">
+
+                    <div>
+                        <span class="section-label">About EduGM UniTools</span>
+
+                        <h2>Built around student needs.</h2>
+
+                        <p>
+                            EduGM UniTools is an educational utility project
+                            focused on making academic calculations easier to
+                            access. Our aim is to offer clear interfaces,
+                            practical features, and a convenient experience
+                            across different screen sizes. We continue to
+                            improve the platform as the project grows.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="about.html" class="button button-primary">
+                                Learn About Us ↗
+                            </a>
+
+                            <a href="founder.html" class="button button-secondary">
+                                Meet the Founder
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="about-symbol" aria-hidden="true">E</div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUGM × CODEBIHIN -->
+        <section class="brand-section">
+            <div class="container">
+
+                <div class="brand-panel">
+                    <div class="brand-inner">
+
+                        <div class="brand-heading">
+                            <span class="section-label">Connected by Technology</span>
+
+                            <h2>EduGM UniTools × CodeBihin</h2>
+
+                            <p>
+                                EduGM UniTools is associated with the CodeBihin
+                                brand. This connection represents a shared
+                                interest in developing practical digital
+                                experiences and useful online tools.
+                            </p>
+                        </div>
+
+                        <div class="brand-pair">
+
+                            <div class="brand-tile">
+                                <div class="brand-logo" aria-hidden="true">E</div>
+                                <div>
+                                    <strong>EduGM UniTools</strong>
+                                    <small>Academic Tools & Utilities</small>
+                                </div>
+                            </div>
+
+                            <div class="brand-cross" aria-label="Connected with">×</div>
+
+                            <div class="brand-tile">
+                                <div class="brand-logo codebihin" aria-hidden="true">C</div>
+                                <div>
+                                    <strong>CodeBihin</strong>
+                                    <small>Technology & Development</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <p class="brand-note">
+                            EduGM UniTools × CodeBihin · Building useful digital experiences.
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div>
+                    <a class="brand" href="index.html">
+                        <span class="brand-icon">E</span>
+                        <span class="brand-text">
+                            EduGM <span>UniTools</span>
+                            <small>Learn · Calculate · Grow</small>
+                        </span>
+                    </a>
+
+                    <p class="footer-description">
+                        Educational calculators and student utilities designed
+                        to make everyday academic tasks easier.
+                    </p>
+                </div>
+
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="index.html">Home</a>
+                    <a href="#calculators">Tools</a>
+                    <a href="about.html">About</a>
+                    <a href="founder.html">Founder</a>
+                    <a href="contact.html">Contact Us</a>
+                    <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
+                        Privacy Policy
+                    </a>
+                    <a href="#donations">Support Us</a>
+                </nav>
+
+            </div>
+
+            <div class="footer-bottom">
+                <span>
+                    © <span id="currentYear">2026</span> EduGM UniTools. All rights reserved.
+                </span>
+
+                <span>
+                    Maintained and developed by <strong>CodeBihin</strong>
+                </span>
+
+                <span>
+                    <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+                </span>
             </div>
 
         </div>
-    </div>
-</section>
+    </footer>
 
-<!-- FOOTER -->
-<footer>
-    <div class="container">
+    <!-- BACK TO TOP -->
+    <button
+        class="back-to-top"
+        id="backToTop"
+        type="button"
+        aria-label="Back to top"
+        title="Back to top">
+        ↑
+    </button>
 
-        <div class="footer-brand">
-            EduGM <span>UniTools</span>
-        </div>
+    <script>
+        // Current copyright year
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
 
-        <p class="footer-note">
-            Educational calculators and academic tools for students.
-        </p>
+        // Search and filter calculator cards
+        const searchInput = document.getElementById("toolSearch");
+        const calculatorCards = Array.from(
+            document.querySelectorAll(".calculator-card")
+        );
+        const noResults = document.getElementById("noResults");
 
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="founder.html">Founder</a>
-            <a href="contact.html">Contact Us</a>
-            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
-                Privacy Policy
-            </a>
-        </nav>
+        searchInput.addEventListener("input", function () {
+            const query = this.value.trim().toLowerCase();
+            let visibleCount = 0;
 
-        <p class="footer-note">
-            &copy; 2026 EduGM UniTools. All rights reserved.
-        </p>
+            calculatorCards.forEach(function (card) {
+                const searchableText = (
+                    card.innerText + " " + (card.dataset.search || "")
+                ).toLowerCase();
 
-        <p class="footer-note">
-            Owned and operated by EduGM.
-        </p>
+                const matches = searchableText.includes(query);
 
-        <p class="footer-note">
-            Maintained and developed by <strong>CodeBihin</strong>.
-        </p>
+                card.hidden = !matches;
 
-        <p class="footer-note">
-            Contact:
-            <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>
-        </p>
+                if (matches) {
+                    visibleCount++;
+                }
+            });
 
-    </div>
-</footer>
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+        });
+
+        // Back-to-top button
+        const backToTop = document.getElementById("backToTop");
+
+        function updateBackToTop() {
+            backToTop.classList.toggle("visible", window.scrollY > 350);
+        }
+
+        window.addEventListener("scroll", updateBackToTop, {
+            passive: true
+        });
+
+        updateBackToTop();
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 
 </body>
 </html>
