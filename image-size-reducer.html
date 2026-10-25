@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6546e8">
+<meta name="description" content="Resize, crop, and compress photos for exam applications with EduGM UniTools Image Size Reducer.">
+<title>Image Size Reducer & Crop Tool | EduGM UniTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#6546e8;--primary2:#4f35c8;--ink:#182033;--muted:#667085;--line:#e8eaf2;--bg:#f7f8fc;--card:#fff;--green:#14804a;--red:#b42318;--shadow:0 12px 35px rgba(28,31,58,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select{font:inherit}.container{width:min(1200px,92%);margin:auto}
+header{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.5px}.brand-icon{width:39px;height:39px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#7958f4,#4f46e5);border-radius:13px;box-shadow:0 7px 16px #6546e833}.brand small{display:block;font-size:10px;letter-spacing:.3px;color:var(--muted);font-weight:600}.nav-links{display:flex;gap:7px;flex-wrap:wrap}.nav-links a{padding:9px 12px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:700}.nav-links a:hover{background:#f0edff;color:var(--primary)}
+.hero{text-align:center;padding:48px 0 38px;background:radial-gradient(ellipse at top,#eee9ff 0%,#f7f8fc 70%);border-bottom:1px solid var(--line)}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #e1dafd;background:#fff;border-radius:99px;padding:7px 12px;color:var(--primary);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}.dot{width:7px;height:7px;background:#22c55e;border-radius:50%}.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.12;letter-spacing:-2px;margin:17px 0 12px}.gradient{color:var(--primary)}.hero p{max-width:680px;margin:auto;color:var(--muted);font-size:15px}.trust{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:20px;color:#475467;font-size:12px;font-weight:700}.trust span{display:flex;gap:6px;align-items:center}.trust b{color:var(--green)}
+main{padding:30px 0 50px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;align-items:start}.panel,.side-card,.faq{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.panel{padding:26px}.panel h2{margin:0;font-size:21px;letter-spacing:-.6px}.muted{color:var(--muted);font-size:13px;margin:6px 0 20px}.upload{border:2px dashed #d7d0fb;background:#faf9ff;border-radius:16px;min-height:170px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;cursor:pointer;transition:.2s}.upload:hover,.upload.drag{border-color:var(--primary);background:#f4f1ff}.upload-icon{width:48px;height:48px;border-radius:15px;background:#ebe6ff;color:var(--primary);display:grid;place-items:center;font-size:24px;margin-bottom:10px}.upload strong{font-size:15px}.upload span{font-size:12px;color:var(--muted);margin-top:5px}#fileInput{display:none}.file-info{display:none;margin-top:12px;padding:11px 13px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;font-size:12px;justify-content:space-between;gap:12px;align-items:center}.file-info.show{display:flex}.text-btn{border:0;background:transparent;color:var(--red);font-weight:800;cursor:pointer}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}.field input,.field select{width:100%;border:1px solid #dfe2eb;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--primary);box-shadow:0 0 0 3px #6546e81a}.field small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.full{grid-column:1/-1}.inline-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check-row{display:flex;align-items:center;gap:9px;font-size:12px;color:#475467;margin-top:12px}.check-row input{accent-color:var(--primary)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:11px;padding:12px 17px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .15s,background .15s}.btn:active{transform:scale(.98)}.primary{background:var(--primary);color:#fff;box-shadow:0 7px 16px #6546e82b}.primary:hover{background:var(--primary2)}.secondary{background:#f0edff;color:var(--primary)}.btn:disabled{opacity:.45;cursor:not-allowed}.status{display:none;margin-top:15px;padding:12px 14px;border-radius:11px;font-size:12px}.status.show{display:block}.status.info{background:#f1f5ff;color:#3449a1}.status.success{background:#ecfdf3;color:#067647}.status.error{background:#fff1f0;color:#b42318}
+.preview-wrap{display:none;margin-top:22px;border-top:1px solid var(--line);padding-top:20px}.preview-wrap.show{display:block}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.preview-head h3{margin:0;font-size:16px}.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}.preview-card{background:#f8f9fc;border:1px solid var(--line);border-radius:13px;padding:12px;min-width:0}.preview-card strong{display:block;font-size:11px;margin-bottom:8px}.preview-card img{display:block;width:100%;height:220px;object-fit:contain;background:linear-gradient(45deg,#f1f2f6 25%,transparent 25%),linear-gradient(-45deg,#f1f2f6 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#f1f2f6 75%),linear-gradient(-45deg,transparent 75%,#f1f2f6 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;border-radius:8px}.preview-meta{font-size:11px;color:var(--muted);margin-top:8px}.output-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:13px;padding:13px;background:#f0fbf5;border-radius:12px}.output-row p{margin:0;font-size:12px;color:#17603a}.side{display:grid;gap:16px}.side-card{padding:20px}.side-card h3{margin:0 0 6px;font-size:16px}.side-card>p{font-size:11px;color:var(--muted);margin:0 0 13px}.preset-search{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;margin-bottom:10px}.preset-list{display:grid;gap:8px;max-height:480px;overflow:auto;padding-right:3px}.preset{border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;padding:11px;cursor:pointer;transition:.18s;width:100%}.preset:hover,.preset.active{border-color:#a99af8;background:#f8f6ff}.preset-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.preset-name{font-size:12px;font-weight:800}.preset-tag{font-size:9px;font-weight:800;color:var(--primary);background:#eee9ff;border-radius:99px;padding:3px 6px}.preset-detail{font-size:10px;color:var(--muted);margin-top:4px}.note{background:#fffbeb;border:1px solid #f6e6a9;border-radius:12px;padding:12px;font-size:11px;color:#805b00;line-height:1.5}.faq{margin-top:22px;padding:24px}.faq h2{font-size:19px;margin:0 0 12px}.faq details{border-top:1px solid var(--line);padding:13px 0;font-size:13px}.faq summary{cursor:pointer;font-weight:800}.faq details p{color:var(--muted);font-size:12px;margin-bottom:0}
+footer{border-top:1px solid var(--line);background:#fff;padding:28px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.footer-copy{font-size:11px;color:var(--muted);margin-top:6px}.footer-links{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted)}.footer-bottom{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.preset-list{max-height:360px}}@media(max-width:600px){.nav{padding:12px 0;flex-direction:column}.nav-links{justify-content:center}.nav-links a{font-size:11px;padding:7px}.hero{padding:37px 0 30px}.hero h1{letter-spacing:-1.2px}.hero p{font-size:13px}.panel{padding:17px}.controls{grid-template-columns:1fr}.full{grid-column:auto}.side{grid-template-columns:1fr}.preview-grid{grid-template-columns:1fr}.preview-card img{height:190px}.trust{gap:10px;font-size:10px}.faq{padding:18px}.footer-inner{align-items:flex-start;flex-direction:column}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="brand" href="index.html"><span class="brand-icon">EG</span><span>EduGM <span class="gradient">UniTools</span><small>Learn · Calculate · Grow</small></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#calculators">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+</div></header>
+<section class="hero"><div class="container">
+<div class="eyebrow"><span class="dot"></span> Free Image Utility</div>
+<h1>Image Size <span class="gradient">Reducer</span></h1>
+<p>Resize, crop and compress photos for exam applications, forms and online uploads. Choose an exam preset or enter your own dimensions.</p>
+<div class="trust"><span><b>✓</b> Browser-based processing</span><span><b>✓</b> Crop & resize</span><span><b>✓</b> JPG, PNG, WebP</span><span><b>✓</b> No account required</span></div>
+</div></section>
+<main><div class="container">
+<div class="layout">
+<section class="panel">
+<h2>Resize and crop your image</h2><p class="muted">Select an image, choose a preset from the right, then preview and download.</p>
+<label class="upload" id="dropZone" for="fileInput"><span class="upload-icon">↥</span><strong>Choose an image or drop it here</strong><span>JPG, JPEG, PNG or WebP · Recommended maximum 20 MB</span><span class="btn secondary" style="margin-top:12px">Browse image</span></label>
+<input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+<div class="file-info" id="fileInfo"><span id="fileName"></span><button class="text-btn" id="removeFile" type="button">Remove</button></div>
+<div class="controls">
+<div class="field full"><label for="presetSelect">Exam / image preset</label><select id="presetSelect"><option value="custom">Custom dimensions</option></select><small>Presets are starting points, not a guarantee of current official exam requirements.</small></div>
+<div class="field"><label for="width">Output width (px)</label><input id="width" type="number" min="1" max="8000" value="413"></div>
+<div class="field"><label for="height">Output height (px)</label><input id="height" type="number" min="1" max="8000" value="531"></div>
+<div class="field"><label for="format">Output format</label><select id="format"><option value="image/jpeg">JPG (smaller file)</option><option value="image/webp">WebP (often smaller)</option><option value="image/png">PNG (supports transparency)</option></select></div>
+<div class="field"><label for="quality">Image quality: <span id="qualityValue">82%</span></label><input id="quality" type="range" min="35" max="100" value="82"><small>Quality affects JPG/WebP; PNG is lossless.</small></div>
+<div class="field full"><label for="cropMode">Fit / crop mode</label><select id="cropMode"><option value="cover">Fill frame (crop edges to fit)</option><option value="contain">Fit whole image (may add background)</option><option value="stretch">Stretch to exact dimensions</option></select></div>
+<div class="field full"><label for="background">Background for fit mode</label><select id="background"><option value="#ffffff">White</option><option value="#f3f4f6">Light grey</option><option value="#000000">Black</option></select></div>
+<div class="field full"><label for="filename">Download filename</label><input id="filename" type="text" value="edugm-resized-image" maxlength="90"></div>
+</div>
+<label class="check-row"><input type="checkbox" id="keepRatio" checked> Keep dimensions linked when I edit width or height</label>
+<div class="actions"><button class="btn primary" id="processBtn" disabled>Resize & Reduce Image</button><button class="btn secondary" id="resetBtn" type="button">Reset settings</button></div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<div class="preview-wrap" id="previewWrap">
+<div class="preview-head"><h3>Your image preview</h3><span class="muted" style="margin:0">Check before downloading</span></div>
+<div class="preview-grid">
+<div class="preview-card"><strong>Original image</strong><img id="originalPreview" alt="Original image preview"><div class="preview-meta" id="originalMeta"></div></div>
+<div class="preview-card"><strong>Resized output</strong><img id="outputPreview" alt="Resized image preview"><div class="preview-meta" id="outputMeta"></div></div>
+</div>
+<div class="output-row"><p id="resultInfo">Your resized image is ready.</p><button class="btn primary" id="downloadBtn" type="button">Download image ↓</button></div>
+</div>
+</section>
+<aside class="side">
+<section class="side-card"><h3>🎓 Exam image-size suggestions</h3><p>Search and click a preset to fill dimensions and crop settings.</p><input class="preset-search" id="presetSearch" type="search" placeholder="Search NEET, JEE, WBJEE..." aria-label="Search exam presets"><div class="preset-list" id="presetList"></div></section>
+<section class="side-card"><h3>Before you upload</h3><p>Quick checks to avoid application-form errors.</p><div class="note"><strong>Important:</strong> Exam rules can change each year and may specify file size in KB, pixel dimensions, aspect ratio, background, signature format or a live photograph. Always check the current official information bulletin. These presets are editable suggestions only.</div><p style="margin-top:13px">• Keep the face clear and centered for photo uploads.<br>• Do not crop out required edges of a signature.<br>• Check both pixel dimensions and KB/MB limits.<br>• Save the original image before replacing it.</p></section>
+</aside>
+</div>
+<section class="faq"><h2>Frequently asked questions</h2>
+<details><summary>Does this tool upload my photo?</summary><p>No. Resizing and compression happen in your browser. The page loads its font from Google Fonts, but the selected image is not sent to an EduGM server by this tool.</p></details>
+<details><summary>Are exam presets official?</summary><p>No. Exam authorities may change requirements by year, post, or application stage. Presets are editable starting points. Verify the current official notification before submitting.</p></details>
+<details><summary>Can I reduce the image file size to a specific KB limit?</summary><p>Lower JPG/WebP quality and smaller dimensions usually reduce file size, but the final size depends on the image. Check the downloaded file size against the portal's limit. PNG compression may not reduce size as much.</p></details>
+<details><summary>What does crop mode do?</summary><p>Fill frame crops the edges to fill the chosen dimensions. Fit whole image keeps all of the photo visible and may show a background. Stretch fills the exact dimensions but can distort the image.</p></details>
+</section>
+</div></main>
+<footer><div class="container"><div class="footer-inner"><div><a class="brand" href="index.html"><span class="brand-icon">EG</span><span>EduGM UniTools</span></a><div class="footer-copy">Simple and useful educational calculators and academic tools.</div></div><nav class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a></nav></div><div class="footer-bottom"><span>© <span id="year"></span> EduGM UniTools. All rights reserved.</span><span>Owned by EduGM · Developed and maintained by CodeBihin</span></div></div></footer>
+<script>
+"use strict";
+(() => {
+const $ = id => document.getElementById(id);
+const presets = [
+{name:"NEET UG — Photograph",group:"Medical",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · verify current bulletin"},
+{name:"NEET UG — Signature",group:"Medical",w:400,h:200,mode:"contain",note:"Signature suggestion · verify current bulletin"},
+{name:"JEE Main — Photograph",group:"Engineering",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · verify current bulletin"},
+{name:"JEE Main — Signature",group:"Engineering",w:400,h:200,mode:"contain",note:"Signature suggestion · verify current bulletin"},
+{name:"JEE Advanced — Photograph",group:"Engineering",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · verify current bulletin"},
+{name:"JEE Advanced — Signature",group:"Engineering",w:400,h:200,mode:"contain",note:"Signature suggestion · verify current bulletin"},
+{name:"WBJEE — Photograph",group:"West Bengal",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check WBJEE bulletin"},
+{name:"WBJEE — Signature",group:"West Bengal",w:400,h:200,mode:"contain",note:"Signature suggestion · check WBJEE bulletin"},
+{name:"CUET UG — Photograph",group:"Entrance exams",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · verify current bulletin"},
+{name:"CUET UG — Signature",group:"Entrance exams",w:400,h:200,mode:"contain",note:"Signature suggestion · verify current bulletin"},
+{name:"GATE — Photograph",group:"Entrance exams",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · verify current bulletin"},
+{name:"GATE — Signature",group:"Entrance exams",w:400,h:200,mode:"contain",note:"Signature suggestion · verify current bulletin"},
+{name:"CAT — Photograph",group:"Management",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check CAT instructions"},
+{name:"CAT — Signature",group:"Management",w:400,h:200,mode:"contain",note:"Signature suggestion · check CAT instructions"},
+{name:"UPSC / Civil Services — Photo",group:"Government exams",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check application rules"},
+{name:"SSC — Photograph",group:"Government exams",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check current notice"},
+{name:"SSC — Signature",group:"Government exams",w:400,h:200,mode:"contain",note:"Signature suggestion · check current notice"},
+{name:"IBPS / Banking — Photograph",group:"Banking",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check current notice"},
+{name:"IBPS / Banking — Signature",group:"Banking",w:400,h:200,mode:"contain",note:"Signature suggestion · check current notice"},
+{name:"RRB / Railway — Photograph",group:"Government exams",w:413,h:531,mode:"cover",note:"Portrait photo suggestion · check current notice"},
+{name:"Passport-style photo",group:"General",w:413,h:531,mode:"cover",note:"General portrait ratio only; not an official passport standard"},
+{name:"Square profile photo",group:"General",w:600,h:600,mode:"cover",note:"General-purpose square image"},
+{name:"Document signature",group:"General",w:600,h:300,mode:"contain",note:"General wide signature canvas"}
+];
+let sourceFile=null,sourceUrl=null,outputBlob=null,outputUrl=null,sourceImage=null,ratio=413/531;
+const fileInput=$("fileInput"),dropZone=$("dropZone"),widthInput=$("width"),heightInput=$("height");
+const presetSelect=$("presetSelect"),cropMode=$("cropMode"),status=$("status");
+$("year").textContent=new Date().getFullYear();
+function populatePresets(){
+ presets.forEach((p,i)=>{const opt=document.createElement("option");opt.value=String(i);opt.textContent=p.name;presetSelect.appendChild(opt)});
+ renderPresets(presets);
+}
+function renderPresets(items){
+ const list=$("presetList");list.replaceChildren();
+ if(!items.length){const p=document.createElement("p");p.className="muted";p.textContent="No matching presets.";list.appendChild(p);return}
+ items.forEach(p=>{
+  const index=presets.indexOf(p),b=document.createElement("button");b.type="button";b.className="preset"+(presetSelect.value===String(index)?" active":"");
+  const top=document.createElement("div");top.className="preset-top";
+  const name=document.createElement("span");name.className="preset-name";name.textContent=p.name;
+  const tag=document.createElement("span");tag.className="preset-tag";tag.textContent=p.group;
+  const detail=document.createElement("div");detail.className="preset-detail";detail.textContent=`Suggested ${p.w} × ${p.h} px · ${p.note}`;
+  top.append(name,tag);b.append(top,detail);b.addEventListener("click",()=>applyPreset(index));list.appendChild(b);
+ });
+}
+function applyPreset(index){
+ const p=presets[index];presetSelect.value=String(index);widthInput.value=p.w;heightInput.value=p.h;ratio=p.w/p.h;cropMode.value=p.mode;$("keepRatio").checked=true;renderPresets(filteredPresets());if(sourceImage)processImage();
+}
+function filteredPresets(){const q=$("presetSearch").value.trim().toLowerCase();return presets.filter(p=>(p.name+" "+p.group+" "+p.note).toLowerCase().includes(q))}
+function showStatus(message,type="info"){status.textContent=message;status.className="status show "+type}
+function clearStatus(){status.textContent="";status.className="status"}
+function formatBytes(n){if(n<1024)return n+" B";if(n<1048576)return (n/1024).toFixed(1)+" KB";return (n/1048576).toFixed(2)+" MB"}
+function cleanName(s){return (s||"edugm-resized-image").replace(/\.[^.]+$/,"").replace(/[<>:"/\\|?*\x00-\x1F]/g,"-").trim().slice(0,90)||"edugm-resized-image"}
+function clearOutput(){if(outputUrl)URL.revokeObjectURL(outputUrl);outputUrl=null;outputBlob=null;$("previewWrap").classList.remove("show")}
+function clearSource(){if(sourceUrl)URL.revokeObjectURL(sourceUrl);sourceUrl=null;sourceFile=null;sourceImage=null;fileInput.value="";$("fileInfo").classList.remove("show");$("processBtn").disabled=true;clearOutput();clearStatus()}
+function loadFile(file){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp|gif)$/.test(file.type)){showStatus("Please choose a JPG, PNG, WebP or GIF image.","error");return}
+ if(file.size>20*1024*1024){showStatus("This image is over 20 MB. Choose a smaller file for smoother processing.","error");return}
+ clearSource();sourceFile=file;sourceUrl=URL.createObjectURL(file);const img=new Image();
+ img.onload=()=>{sourceImage=img;ratio=img.naturalWidth/img.naturalHeight;$("fileName").textContent=`${file.name} · ${img.naturalWidth} × ${img.naturalHeight}px · ${formatBytes(file.size)}`;$("fileInfo").classList.add("show");$("processBtn").disabled=false;$("originalPreview").src=sourceUrl;$("originalMeta").textContent=`${img.naturalWidth} × ${img.naturalHeight}px · ${formatBytes(file.size)}`;$("filename").value=cleanName(file.name)+"-resized";clearStatus();processImage()};
+ img.onerror=()=>{clearSource();showStatus("The image could not be opened. Please try another file.","error")};img.src=sourceUrl;
+}
+function canvasBlob(canvas,type,quality){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("Could not encode image. Try JPG or WebP.")),type,quality))}
+async function processImage(){
+ if(!sourceImage)return;
+ const w=Number(widthInput.value),h=Number(heightInput.value);
+ if(!Number.isInteger(w)||!Number.isInteger(h)||w<1||h<1||w>8000||h>8000){showStatus("Enter width and height from 1 to 8000 pixels.","error");return}
+ $("processBtn").disabled=true;$("processBtn").textContent="Processing…";clearOutput();
+ try{
+  // Draw at requested dimensions; source remains local to this browser.
+  const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;const ctx=canvas.getContext("2d",{alpha:$("format").value==="image/png"});
+  const bg=$("background").value;ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const sw=sourceImage.naturalWidth,sh=sourceImage.naturalHeight,mode=cropMode.value;
+  if(mode==="stretch"){ctx.drawImage(sourceImage,0,0,w,h)}
+  else{
+   const scale=mode==="cover"?Math.max(w/sw,h/sh):Math.min(w/sw,h/sh);
+   const dw=sw*scale,dh=sh*scale,dx=(w-dw)/2,dy=(h-dh)/2;ctx.drawImage(sourceImage,dx,dy,dw,dh);
+  }
+  const type=$("format").value,quality=Number($("quality").value)/100;
+  outputBlob=await canvasBlob(canvas,type,quality);outputUrl=URL.createObjectURL(outputBlob);
+  $("outputPreview").src=outputUrl;$("outputMeta").textContent=`${w} × ${h}px · ${formatBytes(outputBlob.size)} · ${type.split("/")[1].toUpperCase()}`;
+  const diff=sourceFile.size?((1-outputBlob.size/sourceFile.size)*100):0;
+  $("resultInfo").textContent=diff>=0?`${formatBytes(outputBlob.size)} · ${Math.max(0,diff).toFixed(1)}% smaller than original`:`${formatBytes(outputBlob.size)} · output is ${Math.abs(diff).toFixed(1)}% larger`;
+  $("previewWrap").classList.add("show");showStatus("Image processed successfully. Review the preview, then download it.","success");
+ }catch(e){showStatus(e.message||"Could not process this image.","error")}
+ finally{$("processBtn").disabled=!sourceImage;$("processBtn").textContent="Resize & Reduce Image"}
+}
+fileInput.addEventListener("change",e=>loadFile(e.target.files&&e.target.files[0]));
+$("removeFile").addEventListener("click",clearSource);
+["dragenter","dragover"].forEach(t=>dropZone.addEventListener(t,e=>{e.preventDefault();dropZone.classList.add("drag")}));
+["dragleave","drop"].forEach(t=>dropZone.addEventListener(t,e=>{e.preventDefault();dropZone.classList.remove("drag")}));
+dropZone.addEventListener("drop",e=>loadFile(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]));
+$("quality").addEventListener("input",()=>{$("qualityValue").textContent=$("quality").value+"%";if(sourceImage)processImage()});
+widthInput.addEventListener("change",()=>{if($("keepRatio").checked&&Number(widthInput.value)>0)heightInput.value=Math.max(1,Math.round(Number(widthInput.value)/ratio));if(sourceImage)processImage()});
+heightInput.addEventListener("change",()=>{if($("keepRatio").checked&&Number(heightInput.value)>0)widthInput.value=Math.max(1,Math.round(Number(heightInput.value)*ratio));if(sourceImage)processImage()});
+["format","cropMode","background"].forEach(id=>$(id).addEventListener("change",()=>{if(sourceImage)processImage()}));
+presetSelect.addEventListener("change",()=>{if(presetSelect.value==="custom"){renderPresets(filteredPresets());return}applyPreset(Number(presetSelect.value))});
+$("presetSearch").addEventListener("input",()=>renderPresets(filteredPresets()));
+$("processBtn").addEventListener("click",processImage);
+$("resetBtn").addEventListener("click",()=>{presetSelect.value="custom";widthInput.value=413;heightInput.value=531;ratio=413/531;cropMode.value="cover";$("format").value="image/jpeg";$("quality").value=82;$("qualityValue").textContent="82%";$("background").value="#ffffff";$("keepRatio").checked=true;$("filename").value="edugm-resized-image";renderPresets(filteredPresets());if(sourceImage)processImage();else clearStatus()});
+$("downloadBtn").addEventListener("click",()=>{if(!outputBlob||!outputUrl)return;const ext=$("format").value==="image/jpeg"?"jpg":$("format").value.split("/")[1];const a=document.createElement("a");a.href=outputUrl;a.download=cleanName($("filename").value)+"."+ext;document.body.appendChild(a);a.click();a.remove()});
+populatePresets();
+})();
+</script>
+</body>
+</html>
