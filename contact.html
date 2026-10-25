@@ -4,220 +4,852 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6546e8">
 
     <title>Contact Us | EduGM UniTools</title>
-    <meta name="description" content="Contact EduGM UniTools for support, feedback, suggestions and enquiries.">
+    <meta name="description" content="Contact EduGM UniTools for support, feedback, suggestions, and enquiries about our educational calculators and academic tools.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #6546e8;
+            --primary-dark: #4f32c8;
+            --primary-light: #f0edff;
+            --text: #19172a;
+            --muted: #77758b;
+            --border: #e9e7f2;
+            --surface: #ffffff;
+            --background: #f8f7fc;
+            --success: #168653;
+            --shadow: 0 20px 60px rgba(48, 34, 100, 0.08);
+            --radius: 22px;
+        }
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #171717;
+            font-family: "Inter", Arial, sans-serif;
+            color: var(--text);
+            background: var(--background);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 18px 6%;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .header-container {
-            max-width: 1100px;
-            margin: auto;
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button,
+        a,
+        input,
+        textarea {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid rgba(101, 70, 232, 0.35);
+            outline-offset: 4px;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin-inline: auto;
+        }
+
+        /* Navigation */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.91);
+            border-bottom: 1px solid rgba(233, 231, 242, 0.9);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .header-inner {
+            min-height: 78px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 28px;
         }
 
         .brand {
-            color: #111827;
-            font-size: 23px;
-            font-weight: bold;
-            text-decoration: none;
-            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            flex-shrink: 0;
         }
 
-        .brand span {
-            font-weight: normal;
+        .brand-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: white;
+            background: linear-gradient(135deg, #8469ff, #5635d4);
+            box-shadow: 0 7px 18px rgba(101, 70, 232, 0.25);
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        nav {
+        .brand-name {
+            display: block;
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.6px;
+        }
+
+        .brand-name span {
+            color: var(--primary);
+        }
+
+        .brand-tagline {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .main-nav {
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px 22px;
+            align-items: center;
+            gap: 7px;
         }
 
-        nav a {
-            color: #333333;
-            text-decoration: none;
-            font-size: 14px;
+        .main-nav a {
+            padding: 10px 13px;
+            border-radius: 10px;
+            color: #666379;
+            font-size: 13px;
             font-weight: 600;
+            transition: color 0.2s, background 0.2s;
         }
 
-        nav a:hover,
-        nav a.active {
-            text-decoration: underline;
-            text-underline-offset: 5px;
+        .main-nav a:hover {
+            color: var(--primary);
+            background: var(--primary-light);
         }
+
+        .main-nav a.active {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .main-nav .nav-cta {
+            margin-left: 5px;
+            padding: 11px 17px;
+            color: #fff;
+            background: var(--primary);
+        }
+
+        .main-nav .nav-cta:hover {
+            color: #fff;
+            background: var(--primary-dark);
+        }
+
+        /* Hero */
 
         .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 20px 76px;
             text-align: center;
-            padding: 40px 20px 25px;
-            background: #fafafa;
-            border-bottom: 1px solid #eeeeee;
+            background:
+                radial-gradient(ellipse at 15% 15%, rgba(180, 160, 255, 0.25), transparent 38%),
+                radial-gradient(ellipse at 90% 85%, rgba(202, 190, 255, 0.28), transparent 35%),
+                linear-gradient(145deg, #ffffff, #f3f0ff);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(101, 70, 232, 0.12);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 280px;
+            height: 280px;
+            top: -175px;
+            right: 8%;
+        }
+
+        .hero::after {
+            width: 190px;
+            height: 190px;
+            bottom: -125px;
+            left: 9%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 7px 13px;
+            border: 1px solid #e4ddff;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px rgba(101, 70, 232, 0.1);
         }
 
         .hero h1 {
-            margin: 0 0 8px;
-            font-size: 32px;
+            margin-bottom: 16px;
+            font-size: clamp(35px, 5vw, 53px);
+            line-height: 1.13;
+            letter-spacing: -2.4px;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            color: var(--primary);
+            background: linear-gradient(100deg, #7855f5, #4e30c4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            margin: 0;
-            color: #666666;
+            max-width: 580px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.9;
         }
 
+        /* Contact layout */
+
         main {
-            max-width: 850px;
-            margin: 35px auto 50px;
-            padding: 0 20px;
+            padding: 60px 0 82px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+            align-items: start;
+            gap: 28px;
+        }
+
+        .contact-card,
+        .info-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
         }
 
         .contact-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 28px;
-            background: #ffffff;
+            padding: 36px;
         }
 
-        .contact-card h2 {
-            margin-top: 0;
-            font-size: 23px;
+        .section-label {
+            margin-bottom: 9px;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .contact-card h2,
+        .info-heading {
+            font-size: 25px;
+            line-height: 1.35;
+            font-weight: 800;
+            letter-spacing: -0.8px;
         }
 
         .description {
-            color: #666666;
-            margin-bottom: 25px;
+            margin: 12px 0 28px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 19px;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            min-width: 0;
+            margin-bottom: 19px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
 
         label {
             display: block;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
+            color: #333047;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .required {
+            color: #e34c69;
         }
 
         input,
         textarea {
+            display: block;
             width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 7px;
-            font: inherit;
-            font-size: 15px;
-            background: #ffffff;
-            color: #171717;
-            outline: none;
+            border: 1px solid #e5e2ef;
+            border-radius: 12px;
+            padding: 13px 15px;
+            color: var(--text);
+            background: #fcfbff;
+            font-size: 13px;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        input {
+            min-height: 49px;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #a19eb2;
+        }
+
+        input:hover,
+        textarea:hover {
+            border-color: #cfc5ff;
         }
 
         input:focus,
         textarea:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(101, 70, 232, 0.09);
         }
 
         textarea {
-            min-height: 150px;
+            min-height: 155px;
             resize: vertical;
+            line-height: 1.8;
         }
 
-        button {
+        .form-hint {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 7px;
+            color: #9692a7;
+            font-size: 10px;
+        }
+
+        .submit-button {
             width: 100%;
-            padding: 13px 18px;
-            background: #111827;
-            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            min-height: 53px;
+            margin-top: 4px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 7px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 12px;
+            color: white;
+            background: linear-gradient(110deg, #7654f2, #5938d3);
+            box-shadow: 0 8px 20px rgba(101, 70, 232, 0.2);
+            font-size: 13px;
+            font-weight: 800;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        button:hover {
-            background: #2563eb;
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(101, 70, 232, 0.3);
         }
 
-        .email-info {
-            margin-top: 22px;
-            padding: 16px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            background: #fafafa;
-            font-size: 14px;
+        .submit-button:active {
+            transform: translateY(0);
         }
 
-        .email-info a {
-            color: #111827;
-            font-weight: bold;
-            overflow-wrap: anywhere;
+        .submit-button svg {
+            width: 17px;
+            height: 17px;
         }
 
-        footer {
+        .privacy-hint {
+            margin-top: 15px;
+            color: #8a879d;
             text-align: center;
-            padding: 28px 16px;
-            border-top: 1px solid #e5e7eb;
-            background: #fafafa;
+            font-size: 10px;
+            line-height: 1.8;
         }
 
-        .footer-brand {
-            font-weight: bold;
+        .privacy-hint a {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Contact information */
+
+        .info-column {
+            display: grid;
+            gap: 18px;
+        }
+
+        .info-card {
+            padding: 27px;
+        }
+
+        .info-heading {
+            margin-bottom: 9px;
             font-size: 19px;
         }
 
+        .info-description {
+            margin-bottom: 22px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 17px 0;
+            border-top: 1px solid #f0eef6;
+        }
+
+        .contact-method:first-of-type {
+            border-top: 0;
+        }
+
+        .method-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 13px;
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .method-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .method-label {
+            display: block;
+            margin-bottom: 4px;
+            color: #9290a4;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .method-value {
+            display: inline-block;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .method-value:hover {
+            color: var(--primary);
+        }
+
+        .email-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #f8f6ff;
+            color: #77718e;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .support-card {
+            position: relative;
+            overflow: hidden;
+            padding: 27px;
+            border: 1px solid #e6dfff;
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, #f1edff, #fff);
+        }
+
+        .support-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, #8c72ff, #5b39d4);
+            font-size: 21px;
+        }
+
+        .support-card h3 {
+            margin-bottom: 9px;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .support-card p {
+            margin-bottom: 17px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .support-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .support-link:hover {
+            gap: 11px;
+        }
+
+        /* Footer */
+
+        .site-footer {
+            padding: 52px 0 24px;
+            border-top: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
+            gap: 38px;
+            padding-bottom: 36px;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand .brand-icon {
+            width: 39px;
+            height: 39px;
+            border-radius: 12px;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .footer-heading {
+            margin-bottom: 16px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
         .footer-links {
-            justify-content: center;
-            margin: 12px 0;
+            display: grid;
+            justify-items: start;
+            gap: 10px;
         }
 
         .footer-links a {
-            font-weight: normal;
+            color: var(--muted);
+            font-size: 12px;
+            transition: color 0.2s;
         }
 
-        .footer-note {
-            color: #666666;
-            font-size: 13px;
-            margin: 5px 0;
+        .footer-links a:hover {
+            color: var(--primary);
         }
 
-        @media (max-width: 700px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
+        .footer-email {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .brand-partnership {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-top: 20px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #fbfaff;
+        }
+
+        .partnership-brand {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .partnership-brand small {
+            display: block;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        .partnership-cross {
+            color: var(--primary);
+            font-size: 21px;
+            font-weight: 500;
+        }
+
+        .codebihin-mark {
+            color: #242037;
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 23px;
+            border-top: 1px solid #f0eef6;
+        }
+
+        .copyright,
+        .footer-credit {
+            color: #89869b;
+            font-size: 10px;
+        }
+
+        .footer-credit strong {
+            color: var(--text);
+        }
+
+        /* Small interaction feedback */
+
+        .status-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 13px 15px;
+            border: 1px solid #ccebd9;
+            border-radius: 11px;
+            color: var(--success);
+            background: #f1fbf5;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 850px) {
+            .header-inner {
+                gap: 15px;
             }
 
-            nav {
+            .main-nav {
+                gap: 2px;
+            }
+
+            .main-nav a {
+                padding: 9px 10px;
+                font-size: 12px;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .info-column {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-top > div:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: min(100% - 30px, 480px);
+            }
+
+            .header-inner {
+                padding: 13px 0;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .brand {
+                align-self: center;
+            }
+
+            .main-nav {
+                width: 100%;
                 justify-content: center;
-                gap: 12px 17px;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            .main-nav a {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+
+            .main-nav .nav-cta {
+                margin-left: 0;
+            }
+
+            .hero {
+                padding: 57px 18px 52px;
             }
 
             .hero h1 {
-                font-size: 27px;
+                font-size: 37px;
+                letter-spacing: -1.7px;
+            }
+
+            .hero p {
+                font-size: 13px;
+            }
+
+            main {
+                padding: 30px 0 48px;
             }
 
             .contact-card {
-                padding: 20px;
+                padding: 23px 19px;
+                border-radius: 18px;
+            }
+
+            .contact-card h2 {
+                font-size: 23px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .info-column {
+                grid-template-columns: 1fr;
+            }
+
+            .info-card,
+            .support-card {
+                padding: 23px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-top > div:first-child {
+                grid-column: auto;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .brand-partnership {
+                max-width: 310px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
             }
         }
     </style>
@@ -225,167 +857,333 @@
 
 <body>
 
-<header>
-    <div class="header-container">
-        <a class="brand" href="index.html">
-            EduGM <span>UniTools</span>
+<header class="site-header">
+    <div class="container header-inner">
+
+        <a class="brand" href="index.html" aria-label="EduGM UniTools home">
+            <span class="brand-icon" aria-hidden="true">EG</span>
+            <span>
+                <span class="brand-name">EduGM <span>UniTools</span></span>
+                <span class="brand-tagline">Your academic companion</span>
+            </span>
         </a>
 
-        <nav aria-label="Main navigation">
+        <nav class="main-nav" aria-label="Main navigation">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
-            <a class="active" href="contact.html" aria-current="page">Contact Us</a>
-            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
-                Privacy Policy
-            </a>
+            <a href="contact.html" class="active" aria-current="page">Contact</a>
+            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy</a>
+            <a href="index.html" class="nav-cta">Explore Tools ↗</a>
         </nav>
+
     </div>
 </header>
 
 <section class="hero">
-    <h1>Contact Us</h1>
-    <p>We are happy to hear from you.</p>
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            We're here to help
+        </div>
+
+        <h1>Let's start a <span class="gradient-text">conversation.</span></h1>
+
+        <p>
+            Have a question, spotted an issue, or thought of a new feature?
+            Send us a message. Your feedback helps us make EduGM UniTools better.
+        </p>
+
+    </div>
 </section>
 
 <main>
-    <div class="contact-card">
-        <h2>Send Us a Message</h2>
+    <div class="container contact-layout">
 
-        <p class="description">
-            Have a question, suggestion, technical issue, or feedback
-            about EduGM UniTools? Fill in the form below to contact our team.
-        </p>
+        <!-- Contact form -->
+        <section class="contact-card" aria-labelledby="form-title">
 
-        <form id="contactForm">
+            <div class="section-label">Get in touch</div>
+            <h2 id="form-title">Send us a message</h2>
 
-            <div class="form-group">
-                <label for="name">Your Name *</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your full name"
-                    maxlength="100"
-                    autocomplete="name"
-                    required>
-            </div>
+            <p class="description">
+                Fill in the details below. Your email application will open
+                with your message prepared so you can review and send it.
+            </p>
 
-            <div class="form-group">
-                <label for="email">Your Email Address *</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    maxlength="254"
-                    autocomplete="email"
-                    required>
-            </div>
+            <div id="formStatus" class="status-message" role="status" aria-live="polite"></div>
 
-            <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    placeholder="What is your enquiry about?"
-                    maxlength="150"
-                    required>
-            </div>
+            <form id="contactForm">
 
-            <div class="form-group">
-                <label for="message">Your Message *</label>
-                <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Write your message here..."
-                    maxlength="5000"
-                    required></textarea>
-            </div>
+                <div class="form-grid">
 
-            <button type="submit">Send Email</button>
+                    <div class="form-group">
+                        <label for="name">Your name <span class="required">*</span></label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="e.g. Rahul Sharma"
+                            maxlength="100"
+                            autocomplete="name"
+                            required>
+                    </div>
 
-        </form>
+                    <div class="form-group">
+                        <label for="email">Email address <span class="required">*</span></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            maxlength="254"
+                            autocomplete="email"
+                            required>
+                    </div>
 
-        <div class="email-info">
-            <strong>Official Contact Email</strong>
-            <p>
-                <a href="mailto:admin@codebihin.in">
-                    admin@codebihin.in
+                    <div class="form-group full-width">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder="What would you like to discuss?"
+                            maxlength="150"
+                            required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="message">Your message <span class="required">*</span></label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Tell us how we can help..."
+                            maxlength="5000"
+                            required></textarea>
+
+                        <div class="form-hint">
+                            <span>Please don't include passwords or sensitive information.</span>
+                            <span id="charCount">0 / 5000</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <span>Prepare email</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="M22 2 11 13"></path>
+                        <path d="m22 2-7 20-4-9-9-4Z"></path>
+                    </svg>
+                </button>
+
+                <p class="privacy-hint">
+                    By contacting us, please avoid sharing confidential information.
+                    See our <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy Policy</a>.
+                </p>
+
+            </form>
+        </section>
+
+        <!-- Contact information -->
+        <aside class="info-column" aria-label="Contact information">
+
+            <section class="info-card">
+                <div class="section-label">Contact details</div>
+                <h2 class="info-heading">We'd love to hear from you.</h2>
+
+                <p class="info-description">
+                    Choose the best way to reach us for feedback, questions,
+                    technical issues, or suggestions.
+                </p>
+
+                <div class="contact-method">
+                    <div class="method-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                            <path d="m4 7 8 6 8-6"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="method-label">Official email</span>
+                        <a class="method-value" href="mailto:admin@codebihin.in">admin@codebihin.in</a>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <div class="method-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7v5l3 2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="method-label">Response time</span>
+                        <span class="method-value">We'll respond when available</span>
+                    </div>
+                </div>
+
+                <div class="email-note">
+                    Selecting the email address opens your configured email
+                    application. Email delivery depends on your email provider.
+                </div>
+            </section>
+
+            <section class="support-card">
+                <div class="support-icon" aria-hidden="true">✦</div>
+                <h3>Have an idea?</h3>
+                <p>
+                    Suggest a calculator, report an incorrect result, or tell
+                    us how we can improve your learning experience.
+                </p>
+                <a class="support-link" href="#contactForm">
+                    Share your feedback <span aria-hidden="true">→</span>
                 </a>
-            </p>
-            <p>
-                Clicking Send Email opens your configured email application.
-                Please review and send the email from that application.
-            </p>
-        </div>
+            </section>
+
+        </aside>
+
     </div>
 </main>
 
-<footer>
-    <div class="footer-brand">EduGM UniTools</div>
+<footer class="site-footer">
+    <div class="container">
 
-    <p class="footer-note">
-        Educational calculators and academic tools for students.
-    </p>
+        <div class="footer-top">
 
-    <nav class="footer-links" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
-            Privacy Policy
-        </a>
-    </nav>
+            <div>
+                <a class="footer-brand" href="index.html" aria-label="EduGM UniTools home">
+                    <span class="brand-icon" aria-hidden="true">EG</span>
+                    <span>
+                        <span class="brand-name">EduGM <span>UniTools</span></span>
+                        <span class="brand-tagline">Tools for your academic journey</span>
+                    </span>
+                </a>
 
-    <p class="footer-note">
-        &copy; 2026 EduGM UniTools. All rights reserved.
-    </p>
+                <p class="footer-description">
+                    Simple, useful educational calculators and academic tools
+                    designed to make student life easier.
+                </p>
 
-    <p class="footer-note">
-        Owned and operated by EduGM.
-    </p>
+                <div class="brand-partnership" aria-label="EduGM UniTools maintained and developed by CodeBihin">
+                    <div class="partnership-brand">
+                        EduGM UniTools
+                        <small>Educational tools</small>
+                    </div>
 
-    <p class="footer-note">
-        Maintained and developed by <strong>CodeBihin</strong>.
-    </p>
+                    <span class="partnership-cross" aria-hidden="true">×</span>
 
-    <p class="footer-note">
-        Contact: admin@codebihin.in
-    </p>
+                    <div class="partnership-brand codebihin-mark">
+                        CodeBihin
+                        <small>Development & maintenance</small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="footer-heading">Quick links</h3>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About us</a>
+                    <a href="contact.html">Contact us</a>
+                    <a href="index.html">Explore tools</a>
+                    <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">Privacy policy</a>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="footer-heading">Need assistance?</h3>
+                <p class="footer-description">
+                    Questions, feedback, or suggestions? Get in touch with our team.
+                </p>
+                <a class="footer-email" href="mailto:admin@codebihin.in">
+                    admin@codebihin.in ↗
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">
+                &copy; <span id="currentYear">2026</span> EduGM UniTools. All rights reserved.
+            </p>
+
+            <p class="footer-credit">
+                Owned and operated by <strong>EduGM</strong> ·
+                Maintained and developed by <strong>CodeBihin</strong>.
+            </p>
+        </div>
+
+    </div>
 </footer>
 
 <script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
+    "use strict";
+
+    const contactForm = document.getElementById("contactForm");
+    const messageInput = document.getElementById("message");
+    const charCount = document.getElementById("charCount");
+    const formStatus = document.getElementById("formStatus");
+
+    // Keep the footer year up to date.
+    document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+    // Update the message character counter.
+    messageInput.addEventListener("input", function () {
+        charCount.textContent = `${messageInput.value.length} / 5000`;
+    });
+
+    // Prepare an email using the visitor's configured email application.
+    contactForm.addEventListener("submit", function (event) {
         event.preventDefault();
+
+        if (!contactForm.reportValidity()) {
+            return;
+        }
 
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const subject = document.getElementById("subject").value.trim();
-        const message = document.getElementById("message").value.trim();
+        const message = messageInput.value.trim();
 
         if (!name || !email || !subject || !message) {
-            alert("Please fill in all required fields.");
+            formStatus.textContent = "Please complete all required fields.";
+            formStatus.classList.add("show");
             return;
         }
 
         const recipient = "admin@codebihin.in";
 
-        const emailSubject = "[EduGM UniTools] " + subject;
+        const emailSubject = `[EduGM UniTools] ${subject}`;
 
-        const emailBody =
-            "EduGM UniTools Contact Form Message\n\n" +
-            "Name: " + name + "\n" +
-            "Sender Email: " + email + "\n" +
-            "Subject: " + subject + "\n\n" +
-            "Message:\n" + message + "\n\n" +
-            "Sent through the EduGM UniTools Contact Us page.";
+        const emailBody = [
+            "EduGM UniTools — Contact Form Message",
+            "",
+            `Name: ${name}`,
+            `Sender email: ${email}`,
+            `Subject: ${subject}`,
+            "",
+            "Message:",
+            message,
+            "",
+            "Sent through the EduGM UniTools Contact Us page."
+        ].join("\n");
 
         const mailtoLink =
-            "mailto:" + recipient +
-            "?subject=" + encodeURIComponent(emailSubject) +
-            "&body=" + encodeURIComponent(emailBody);
+            `mailto:${recipient}` +
+            `?subject=${encodeURIComponent(emailSubject)}` +
+            `&body=${encodeURIComponent(emailBody)}`;
 
+        formStatus.textContent =
+            "Your email application should open with the message prepared. Review the details and press Send to submit it.";
+        formStatus.classList.add("show");
+
+        // Opening the email application does not itself send the message.
         window.location.href = mailtoLink;
     });
 </script>
