@@ -952,6 +952,26 @@
 
     <div class="tools-grid" id="toolsGrid">
 
+      <!-- PDF SIZE REDUCER — FIRST TOOL -->
+      <a class="tool-card" href="pdf-size-reducer.html"
+         data-category="student"
+         data-search="pdf size reducer compress pdf reduce pdf file size document compressor">
+        <div class="tool-top">
+          <div class="tool-icon red">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <span class="tool-badge">
+            <i class="fa-solid fa-check"></i> Available
+          </span>
+        </div>
+        <h3>PDF Size Reducer</h3>
+        <p>Reduce PDF file size directly in your browser. Upload a PDF, process it, and download your reduced file.</p>
+        <div class="tool-action">
+          <span>Reduce PDF Size</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </a>
+
       <!-- GRADES & GPA -->
       <a class="tool-card" href="sgpa-calculator.html" data-category="grades" data-search="sgpa semester grade point average grade calculator">
         <div class="tool-top">
@@ -1267,6 +1287,7 @@
         <div class="tool-action"><span>Coming soon</span><i class="fa-regular fa-clock"></i></div>
       </a>
 
+      <!-- Existing PDF Utility Tools placeholder retained -->
       <a class="tool-card is-coming" href="#" data-coming="true" data-category="student" data-search="pdf tools merge split compress student documents">
         <div class="tool-top">
           <div class="tool-icon red"><i class="fa-solid fa-file-pdf"></i></div>
@@ -1433,6 +1454,7 @@
       });
 
       // Do not let placeholder cards navigate to the top of the page.
+      // The new PDF Size Reducer card remains a normal working link.
       cards.forEach(card => {
         if (card.dataset.coming === "true") {
           card.addEventListener("click", event => {
