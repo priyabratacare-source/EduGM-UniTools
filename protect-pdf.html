@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6546e8">
   <title>Protect PDF — Add Password to PDF | EduGM UniTools</title>
-  <meta name="description" content="Free browser-based PDF protection tool. Add password encryption to your PDF files using pdf-lib. 100% private, runs locally.">
-  <meta name="keywords" content="protect pdf, password pdf, encrypt pdf, lock pdf, secure pdf, pdf password">
+  <meta name="description" content="Free browser-based PDF protection tool. Add AES-256 password encryption to your PDF files. 100% private, runs locally.">
+  <meta name="keywords" content="protect pdf, password pdf, encrypt pdf, lock pdf, secure pdf, pdf password, aes-256">
   <meta name="author" content="EduGM UniTools">
 
   <link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png">
@@ -19,7 +19,7 @@
     :root{
       --primary:#6546e8;--primary-dark:#5032cb;--primary-light:#eee9ff;
       --ink:#17172d;--muted:#72758a;--bg:#f7f8fc;--card:#fff;
-      --border:#e9eaf2;--green:#159b69;--red:#d94b4b;--amber:#b45309;
+      --border:#e9eaf2;--green:#159b69;--red:#d94b4b;
       --shadow:0 12px 36px rgba(33,28,75,.07);--radius:20px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -30,7 +30,6 @@
     button{cursor:pointer}
     .container{width:min(1100px,calc(100% - 40px));margin-inline:auto}
 
-    /* Navbar */
     .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,231,240,.85)}
     .nav-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{display:inline-flex;align-items:center;gap:11px;font-family:"Manrope",sans-serif;font-size:21px;font-weight:800;letter-spacing:-.8px;white-space:nowrap}
@@ -42,7 +41,6 @@
     .nav-cta{padding:11px 17px;border-radius:12px;background:var(--primary);color:#fff!important;box-shadow:0 5px 15px rgba(101,70,232,.2)}
     .menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--border);background:#fff;border-radius:12px;color:var(--ink);font-size:18px}
 
-    /* Hero */
     .hero{padding:56px 0 40px;text-align:center;background:radial-gradient(ellipse at 20% 0%,rgba(128,99,255,.13),transparent 40%),radial-gradient(ellipse at 90% 80%,rgba(73,142,255,.10),transparent 40%),linear-gradient(135deg,#fff 0%,#f8f6ff 52%,#f1f6ff 100%);border-bottom:1px solid #eeedf8}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid #e5ddff;border-radius:999px;background:rgba(255,255,255,.78);color:var(--primary-dark);font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
     .hero h1{margin:18px 0 14px;font-family:"Manrope",sans-serif;font-size:clamp(30px,4.5vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.8px}
@@ -52,14 +50,12 @@
     .badges span{display:inline-flex;align-items:center;gap:7px}
     .badges i{color:var(--green)}
 
-    /* Main */
     main{padding:40px 0 80px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
     .card + .card{margin-top:20px}
     .card-title{font-family:"Manrope",sans-serif;font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
     .card-sub{color:var(--muted);font-size:13.5px;margin-bottom:20px}
 
-    /* Drop zone */
     .dropzone{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;padding:34px 22px;border:2px dashed #cfc9ef;border-radius:16px;background:linear-gradient(145deg,#fbfaff,#f4f2ff);text-align:center;transition:.2s;cursor:pointer}
     .dropzone:hover,.dropzone.dragover{border-color:var(--primary);background:#efeaff}
     .dropzone .icon{width:64px;height:64px;display:grid;place-items:center;border-radius:18px;background:#fff;color:var(--primary);font-size:26px;box-shadow:0 6px 18px rgba(101,70,232,.15)}
@@ -76,7 +72,6 @@
     .btn-danger{background:#ffecec;color:var(--red)}
     .btn-danger:hover{background:#ffdcdc}
 
-    /* File info */
     .file-info{display:none;align-items:center;gap:14px;margin-top:18px;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fafaff}
     .file-info.show{display:flex}
     .file-info .file-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#ffecec;color:var(--red);font-size:20px;flex-shrink:0}
@@ -86,7 +81,6 @@
     .file-info .remove-file{width:36px;height:36px;border:0;border-radius:10px;background:#fff;color:var(--muted);display:grid;place-items:center}
     .file-info .remove-file:hover{background:#ffecec;color:var(--red)}
 
-    /* Password fields */
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
     .field{display:flex;flex-direction:column;gap:6px;position:relative}
     .field label{font-size:12.5px;font-weight:700;color:#555870;letter-spacing:.2px}
@@ -99,7 +93,6 @@
     .hint{font-size:11.5px;color:var(--muted);margin-top:2px}
     .hint.err{color:var(--red)}
 
-    /* Strength meter */
     .strength{margin-top:2px;display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted)}
     .strength-bar{flex:1;height:6px;background:#eee;border-radius:99px;overflow:hidden}
     .strength-fill{height:100%;width:0%;border-radius:99px;background:#e0e0ea;transition:.25s}
@@ -108,11 +101,9 @@
     .strength-fill.s3{background:#5db1e3;width:75%}
     .strength-fill.s4{background:#159b69;width:100%}
 
-    /* Actions */
     .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
     .actions .btn-primary{flex:1;min-width:200px}
 
-    /* Progress */
     .progress-wrap{display:none;margin-top:22px}
     .progress-wrap.show{display:block}
     .progress-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:#555870;margin-bottom:8px}
@@ -120,7 +111,6 @@
     .progress-bar{height:12px;background:#edeafd;border-radius:99px;overflow:hidden}
     .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#7858f5,#4d8af5);border-radius:99px;transition:width .25s ease}
 
-    /* Result */
     .result-wrap{display:none;margin-top:20px}
     .result-wrap.show{display:block}
     .result-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
@@ -130,12 +120,10 @@
     .success-banner i{font-size:20px;color:var(--green)}
     .result-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
-    /* Error */
     .error-box{display:none;margin-top:16px;padding:14px;border-radius:12px;background:#fff1f1;border:1px solid #ffd5d5;color:#a12323;font-size:13.5px}
     .error-box.show{display:block}
     .error-box i{margin-right:8px}
 
-    /* Info */
     .info-section{margin-top:32px}
     .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
     .info-item{padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff}
@@ -151,7 +139,6 @@
     .faq details[open] summary::after{content:"−"}
     .faq p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.75}
 
-    /* Footer */
     footer{padding:38px 0 20px;border-top:1px solid var(--border);background:#fff;margin-top:20px}
     .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:#89899a;font-size:11.5px}
     .footer-bottom strong{color:#64657a}
@@ -198,12 +185,12 @@
   <section class="hero">
     <div class="container">
       <span class="eyebrow"><i class="fa-solid fa-lock"></i> Free browser tool</span>
-      <h1>Protect PDF — <span class="gradient-text">Add password encryption</span></h1>
-      <p>Add a password to your PDF so only people who know it can open the file. Encryption happens in your browser — the PDF never leaves your device.</p>
+      <h1>Protect PDF — <span class="gradient-text">Add AES-256 password encryption</span></h1>
+      <p>Add a password to your PDF so only people who know it can open the file. Encryption runs in your browser using the Web Crypto API — the PDF never leaves your device.</p>
       <div class="badges">
         <span><i class="fa-solid fa-shield-halved"></i> 100% private</span>
         <span><i class="fa-solid fa-bolt"></i> No upload</span>
-        <span><i class="fa-solid fa-key"></i> AES encryption</span>
+        <span><i class="fa-solid fa-key"></i> AES-256</span>
       </div>
     </div>
   </section>
@@ -212,7 +199,6 @@
 
     <a href="tools.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to all tools</a>
 
-    <!-- UPLOAD + PASSWORD CARD -->
     <div class="card">
       <div class="card-title">1. Upload your PDF</div>
       <div class="card-sub">PDF only. Files are processed locally on your device.</div>
@@ -286,11 +272,10 @@
       </div>
     </div>
 
-    <!-- RESULT CARD -->
     <div class="card result-wrap" id="resultWrap">
       <div class="success-banner">
         <i class="fa-solid fa-circle-check"></i>
-        <span>Your PDF is now password-protected. Download it below.</span>
+        <span>Your PDF is now password-protected with AES-256. Download it below.</span>
       </div>
       <div class="result-head">
         <h3><i class="fa-solid fa-file-shield" style="color:var(--primary);margin-right:6px"></i> Protected PDF</h3>
@@ -306,12 +291,11 @@
       </div>
     </div>
 
-    <!-- INFO -->
     <section class="info-section">
       <h2 class="card-title" style="font-size:20px">How it works</h2>
       <div class="info-grid">
         <div class="info-item"><div class="num">1</div><h4>Load PDF</h4><p>Your PDF is read into memory in the browser — nothing is sent to any server.</p></div>
-        <div class="info-item"><div class="num">2</div><h4>Encrypt</h4><p>The document is re-saved with AES encryption, a user password and an owner password.</p></div>
+        <div class="info-item"><div class="num">2</div><h4>AES-256 encrypt</h4><p>Every string and stream is individually encrypted using the Web Crypto API (PDF 2.0 standard).</p></div>
         <div class="info-item"><div class="num">3</div><h4>Download</h4><p>A new protected PDF is generated. Anyone opening it must enter the password.</p></div>
       </div>
     </section>
@@ -320,11 +304,11 @@
       <h2 class="card-title" style="font-size:20px;margin-bottom:14px">Frequently asked questions</h2>
       <details>
         <summary>Does my PDF or password get uploaded anywhere?</summary>
-        <p>No. The PDF is read and encrypted entirely in your browser using pdf-lib. Neither the file nor the password ever leaves your device.</p>
+        <p>No. The PDF is read and encrypted entirely in your browser. Neither the file nor the password ever leaves your device.</p>
       </details>
       <details>
         <summary>What encryption is used?</summary>
-        <p>pdf-lib writes the file with standard PDF encryption — AES-128 for user and owner passwords. The resulting file opens in all modern PDF readers (Adobe, Chrome, Edge, Firefox, Preview, etc.).</p>
+        <p>AES-256 (PDF 2.0, V=5 R=6), implemented using the browser's native Web Crypto API. This is the same encryption standard used by Adobe Acrobat and modern PDF readers [citation:1][citation:2].</p>
       </details>
       <details>
         <summary>What happens if I forget the password?</summary>
@@ -335,8 +319,12 @@
         <p>Yes — use the <a href="unlock-pdf.html" style="color:var(--primary);font-weight:600">Unlock PDF</a> tool with the password to create an unprotected copy.</p>
       </details>
       <details>
+        <summary>Why does encryption need HTTPS?</summary>
+        <p>AES-256 encryption relies on the browser's <code>crypto.subtle</code> API, which is only available in secure contexts (HTTPS or localhost). If this page runs on plain HTTP, encryption will fail — use HTTPS [citation:2][citation:5].</p>
+      </details>
+      <details>
         <summary>How large can the file be?</summary>
-        <p>Up to about 100 MB. Very large files may take longer to load and re-save.</p>
+        <p>Up to about 100 MB. Very large files may take longer to encrypt.</p>
       </details>
     </section>
 
@@ -349,14 +337,15 @@
     </div>
   </footer>
 
-  <!-- Libraries -->
+  <!-- pdf-lib (peer dependency) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <!-- @pdfsmaller/pdf-encrypt UMD build — exposes global PDFEncrypt -->
+  <script src="https://cdn.jsdelivr.net/npm/@pdfsmaller/pdf-encrypt@1.2.0/dist/pdf-encrypt.umd.js"></script>
 
   <script>
     (() => {
       "use strict";
 
-      // --- Elements ---
       const $ = id => document.getElementById(id);
       const dropzone     = $("dropzone");
       const pdfInput     = $("pdfInput");
@@ -430,7 +419,6 @@
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
         if (/\d/.test(pw)) score++;
         if (/[^A-Za-z0-9]/.test(pw)) score++;
-        // cap to 4
         return Math.min(4, score);
       }
       function updateStrength() {
@@ -451,7 +439,6 @@
         const pw = passwordEl.value;
         const pw2 = password2El.value;
 
-        // Match check
         if (pw2 && pw !== pw2) {
           matchHint.textContent = "Passwords do not match.";
           matchHint.classList.add("err");
@@ -462,11 +449,7 @@
           password2El.classList.remove("bad");
         }
 
-        const ok =
-          !!currentFile &&
-          pw.length >= 6 &&
-          pw === pw2;
-
+        const ok = !!currentFile && pw.length >= 6 && pw === pw2;
         startBtn.disabled = !ok || busy;
       }
 
@@ -540,7 +523,7 @@
         setProgress(0, "Preparing…");
       });
 
-      // --- Protect flow ---
+      // --- Protect flow (AES-256 via @pdfsmaller/pdf-encrypt) ---
       startBtn.addEventListener("click", async () => {
         if (!currentFile || busy) return;
 
@@ -551,6 +534,12 @@
         }
         if (pw !== password2El.value) {
           showError("Passwords do not match.");
+          return;
+        }
+
+        // Confirm the global is available (sanity check)
+        if (typeof PDFEncrypt === "undefined") {
+          showError("Encryption library failed to load. Please refresh the page and try again.");
           return;
         }
 
@@ -574,26 +563,26 @@
             updateMetadata: false,
           });
 
-          setProgress(60, "Applying encryption…");
-          const bytes = await doc.save({
-            userPassword: pw,
+          setProgress(50, "Saving plain copy…");
+          const plainBytes = await doc.save();
+
+          setProgress(65, "Applying AES-256 encryption…");
+          // @pdfsmaller/pdf-encrypt API:
+          // encryptPDF(pdfBytes, userPassword, options) → Uint8Array
+          const encryptedBytes = await PDFEncrypt.encryptPDF(plainBytes, pw, {
             ownerPassword: pw,
-            permissions: {
-              printing: "highResolution",
-              modifying: false,
-              copying: false,
-              annotating: false,
-              fillingForms: true,
-              contentAccessibility: true,
-              documentAssembly: false,
-            },
+            allowPrinting: true,
+            allowCopying: false,
+            allowModifying: false,
+            allowFillingForms: true,
+            allowAnnotations: false,
           });
 
-          protectedBytes = bytes;
+          protectedBytes = encryptedBytes;
           setProgress(100, "Done");
 
           resultMeta.textContent =
-            `${doc.getPageCount()} page(s) · ${humanSize(bytes.length)}`;
+            `${doc.getPageCount()} page(s) · ${humanSize(encryptedBytes.length)}`;
           downloadBtn.disabled = false;
           resultWrap.classList.add("show");
           resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -635,7 +624,6 @@
         setProgress(0, "Preparing…");
       });
 
-      // Initial state
       updateStrength();
       validate();
 
