@@ -19,7 +19,7 @@
     :root{
       --primary:#6546e8;--primary-dark:#5032cb;--primary-light:#eee9ff;
       --ink:#17172d;--muted:#72758a;--bg:#f7f8fc;--card:#fff;
-      --border:#e9eaf2;--green:#159b69;--red:#d94b4b;--amber:#b45309;
+      --border:#e9eaf2;--green:#159b69;--red:#d94b4b;
       --shadow:0 12px 36px rgba(33,28,75,.07);--radius:20px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -292,7 +292,7 @@
       </details>
       <details>
         <summary>What encryption types are supported?</summary>
-        <p>RC4 (40/128-bit) and AES-128/AES-256 (standard security handler). Certificate-based encryption is not supported.</p>
+        <p>RC4 (40/128-bit) and AES-256 (PDF 2.0). Certificate-based encryption is not supported.</p>
       </details>
       <details>
         <summary>Why does it say "wrong password" even though I'm sure it's correct?</summary>
@@ -309,8 +309,10 @@
     </div>
   </footer>
 
-  <!-- pdf-lib -->
+  <!-- pdf-lib (peer dependency for @pdfsmaller/pdf-decrypt) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <!-- @pdfsmaller/pdf-decrypt UMD build — exposes global PDFDecrypt -->
+  <script src="https://cdn.jsdelivr.net/npm/@pdfsmaller/pdf-decrypt@1.0.1/dist/pdf-decrypt.umd.js"></script>
 
   <script>
     (() => {
@@ -443,27 +445,18 @@
         setProgress(0, "Preparing…");
       });
 
-      // -------------------------
-      // PDF decryption helpers
-      // -------------------------
-      // pdf-lib alone cannot decrypt content; it only skips the encryption check.
-      // We use pdf-lib to parse structure, then rely on the fact that the
-      // @cantoo/pdf-lib fork (or manual crypto) is needed for real decryption.
-      //
-      // PRACTICAL NOTE: The official pdf-lib (1.17.1) does NOT include a
-      // decryption engine. Loading with ignoreEncryption and re-saving yields
-      // a broken file. For a robust client-side unlock, use qpdf-wasm OR
-      // the @cantoo/pdf-lib fork which adds password support.
-      //
-      // Since we want a self-contained single-file HTML, we load @cantoo/pdf-lib
-      // from a CDN below instead of the official build.
-      // -------------------------
-
+      // --- Unlock flow (using @pdfsmaller/pdf-decrypt) ---
       startBtn.addEventListener("click", async () => {
         if (!currentFile || busy) return;
         const pw = passwordEl.value;
         if (!pw) {
           showError("Please enter the PDF password.");
+          return;
+        }
+
+        // Sanity check: ensure the library loaded correctly
+        if (typeof PDFDecrypt === "undefined" || typeof PDFDecrypt.decryptPDF !== "function") {
+          showError("Decryption library failed to load. Please refresh the page and try again.");
           return;
         }
 
@@ -476,28 +469,24 @@
 
         progressWrap.classList.add("show");
         resultWrap.classList.remove("show");
-        setProgress(5, "Reading file…");
+        setProgress(10, "Reading file…");
 
         try {
           const arrayBuf = await currentFile.arrayBuffer();
+          const pdfBytes = new Uint8Array(arrayBuf);
 
-          setProgress(30, "Loading & decrypting PDF…");
+          setProgress(30, "Verifying password & decrypting…");
 
-          // @cantoo/pdf-lib supports password option natively
-          const { PDFDocument } = PDFLib;
-          const doc = await PDFDocument.load(arrayBuf, {
-            password: pw,
-            updateMetadata: false,
-          });
+          // decryptPDF(pdfBytes, password) → Uint8Array
+          const decryptedBytes = await PDFDecrypt.decryptPDF(pdfBytes, pw);
 
-          setProgress(75, "Saving unlocked PDF…");
-          const bytes = await doc.save();
+          setProgress(90, "Finalizing…");
+          unlockedBytes = decryptedBytes;
 
-          unlockedBytes = bytes;
           setProgress(100, "Done");
 
           resultMeta.textContent =
-            `${doc.getPageCount()} page(s) · ${humanSize(bytes.length)}`;
+            `${humanSize(decryptedBytes.length)} · unlocked`;
           downloadBtn.disabled = false;
           resultWrap.classList.add("show");
           resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -505,8 +494,12 @@
         } catch (err) {
           console.error(err);
           const msg = String(err?.message || err);
-          if (/password/i.test(msg) || /encrypt/i.test(msg)) {
-            showError("Wrong password, or this PDF uses an unsupported security handler.");
+          if (/incorrect password/i.test(msg)) {
+            showError("Wrong password. Please check and try again.");
+          } else if (/not encrypted/i.test(msg)) {
+            showError("This PDF is not password-protected. Nothing to unlock.");
+          } else if (/unsupported/i.test(msg)) {
+            showError("This PDF uses an unsupported encryption type (e.g. certificate-based).");
           } else {
             showError(msg || "Could not unlock this PDF.");
           }
