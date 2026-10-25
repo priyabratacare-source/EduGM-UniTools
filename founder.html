@@ -1,0 +1,1412 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6546e8">
+
+    <title>Founder & Leadership | EduGM UniTools</title>
+
+    <meta name="description" content="Meet the founder of EduGM UniTools, discover our mission, and explore future leadership opportunities.">
+    <meta name="keywords" content="EduGM UniTools, Founder, Leadership, CodeBihin, Co-Founder">
+    <meta name="author" content="Priyabrata Patra">
+
+    <meta property="og:title" content="Founder & Leadership | EduGM UniTools">
+    <meta property="og:description" content="Discover the people, purpose, and vision behind EduGM UniTools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://priyabratacare-source.github.io/EduGM-UniTools/founder.html">
+
+    <link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6546e8;
+            --primary-dark: #4f32c7;
+            --primary-light: #f0edff;
+            --text: #19172b;
+            --muted: #6c6b80;
+            --background: #f8f9ff;
+            --surface: #ffffff;
+            --border: #e9e8f2;
+            --green: #138a60;
+            --shadow: 0 18px 55px rgba(39, 30, 91, 0.08);
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--background);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(233, 232, 242, 0.85);
+        }
+
+        .nav-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 19px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8064ff, #5436d7);
+            box-shadow: 0 7px 18px rgba(101, 70, 232, 0.25);
+        }
+
+        .brand-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-links a {
+            color: #5d5b70;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            padding: 11px 17px;
+            border-radius: 12px;
+            color: white !important;
+            background: var(--primary);
+            box-shadow: 0 6px 15px rgba(101, 70, 232, 0.18);
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 94px 0 82px;
+            background:
+                radial-gradient(ellipse at 10% 10%, rgba(173, 157, 255, 0.22), transparent 38%),
+                radial-gradient(ellipse at 90% 40%, rgba(173, 212, 255, 0.24), transparent 36%),
+                linear-gradient(180deg, #ffffff, #f8f9ff);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(101, 70, 232, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            top: -150px;
+            right: 12%;
+        }
+
+        .hero::after {
+            bottom: -190px;
+            left: 5%;
+            width: 340px;
+            height: 340px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 14px;
+            border: 1px solid #e3ddff;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px rgba(101, 70, 232, 0.1);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -1.2px;
+            line-height: 1.2;
+        }
+
+        .hero h1 {
+            margin: 25px 0 20px;
+            font-size: clamp(38px, 6vw, 66px);
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            color: var(--primary);
+            background: linear-gradient(110deg, #6546e8, #9a64ed, #4a79e8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 670px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 47px;
+            padding: 12px 20px;
+            border: 1px solid transparent;
+            border-radius: 13px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 9px 22px rgba(101, 70, 232, 0.22);
+        }
+
+        .button-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .button-secondary {
+            color: var(--text);
+            border-color: var(--border);
+            background: white;
+        }
+
+        .button-secondary:hover {
+            box-shadow: 0 8px 22px rgba(39, 30, 91, 0.07);
+        }
+
+        /* General sections */
+
+        .section {
+            padding: 76px 0;
+        }
+
+        .section-heading {
+            max-width: 690px;
+            margin: 0 auto 38px;
+            text-align: center;
+        }
+
+        .section-label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 15px;
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Founder profile */
+
+        .founder-section {
+            padding-top: 12px;
+        }
+
+        .founder-card {
+            display: grid;
+            grid-template-columns: 0.82fr 1.5fr;
+            gap: 36px;
+            align-items: stretch;
+            padding: 36px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .founder-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            padding: 30px 20px;
+            overflow: hidden;
+            border-radius: 20px;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(255,255,255,0.8), transparent 35%),
+                linear-gradient(145deg, #eeebff, #e5edff);
+        }
+
+        .founder-visual::before,
+        .founder-visual::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(101, 70, 232, 0.13);
+            border-radius: 50%;
+        }
+
+        .founder-visual::before {
+            width: 230px;
+            height: 230px;
+        }
+
+        .founder-visual::after {
+            width: 290px;
+            height: 290px;
+        }
+
+        .founder-monogram {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            place-items: center;
+            width: 142px;
+            height: 142px;
+            border: 5px solid rgba(255, 255, 255, 0.9);
+            border-radius: 42px;
+            color: #fff;
+            background: linear-gradient(145deg, #876cff, #5031cb);
+            box-shadow: 0 18px 40px rgba(91, 61, 207, 0.28);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -3px;
+            transform: rotate(-4deg);
+        }
+
+        .founder-visual-name {
+            position: relative;
+            z-index: 1;
+            margin-top: 24px;
+            color: #33226f;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .founder-visual-caption {
+            position: relative;
+            z-index: 1;
+            margin-top: 5px;
+            color: #71669b;
+            font-size: 12px;
+        }
+
+        .founder-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .role-tag {
+            align-self: flex-start;
+            padding: 7px 11px;
+            border-radius: 9px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .founder-info h2 {
+            margin: 18px 0 8px;
+            font-size: clamp(29px, 4vw, 39px);
+        }
+
+        .founder-title {
+            margin-bottom: 19px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .founder-info p {
+            margin-bottom: 15px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .leadership-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .leadership-tags span {
+            padding: 8px 11px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fcfcff;
+            color: #514d68;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* Co-founder opening */
+
+        .cofounder-section {
+            padding-top: 24px;
+        }
+
+        .cofounder-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 25px;
+            padding: 35px;
+            overflow: hidden;
+            border: 1px solid #ded8ff;
+            border-radius: var(--radius);
+            background: linear-gradient(115deg, #f2efff 0%, #ffffff 70%);
+        }
+
+        .cofounder-card::after {
+            content: "+";
+            position: absolute;
+            right: 90px;
+            bottom: -82px;
+            color: rgba(101, 70, 232, 0.06);
+            font-size: 240px;
+            font-weight: 400;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .cofounder-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .opening-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 13px;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .opening-status span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #20a875;
+            box-shadow: 0 0 0 4px rgba(32, 168, 117, 0.12);
+        }
+
+        .cofounder-content h2 {
+            margin-bottom: 12px;
+            font-size: clamp(25px, 3vw, 34px);
+        }
+
+        .cofounder-content p {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .vacant-badge {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px dashed #b6a8ff;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        .vacant-icon {
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 24px;
+        }
+
+        .vacant-badge strong {
+            color: #4f3aab;
+            font-size: 12px;
+        }
+
+        .vacant-badge small {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* Mission and vision */
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .value-card {
+            padding: 27px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: white;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .value-icon {
+            display: grid;
+            place-items: center;
+            width: 49px;
+            height: 49px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 22px;
+        }
+
+        .value-card h3 {
+            margin-bottom: 11px;
+            font-size: 18px;
+            letter-spacing: -0.4px;
+        }
+
+        .value-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* Focus areas */
+
+        .focus-section {
+            background: white;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .focus-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            background: #fff;
+        }
+
+        .focus-check {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 35px;
+            height: 35px;
+            border-radius: 11px;
+            color: var(--green);
+            background: #e9f8f1;
+            font-weight: 800;
+        }
+
+        .focus-item h3 {
+            margin-bottom: 5px;
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .focus-item p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Brand partnership */
+
+        .brand-section {
+            padding: 78px 0;
+        }
+
+        .brand-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 45px 35px;
+            border-radius: 28px;
+            color: white;
+            background: linear-gradient(125deg, #241747 0%, #4930a8 55%, #6546e8 100%);
+            box-shadow: 0 20px 55px rgba(50, 34, 121, 0.2);
+        }
+
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            top: -130px;
+            right: -50px;
+            width: 340px;
+            height: 340px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+        }
+
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            right: 80px;
+            bottom: -200px;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 50%;
+        }
+
+        .brand-panel-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-heading {
+            max-width: 650px;
+            margin: 0 auto 35px;
+            text-align: center;
+        }
+
+        .brand-heading .section-label {
+            color: #c8bcff;
+        }
+
+        .brand-heading h2 {
+            margin-bottom: 13px;
+            font-size: clamp(27px, 4vw, 40px);
+        }
+
+        .brand-heading p {
+            color: #ded8ff;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .brand-pair {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .brand-tile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: min(300px, 42%);
+            min-height: 90px;
+            padding: 17px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .brand-logo {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            color: #4930a8;
+            background: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .brand-logo.codebihin {
+            color: white;
+            background: linear-gradient(135deg, #3bb5e9, #3876e9);
+        }
+
+        .brand-tile strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .brand-tile small {
+            display: block;
+            margin-top: 4px;
+            color: #d8d0ff;
+            font-size: 10px;
+        }
+
+        .brand-cross {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .brand-note {
+            margin-top: 25px;
+            color: #d8d0ff;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* Contact CTA */
+
+        .contact-section {
+            padding-top: 0;
+        }
+
+        .contact-card {
+            padding: 40px 25px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: white;
+            text-align: center;
+        }
+
+        .contact-card h2 {
+            margin-bottom: 12px;
+            font-size: clamp(25px, 4vw, 35px);
+        }
+
+        .contact-card p {
+            max-width: 610px;
+            margin: 0 auto 23px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Footer */
+
+        .footer {
+            margin-top: 45px;
+            padding: 38px 0 22px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 30px;
+            padding-bottom: 28px;
+        }
+
+        .footer-description {
+            max-width: 360px;
+            margin-top: 13px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 19px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer-bottom strong {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 800px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+
+            .hero {
+                padding: 72px 0 65px;
+            }
+
+            .founder-card {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 22px;
+            }
+
+            .founder-visual {
+                min-height: 260px;
+            }
+
+            .founder-info {
+                padding: 5px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cofounder-card {
+                grid-template-columns: 1fr;
+                padding: 27px;
+            }
+
+            .vacant-badge {
+                width: 100%;
+                min-height: auto;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 12px;
+                text-align: left;
+            }
+
+            .vacant-icon {
+                margin: 0;
+            }
+
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .container {
+                width: min(100% - 28px, 1120px);
+            }
+
+            .nav-inner {
+                min-height: 67px;
+            }
+
+            .brand {
+                font-size: 17px;
+            }
+
+            .brand-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .nav-cta {
+                padding: 9px 12px;
+                font-size: 11px !important;
+            }
+
+            .hero h1 {
+                font-size: 39px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .section {
+                padding: 57px 0;
+            }
+
+            .founder-section {
+                padding-top: 0;
+            }
+
+            .founder-card {
+                padding: 15px;
+            }
+
+            .founder-visual {
+                min-height: 245px;
+            }
+
+            .cofounder-card {
+                padding: 22px;
+            }
+
+            .brand-panel {
+                padding: 32px 18px;
+            }
+
+            .brand-pair {
+                flex-direction: column;
+                gap: 13px;
+            }
+
+            .brand-tile {
+                width: 100%;
+                min-height: 80px;
+            }
+
+            .brand-cross {
+                width: 35px;
+                height: 35px;
+                transform: rotate(90deg);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand" aria-label="EduGM UniTools homepage">
+                <span class="brand-icon">E</span>
+                <span class="brand-text">EduGM <span>UniTools</span></span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="index.html#tools">Tools</a>
+                <a href="#founder" class="active">Founder</a>
+                <a href="#leadership">Leadership</a>
+                <a href="#about">About</a>
+                <a href="index.html" class="nav-cta">Explore Tools ↗</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    The People Behind the Platform
+                </div>
+
+                <h1>
+                    Building Better<br>
+                    <span class="gradient-text">Digital Learning Tools.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Every meaningful platform begins with an idea and a purpose.
+                    EduGM UniTools is being developed with a vision to make
+                    academic calculations, student utilities, and educational
+                    resources easier to access and simpler to use.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#founder" class="button button-primary">
+                        Meet the Founder <span aria-hidden="true">↓</span>
+                    </a>
+                    <a href="#leadership" class="button button-secondary">
+                        Leadership & Vision
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder -->
+        <section class="section founder-section" id="founder">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-label">Our Founder</span>
+                    <h2>Meet the EduGM UniTools Founder</h2>
+                    <p>
+                        The person behind the idea, product direction, and
+                        development of EduGM UniTools.
+                    </p>
+                </div>
+
+                <article class="founder-card">
+                    <div class="founder-visual" aria-label="Founder monogram illustration">
+                        <div class="founder-monogram" aria-hidden="true">PP</div>
+                        <div class="founder-visual-name">Priyabrata Patra</div>
+                        <div class="founder-visual-caption">Founder of EduGM UniTools</div>
+                    </div>
+
+                    <div class="founder-info">
+                        <span class="role-tag">Founder & Leadership</span>
+
+                        <h2>Priyabrata Patra</h2>
+
+                        <div class="founder-title">
+                            Founder · Chairman · CEO · Developer
+                        </div>
+
+                        <p>
+                            Priyabrata Patra is the founder behind EduGM UniTools,
+                            an educational utility platform focused on making
+                            useful academic tools accessible through a simple
+                            and user-friendly online experience.
+                        </p>
+
+                        <p>
+                            With an interest in technology, web development,
+                            and practical digital solutions, the goal is to
+                            build tools that help students and learners complete
+                            everyday academic tasks more conveniently.
+                        </p>
+
+                        <p>
+                            From planning website features and shaping the user
+                            experience to developing and improving the platform,
+                            the focus is on usability, accessibility, and
+                            continuous improvement. EduGM UniTools is a growing
+                            project, with its features and direction evolving
+                            over time.
+                        </p>
+
+                        <p>
+                            Priyabrata is also associated with CodeBihin, the
+                            technology brand connected with this project.
+                            The long-term aim is to develop useful digital
+                            products that solve real problems and provide
+                            a reliable experience for their users.
+                        </p>
+
+                        <div class="leadership-tags">
+                            <span>Product Vision</span>
+                            <span>Web Development</span>
+                            <span>Educational Technology</span>
+                            <span>Digital Innovation</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Co-Founder Vacancy -->
+        <section class="section cofounder-section" id="leadership">
+            <div class="container">
+                <article class="cofounder-card">
+                    <div class="cofounder-content">
+                        <div class="opening-status">
+                            <span></span>
+                            Leadership Position
+                        </div>
+
+                        <h2>Co-Founder — Soon to Be Appointed</h2>
+
+                        <p>
+                            EduGM UniTools is growing, and the Co-Founder
+                            position is currently vacant. The position is
+                            reserved for a future appointment when the right
+                            person and shared vision come together.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            The future Co-Founder may contribute to strategy,
+                            product development, educational initiatives,
+                            operations, or business growth. The responsibilities
+                            and appointment will be determined when the role
+                            is formally established.
+                        </p>
+                    </div>
+
+                    <div class="vacant-badge" aria-label="Co-Founder position currently vacant">
+                        <div class="vacant-icon" aria-hidden="true">＋</div>
+                        <div>
+                            <strong>Co-Founder</strong>
+                            <small>Currently Vacant</small>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Mission and Vision -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-label">Purpose & Direction</span>
+                    <h2>What We Aim to Build</h2>
+                    <p>
+                        Our direction is guided by practical problem-solving,
+                        accessible technology, and a better digital experience
+                        for students.
+                    </p>
+                </div>
+
+                <div class="values-grid">
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">◎</div>
+                        <h3>Our Mission</h3>
+                        <p>
+                            To provide useful and easy-to-understand academic
+                            tools that help students access calculations and
+                            educational utilities without unnecessary complexity.
+                        </p>
+                    </article>
+
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">↗</div>
+                        <h3>Our Vision</h3>
+                        <p>
+                            To grow into a dependable collection of digital
+                            educational resources that supports students
+                            through practical, accessible, and thoughtful tools.
+                        </p>
+                    </article>
+
+                    <article class="value-card">
+                        <div class="value-icon" aria-hidden="true">✦</div>
+                        <h3>Our Approach</h3>
+                        <p>
+                            To focus on clear interfaces, responsive design,
+                            useful features, and ongoing improvements informed
+                            by real user needs.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Areas -->
+        <section class="section focus-section">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-label">Our Priorities</span>
+                    <h2>What Matters to Us</h2>
+                    <p>
+                        The principles that shape the EduGM UniTools experience
+                        and guide future development.
+                    </p>
+                </div>
+
+                <div class="focus-grid">
+                    <article class="focus-item">
+                        <div class="focus-check" aria-hidden="true">✓</div>
+                        <div>
+                            <h3>Student-Friendly Experience</h3>
+                            <p>
+                                Keep navigation clear and tools straightforward
+                                so students can find what they need quickly.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="focus-item">
+                        <div class="focus-check" aria-hidden="true">✓</div>
+                        <div>
+                            <h3>Useful Academic Utilities</h3>
+                            <p>
+                                Develop practical tools such as academic
+                                calculators and other student-focused utilities.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="focus-item">
+                        <div class="focus-check" aria-hidden="true">✓</div>
+                        <div>
+                            <h3>Responsive Web Design</h3>
+                            <p>
+                                Make the platform comfortable to use on mobile
+                                phones, tablets, laptops, and desktop screens.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="focus-item">
+                        <div class="focus-check" aria-hidden="true">✓</div>
+                        <div>
+                            <h3>Continuous Improvement</h3>
+                            <p>
+                                Improve usability, fix issues, and add features
+                                as the project develops and user needs become clearer.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section contact-section">
+            <div class="container">
+                <div class="contact-card">
+                    <span class="section-label">Connect With Us</span>
+                    <h2>Have an Idea or Suggestion?</h2>
+                    <p>
+                        Feedback and practical suggestions can help shape
+                        future improvements to EduGM UniTools. Reach out
+                        regarding the platform, features, or collaboration.
+                    </p>
+
+                    <a
+                        href="mailto:admin@codebihin.in?subject=EduGM%20UniTools%20Enquiry"
+                        class="button button-primary"
+                    >
+                        Contact the Team ↗
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- EduGM × CodeBihin -->
+        <section class="brand-section">
+            <div class="container">
+                <div class="brand-panel">
+                    <div class="brand-panel-inner">
+                        <div class="brand-heading">
+                            <span class="section-label">Connected by Technology</span>
+                            <h2>EduGM UniTools × CodeBihin</h2>
+                            <p>
+                                EduGM UniTools is an educational utility project
+                                associated with the CodeBihin brand. Together,
+                                the names represent a shared interest in building
+                                practical digital experiences and useful online tools.
+                            </p>
+                        </div>
+
+                        <div class="brand-pair">
+                            <div class="brand-tile">
+                                <div class="brand-logo" aria-hidden="true">E</div>
+                                <div>
+                                    <strong>EduGM UniTools</strong>
+                                    <small>Academic Tools & Utilities</small>
+                                </div>
+                            </div>
+
+                            <div class="brand-cross" aria-label="Connected with">×</div>
+
+                            <div class="brand-tile">
+                                <div class="brand-logo codebihin" aria-hidden="true">C</div>
+                                <div>
+                                    <strong>CodeBihin</strong>
+                                    <small>Technology & Development</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="brand-note">
+                            EduGM UniTools × CodeBihin · Building useful digital experiences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <a href="index.html" class="brand">
+                        <span class="brand-icon">E</span>
+                        <span class="brand-text">EduGM <span>UniTools</span></span>
+                    </a>
+
+                    <p class="footer-description">
+                        Academic calculators and student utilities designed
+                        to make everyday educational tasks easier.
+                    </p>
+                </div>
+
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#tools">Tools</a>
+                    <a href="#founder">Founder</a>
+                    <a href="#leadership">Leadership</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="mailto:admin@codebihin.in">Contact</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span>
+                    © <span id="currentYear">2026</span> EduGM UniTools.
+                    All rights reserved.
+                </span>
+                <span>Built with purpose by <strong>CodeBihin</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Keep the copyright year current.
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
