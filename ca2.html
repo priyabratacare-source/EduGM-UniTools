@@ -36,9 +36,46 @@
       background: #cbd5e1;
       border-radius: 9999px;
     }
+
+    #login-screen { background: radial-gradient(circle at top left, #4338ca, #0f172a 68%); }
+    #login-card { animation: loginAppear .35s ease-out; }
+    @keyframes loginAppear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+  <!-- Password Gate -->
+  <section id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-5">
+    <div id="login-card" class="w-full max-w-md rounded-3xl bg-white p-7 sm:p-9 shadow-2xl">
+      <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700">
+        <i class="fa-solid fa-atom text-3xl"></i>
+      </div>
+      <div class="text-center">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">Secure Access</p>
+        <h1 class="mt-2 text-2xl font-bold text-slate-900">Chemistry CA 2 MCQ Quiz</h1>
+        <p class="mt-2 text-sm text-slate-500">Enter the password to continue to your quiz.</p>
+      </div>
+      <form id="password-form" class="mt-7 space-y-4">
+        <label for="quiz-password" class="block text-sm font-semibold text-slate-700">Password</label>
+        <div class="relative">
+          <input id="quiz-password" type="password" autocomplete="current-password" required
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+            placeholder="Enter password">
+          <button type="button" id="toggle-password" aria-label="Show password"
+            class="absolute inset-y-0 right-0 px-4 text-slate-500 hover:text-indigo-600">
+            <i id="password-eye" class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+        <p id="password-error" class="hidden rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700" role="alert">Incorrect password. Please try again.</p>
+        <button type="submit" class="w-full rounded-xl bg-indigo-600 px-4 py-3 font-semibold text-white shadow-lg shadow-indigo-200 transition hover:bg-indigo-700 active:scale-[0.99]">
+          Unlock Quiz <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+      </form>
+      <p class="mt-6 text-center text-xs text-slate-400">CA 2 Chemistry Preparation</p>
+    </div>
+  </section>
+
+  <div id="quiz-app" class="hidden">
 
   <!-- Top Navigation Header -->
   <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
@@ -320,6 +357,7 @@
   <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
     Designed for CA 2 Chemistry Preparation &bull; Strictly from AG Ma'am & AD Sir's Suggestion Papers
   </footer>
+  </div><!-- /quiz-app -->
 
   <!-- Application Logic -->
   <script>
@@ -706,6 +744,39 @@
         explanation: "Catalyst poisoning (inhibition) occurs when impurities or foreign molecules preferentially bind to active catalytic sites, blocking reactants and deactivating the catalyst."
       }
     ];
+
+
+    // Simple front-end password gate. Password requested by the site owner: 123456.
+    const QUIZ_PASSWORD = '123456';
+
+    document.getElementById('password-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const enteredPassword = document.getElementById('quiz-password').value;
+      const errorMessage = document.getElementById('password-error');
+
+      if (enteredPassword === QUIZ_PASSWORD) {
+        errorMessage.classList.add('hidden');
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('quiz-app').classList.remove('hidden');
+        document.getElementById('quiz-password').value = '';
+        renderCurrentQuestion();
+        renderPalette();
+        updateStats();
+      } else {
+        errorMessage.classList.remove('hidden');
+        document.getElementById('quiz-password').value = '';
+        document.getElementById('quiz-password').focus();
+      }
+    });
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+      const input = document.getElementById('quiz-password');
+      const eye = document.getElementById('password-eye');
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      eye.className = show ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+      this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
 
     // State Variables
     let currentFilter = 'all';
