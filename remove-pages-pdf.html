@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6546e8">
+  <title>Remove Pages from PDF — Delete PDF Pages | EduGM UniTools</title>
+  <meta name="description" content="Free browser-based tool to remove pages from a PDF. Preview every page, select the ones to delete, and download the cleaned PDF. 100% private, runs locally.">
+  <meta name="keywords" content="remove pdf pages, delete pdf pages, pdf page remover, pdf editor, pdf.js">
+  <meta name="author" content="EduGM UniTools">
+
+  <link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root{
+      --primary:#6546e8;--primary-dark:#5032cb;--primary-light:#eee9ff;
+      --ink:#17172d;--muted:#72758a;--bg:#f7f8fc;--card:#fff;
+      --border:#e9eaf2;--green:#159b69;--red:#d94b4b;
+      --shadow:0 12px 36px rgba(33,28,75,.07);--radius:20px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(1100px,calc(100% - 40px));margin-inline:auto}
+
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(230,231,240,.85)}
+    .nav-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:inline-flex;align-items:center;gap:11px;font-family:"Manrope",sans-serif;font-size:21px;font-weight:800;letter-spacing:-.8px;white-space:nowrap}
+    .brand-icon{width:42px;height:42px;display:grid;place-items:center;color:#fff;border-radius:14px;background:linear-gradient(135deg,#7858f5,#4d39cb);box-shadow:0 7px 18px rgba(101,70,232,.24)}
+    .brand span span{color:var(--primary)}
+    .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600;color:#65677b}
+    .nav-links a{transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--primary)}
+    .nav-cta{padding:11px 17px;border-radius:12px;background:var(--primary);color:#fff!important;box-shadow:0 5px 15px rgba(101,70,232,.2)}
+    .menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--border);background:#fff;border-radius:12px;color:var(--ink);font-size:18px}
+
+    .hero{padding:56px 0 40px;text-align:center;background:radial-gradient(ellipse at 20% 0%,rgba(128,99,255,.13),transparent 40%),radial-gradient(ellipse at 90% 80%,rgba(73,142,255,.10),transparent 40%),linear-gradient(135deg,#fff 0%,#f8f6ff 52%,#f1f6ff 100%);border-bottom:1px solid #eeedf8}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid #e5ddff;border-radius:999px;background:rgba(255,255,255,.78);color:var(--primary-dark);font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+    .hero h1{margin:18px 0 14px;font-family:"Manrope",sans-serif;font-size:clamp(30px,4.5vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.8px}
+    .gradient-text{background:linear-gradient(100deg,#6546e8,#4386f4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{max-width:640px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.8}
+    .badges{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:20px;font-size:13px;font-weight:600;color:#666980}
+    .badges span{display:inline-flex;align-items:center;gap:7px}
+    .badges i{color:var(--green)}
+
+    main{padding:40px 0 80px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+    .card + .card{margin-top:20px}
+    .card-title{font-family:"Manrope",sans-serif;font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+    .card-sub{color:var(--muted);font-size:13.5px;margin-bottom:20px}
+
+    .dropzone{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;padding:34px 22px;border:2px dashed #cfc9ef;border-radius:16px;background:linear-gradient(145deg,#fbfaff,#f4f2ff);text-align:center;transition:.2s;cursor:pointer}
+    .dropzone:hover,.dropzone.dragover{border-color:var(--primary);background:#efeaff}
+    .dropzone .icon{width:64px;height:64px;display:grid;place-items:center;border-radius:18px;background:#fff;color:var(--primary);font-size:26px;box-shadow:0 6px 18px rgba(101,70,232,.15)}
+    .dropzone h3{font-size:16px;font-weight:800;margin-top:4px}
+    .dropzone p{font-size:13px;color:var(--muted)}
+    .dropzone input[type=file]{display:none}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 20px;border:0;border-radius:12px;font-size:14px;font-weight:700;transition:.2s;white-space:nowrap}
+    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 16px rgba(101,70,232,.22)}
+    .btn-primary:hover:not(:disabled){background:var(--primary-dark);transform:translateY(-1px)}
+    .btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+    .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:#cfc3ff;color:var(--primary)}
+    .btn-danger{background:#ffecec;color:var(--red)}
+    .btn-danger:hover{background:#ffdcdc}
+    .btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
+
+    .file-info{display:none;align-items:center;gap:14px;margin-top:18px;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fafaff}
+    .file-info.show{display:flex}
+    .file-info .file-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#ffecec;color:var(--red);font-size:20px;flex-shrink:0}
+    .file-info .file-meta{flex:1;min-width:0}
+    .file-info .file-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .file-info .file-size{color:var(--muted);font-size:12px}
+    .file-info .remove-file{width:36px;height:36px;border:0;border-radius:10px;background:#fff;color:var(--muted);display:grid;place-items:center}
+    .file-info .remove-file:hover{background:#ffecec;color:var(--red)}
+
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .actions .btn-primary{flex:1;min-width:200px}
+
+    .progress-wrap{display:none;margin-top:22px}
+    .progress-wrap.show{display:block}
+    .progress-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:#555870;margin-bottom:8px}
+    .progress-head .status{color:var(--primary)}
+    .progress-bar{height:12px;background:#edeafd;border-radius:99px;overflow:hidden}
+    .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#7858f5,#4d8af5);border-radius:99px;transition:width .25s ease}
+    .page-status{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .error-box{display:none;margin-top:16px;padding:14px;border-radius:12px;background:#fff1f1;border:1px solid #ffd5d5;color:#a12323;font-size:13.5px}
+    .error-box.show{display:block}
+    .error-box i{margin-right:8px}
+
+    /* Page preview grid */
+    .pages-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .pages-toolbar .left{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .pages-toolbar .right{font-size:12.5px;color:var(--muted);font-weight:600}
+    .sel-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--primary-light);color:var(--primary-dark);font-size:12px;font-weight:800}
+
+    .page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+    .page-card{position:relative;border:2px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;transition:.18s;cursor:pointer;user-select:none}
+    .page-card:hover{border-color:#cfc3ff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(33,28,75,.08)}
+    .page-card.selected{border-color:var(--red);box-shadow:0 0 0 3px rgba(217,75,75,.14)}
+    .page-card .thumb-wrap{position:relative;aspect-ratio:1/1.3;background:#f2f2f7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .page-card .thumb-wrap img{max-width:100%;max-height:100%;display:block;object-fit:contain}
+    .page-card .thumb-wrap .loading{font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:6px}
+    .page-card .thumb-wrap .loading i{font-size:20px;color:var(--primary);animation:pulse 1.2s infinite}
+    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+    .page-card .page-label{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;font-size:12px;font-weight:700;color:#555870;background:#fff;border-top:1px solid var(--border)}
+    .page-card .page-label .num{display:inline-flex;align-items:center;gap:6px}
+    .page-card .page-label .num .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+    .page-card.selected .page-label .num .dot{background:var(--red)}
+    .page-card .check{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);border:1.5px solid var(--border);display:grid;place-items:center;font-size:12px;color:#fff;transition:.15s}
+    .page-card.selected .check{background:var(--red);border-color:var(--red)}
+    .page-card .check i{opacity:0}
+    .page-card.selected .check i{opacity:1}
+    .page-card .deleted-veil{position:absolute;inset:0;background:rgba(217,75,75,.55);display:none;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;letter-spacing:.5px;text-transform:uppercase;gap:6px;backdrop-filter:blur(1px)}
+    .page-card.selected .deleted-veil{display:flex}
+
+    .summary-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;padding:16px;border:1px solid var(--border);border-radius:14px;background:#fafaff}
+    .summary-bar .info{font-size:13px;color:#555870;font-weight:600}
+    .summary-bar .info strong{color:var(--ink)}
+    .summary-bar .info .warn{color:var(--red)}
+
+    .info-section{margin-top:32px}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .info-item{padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff}
+    .info-item .num{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--primary-light);color:var(--primary);font-weight:800;font-size:13px;margin-bottom:10px}
+    .info-item h4{font-size:14px;font-weight:800;margin-bottom:5px}
+    .info-item p{font-size:12.5px;color:var(--muted);line-height:1.65}
+
+    .faq{margin-top:32px}
+    .faq details{border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px 18px;margin-bottom:10px}
+    .faq summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";font-size:20px;color:var(--primary);font-weight:400;transition:transform .2s}
+    .faq details[open] summary::after{content:"−"}
+    .faq p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.75}
+
+    footer{padding:38px 0 20px;border-top:1px solid var(--border);background:#fff;margin-top:20px}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:#89899a;font-size:11.5px}
+    .footer-bottom strong{color:#64657a}
+    .back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--primary);margin-bottom:8px}
+    .back-link:hover{color:var(--primary-dark)}
+
+    @media (max-width:760px){
+      .container{width:min(100% - 30px,600px)}
+      .menu-toggle{display:grid;place-items:center}
+      .nav-links{position:absolute;top:calc(100% + 1px);left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px 20px 18px;border-bottom:1px solid var(--border);background:#fff;box-shadow:0 15px 25px rgba(25,25,60,.06)}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px 4px}
+      .nav-links .nav-cta{margin-top:8px;text-align:center}
+      .info-grid{grid-template-columns:1fr}
+      .card{padding:22px}
+      .actions .btn-primary{min-width:100%}
+      .page-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+    }
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="EduGM UniTools home">
+        <span class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span>EduGM <span>UniTools</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="tools.html" class="active">All Tools</a>
+        <a href="about.html">About</a>
+        <a href="founder.html">Founder</a>
+        <a href="contact.html">Contact</a>
+        <a class="nav-cta" href="tools.html">Explore Tools <i class="fa-solid fa-arrow-right"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow"><i class="fa-solid fa-scissors"></i> Free browser tool</span>
+      <h1>Remove Pages — <span class="gradient-text">delete PDF pages</span></h1>
+      <p>Preview every page of your PDF, select the ones you don’t need, and download a cleaned-up PDF. Everything runs in your browser — your file never leaves your device.</p>
+      <div class="badges">
+        <span><i class="fa-solid fa-shield-halved"></i> 100% private</span>
+        <span><i class="fa-solid fa-bolt"></i> No upload</span>
+        <span><i class="fa-solid fa-eye"></i> Page previews</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <a href="tools.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to all tools</a>
+
+    <!-- Step 1: Upload -->
+    <div class="card">
+      <div class="card-title">1. Upload your PDF</div>
+      <div class="card-sub">PDF only. Files are processed locally on your device.</div>
+
+      <label class="dropzone" id="dropzone" for="pdfInput">
+        <div class="icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <h3>Click to choose a PDF</h3>
+        <p>or drag &amp; drop it here — max 100 MB</p>
+        <input id="pdfInput" type="file" accept="application/pdf,.pdf">
+      </label>
+
+      <div class="file-info" id="fileInfo">
+        <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="file-meta">
+          <div class="file-name" id="fileName">—</div>
+          <div class="file-size" id="fileSize">—</div>
+        </div>
+        <button class="remove-file" id="removeFile" type="button" aria-label="Remove file">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-head">
+          <span class="status" id="statusText">Preparing…</span>
+          <span id="percentText">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="page-status" id="pageStatus"></div>
+      </div>
+
+      <div class="error-box" id="errorBox">
+        <i class="fa-solid fa-circle-exclamation"></i><span id="errorText"></span>
+      </div>
+    </div>
+
+    <!-- Step 2: Preview & select pages to remove -->
+    <div class="card result-wrap" id="resultWrap">
+      <div class="card-title">2. Select pages to remove</div>
+      <div class="card-sub">Click a page thumbnail to mark it for deletion. Marked pages will be removed from the new PDF.</div>
+
+      <div class="pages-toolbar">
+        <div class="left">
+          <button class="btn btn-ghost btn-sm" id="selectAllBtn" type="button"><i class="fa-solid fa-check-double"></i> Select all</button>
+          <button class="btn btn-ghost btn-sm" id="clearSelBtn" type="button"><i class="fa-solid fa-eraser"></i> Clear selection</button>
+          <button class="btn btn-ghost btn-sm" id="invertSelBtn" type="button"><i class="fa-solid fa-right-left"></i> Invert</button>
+        </div>
+        <div class="right">
+          <span class="sel-badge" id="selBadge"><i class="fa-solid fa-trash-can"></i> 0 selected</span>
+        </div>
+      </div>
+
+      <div class="page-grid" id="pageGrid"></div>
+
+      <div class="summary-bar">
+        <div class="info" id="summaryInfo">Loading pages…</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button class="btn btn-ghost" id="resetBtn" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          <button class="btn btn-primary" id="createBtn" type="button" disabled>
+            <i class="fa-solid fa-file-pdf"></i> Create PDF without selected
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Download -->
+    <div class="card result-wrap" id="downloadWrap">
+      <div class="card-title">3. Download your PDF</div>
+      <div class="card-sub">Your cleaned PDF is ready.</div>
+      <div class="result-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+        <h3 style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:800"><i class="fa-solid fa-file-pdf" style="color:var(--primary);margin-right:6px"></i> Cleaned PDF</h3>
+        <span class="meta" id="downloadMeta" style="color:var(--muted);font-size:12.5px"></span>
+      </div>
+      <div class="result-actions" style="display:flex;flex-wrap:wrap;gap:10px">
+        <button class="btn btn-primary" id="downloadBtn" type="button">
+          <i class="fa-solid fa-download"></i> Download PDF
+        </button>
+        <button class="btn btn-ghost" id="startOverBtn" type="button">
+          <i class="fa-solid fa-rotate-left"></i> Start over
+        </button>
+      </div>
+    </div>
+
+    <section class="info-section">
+      <h2 class="card-title" style="font-size:20px">How it works</h2>
+      <div class="info-grid">
+        <div class="info-item"><div class="num">1</div><h4>Load PDF</h4><p>Your PDF is read in the browser using PDF.js — nothing is uploaded to a server.</p></div>
+        <div class="info-item"><div class="num">2</div><h4>Preview & select</h4><p>Each page is rendered as a thumbnail. Click any page to mark it for deletion.</p></div>
+        <div class="info-item"><div class="num">3</div><h4>Rebuild & download</h4><p>The remaining pages are copied into a new PDF that you can download instantly.</p></div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2 class="card-title" style="font-size:20px;margin-bottom:14px">Frequently asked questions</h2>
+      <details>
+        <summary>Does my PDF get uploaded anywhere?</summary>
+        <p>No. The entire process runs in your browser using PDF.js and pdf-lib. The file never leaves your device.</p>
+      </details>
+      <details>
+        <summary>Can I keep only certain pages instead?</summary>
+        <p>Yes — click “Select all” then un-select the pages you want to keep. The tool removes whatever is selected.</p>
+      </details>
+      <details>
+        <summary>What happens to links, forms, and bookmarks?</summary>
+        <p>The tool focuses on page content. Interactive elements like form fields and some annotations may not carry over to the rebuilt PDF. Text, images, and layout are preserved.</p>
+      </details>
+      <details>
+        <summary>Can I remove all pages?</summary>
+        <p>No — at least one page must remain. If you select every page, the Create button will be disabled.</p>
+      </details>
+      <details>
+        <summary>How large can the file be?</summary>
+        <p>Up to about 100 MB. Very large PDFs with many pages may take longer because each page thumbnail is rendered individually.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-bottom">
+      <span>© <span id="currentYear"></span> <strong>EduGM UniTools</strong>. All rights reserved.</span>
+      <span>Owned by EduGM · Developed and maintained by <strong>CodeBihin</strong></span>
+    </div>
+  </footer>
+
+  <!-- PDF.js + pdf-lib -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+
+      const $ = id => document.getElementById(id);
+      const dropzone     = $("dropzone");
+      const pdfInput     = $("pdfInput");
+      const fileInfo     = $("fileInfo");
+      const fileNameEl   = $("fileName");
+      const fileSizeEl   = $("fileSize");
+      const removeFile   = $("removeFile");
+      const progressWrap = $("progressWrap");
+      const progressFill = $("progressFill");
+      const percentText  = $("percentText");
+      const statusText   = $("statusText");
+      const pageStatus   = $("pageStatus");
+      const errorBox     = $("errorBox");
+      const errorText    = $("errorText");
+      const resultWrap   = $("resultWrap");
+      const pageGrid     = $("pageGrid");
+      const selBadge     = $("selBadge");
+      const summaryInfo  = $("summaryInfo");
+      const selectAllBtn = $("selectAllBtn");
+      const clearSelBtn  = $("clearSelBtn");
+      const invertSelBtn = $("invertSelBtn");
+      const resetBtn     = $("resetBtn");
+      const createBtn    = $("createBtn");
+      const downloadWrap = $("downloadWrap");
+      const downloadMeta = $("downloadMeta");
+      const downloadBtn  = $("downloadBtn");
+      const startOverBtn = $("startOverBtn");
+      const menuToggle   = $("menuToggle");
+      const navLinks     = $("navLinks");
+
+      $("currentYear").textContent = new Date().getFullYear();
+
+      // Mobile nav
+      menuToggle?.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.innerHTML = open
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+      });
+      navLinks?.querySelectorAll("a").forEach(l => l.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      }));
+
+      // ---- State ----
+      let currentFile = null;
+      let pdfBytes = null;          // Uint8Array of original PDF
+      let pdfDoc = null;            // pdf.js document
+      let totalPages = 0;
+      let selected = new Set();     // page numbers (1-based) marked for removal
+      let busy = false;
+      let pdfBlobUrl = null;
+      let pdfFileName = "edited-document.pdf";
+
+      function humanSize(bytes) {
+        if (!bytes) return "0 B";
+        const u = ["B","KB","MB","GB"];
+        let i = 0, n = bytes;
+        while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; }
+        return n.toFixed(n < 10 && i ? 1 : 0) + " " + u[i];
+      }
+      function showError(msg) { errorText.textContent = msg; errorBox.classList.add("show"); }
+      function clearError()   { errorBox.classList.remove("show"); errorText.textContent = ""; }
+      function setProgress(pct, status, page) {
+        const v = Math.max(0, Math.min(100, Math.round(pct)));
+        progressFill.style.width = v + "%";
+        percentText.textContent = v + "%";
+        if (status) statusText.textContent = status;
+        if (page != null) pageStatus.textContent = page;
+      }
+
+      function updateSelectionUI() {
+        const removeCount = selected.size;
+        const keepCount = totalPages - removeCount;
+        selBadge.innerHTML = `<i class="fa-solid fa-trash-can"></i> ${removeCount} selected`;
+        if (totalPages === 0) {
+          summaryInfo.textContent = "Loading pages…";
+        } else {
+          summaryInfo.innerHTML =
+            `<strong>${totalPages}</strong> page${totalPages > 1 ? "s" : ""} total · ` +
+            `<strong>${keepCount}</strong> will be kept · ` +
+            `<span class="${removeCount ? 'warn' : ''}">${removeCount}</span> will be removed`;
+        }
+        // Create button enabled only if at least 1 page remains and something is selected
+        createBtn.disabled = !(removeCount > 0 && keepCount > 0) || busy;
+        // Update card states
+        pageGrid.querySelectorAll(".page-card").forEach(card => {
+          const n = parseInt(card.dataset.page, 10);
+          card.classList.toggle("selected", selected.has(n));
+        });
+      }
+
+      function buildPageCard(pageNum) {
+        const card = document.createElement("div");
+        card.className = "page-card";
+        card.dataset.page = String(pageNum);
+        card.innerHTML = `
+          <div class="thumb-wrap" id="thumb-${pageNum}">
+            <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i><span>Rendering…</span></div>
+          </div>
+          <div class="check"><i class="fa-solid fa-check"></i></div>
+          <div class="deleted-veil"><i class="fa-solid fa-trash-can"></i> Remove</div>
+          <div class="page-label">
+            <span class="num"><span class="dot"></span>Page ${pageNum}</span>
+          </div>
+        `;
+        card.addEventListener("click", () => {
+          if (busy) return;
+          if (selected.has(pageNum)) selected.delete(pageNum);
+          else selected.add(pageNum);
+          updateSelectionUI();
+        });
+        return card;
+      }
+
+      async function renderThumbnail(pageNum) {
+        try {
+          const page = await pdfDoc.getPage(pageNum);
+          // Render at a decent thumbnail resolution
+          const viewportBase = page.getViewport({ scale: 1 });
+          const targetWidth = 220; // px
+          const scale = targetWidth / viewportBase.width;
+          const viewport = page.getViewport({ scale });
+
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+
+          await page.render({ canvasContext: ctx, viewport }).promise;
+
+          const thumbWrap = $("thumb-" + pageNum);
+          if (thumbWrap) {
+            const img = document.createElement("img");
+            img.src = canvas.toDataURL("image/jpeg", 0.8);
+            img.alt = "Page " + pageNum;
+            thumbWrap.innerHTML = "";
+            thumbWrap.appendChild(img);
+          }
+          page.cleanup?.();
+        } catch (err) {
+          console.error("Thumb render failed for page", pageNum, err);
+          const thumbWrap = $("thumb-" + pageNum);
+          if (thumbWrap) {
+            thumbWrap.innerHTML = `<div class="loading" style="color:var(--red)"><i class="fa-solid fa-triangle-exclamation"></i><span>Failed</span></div>`;
+          }
+        }
+      }
+
+      async function loadPdf(file) {
+        if (!file) return;
+        if (file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) {
+          showError("Please choose a PDF file.");
+          return;
+        }
+        if (file.size > 100 * 1024 * 1024) {
+          showError("File is larger than 100 MB. Please choose a smaller PDF.");
+          return;
+        }
+        clearError();
+        busy = true;
+        createBtn.disabled = true;
+        resultWrap.classList.remove("show");
+        downloadWrap.classList.remove("show");
+        pageGrid.innerHTML = "";
+        selected.clear();
+        totalPages = 0;
+        pdfDoc = null;
+        pdfBytes = null;
+        if (pdfBlobUrl) { URL.revokeObjectURL(pdfBlobUrl); pdfBlobUrl = null; }
+
+        try {
+          currentFile = file;
+          fileNameEl.textContent = file.name;
+          fileSizeEl.textContent = humanSize(file.size);
+          fileInfo.classList.add("show");
+
+          progressWrap.classList.add("show");
+          setProgress(2, "Reading PDF…", "");
+
+          const arrayBuf = await file.arrayBuffer();
+          pdfBytes = new Uint8Array(arrayBuf);
+
+          setProgress(5, "Parsing PDF…", "");
+          pdfDoc = await pdfjsLib.getDocument({ data: pdfBytes.slice() }).promise;
+          totalPages = pdfDoc.numPages;
+
+          setProgress(10, `Rendering ${totalPages} page preview(s)…`, "");
+
+          // Build cards first
+          for (let i = 1; i <= totalPages; i++) {
+            pageGrid.appendChild(buildPageCard(i));
+          }
+
+          // Render thumbnails sequentially (avoids memory spikes)
+          for (let i = 1; i <= totalPages; i++) {
+            await renderThumbnail(i);
+            const pct = 10 + (i / totalPages) * 88;
+            setProgress(pct, `Rendering page ${i} of ${totalPages}…`, `Page ${i} / ${totalPages}`);
+            // Yield occasionally
+            if (i % 3 === 0) await new Promise(r => setTimeout(r, 0));
+          }
+
+          setProgress(100, "Ready", `${totalPages} page(s) loaded`);
+          resultWrap.classList.add("show");
+          updateSelectionUI();
+          resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        } catch (err) {
+          console.error(err);
+          showError(err?.message || "Could not load this PDF. It may be corrupted or password-protected.");
+          setProgress(0, "Failed", "");
+          fileInfo.classList.remove("show");
+          currentFile = null;
+        } finally {
+          busy = false;
+          // Hide progress after a moment so it doesn't linger
+          setTimeout(() => {
+            if (!busy) progressWrap.classList.remove("show");
+          }, 900);
+        }
+      }
+
+      // ---- Upload wiring ----
+      pdfInput.addEventListener("change", e => loadPdf(e.target.files?.[0]));
+
+      ["dragenter","dragover"].forEach(ev =>
+        dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.add("dragover"); }));
+      ["dragleave","drop"].forEach(ev =>
+        dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.remove("dragover"); }));
+      dropzone.addEventListener("drop", e => {
+        const f = e.dataTransfer?.files?.[0];
+        if (f) loadPdf(f);
+      });
+
+      removeFile.addEventListener("click", () => {
+        if (busy) return;
+        resetAll();
+      });
+
+      function resetAll() {
+        currentFile = null;
+        pdfBytes = null;
+        pdfDoc = null;
+        totalPages = 0;
+        selected.clear();
+        pdfInput.value = "";
+        fileInfo.classList.remove("show");
+        progressWrap.classList.remove("show");
+        resultWrap.classList.remove("show");
+        downloadWrap.classList.remove("show");
+        pageGrid.innerHTML = "";
+        if (pdfBlobUrl) { URL.revokeObjectURL(pdfBlobUrl); pdfBlobUrl = null; }
+        clearError();
+        setProgress(0, "Preparing…", "");
+        updateSelectionUI();
+      }
+
+      resetBtn.addEventListener("click", () => {
+        if (busy) return;
+        selected.clear();
+        updateSelectionUI();
+        downloadWrap.classList.remove("show");
+        resultWrap.classList.add("show");
+        resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      startOverBtn.addEventListener("click", () => {
+        if (busy) return;
+        resetAll();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // ---- Selection helpers ----
+      selectAllBtn.addEventListener("click", () => {
+        if (busy || totalPages === 0) return;
+        for (let i = 1; i <= totalPages; i++) selected.add(i);
+        updateSelectionUI();
+      });
+      clearSelBtn.addEventListener("click", () => {
+        if (busy) return;
+        selected.clear();
+        updateSelectionUI();
+      });
+      invertSelBtn.addEventListener("click", () => {
+        if (busy || totalPages === 0) return;
+        for (let i = 1; i <= totalPages; i++) {
+          if (selected.has(i)) selected.delete(i);
+          else selected.add(i);
+        }
+        updateSelectionUI();
+      });
+
+      // ---- Create PDF ----
+      createBtn.addEventListener("click", async () => {
+        if (busy) return;
+        const keepPages = [];
+        for (let i = 1; i <= totalPages; i++) if (!selected.has(i)) keepPages.push(i);
+        if (keepPages.length === 0) {
+          showError("At least one page must remain in the PDF.");
+          return;
+        }
+        if (keepPages.length === totalPages) {
+          showError("No pages selected for removal. Click page thumbnails to mark pages.");
+          return;
+        }
+
+        busy = true;
+        createBtn.disabled = true;
+        clearError();
+        downloadWrap.classList.remove("show");
+        progressWrap.classList.add("show");
+        setProgress(0, "Building new PDF…", "");
+
+        try {
+          const { PDFDocument } = window.PDFLib;
+          const srcDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+
+          setProgress(20, "Copying pages…", "");
+          const newDoc = await PDFDocument.create();
+
+          // Copy page indices (0-based) in order
+          const indices = keepPages.map(n => n - 1);
+          const copied = await newDoc.copyPages(srcDoc, indices);
+          copied.forEach(p => newDoc.addPage(p));
+
+          setProgress(80, "Saving PDF…", "");
+          const outBytes = await newDoc.save();
+          const blob = new Blob([outBytes], { type: "application/pdf" });
+
+          if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
+          pdfBlobUrl = URL.createObjectURL(blob);
+          const base = (currentFile?.name || "document").replace(/\.pdf$/i, "");
+          pdfFileName = base + "-edited.pdf";
+
+          downloadMeta.textContent =
+            `${keepPages.length} page${keepPages.length > 1 ? "s" : ""} kept · ` +
+            `${selected.size} removed · ${humanSize(blob.size)}`;
+          downloadWrap.classList.add("show");
+          setProgress(100, "Done", "PDF ready to download");
+          downloadWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        } catch (err) {
+          console.error(err);
+          showError(err?.message || "Could not create the PDF. The original may be encrypted or malformed.");
+          setProgress(0, "Failed", "");
+        } finally {
+          busy = false;
+          createBtn.disabled = !(selected.size > 0 && (totalPages - selected.size) > 0);
+          setTimeout(() => {
+            if (!busy) progressWrap.classList.remove("show");
+          }, 900);
+        }
+      });
+
+      downloadBtn.addEventListener("click", () => {
+        if (!pdfBlobUrl) {
+          showError("No PDF generated yet.");
+          return;
+        }
+        const a = document.createElement("a");
+        a.href = pdfBlobUrl;
+        a.download = pdfFileName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+
+      // Cleanup
+      window.addEventListener("beforeunload", () => {
+        if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
+      });
+
+      updateSelectionUI();
+
+    })();
+  </script>
+</body>
+</html>
