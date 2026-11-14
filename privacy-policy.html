@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Privacy Policy | EduGM UniTools</title>
-    <meta name="description" content="Read the privacy policy of EduGM UniTools, an educational calculator and academic tools platform.">
+    <meta name="description" content="Read the privacy policy of EduGM UniTools — a privacy-first platform where PDF and academic tools run locally in your browser. Learn how camera and gallery permissions are handled.">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -34,7 +28,6 @@
             top: 0;
             z-index: 1000;
         }
-
         .header-container {
             max-width: 1150px;
             margin: auto;
@@ -43,7 +36,6 @@
             justify-content: space-between;
             gap: 20px;
         }
-
         .brand {
             text-decoration: none;
             color: #111827;
@@ -51,18 +43,13 @@
             font-weight: bold;
             white-space: nowrap;
         }
-
-        .brand span {
-            font-weight: normal;
-        }
-
+        .brand span { font-weight: normal; }
         nav {
             display: flex;
             align-items: center;
             gap: 24px;
             flex-wrap: wrap;
         }
-
         nav a {
             color: #333333;
             text-decoration: none;
@@ -70,7 +57,6 @@
             font-weight: 600;
             transition: color 0.2s ease;
         }
-
         nav a:hover,
         nav a.active {
             color: #000000;
@@ -85,16 +71,21 @@
             background: #fafafa;
             border-bottom: 1px solid #eeeeee;
         }
+        .hero h1 { font-size: 32px; margin: 0 0 8px; }
+        .hero p { margin: 0; color: #666666; font-size: 15px; }
 
-        .hero h1 {
-            font-size: 32px;
-            margin: 0 0 8px;
-        }
-
-        .hero p {
-            margin: 0;
-            color: #666666;
-            font-size: 15px;
+        /* Callout badge */
+        .local-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #e7f8ef;
+            color: #128657;
+            font-size: 13px;
+            font-weight: 700;
         }
 
         /* Main content */
@@ -103,39 +94,17 @@
             margin: auto;
             padding: 30px 24px 45px;
         }
-
         .updated {
             color: #666666;
             font-size: 14px;
             margin-bottom: 25px;
         }
-
-        h2 {
-            font-size: 21px;
-            margin-top: 32px;
-            margin-bottom: 8px;
-        }
-
-        h3 {
-            font-size: 17px;
-            margin-top: 20px;
-        }
-
-        p {
-            margin: 12px 0;
-        }
-
-        ul {
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 7px;
-        }
-
-        a {
-            overflow-wrap: anywhere;
-        }
+        h2 { font-size: 21px; margin-top: 32px; margin-bottom: 8px; }
+        h3 { font-size: 17px; margin-top: 20px; }
+        p { margin: 12px 0; }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 7px; }
+        a { overflow-wrap: anywhere; }
 
         .contact-box {
             border: 1px solid #e5e7eb;
@@ -145,6 +114,15 @@
             background: #fafafa;
         }
 
+        .info-box {
+            border-left: 4px solid #159b69;
+            background: #f2fbf7;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 18px 0;
+        }
+        .info-box strong { color: #128657; }
+
         /* Footer */
         footer {
             background: #f8f8f8;
@@ -152,13 +130,7 @@
             padding: 30px 20px 20px;
             text-align: center;
         }
-
-        .footer-brand {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
+        .footer-brand { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
         .footer-links {
             display: flex;
             justify-content: center;
@@ -166,60 +138,23 @@
             gap: 12px 24px;
             margin: 15px 0;
         }
-
         .footer-links a {
             color: #333333;
             font-size: 14px;
             text-decoration: none;
         }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        .copyright {
-            font-size: 14px;
-            margin-top: 18px;
-        }
-
-        .footer-note {
-            color: #666666;
-            font-size: 13px;
-            margin: 5px 0;
-        }
+        .footer-links a:hover { text-decoration: underline; }
+        .copyright { font-size: 14px; margin-top: 18px; }
+        .footer-note { color: #666666; font-size: 13px; margin: 5px 0; }
 
         @media (max-width: 700px) {
-            header {
-                padding: 16px 20px;
-                position: static;
-            }
-
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 14px;
-            }
-
-            nav {
-                justify-content: center;
-                gap: 12px 18px;
-            }
-
-            .hero {
-                padding: 32px 16px 22px;
-            }
-
-            .hero h1 {
-                font-size: 27px;
-            }
-
-            main {
-                padding: 24px 18px 35px;
-            }
-
-            h2 {
-                font-size: 19px;
-            }
+            header { padding: 16px 20px; position: static; }
+            .header-container { flex-direction: column; text-align: center; gap: 14px; }
+            nav { justify-content: center; gap: 12px 18px; }
+            .hero { padding: 32px 16px 22px; }
+            .hero h1 { font-size: 27px; }
+            main { padding: 24px 18px 35px; }
+            h2 { font-size: 19px; }
         }
     </style>
 </head>
@@ -238,7 +173,7 @@
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact Us</a>
                 <a class="active"
-                   href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html"
+                   href="privacy-policy.html"
                    aria-current="page">Privacy Policy</a>
             </nav>
         </div>
@@ -248,21 +183,34 @@
     <section class="hero">
         <h1>Privacy Policy</h1>
         <p>Your privacy matters to EduGM UniTools.</p>
+        <span class="local-badge">
+            <i>🔒</i> All PDF &amp; academic tools run locally in your browser
+        </span>
     </section>
 
     <!-- Privacy Policy Content -->
     <main>
         <p class="updated">
-            <strong>Last Updated:</strong> October 22, 2026
+            <strong>Last Updated:</strong> November 14, 2026 &middot;
+            <strong>Updated by:</strong> EduGM UniTools Admin
         </p>
 
         <h2>1. Introduction</h2>
         <p>
             Welcome to EduGM UniTools. We provide educational calculators,
-            academic utilities and other tools designed to support students
-            and learners. This Privacy Policy explains how information may
-            be collected, used and protected when you use our website.
+            academic utilities and PDF tools designed to support students
+            and learners on our website and mobile app. This Privacy Policy
+            explains how information may be collected, used and protected
+            when you use our services.
         </p>
+
+        <div class="info-box">
+            <strong>Privacy-first by design:</strong> Our PDF tools and
+            academic calculators process your files and inputs
+            <strong>locally on your device</strong> — inside your browser or app.
+            Your PDFs, images and entered data are <strong>never uploaded</strong>
+            to our servers.
+        </div>
 
         <h2>2. Information We Collect</h2>
         <p>
@@ -273,52 +221,88 @@
             be processed by our hosting or technical service providers.
         </p>
 
-        <h2>3. Information Entered into Tools</h2>
+        <h2>3. Information Entered into Tools — Processed Locally</h2>
         <p>
-            Information entered into a calculator may be processed directly
-            in your browser or sent to a server, depending on how that tool
-            is implemented. Please avoid entering passwords, banking
-            details, government identification numbers or confidential
-            information into general-purpose educational tools.
+            Information entered into a calculator or uploaded into a PDF
+            tool is processed <strong>directly in your browser or app</strong>.
+            This includes:
+        </p>
+        <ul>
+            <li>PDF files you merge, split, compress, organize or convert.</li>
+            <li>Images you scan, compress or convert to PDF.</li>
+            <li>Marks, grades, percentages and other calculator inputs.</li>
+        </ul>
+        <p>
+            These files and inputs stay on your device and are not
+            transmitted to our servers. Please still avoid entering
+            passwords, banking details, government identification numbers
+            or confidential information into general-purpose educational
+            tools.
         </p>
 
-        <h2>4. How We Use Information</h2>
+        <h2>4. Camera and Device Permissions (Scan to PDF)</h2>
+        <p>
+            Some tools — such as <strong>Scan to PDF</strong> — let you capture
+            pages using your device's camera or pick images from your
+            gallery. To use these features, your browser or app may ask
+            for permission to access:
+        </p>
         <ul>
-            <li>To provide and operate educational tools.</li>
+            <li><strong>Camera:</strong> to capture photos of documents for scanning.</li>
+            <li><strong>Photo Gallery / Files:</strong> to select existing images to convert.</li>
+        </ul>
+        <p>
+            These permissions are requested only when you choose to use the
+            feature. Images captured or selected are processed
+            <strong>locally on your device</strong> and are not uploaded to
+            our servers. You can revoke these permissions at any time from
+            your browser or app settings — doing so will only disable the
+            camera/gallery features, not the rest of the website or app.
+        </p>
+
+        <h2>5. How We Use Information</h2>
+        <ul>
+            <li>To provide and operate educational and PDF tools.</li>
             <li>To respond to enquiries and feedback.</li>
-            <li>To improve website performance and usability.</li>
+            <li>To improve website and app performance and usability.</li>
             <li>To troubleshoot technical problems.</li>
-            <li>To maintain website security and prevent misuse.</li>
+            <li>To maintain website and app security and prevent misuse.</li>
             <li>To comply with applicable legal requirements.</li>
         </ul>
 
-        <h2>5. Cookies and Third-Party Services</h2>
+        <h2>6. Cookies and Third-Party Services</h2>
         <p>
-            Our website or its service providers may use cookies or similar
-            technologies where enabled. Hosting, security, analytics or
-            other third-party services may process technical information
-            as needed to provide their services. Their own privacy policies
-            may also apply.
+            Our website, app or their service providers may use cookies or
+            similar technologies where enabled. Hosting, security,
+            analytics or other third-party services may process technical
+            information as needed to provide their services. Their own
+            privacy policies may also apply. Third-party libraries loaded
+            in your browser (such as PDF processing libraries) run locally
+            and do not receive your files.
         </p>
 
-        <h2>6. Data Sharing and Security</h2>
+        <h2>7. Data Sharing and Security</h2>
         <p>
-            Information may be shared with service providers when necessary
-            to operate the website, or when disclosure is required or
-            permitted by applicable law. We aim to use reasonable measures
-            to protect information, but no online system can guarantee
-            absolute security.
+            Because PDF files, images and calculator inputs are processed
+            locally, they are not shared with us. Information may be shared
+            with service providers only when necessary to operate the
+            website or app, or when disclosure is required or permitted by
+            applicable law. We aim to use reasonable measures to protect
+            information, but no online system can guarantee absolute
+            security.
         </p>
 
-        <h2>7. Data Retention and Your Rights</h2>
+        <h2>8. Data Retention and Your Rights</h2>
         <p>
-            Information may be retained for as long as reasonably necessary
-            for its intended purpose or as required by law. Depending on
-            applicable law, you may request access to, correction of or
-            deletion of your personal information.
+            Locally processed files and inputs are not retained by us after
+            you close the tool or refresh the page. Any information you send
+            us (such as support emails) may be retained for as long as
+            reasonably necessary for its intended purpose or as required by
+            law. Depending on applicable law, you may request access to,
+            correction of or deletion of your personal information.
         </p>
 
-        <h2>8. Children's Privacy</h2>
+        <h2>9. Children's Privacy</h2>
         <p>
             EduGM UniTools provides educational resources that may be used
             by students. We aim to handle personal information responsibly
@@ -326,38 +310,39 @@
             parental consent.
         </p>
 
-        <h2>9. External Links</h2>
+        <h2>10. External Links</h2>
         <p>
-            Our website may link to external websites and educational
+            Our website or app may link to external websites and educational
             resources. We do not control their content or privacy practices.
             Please review the relevant policies before providing information
             to an external service.
         </p>
 
-        <h2>10. Educational Disclaimer</h2>
+        <h2>11. Educational Disclaimer</h2>
         <p>
-            Our tools are intended to assist with academic calculations
-            and general educational activities. Always verify important
-            results with your university or another official source.
-            EduGM UniTools should not be assumed to be affiliated with or
-            endorsed by a university unless expressly authorized.
+            Our tools are intended to assist with academic calculations,
+            document handling and general educational activities. Always
+            verify important results with your university or another
+            official source. EduGM UniTools should not be assumed to be
+            affiliated with or endorsed by a university unless expressly
+            authorized.
         </p>
 
-        <h2>11. Changes to This Policy</h2>
+        <h2>12. Changes to This Policy</h2>
         <p>
             We may update this Privacy Policy as our services or legal
             requirements change. Updated versions will be published on
             this page with a revised date.
         </p>
 
-        <h2>12. Contact Us</h2>
+        <h2>13. Contact Us</h2>
         <p>
             For privacy questions, support or requests, please contact us
             using the email address below.
         </p>
 
         <div class="contact-box">
-            <p><strong>Platform:</strong> EduGM UniTools</p>
+            <p><strong>Platform:</strong> EduGM UniTools (Website &amp; App)</p>
             <p>
                 <strong>Email:</strong>
                 <a href="mailto:admin@codebihin.in">
@@ -376,16 +361,14 @@
         <div class="footer-brand">EduGM UniTools</div>
 
         <p class="footer-note">
-            Educational calculators and academic tools for students.
+            Educational calculators, PDF tools and academic utilities for students.
         </p>
 
         <nav class="footer-links" aria-label="Footer navigation">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact Us</a>
-            <a href="https://priyabratacare-source.github.io/EduGM-UniTools/privacy-policy.html">
-                Privacy Policy
-            </a>
+            <a href="privacy-policy.html">Privacy Policy</a>
         </nav>
 
         <p class="copyright">
