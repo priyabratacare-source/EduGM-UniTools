@@ -1,60 +1,70 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Donation Admin | EduGM UniTools</title>
+<meta name="description" content="EduGM UniTools donation review panel — authorized team members only.">
+<meta name="theme-color" content="#1769e0">
+<title>Team Login | EduGM UniTools</title>
 <style>
-:root {
-  --blue:#1769e0; --dark:#12335b; --bg:#f4f7fc;
-  --border:#dce5f1; --text:#243449;
+:root{
+  --blue:#1769e0;--blue-dark:#1255b8;--dark:#12335b;--bg:#f4f7fc;
+  --border:#dce5f1;--text:#243449;--muted:#68778b;
+  --green:#137333;--red:#b42318;--amber:#805400;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
 header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px}
 .nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand{font-size:20px;font-weight:bold;color:var(--dark)}
+.brand{font-size:20px;font-weight:bold;color:var(--dark);letter-spacing:-.3px}
 .brand span{color:var(--blue)}
 main{max-width:1100px;margin:28px auto;padding:0 16px 40px}
-.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:20px}
-.login{max-width:420px;margin:50px auto}
-h1,h2{color:var(--dark);margin-top:0}
-h1{font-size:25px}h2{font-size:19px}
-label{display:block;font-size:14px;margin:13px 0 6px}
-input,select{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px}
-button{border:0;border-radius:8px;padding:10px 13px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.55;cursor:wait}
-.primary{background:var(--blue);color:white}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:18px}
+.login{max-width:400px;margin:50px auto}
+h1,h2{color:var(--dark);margin-top:0;letter-spacing:-.3px}
+h1{font-size:24px}h2{font-size:18px}
+label{display:block;font-size:14px;margin:14px 0 6px;font-weight:600}
+input,select{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px;font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,224,.12)}
+button{border:0;border-radius:8px;padding:11px 14px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:14px;transition:background .15s}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:var(--blue);color:#fff}
+.primary:hover:not(:disabled){background:var(--blue-dark)}
 .secondary{background:#edf2fa;color:var(--dark)}
-.verify{background:#e4f7e9;color:#176b35}
-.reject{background:#ffebeb;color:#a61b1b}
-.hold{background:#fff2d9;color:#805400}
+.secondary:hover:not(:disabled){background:#e0e8f4}
+.verify{background:#e4f7e9;color:var(--green)}
+.verify:hover:not(:disabled){background:#d3f0dc}
+.reject{background:#ffebeb;color:var(--red)}
+.reject:hover:not(:disabled){background:#ffdcdc}
+.hold{background:#fff2d9;color:var(--amber)}
+.hold:hover:not(:disabled){background:#ffe9c2}
 .logout{background:#edf2fa;color:var(--dark)}
-button:hover{filter:brightness(.97)}
-.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere}
-.error{color:#b42318}.success{color:#137333}
+.logout:hover{background:#e0e8f4}
+.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere;min-height:0}
+.message:empty{display:none}
+.error{color:var(--red)}.success{color:var(--green)}
 .hidden{display:none!important}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .stat{padding:16px;border:1px solid var(--border);border-radius:10px;background:#f9fbff}
-.stat span{display:block;color:#68778b;font-size:13px}
-.stat strong{display:block;font-size:25px;margin-top:6px;color:var(--dark)}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat strong{display:block;font-size:24px;margin-top:6px;color:var(--dark)}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .toolbar input{flex:1;min-width:180px}
+.toolbar select{width:auto;min-width:150px}
 .table-wrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:760px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px;vertical-align:top}
-th{background:#f7f9fd;color:var(--dark)}
+th{background:#f7f9fd;color:var(--dark);font-weight:700}
 .status{display:inline-block;border-radius:20px;padding:4px 9px;font-size:12px;font-weight:bold}
 .pending{background:#edf2fa;color:#46566b}
-.verified{background:#e4f7e9;color:#176b35}
-.rejected{background:#ffebeb;color:#a61b1b}
-.hold-status{background:#fff2d9;color:#805400}
+.verified{background:#e4f7e9;color:var(--green)}
+.rejected{background:#ffebeb;color:var(--red)}
+.hold-status{background:#fff2d9;color:var(--amber)}
 .actions{display:flex;gap:6px;flex-wrap:wrap}
-.actions button{font-size:12px;padding:8px}
-.small{color:#68778b;font-size:13px}
-footer{text-align:center;padding:20px;color:#68778b;font-size:13px}
+.actions button{font-size:12px;padding:7px 10px}
+.small{color:var(--muted);font-size:13px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:13px}
 @media(max-width:650px){
  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
  .card{padding:16px}.nav{align-items:flex-start}
@@ -64,23 +74,23 @@ footer{text-align:center;padding:20px;color:#68778b;font-size:13px}
 <body>
 <header>
   <div class="nav">
-    <div class="brand">EduGM <span>UniTools</span> <small>Admin</small></div>
-    <button id="logoutBtn" class="logout hidden">Logout</button>
+    <div class="brand">EduGM <span>UniTools</span> <small style="color:var(--muted);font-weight:normal">Team</small></div>
+    <button id="logoutBtn" class="logout hidden" type="button">Logout</button>
   </div>
 </header>
 
 <main>
   <section id="loginSection" class="card login">
-    <h1>Admin Login</h1>
-    <p class="small">Authorized donation reviewers only.</p>
-    <form id="loginForm">
-      <label for="email">Admin email</label>
+    <h1>Team Login</h1>
+    <p class="small">Authorized EduGM team members only.</p>
+    <form id="loginForm" autocomplete="on">
+      <label for="email">Email</label>
       <input id="email" type="email" autocomplete="username" required>
       <label for="password">Password</label>
       <input id="password" type="password" autocomplete="current-password" required>
       <button id="loginBtn" class="primary" type="submit" style="width:100%;margin-top:18px">Sign in</button>
     </form>
-    <p id="loginMessage" class="message" role="status"></p>
+    <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
   </section>
 
   <section id="dashboard" class="hidden">
@@ -98,7 +108,7 @@ footer{text-align:center;padding:20px;color:#68778b;font-size:13px}
     <div class="card">
       <h2>Donation Records</h2>
       <div class="toolbar">
-        <input id="search" type="search" placeholder="Search donor or transaction reference">
+        <input id="search" type="search" placeholder="Search donor or transaction reference" aria-label="Search donations">
         <select id="statusFilter" aria-label="Filter by status">
           <option value="all">All statuses</option>
           <option value="pending">Pending</option>
@@ -106,9 +116,9 @@ footer{text-align:center;padding:20px;color:#68778b;font-size:13px}
           <option value="rejected">Rejected</option>
           <option value="hold">Hold</option>
         </select>
-        <button id="refreshBtn" class="secondary">Refresh</button>
+        <button id="refreshBtn" class="secondary" type="button">Refresh</button>
       </div>
-      <p id="dashboardMessage" class="message" role="status"></p>
+      <p id="dashboardMessage" class="message" role="status" aria-live="polite"></p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -143,7 +153,17 @@ import {
   addDoc, serverTimestamp
 } from "./firebase.js";
 
-const ADMIN_UID = "xrQ5oHinaAaddySn09V3k8CRAo52";
+/* ---------------------------------------------------------------
+   AUTHORIZED TEAM MEMBERS
+   Add the Firebase UID of every authorized team member here.
+   Only these accounts can log in or review donations.
+   --------------------------------------------------------------- */
+const AUTHORIZED_UIDS = new Set([
+  "xrQ5oHinaAaddySn09V3k8CRAo52"   // primary admin — replace / extend as needed
+]);
+
+/* Shared team display name used in messages (optional). */
+const TEAM_LABEL = "EduGM Team";
 
 const loginSection = document.getElementById("loginSection");
 const dashboard = document.getElementById("dashboard");
@@ -156,38 +176,34 @@ const rows = document.getElementById("donationRows");
 let donations = [];
 let busy = false;
 
-function message(element, text, isError = false) {
-  element.textContent = text;
-  element.className = "message " + (isError ? "error" : "success");
+/* ---------------- UI helpers ---------------- */
+function message(el, text, isError = false) {
+  el.textContent = text;
+  el.className = "message " + (isError ? "error" : "success");
 }
-
-function clearMessage(element) {
-  element.textContent = "";
-  element.className = "message";
+function clearMessage(el) {
+  el.textContent = "";
+  el.className = "message";
 }
-
 function formatDate(value) {
   if (!value) return "—";
   let date;
-
   if (typeof value.toDate === "function") date = value.toDate();
   else if (typeof value === "string" || typeof value === "number") date = new Date(value);
   else return "—";
-
   return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString();
 }
-
-function safeText(value) {
-  return value == null || value === "" ? "—" : String(value);
+function safeText(v) {
+  return v == null || v === "" ? "—" : String(v);
 }
-
-function statusClass(status) {
-  if (status === "verified") return "verified";
-  if (status === "rejected") return "rejected";
-  if (status === "hold") return "hold-status";
+function statusClass(s) {
+  if (s === "verified") return "verified";
+  if (s === "rejected") return "rejected";
+  if (s === "hold") return "hold-status";
   return "pending";
 }
 
+/* ---------------- Rendering ---------------- */
 function render() {
   document.getElementById("totalCount").textContent = donations.length;
   document.getElementById("pendingCount").textContent =
@@ -202,12 +218,9 @@ function render() {
 
   const filtered = donations.filter(d => {
     const status = d.status || "pending";
-    const searchable = [
-      d.donorName, d.transactionId, d.email
-    ].filter(Boolean).join(" ").toLowerCase();
-
-    return (filter === "all" || status === filter) &&
-      searchable.includes(query);
+    const searchable = [d.donorName, d.transactionId, d.email]
+      .filter(Boolean).join(" ").toLowerCase();
+    return (filter === "all" || status === filter) && searchable.includes(query);
   });
 
   rows.replaceChildren();
@@ -218,7 +231,7 @@ function render() {
     td.colSpan = 6;
     td.textContent = donations.length
       ? "No donations match your search."
-      : "No donation records yet. Connect your Google Form integration to import submissions.";
+      : "No donation records yet.";
     tr.appendChild(td);
     rows.appendChild(tr);
     return;
@@ -247,31 +260,32 @@ function render() {
     cell(formatDate(d.submittedAt));
 
     const actionCell = cell("");
-    const actionBox = document.createElement("div");
-    actionBox.className = "actions";
+    const box = document.createElement("div");
+    box.className = "actions";
 
-    for (const action of [
-      {status: "verified", label: "Verify", cls: "verify"},
-      {status: "hold", label: "Hold", cls: "hold"},
-      {status: "rejected", label: "Reject", cls: "reject"}
-    ]) {
+    [
+      { status: "verified", label: "Verify", cls: "verify" },
+      { status: "hold",     label: "Hold",   cls: "hold" },
+      { status: "rejected", label: "Reject", cls: "reject" }
+    ].forEach(a => {
       const btn = document.createElement("button");
-      btn.textContent = action.label;
-      btn.className = action.cls;
-      btn.disabled = busy || d.status === action.status;
-      btn.addEventListener("click", () => changeStatus(d.id, action.status));
-      actionBox.appendChild(btn);
-    }
+      btn.type = "button";
+      btn.textContent = a.label;
+      btn.className = a.cls;
+      btn.disabled = busy || d.status === a.status;
+      btn.addEventListener("click", () => changeStatus(d.id, a.status));
+      box.appendChild(btn);
+    });
 
-    actionCell.appendChild(actionBox);
+    actionCell.appendChild(box);
     rows.appendChild(tr);
   }
 }
 
+/* ---------------- Data ---------------- */
 async function loadDonations() {
   clearMessage(dashboardMessage);
   rows.replaceChildren();
-
   const loadingRow = document.createElement("tr");
   const loadingCell = document.createElement("td");
   loadingCell.colSpan = 6;
@@ -281,40 +295,29 @@ async function loadDonations() {
 
   try {
     const snapshot = await getDocs(collection(db, "donations"));
-    donations = snapshot.docs.map(item => ({id: item.id, ...item.data()}));
-
+    donations = snapshot.docs.map(item => ({ id: item.id, ...item.data() }));
     donations.sort((a, b) => {
-      const time = value => value?.toMillis ? value.toMillis() :
-        (Date.parse(value || "") || 0);
-      return time(b.submittedAt) - time(a.submittedAt);
+      const t = v => v?.toMillis ? v.toMillis() : (Date.parse(v || "") || 0);
+      return t(b.submittedAt) - t(a.submittedAt);
     });
-
     render();
-    message(dashboardMessage, "Donation records loaded.");
+    message(dashboardMessage, "Records loaded.");
   } catch (error) {
     donations = [];
     render();
-    message(dashboardMessage,
-      "Could not load donations. Check Firestore rules and your admin UID. " +
-      error.message, true);
+    message(dashboardMessage, "Could not load donations. " + error.message, true);
   }
 }
 
 async function changeStatus(id, status) {
   if (busy) return;
-
-  const donation = donations.find(item => item.id === id);
+  const donation = donations.find(d => d.id === id);
   if (!donation) return;
 
   if (status === "verified" &&
-      !confirm("Confirm that you independently checked this payment and want to publish the donation?")) {
-    return;
-  }
-
+      !confirm("Confirm you independently checked this payment before publishing?")) return;
   if (status === "rejected" &&
-      !confirm("Reject this donation submission?")) {
-    return;
-  }
+      !confirm("Reject this donation submission?")) return;
 
   busy = true;
   render();
@@ -322,13 +325,12 @@ async function changeStatus(id, status) {
 
   try {
     const user = auth.currentUser;
-    if (!user || user.uid !== ADMIN_UID) {
-      throw new Error("Administrator authorization required.");
+    if (!user || !AUTHORIZED_UIDS.has(user.uid)) {
+      throw new Error("Authorization required.");
     }
 
     const reviewTime = new Date().toISOString();
 
-    // Update the private donation record.
     await updateDoc(doc(db, "donations", id), {
       status,
       reviewedAt: serverTimestamp(),
@@ -336,7 +338,6 @@ async function changeStatus(id, status) {
     });
 
     if (status === "verified") {
-      // Only safe display fields are copied to the public collection.
       await setDoc(doc(db, "publicDonations", id), {
         donorName: String(donation.donorName || "Anonymous").slice(0, 80),
         amount: Number(donation.amount) || 0,
@@ -344,7 +345,6 @@ async function changeStatus(id, status) {
         verifiedAt: reviewTime
       });
     } else {
-      // A rejected or held donation must not remain public.
       await deleteDoc(doc(db, "publicDonations", id));
     }
 
@@ -355,12 +355,11 @@ async function changeStatus(id, status) {
       createdAt: serverTimestamp()
     });
 
-    message(dashboardMessage, "Donation status updated: " + status + ".");
+    message(dashboardMessage, "Status updated: " + status + ".");
     await loadDonations();
   } catch (error) {
     message(dashboardMessage,
-      "The operation may not have completed fully. Check the record and public listing before retrying. " +
-      error.message, true);
+      "Operation may not have completed fully. Check the record before retrying. " + error.message, true);
     await loadDonations();
   } finally {
     busy = false;
@@ -368,9 +367,10 @@ async function changeStatus(id, status) {
   }
 }
 
+/* ---------------- Auth ---------------- */
 loginForm.addEventListener("submit", async event => {
   event.preventDefault();
-  loginMessage.textContent = "";
+  clearMessage(loginMessage);
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -380,12 +380,10 @@ loginForm.addEventListener("submit", async event => {
 
   try {
     const credential = await signInWithEmailAndPassword(auth, email, password);
-
-    if (credential.user.uid !== ADMIN_UID) {
+    if (!AUTHORIZED_UIDS.has(credential.user.uid)) {
       await signOut(auth);
-      throw new Error("This account is not authorized for the donation admin panel.");
+      throw new Error("This account is not authorized for team access.");
     }
-
     message(loginMessage, "Login successful.");
   } catch (error) {
     message(loginMessage, "Login failed: " + error.message, true);
@@ -400,11 +398,13 @@ document.getElementById("search").addEventListener("input", render);
 document.getElementById("statusFilter").addEventListener("change", render);
 
 onAuthStateChanged(auth, async user => {
-  if (user && user.uid === ADMIN_UID) {
+  const authorized = user && AUTHORIZED_UIDS.has(user.uid);
+  if (authorized) {
     loginSection.classList.add("hidden");
     dashboard.classList.remove("hidden");
     logoutBtn.classList.remove("hidden");
-    document.getElementById("welcome").textContent = "Signed in as " + user.email;
+    document.getElementById("welcome").textContent =
+      "Signed in as " + user.email + " (" + TEAM_LABEL + ")";
     await loadDonations();
   } else {
     dashboard.classList.add("hidden");
