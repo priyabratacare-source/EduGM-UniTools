@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6546e8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Sign in to your @mail.codebihin.in workspace mailbox. Secure login powered by Zoho Mail.">
+<title>Sign In · CodeBihin Workspace Mail</title>
+
+<link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --primary:#6546e8;--primary-dark:#4f32c7;--primary-light:#f0edff;
+    --navy:#211747;--text:#202036;--muted:#77768b;
+    --bg:#f8f9ff;--surface:#fff;--border:#e9e8f2;
+    --green:#138a60;--red:#b42318;--amber:#805400;
+    --shadow:0 16px 45px rgba(39,30,91,.07);
+    --radius:20px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    color:var(--text);background:var(--bg);line-height:1.7;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer;border:0}
+  .container{width:min(520px,calc(100% - 40px));margin:0 auto}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:64px 0 40px;text-align:center;
+    background:
+      radial-gradient(ellipse at 20% 0%,rgba(174,157,255,.18),transparent 40%),
+      radial-gradient(ellipse at 90% 80%,rgba(166,202,255,.18),transparent 40%),
+      linear-gradient(180deg,#fff,#f7f8ff);
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 14px;border:1px solid #e4deff;border-radius:999px;
+    color:var(--primary);background:rgba(255,255,255,.8);
+    font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
+  }
+  .eyebrow::before{
+    content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--primary);box-shadow:0 0 0 3px rgba(101,70,232,.15);
+  }
+  .hero h1{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    margin:20px 0 12px;color:var(--navy);
+    font-size:clamp(28px,5vw,38px);font-weight:800;
+    letter-spacing:-1.2px;line-height:1.2;
+  }
+  .hero p{
+    max-width:440px;margin:0 auto;
+    color:var(--muted);font-size:15px;line-height:1.8;
+  }
+  .gradient-text{
+    background:linear-gradient(110deg,#6546e8,#a05ded,#4c7be8);
+    background-clip:text;-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  /* ---------- Card ---------- */
+  main{flex:1;padding:40px 0 60px}
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:40px 32px 32px;text-align:center;
+  }
+  .mail-icon{
+    width:64px;height:64px;margin:0 auto 20px;
+    border-radius:20px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--primary),#a05ded);
+    color:#fff;font-size:28px;
+    box-shadow:0 10px 24px rgba(101,70,232,.28);
+  }
+  .card h2{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:22px;font-weight:800;color:var(--navy);
+    margin-bottom:8px;letter-spacing:-.4px;
+  }
+  .card .lead{
+    color:var(--muted);font-size:13.5px;margin-bottom:28px;
+    line-height:1.7;max-width:400px;margin-left:auto;margin-right:auto;
+  }
+
+  /* ---------- Primary Zoho button ---------- */
+  .zoho-btn{
+    display:flex;align-items:center;justify-content:center;gap:11px;
+    width:100%;padding:16px 24px;border-radius:14px;
+    background:var(--primary);color:#fff;
+    font-size:15px;font-weight:700;letter-spacing:-.2px;
+    box-shadow:0 8px 22px rgba(101,70,232,.28);
+    transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+    cursor:pointer;
+  }
+  .zoho-btn:hover{
+    background:var(--primary-dark);transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(101,70,232,.35);
+  }
+  .zoho-btn:active{transform:translateY(0)}
+  .zoho-btn:disabled{
+    opacity:.7;cursor:wait;transform:none;
+  }
+  .zoho-btn svg{flex-shrink:0}
+
+  .secure-note{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin-top:14px;font-size:11.5px;color:var(--muted);
+  }
+  .secure-note strong{color:var(--navy);font-weight:700}
+  .secure-note svg{color:var(--green)}
+
+  /* ---------- Steps ---------- */
+  .steps{
+    margin-top:30px;padding:22px;border-radius:14px;
+    background:#f7f8ff;border:1px solid #e0d8ff;text-align:left;
+  }
+  .steps h3{
+    font-size:12px;font-weight:800;color:var(--navy);
+    text-transform:uppercase;letter-spacing:.6px;
+    margin-bottom:14px;display:flex;align-items:center;gap:7px;
+  }
+  .steps h3::before{
+    content:"";width:14px;height:2px;border-radius:2px;background:var(--primary);
+  }
+  .steps ol{
+    margin:0;padding:0;list-style:none;
+    counter-reset:step;display:flex;flex-direction:column;gap:12px;
+  }
+  .steps li{
+    position:relative;padding-left:32px;
+    counter-increment:step;font-size:13px;
+    color:#555870;line-height:1.65;
+  }
+  .steps li::before{
+    content:counter(step);position:absolute;left:0;top:0;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--primary-light);color:var(--primary);
+    font-weight:800;font-size:11.5px;
+    display:grid;place-items:center;
+  }
+  .steps li strong{color:var(--navy);font-weight:700}
+  .steps code{
+    background:#fff;padding:2px 6px;border-radius:4px;
+    font-family:monospace;font-size:12px;color:var(--primary-dark);
+    border:1px solid #e0d8ff;
+  }
+
+  /* ---------- Help links ---------- */
+  .help{
+    margin-top:24px;display:flex;flex-direction:column;gap:10px;
+    font-size:12.5px;color:var(--muted);line-height:1.6;
+  }
+  .help-row{
+    display:flex;align-items:flex-start;gap:8px;justify-content:center;
+    text-align:left;padding:0 8px;
+  }
+  .help-row .dot{
+    flex-shrink:0;width:6px;height:6px;border-radius:50%;
+    background:var(--border);margin-top:8px;
+  }
+  .help-row a{
+    color:var(--primary);font-weight:600;
+    transition:color .15s;
+  }
+  .help-row a:hover{color:var(--primary-dark);text-decoration:underline}
+
+  /* ---------- Redirect overlay ---------- */
+  .redirect-overlay{
+    position:fixed;inset:0;z-index:1000;
+    display:none;align-items:center;justify-content:center;
+    background:rgba(33,23,71,.85);backdrop-filter:blur(6px);
+    padding:20px;
+  }
+  .redirect-overlay.show{display:flex}
+  .redirect-box{
+    background:#fff;border-radius:20px;padding:32px 28px;
+    max-width:380px;width:100%;text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,.3);
+    animation:pop .25s ease;
+  }
+  @keyframes pop{
+    from{opacity:0;transform:scale(.95)}
+    to{opacity:1;transform:scale(1)}
+  }
+  .redirect-spinner{
+    width:44px;height:44px;margin:0 auto 18px;
+    border:3px solid var(--primary-light);
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .redirect-box h3{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:17px;font-weight:800;color:var(--navy);
+    margin-bottom:8px;
+  }
+  .redirect-box p{
+    font-size:13px;color:var(--muted);line-height:1.6;
+    margin-bottom:16px;
+  }
+  .redirect-box .fallback{
+    display:inline-block;padding:9px 16px;border-radius:9px;
+    background:var(--primary-light);color:var(--primary-dark);
+    font-size:12.5px;font-weight:700;text-decoration:none;
+    transition:background .15s;
+  }
+  .redirect-box .fallback:hover{background:#e0d8ff}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:28px 0 22px;border-top:1px solid var(--border);
+    background:#fff;
+  }
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11.5px;
+  }
+  .footer-bottom strong{color:var(--primary)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:600px){
+    .container{width:min(100% - 30px,520px)}
+    .card{padding:32px 22px 24px}
+    .hero{padding:48px 0 32px}
+    .redirect-box{padding:26px 22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms!important;
+      transition-duration:.01ms!important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Workspace Mail</span>
+    <h1>Sign in to <span class="gradient-text">@mail.codebihin.in</span></h1>
+    <p>Your workspace mailbox, secured by Zoho Mail. Sign in once and stay connected on any device.</p>
+  </div>
+</section>
+
+<!-- ==================== CARD ==================== -->
+<main class="container">
+  <div class="card">
+
+    <div class="mail-icon" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6h16v12H4V6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h2>Welcome back</h2>
+    <p class="lead">
+      Continue to the official Zoho Mail sign-in page. Use your full workspace email address and the password your administrator provided.
+    </p>
+
+    <!-- Primary action -->
+    <button class="zoho-btn" id="zohoSignInBtn" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 6h16v12H4V6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Sign in to Zoho Mail
+    </button>
+
+    <p class="secure-note">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Secured by <strong>Zoho Mail</strong> · Opens on Zoho's secure domain
+    </p>
+
+    <!-- Steps -->
+    <div class="steps">
+      <h3>How to sign in</h3>
+      <ol>
+        <li><strong>Click the button above.</strong> A new tab opens with Zoho's official sign-in page.</li>
+        <li><strong>Enter your workspace email</strong> — for example <code>yourname@mail.codebihin.in</code>.</li>
+        <li><strong>Use your temporary password</strong> from the approval email sent by <strong>admin@codebihin.in</strong>.</li>
+        <li><strong>Set a new password</strong> when Zoho prompts you on first login.</li>
+        <li><strong>You're in.</strong> Your inbox is now ready to use.</li>
+      </ol>
+    </div>
+
+    <!-- Help -->
+    <div class="help">
+      <div class="help-row">
+        <span class="dot"></span>
+        <span>Forgot your password? Use Zoho's <a href="https://accounts.zoho.com/signin?servicename=VirtualOffice" target="_blank" rel="noopener noreferrer">password recovery page</a>.</span>
+      </div>
+      <div class="help-row">
+        <span class="dot"></span>
+        <span>Don't have a workspace email yet? <a href="join-team.html">Register here</a>.</span>
+      </div>
+      <div class="help-row">
+        <span class="dot"></span>
+        <span>Need help? Email <a href="mailto:admin@codebihin.in">admin@codebihin.in</a>.</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ==================== REDIRECT OVERLAY ==================== -->
+<div class="redirect-overlay" id="redirectOverlay" role="dialog" aria-modal="true" aria-labelledby="redirectTitle">
+  <div class="redirect-box">
+    <div class="redirect-spinner" aria-hidden="true"></div>
+    <h3 id="redirectTitle">Opening Zoho Mail…</h3>
+    <p>A new tab should open with the Zoho Mail sign-in page. If it didn't, click below.</p>
+    <a class="fallback" href="https://mail.zoho.com" target="_blank" rel="noopener noreferrer">
+      Open Zoho Mail manually →
+    </a>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container footer-bottom">
+    <span>© <span id="currentYear"></span> <strong>CodeBihin</strong>. All rights reserved.</span>
+    <span>Mail service operated by <strong>CodeBihin</strong> · Powered by Zoho</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+  const overlay = document.getElementById("redirectOverlay");
+  const btn = document.getElementById("zohoSignInBtn");
+  const ZOHO_URL = "https://mail.zoho.com";
+
+  btn.addEventListener("click", () => {
+    /* Show a friendly loading state */
+    overlay.classList.add("show");
+
+    /* Open Zoho in a new tab */
+    const tab = window.open(ZOHO_URL, "_blank", "noopener,noreferrer");
+
+    /* If the popup was blocked, keep the overlay up with the manual link.
+       Otherwise, auto-hide it after a moment. */
+    if (tab) {
+      setTimeout(() => overlay.classList.remove("show"), 1200);
+    } else {
+      /* Popup blocked — overlay stays visible so the user can click the fallback link */
+      setTimeout(() => {
+        const heading = document.getElementById("redirectTitle");
+        if (heading) heading.textContent = "Please open Zoho Mail manually";
+      }, 800);
+    }
+  });
+
+  /* Allow dismissing the overlay by clicking the backdrop */
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.classList.remove("show");
+  });
+
+  /* Escape key closes the overlay */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") overlay.classList.remove("show");
+  });
+</script>
+</body>
+</html>
