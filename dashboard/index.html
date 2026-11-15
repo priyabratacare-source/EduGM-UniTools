@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="EduGM UniTools donation dashboard — authorized team members only.">
+<meta name="theme-color" content="#1769e0">
+<title>Donation Dashboard | EduGM UniTools</title>
+<style>
+:root{
+  --blue:#1769e0;--blue-dark:#1255b8;--dark:#12335b;--bg:#f4f7fc;
+  --border:#dce5f1;--text:#243449;--muted:#68778b;
+  --green:#137333;--red:#b42318;--amber:#805400;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px}
+.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:20px;font-weight:bold;color:var(--dark);letter-spacing:-.3px}
+.brand span{color:var(--blue)}
+main{max-width:1100px;margin:28px auto;padding:0 16px 40px}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:18px}
+h1,h2{color:var(--dark);margin-top:0;letter-spacing:-.3px}
+h1{font-size:24px}h2{font-size:18px}
+button{border:0;border-radius:8px;padding:11px 14px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:14px;transition:background .15s}
+button:disabled{opacity:.55;cursor:not-allowed}
+.secondary{background:#edf2fa;color:var(--dark)}
+.secondary:hover:not(:disabled){background:#e0e8f4}
+.verify{background:#e4f7e9;color:var(--green)}
+.verify:hover:not(:disabled){background:#d3f0dc}
+.reject{background:#ffebeb;color:var(--red)}
+.reject:hover:not(:disabled){background:#ffdcdc}
+.hold{background:#fff2d9;color:var(--amber)}
+.hold:hover:not(:disabled){background:#ffe9c2}
+.logout{background:#edf2fa;color:var(--dark)}
+.logout:hover{background:#e0e8f4}
+.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere}
+.message:empty{display:none}
+.error{color:var(--red)}.success{color:var(--green)}
+.hidden{display:none!important}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{padding:16px;border:1px solid var(--border);border-radius:10px;background:#f9fbff}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat strong{display:block;font-size:24px;margin-top:6px;color:var(--dark)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar input{flex:1;min-width:180px;padding:11px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px;font-family:inherit}
+.toolbar select{padding:11px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px;font-family:inherit;min-width:150px}
+.toolbar input:focus,.toolbar select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,224,.12)}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px;vertical-align:top}
+th{background:#f7f9fd;color:var(--dark);font-weight:700}
+.status{display:inline-block;border-radius:20px;padding:4px 9px;font-size:12px;font-weight:bold}
+.pending{background:#edf2fa;color:#46566b}
+.verified{background:#e4f7e9;color:var(--green)}
+.rejected{background:#ffebeb;color:var(--red)}
+.hold-status{background:#fff2d9;color:var(--amber)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions button{font-size:12px;padding:7px 10px}
+.small{color:var(--muted);font-size:13px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:13px}
+@media(max-width:650px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .card{padding:16px}.nav{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- Gate: shown while auth is being checked / when not authorized -->
+<div id="gate" style="display:grid;place-items:center;min-height:100vh;font-family:Arial,sans-serif;color:#68778b;font-size:15px">
+  Checking access…
+</div>
+
+<!-- Real dashboard: stays display:none until auth passes -->
+<div id="app" style="display:none">
+  <header>
+    <div class="nav">
+      <div class="brand">EduGM <span>UniTools</span> <small style="color:var(--muted);font-weight:normal">Team</small></div>
+      <button id="logoutBtn" class="logout" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Donation Dashboard</h1>
+      <p id="welcome" class="small"></p>
+      <div class="stats">
+        <div class="stat"><span>Total records</span><strong id="totalCount">0</strong></div>
+        <div class="stat"><span>Pending</span><strong id="pendingCount">0</strong></div>
+        <div class="stat"><span>Verified</span><strong id="verifiedCount">0</strong></div>
+        <div class="stat"><span>On hold / Rejected</span><strong id="otherCount">0</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Donation Records</h2>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search donor or transaction reference" aria-label="Search donations">
+        <select id="statusFilter" aria-label="Filter by status">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="verified">Verified</option>
+          <option value="rejected">Rejected</option>
+          <option value="hold">Hold</option>
+        </select>
+        <button id="refreshBtn" class="secondary" type="button">Refresh</button>
+      </div>
+      <p id="dashboardMessage" class="message" role="status" aria-live="polite"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Donor</th>
+              <th>Amount</th>
+              <th>Transaction reference</th>
+              <th>Status</th>
+              <th>Submitted</th>
+              <th>Review actions</th>
+            </tr>
+          </thead>
+          <tbody id="donationRows">
+            <tr><td colspan="6">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Verify a donation only after independently checking the payment. A submitted screenshot or transaction reference alone is not proof of successful payment.</p>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 EduGM UniTools. Maintained and developed by CodeBihin.
+  </footer>
+</div>
+
+<script type="module">
+import {
+  auth, db,
+  onAuthStateChanged, signOut,
+  collection, getDocs, doc, updateDoc, setDoc, deleteDoc,
+  addDoc, serverTimestamp
+} from "../firebase.js";
+
+/* Authorized team UIDs — must match login.html and Firestore rules. */
+const AUTHORIZED_UIDS = new Set([
+  "xrQ5oHinaAaddySn09V3k8CRAo52"
+]);
+
+const gate = document.getElementById("gate");
+const app = document.getElementById("app");
+const logoutBtn = document.getElementById("logoutBtn");
+const rows = document.getElementById("donationRows");
+const dashboardMessage = document.getElementById("dashboardMessage");
+
+let donations = [];
+let busy = false;
+let currentUid = null;
+
+/* Hard guard: if anything removes the auth user, send them out immediately. */
+function kickOut() {
+  window.location.replace("../login.html");
+}
+
+function isAuthorized() {
+  return auth.currentUser && AUTHORIZED_UIDS.has(auth.currentUser.uid);
+}
+
+function message(el, text, isError = false) {
+  el.textContent = text;
+  el.className = "message " + (isError ? "error" : "success");
+}
+function clearMessage(el) {
+  el.textContent = "";
+  el.className = "message";
+}
+function formatDate(value) {
+  if (!value) return "—";
+  let d;
+  if (typeof value.toDate === "function") d = value.toDate();
+  else if (typeof value === "string" || typeof value === "number") d = new Date(value);
+  else return "—";
+  return Number.isNaN(d.getTime()) ? "—" : d.toLocaleString();
+}
+function safeText(v) { return v == null || v === "" ? "—" : String(v); }
+function statusClass(s) {
+  if (s === "verified") return "verified";
+  if (s === "rejected") return "rejected";
+  if (s === "hold") return "hold-status";
+  return "pending";
+}
+
+function render() {
+  if (!isAuthorized()) { kickOut(); return; }
+
+  document.getElementById("totalCount").textContent = donations.length;
+  document.getElementById("pendingCount").textContent =
+    donations.filter(d => (d.status || "pending") === "pending").length;
+  document.getElementById("verifiedCount").textContent =
+    donations.filter(d => d.status === "verified").length;
+  document.getElementById("otherCount").textContent =
+    donations.filter(d => ["hold", "rejected"].includes(d.status)).length;
+
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  const filter = document.getElementById("statusFilter").value;
+
+  const filtered = donations.filter(d => {
+    const status = d.status || "pending";
+    const searchable = [d.donorName, d.transactionId, d.email]
+      .filter(Boolean).join(" ").toLowerCase();
+    return (filter === "all" || status === filter) && searchable.includes(query);
+  });
+
+  rows.replaceChildren();
+
+  if (!filtered.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 6;
+    td.textContent = donations.length
+      ? "No donations match your search."
+      : "No donation records yet.";
+    tr.appendChild(td);
+    rows.appendChild(tr);
+    return;
+  }
+
+  for (const d of filtered) {
+    const tr = document.createElement("tr");
+
+    const cell = value => {
+      const td = document.createElement("td");
+      td.textContent = safeText(value);
+      tr.appendChild(td);
+      return td;
+    };
+
+    cell(d.donorName);
+    cell(d.amount == null ? "—" : "₹" + d.amount);
+    cell(d.transactionId);
+
+    const statusCell = cell("");
+    const badge = document.createElement("span");
+    badge.className = "status " + statusClass(d.status || "pending");
+    badge.textContent = d.status || "pending";
+    statusCell.appendChild(badge);
+
+    cell(formatDate(d.submittedAt));
+
+    const actionCell = cell("");
+    const box = document.createElement("div");
+    box.className = "actions";
+
+    [
+      { status: "verified", label: "Verify", cls: "verify" },
+      { status: "hold",     label: "Hold",   cls: "hold" },
+      { status: "rejected", label: "Reject", cls: "reject" }
+    ].forEach(a => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = a.label;
+      btn.className = a.cls;
+      btn.disabled = busy || d.status === a.status;
+      btn.addEventListener("click", () => changeStatus(d.id, a.status));
+      box.appendChild(btn);
+    });
+
+    actionCell.appendChild(box);
+    rows.appendChild(tr);
+  }
+}
+
+async function loadDonations() {
+  if (!isAuthorized()) { kickOut(); return; }
+  clearMessage(dashboardMessage);
+  rows.replaceChildren();
+  const lr = document.createElement("tr");
+  const lc = document.createElement("td");
+  lc.colSpan = 6;
+  lc.textContent = "Loading donations…";
+  lr.appendChild(lc);
+  rows.appendChild(lr);
+
+  try {
+    const snap = await getDocs(collection(db, "donations"));
+    if (!isAuthorized()) { kickOut(); return; }
+    donations = snap.docs.map(i => ({ id: i.id, ...i.data() }));
+    donations.sort((a, b) => {
+      const t = v => v?.toMillis ? v.toMillis() : (Date.parse(v || "") || 0);
+      return t(b.submittedAt) - t(a.submittedAt);
+    });
+    render();
+    message(dashboardMessage, "Records loaded.");
+  } catch (err) {
+    donations = [];
+    render();
+    message(dashboardMessage, "Could not load donations. " + err.message, true);
+  }
+}
+
+async function changeStatus(id, status) {
+  if (busy) return;
+  if (!isAuthorized()) { kickOut(); return; }
+
+  const donation = donations.find(d => d.id === id);
+  if (!donation) return;
+
+  if (status === "verified" &&
+      !confirm("Confirm you independently checked this payment before publishing?")) return;
+  if (status === "rejected" &&
+      !confirm("Reject this donation submission?")) return;
+
+  busy = true;
+  render();
+  clearMessage(dashboardMessage);
+
+  try {
+    const user = auth.currentUser;
+    if (!user || !AUTHORIZED_UIDS.has(user.uid)) {
+      throw new Error("Authorization required.");
+    }
+
+    const reviewTime = new Date().toISOString();
+
+    await updateDoc(doc(db, "donations", id), {
+      status,
+      reviewedAt: serverTimestamp(),
+      reviewedBy: user.uid
+    });
+
+    if (status === "verified") {
+      await setDoc(doc(db, "publicDonations", id), {
+        donorName: String(donation.donorName || "Anonymous").slice(0, 80),
+        amount: Number(donation.amount) || 0,
+        status: "verified",
+        verifiedAt: reviewTime
+      });
+    } else {
+      await deleteDoc(doc(db, "publicDonations", id));
+    }
+
+    await addDoc(collection(db, "auditLogs"), {
+      donationId: id,
+      action: status,
+      adminUid: user.uid,
+      createdAt: serverTimestamp()
+    });
+
+    message(dashboardMessage, "Status updated: " + status + ".");
+    await loadDonations();
+  } catch (err) {
+    message(dashboardMessage,
+      "Operation may not have completed fully. Check the record before retrying. " + err.message, true);
+    await loadDonations();
+  } finally {
+    busy = false;
+    render();
+  }
+}
+
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  kickOut();
+});
+
+document.getElementById("refreshBtn").addEventListener("click", loadDonations);
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("statusFilter").addEventListener("change", render);
+
+/* Auth gate — runs first and on every change. */
+onAuthStateChanged(auth, async user => {
+  if (!user || !AUTHORIZED_UIDS.has(user.uid)) {
+    if (user) await signOut(auth);
+    kickOut();
+    return;
+  }
+
+  currentUid = user.uid;
+  gate.style.display = "none";
+  app.style.display = "block";
+  document.getElementById("welcome").textContent =
+    "Signed in as " + user.email;
+  await loadDonations();
+});
+
+/* Extra safety: if the tab regains focus and the session is gone, kick out. */
+window.addEventListener("focus", () => {
+  if (!isAuthorized()) kickOut();
+});
+</script>
+</body>
+</html>
