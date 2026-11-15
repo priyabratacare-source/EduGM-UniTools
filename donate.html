@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6546e8">
+
+<title>Support EduGM UniTools — Donate</title>
+<meta name="description" content="Support EduGM UniTools with a voluntary donation. Submit your donation details for review — all submissions are verified by our team before being published.">
+<meta name="keywords" content="donate edugm, support edugm, edugm donation, education donation, student tools support">
+<meta name="author" content="EduGM UniTools">
+
+<meta property="og:title" content="Support EduGM UniTools — Donate">
+<meta property="og:description" content="Help us keep building free academic tools for students.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="https://i.ibb.co/1Y82N0n0/Edu-GM-Learning-Logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="email.css">
+
+<style>
+  /* Donation-specific styles */
+  .donation-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .donation-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+  .donation-card h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px}
+  .donation-card p.lead{color:var(--muted);font-size:13.5px;line-height:1.8;margin-bottom:20px}
+
+  /* UPI payment block */
+  .payment-block{background:linear-gradient(135deg,#f5f2ff,#eff4ff);border:1px solid #e0d8ff;border-radius:14px;padding:20px;margin-bottom:18px}
+  .payment-block .lbl{font-size:11px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .payment-block .upi{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#fff;border:1px solid #e0d8ff;border-radius:10px;padding:12px 14px;flex-wrap:wrap}
+  .payment-block .upi-id{font-family:monospace;font-size:15px;font-weight:800;color:var(--navy);word-break:break-all}
+  .payment-block .copy-btn{padding:7px 14px;border:0;border-radius:8px;background:var(--primary);color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
+  .payment-block .copy-btn:hover{background:var(--primary-dark)}
+  .payment-block .copy-btn.copied{background:var(--green)}
+
+  .qr-box{text-align:center;padding:16px;background:#fff;border:1px dashed #d9d4eb;border-radius:12px;margin-top:14px}
+  .qr-box .qr-img{width:180px;height:180px;margin:0 auto;display:block;background:#f0edff;border-radius:8px;display:grid;place-items:center;color:var(--primary);font-size:11px;font-weight:700;text-align:center;padding:10px}
+  .qr-box small{display:block;margin-top:10px;color:var(--muted);font-size:11px}
+
+  /* Amount quick-pick */
+  .amount-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:#fff;font-size:12.5px;font-weight:700;color:#555870;cursor:pointer;transition:.15s}
+  .chip:hover{border-color:#cfc3ff;color:var(--primary)}
+  .chip.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
+
+  /* Steps */
+  .steps{list-style:none;padding:0;margin:0;counter-reset:step}
+  .steps li{position:relative;padding:0 0 18px 40px;counter-increment:step;font-size:13px;color:#555870;line-height:1.6}
+  .steps li:last-child{padding-bottom:0}
+  .steps li::before{content:counter(step);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:var(--primary);font-weight:800;font-size:12px;display:grid;place-items:center}
+  .steps li strong{display:block;color:var(--navy);font-size:13.5px;margin-bottom:2px}
+
+  /* Consent checkboxes */
+  .consent{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .consent label{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#555870;line-height:1.6;cursor:pointer}
+  .consent input{margin-top:3px;width:16px;height:16px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
+  .consent a{color:var(--primary);font-weight:700}
+  .consent a:hover{text-decoration:underline}
+
+  /* Donor preview list */
+  .donor-preview{background:#fafaff;border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:16px}
+  .donor-preview .lbl{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+  .donor-preview ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+  .donor-preview li{font-size:12.5px;color:#555870;display:flex;justify-content:space-between;gap:10px}
+  .donor-preview li strong{color:var(--navy)}
+  .donor-preview li .amt{color:var(--green);font-weight:800;font-family:'Plus Jakarta Sans',sans-serif}
+  .donor-preview .empty{color:var(--muted);font-size:12px;text-align:center;padding:8px}
+
+  /* Success state */
+  .success-panel{display:none;text-align:center;padding:30px 10px}
+  .success-panel.show{display:block}
+  .success-icon{width:80px;height:80px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#159b69,#0e7a52);color:#fff;font-size:36px;box-shadow:0 12px 30px rgba(21,155,105,.3)}
+  .success-panel h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;color:var(--navy)}
+  .success-panel p{color:var(--muted);font-size:14px;max-width:480px;margin:0 auto 8px}
+  .ref-code{display:inline-block;margin-top:14px;padding:10px 18px;border-radius:10px;background:var(--primary-light);color:var(--primary-dark);font-weight:800;font-size:14px;letter-spacing:.6px;font-family:monospace}
+  .status-pill{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 14px;border-radius:999px;background:#fff2d9;color:#805400;font-size:12px;font-weight:800}
+
+  /* Notice */
+  .notice{display:flex;gap:10px;padding:12px 14px;border-radius:10px;background:#eff4ff;border:1px solid #d3e1ff;color:#1e44a8;font-size:12.5px;line-height:1.6;margin-bottom:18px}
+  .notice.warn{background:#fff8e6;border-color:#ffe4a8;color:#805400}
+  .notice strong{font-weight:800}
+
+  @media(max-width:820px){
+    .donation-layout{grid-template-columns:1fr}
+  }
+  @media(max-width:520px){
+    .donation-card{padding:22px}
+    .payment-block .upi{flex-direction:column;align-items:stretch}
+    .payment-block .copy-btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="EduGM UniTools Home">
+      <span class="brand-icon">E</span>
+      <span class="brand-text">EduGM <span>UniTools</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="tools.html">Tools</a>
+      <a href="about.html">About</a>
+      <a href="founder.html">Founder</a>
+      <a href="contact.html">Contact</a>
+      <a href="donate.html" class="active">Donate</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Community Support</span>
+    <h1>Support <span class="gradient-text">EduGM UniTools</span></h1>
+    <p>Your voluntary contribution helps us keep building free, privacy-first academic tools for students. Every donation is manually verified before being published.</p>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- ===== STEP 1: PAYMENT INSTRUCTIONS ===== -->
+  <div class="donation-card" id="payCard">
+    <h2>1. Send your donation</h2>
+    <p class="lead">Choose any amount, pay using UPI, then fill the form below with your transaction details so we can verify your support.</p>
+
+    <div class="payment-block">
+      <div class="lbl">Pay via UPI</div>
+      <div class="upi">
+        <span class="upi-id" id="upiId">edugm@upi</span>
+        <button class="copy-btn" id="copyUpiBtn" type="button">Copy UPI ID</button>
+      </div>
+      <div class="qr-box">
+        <div class="qr-img" id="qrPlaceholder">
+          Scan the UPI ID in your banking app<br>
+          <span style="display:block;margin-top:6px;font-size:10px;color:var(--muted);font-weight:500">or use the copy button above</span>
+        </div>
+        <small>Open GPay / PhonePe / Paytm → Pay via UPI → paste the ID.</small>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <strong>Choose an amount</strong>
+        Any amount is appreciated. Suggested: ₹100, ₹250, ₹500, ₹1000.
+      </li>
+      <li>
+        <strong>Pay via UPI</strong>
+        Use the UPI ID above. Save the transaction reference number from your payment app.
+      </li>
+      <li>
+        <strong>Submit this form</strong>
+        Enter your name, amount and transaction reference below.
+      </li>
+      <li>
+        <strong>Wait for verification</strong>
+        Our team will verify the payment within 2–3 business days. Verified supporters appear on the home page.
+      </li>
+    </ol>
+
+    <div class="notice warn" style="margin-top:16px;margin-bottom:0">
+      <span>⚠</span>
+      <span><strong>Important:</strong> Submitting this form does <em>not</em> automatically confirm your donation. Only verified payments are published.</span>
+    </div>
+  </div>
+
+  <!-- ===== STEP 2: SUBMISSION FORM ===== -->
+  <div class="donation-card" id="formCard" style="margin-top:22px">
+    <h2>2. Submit your donation details</h2>
+    <p class="lead">Fields marked <span style="color:var(--red)">*</span> are required. Please enter the exact transaction reference from your payment app.</p>
+
+    <form id="donationForm" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="donorName">Your name <span class="req">*</span></label>
+          <input id="donorName" name="donorName" type="text" autocomplete="name" placeholder="e.g. Priya Sharma" maxlength="80">
+          <div class="hint">Shown publicly only if you allow it below.</div>
+          <div class="err">Please enter your name.</div>
+        </div>
+
+        <div class="field">
+          <label for="donorEmail">Email address <span class="req">*</span></label>
+          <input id="donorEmail" name="donorEmail" type="email" autocomplete="email" placeholder="you@example.com" maxlength="120">
+          <div class="hint">Used only to contact you about this donation.</div>
+          <div class="err">Please enter a valid email address.</div>
+        </div>
+
+        <div class="field full">
+          <label for="donorAmount">Donation amount (₹) <span class="req">*</span></label>
+          <input id="donorAmount" name="donorAmount" type="number" min="1" step="1" placeholder="e.g. 500" inputmode="numeric">
+          <div class="amount-chips" id="amountChips">
+            <button class="chip" type="button" data-amt="100">₹100</button>
+            <button class="chip" type="button" data-amt="250">₹250</button>
+            <button class="chip" type="button" data-amt="500">₹500</button>
+            <button class="chip" type="button" data-amt="1000">₹1000</button>
+            <button class="chip" type="button" data-amt="2500">₹2500</button>
+          </div>
+          <div class="err">Please enter a valid amount (minimum ₹1).</div>
+        </div>
+
+        <div class="field full">
+          <label for="transactionId">Transaction reference / UTR <span class="req">*</span></label>
+          <input id="transactionId" name="transactionId" type="text" placeholder="e.g. 428813057812" maxlength="40" autocomplete="off">
+          <div class="hint">Find this in your UPI app's payment history. It is required for verification.</div>
+          <div class="err">Please enter a transaction reference.</div>
+        </div>
+
+        <div class="field full">
+          <label for="donorMessage">Message (optional)</label>
+          <textarea id="donorMessage" name="donorMessage" placeholder="A short note you'd like us to see (max 200 characters)." maxlength="200" style="min-height:80px"></textarea>
+          <div class="hint"><span id="msgCount">0</span> / 200 characters</div>
+        </div>
+      </div>
+
+      <div class="consent">
+        <label>
+          <input type="checkbox" id="consentPublish">
+          <span>I allow EduGM UniTools to publish my name and amount as a verified supporter on the website. If unchecked, my donation will be recorded privately.</span>
+        </label>
+        <label>
+          <input type="checkbox" id="consentAccurate">
+          <span>I confirm the information above is accurate and I agree to the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. <span style="color:var(--red)">*</span></span>
+        </label>
+      </div>
+
+      <!-- Honeypot -->
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+
+      <div class="alert" id="formAlert" role="alert" aria-live="polite"></div>
+
+      <div class="actions" style="margin-top:22px;padding-top:20px;border-top:1px solid var(--border)">
+        <button class="btn btn-primary" id="submitBtn" type="submit" style="flex:1;min-width:220px">
+          <span>✓</span> Submit for verification
+        </button>
+        <button class="btn btn-ghost" id="resetBtn" type="button">Clear form</button>
+      </div>
+    </form>
+
+    <!-- Success panel -->
+    <div class="success-panel" id="successPanel">
+      <div class="success-icon">✓</div>
+      <h2>Thank you for your support!</h2>
+      <p>Your donation details have been received. Our team will verify the payment within 2–3 business days and contact you by email if needed.</p>
+      <div class="ref-code" id="refCode">—</div>
+      <div class="status-pill"><span>⏳</span> Pending verification</div>
+      <div style="margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-ghost" href="index.html">Back to home</a>
+        <button class="btn btn-primary" id="newDonationBtn" type="button">Submit another donation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RECENT VERIFIED SUPPORTERS (preview) ===== -->
+  <div class="donation-card" style="margin-top:22px">
+    <h2>Recent verified supporters</h2>
+    <p class="lead">A live preview of the latest verified donations. Full list is on the <a href="index.html#donations" style="color:var(--primary);font-weight:700">home page</a>.</p>
+    <div class="donor-preview">
+      <div class="lbl">Latest supporters</div>
+      <ul id="donorPreview">
+        <li class="empty">Loading supporters…</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container footer-bottom">
+    <span>© <span id="currentYear"></span> <strong>EduGM UniTools</strong>. All rights reserved.</span>
+    <span>Owned by EduGM · Developed and maintained by <strong>CodeBihin</strong></span>
+  </div>
+</footer>
+
+<!-- Firebase SDK (modular) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ---------------------------------------------------------------
+   FIREBASE CONFIG
+   Replace with your project's config (same as firebase.js).
+   --------------------------------------------------------------- */
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+let db = null;
+try {
+  const app = initializeApp(FIREBASE_CONFIG);
+  db = getFirestore(app);
+} catch (e) {
+  console.warn("Firebase init failed:", e);
+}
+
+/* ---------- Helpers ---------- */
+const $ = id => document.getElementById(id);
+$("currentYear").textContent = new Date().getFullYear();
+
+function showAlert(type, html) {
+  const el = $("formAlert");
+  el.className = "alert show " + (type === "success" ? "alert-success" : "alert-error");
+  el.innerHTML = html;
+}
+function hideAlert() {
+  const el = $("formAlert");
+  el.className = "alert";
+  el.innerHTML = "";
+}
+function markInvalid(el, invalid) {
+  const f = el.closest(".field");
+  if (f) f.classList.toggle("invalid", invalid);
+}
+function clearAllInvalid() {
+  document.querySelectorAll(".field.invalid").forEach(f => f.classList.remove("invalid"));
+}
+
+/* ---------- UPI copy ---------- */
+const UPI_ID = "edugm@upi";  // ← replace with your real UPI ID
+$("upiId").textContent = UPI_ID;
+
+$("copyUpiBtn").addEventListener("click", async () => {
+  const btn = $("copyUpiBtn");
+  try {
+    await navigator.clipboard.writeText(UPI_ID);
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "Copy UPI ID";
+      btn.classList.remove("copied");
+    }, 1800);
+  } catch {
+    /* Fallback for older browsers */
+    const ta = document.createElement("textarea");
+    ta.value = UPI_ID;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "Copy UPI ID";
+      btn.classList.remove("copied");
+    }, 1800);
+  }
+});
+
+/* ---------- Amount quick-pick ---------- */
+$("amountChips").addEventListener("click", (e) => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  document.querySelectorAll("#amountChips .chip").forEach(c => c.classList.remove("active"));
+  chip.classList.add("active");
+  $("donorAmount").value = chip.dataset.amt;
+  markInvalid($("donorAmount"), false);
+});
+
+$("donorAmount").addEventListener("input", () => {
+  document.querySelectorAll("#amountChips .chip").forEach(c => c.classList.remove("active"));
+  const v = $("donorAmount").value;
+  document.querySelectorAll("#amountChips .chip").forEach(c => {
+    if (c.dataset.amt === v) c.classList.add("active");
+  });
+});
+
+/* ---------- Message counter ---------- */
+$("donorMessage").addEventListener("input", () => {
+  $("msgCount").textContent = $("donorMessage").value.length;
+});
+
+/* ---------- Validate ---------- */
+function validate(data) {
+  clearAllInvalid();
+  let firstInvalid = null;
+  const fail = el => { markInvalid(el, true); if (!firstInvalid) firstInvalid = el; };
+
+  if (!data.donorName || data.donorName.length < 2) fail($("donorName"));
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.donorEmail)) fail($("donorEmail"));
+  if (!data.donorAmount || data.donorAmount < 1) fail($("donorAmount"));
+  if (!data.transactionId || data.transactionId.trim().length < 4) fail($("transactionId"));
+
+  if (!data.consentAccurate) {
+    showAlert("error", "Please confirm that the information is accurate and you agree to the Privacy Policy.");
+    if (!firstInvalid) firstInvalid = $("consentAccurate");
+  }
+
+  if (firstInvalid) {
+    const target = firstInvalid.closest(".field") || firstInvalid;
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (typeof firstInvalid.focus === "function") firstInvalid.focus({ preventScroll: true });
+  }
+  return !firstInvalid;
+}
+
+/* ---------- Collect ---------- */
+function collectData() {
+  return {
+    donorName:       $("donorName").value.trim(),
+    email:           $("donorEmail").value.trim(),
+    amount:          Number($("donorAmount").value) || 0,
+    transactionId:   $("transactionId").value.trim(),
+    message:         $("donorMessage").value.trim(),
+    allowPublish:    $("consentPublish").checked,
+    consentAccurate: $("consentAccurate").checked,
+    website:         $("website").value
+  };
+}
+
+/* ---------- Submit ---------- */
+$("donationForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  hideAlert();
+
+  const data = collectData();
+
+  /* Honeypot */
+  if (data.website) {
+    showAlert("success", "Thank you! Your donation details have been received.");
+    return;
+  }
+
+  if (!validate(data)) {
+    if (!document.querySelector(".alert.show")) {
+      showAlert("error", "Please fix the highlighted fields and try again.");
+    }
+    return;
+  }
+
+  if (!db) {
+    showAlert("error", "The donation system is not available right now. Please email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a>.");
+    return;
+  }
+
+  const btn = $("submitBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> Submitting…';
+
+  const reference = "DON-" + Date.now().toString(36).toUpperCase().slice(-6);
+
+  try {
+    await addDoc(collection(db, "donations"), {
+      donorName:     data.donorName.slice(0, 80),
+      email:         data.email.slice(0, 120),
+      amount:        data.amount,
+      transactionId: data.transactionId.slice(0, 40),
+      message:       data.message.slice(0, 200),
+      allowPublish:  !!data.allowPublish,
+      status:        "pending",
+      reference:     reference,
+      submittedAt:   serverTimestamp(),
+      userAgent:     (navigator.userAgent || "").slice(0, 200)
+    });
+
+    /* Success */
+    $("refCode").textContent = "Reference: " + reference;
+    $("donationForm").style.display = "none";
+    $("successPanel").classList.add("show");
+    $("successPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+
+  } catch (err) {
+    console.error("Donation submit failed:", err);
+    showAlert("error",
+      "<strong>Could not submit your donation.</strong> " +
+      (err.message || "Unknown error") +
+      "<br>Please try again, or email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a> with your transaction reference.");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>✓</span> Submit for verification';
+  }
+});
+
+/* ---------- Reset ---------- */
+$("resetBtn").addEventListener("click", () => {
+  $("donationForm").reset();
+  document.querySelectorAll("#amountChips .chip").forEach(c => c.classList.remove("active"));
+  $("msgCount").textContent = "0";
+  clearAllInvalid();
+  hideAlert();
+  $("donorName").focus();
+});
+
+$("newDonationBtn").addEventListener("click", () => {
+  $("donationForm").reset();
+  document.querySelectorAll("#amountChips .chip").forEach(c => c.classList.remove("active"));
+  $("msgCount").textContent = "0";
+  clearAllInvalid();
+  hideAlert();
+  $("donationForm").style.display = "";
+  $("successPanel").classList.remove("show");
+  $("donorName").focus();
+  $("formCard").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+/* ---------- Load verified supporters preview ---------- */
+async function loadPreview() {
+  const ul = $("donorPreview");
+  if (!db) {
+    ul.innerHTML = '<li class="empty">Supporter list unavailable</li>';
+    return;
+  }
+  try {
+    let snap;
+    try {
+      snap = await getDocs(query(
+        collection(db, "publicDonations"),
+        orderBy("verifiedAt", "desc"),
+        limit(5)
+      ));
+    } catch {
+      /* Fallback if verifiedAt missing on some docs */
+      snap = await getDocs(collection(db, "publicDonations"));
+    }
+
+    const rows = snap.docs
+      .map(d => d.data())
+      .filter(d => d && d.status === "verified")
+      .sort((a, b) => {
+        const t = v => {
+          if (!v) return 0;
+          if (typeof v === "string") return Date.parse(v) || 0;
+          if (typeof v.seconds === "number") return v.seconds * 1000;
+          return 0;
+        };
+        return t(b.verifiedAt) - t(a.verifiedAt);
+      })
+      .slice(0, 5);
+
+    if (!rows.length) {
+      ul.innerHTML = '<li class="empty">No verified supporters yet — be the first!</li>';
+      return;
+    }
+
+    ul.innerHTML = "";
+    rows.forEach(d => {
+      const li = document.createElement("li");
+      const amt = Number(d.amount) || 0;
+      li.innerHTML = `
+        <strong>${(d.donorName || "Anonymous").slice(0, 60)}</strong>
+        <span class="amt">₹${amt.toLocaleString()}</span>
+      `;
+      ul.appendChild(li);
+    });
+  } catch (err) {
+    console.warn("Preview failed:", err);
+    ul.innerHTML = '<li class="empty">Could not load supporters</li>';
+  }
+}
+
+loadPreview();
+</script>
+</body>
+</html>
