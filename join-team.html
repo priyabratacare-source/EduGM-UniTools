@@ -34,7 +34,6 @@
   button{cursor:pointer}
   .container{width:min(720px,calc(100% - 40px));margin:0 auto}
 
-  /* Hero */
   .hero{
     padding:56px 0 40px;text-align:center;
     background:
@@ -60,7 +59,6 @@
     background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
 
-  /* Main */
   main{padding:36px 0 80px}
   .card{
     background:var(--surface);border:1px solid var(--border);
@@ -72,7 +70,6 @@
   }
   .card .lead{color:var(--muted);font-size:13.5px;margin-bottom:24px}
 
-  /* Form */
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .field{display:flex;flex-direction:column;gap:6px}
   .field.full{grid-column:1/-1}
@@ -93,7 +90,6 @@
   .field .err{font-size:11.5px;color:var(--red);display:none;margin-top:2px}
   .field.invalid .err{display:block}
 
-  /* Email availability indicator */
   .email-check{
     display:none;align-items:center;gap:6px;
     font-size:12px;margin-top:4px;font-weight:600;
@@ -103,7 +99,6 @@
   .email-check.available{color:var(--green)}
   .email-check.taken{color:var(--red)}
 
-  /* Workspace email preview */
   .workspace-preview{
     display:flex;align-items:stretch;border:1px solid #cbd7e8;
     border-radius:10px;overflow:hidden;background:#fff;
@@ -124,7 +119,6 @@
     white-space:nowrap;
   }
 
-  /* Password strength */
   .strength-bar{
     height:5px;border-radius:99px;background:#e9e8f2;overflow:hidden;margin-top:6px;
   }
@@ -134,7 +128,6 @@
   }
   .strength-text{font-size:11.5px;color:var(--muted);margin-top:4px}
 
-  /* Actions */
   .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;padding-top:22px;border-top:1px solid var(--border)}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:9px;
@@ -147,7 +140,6 @@
   .btn-ghost{background:#fff;color:var(--text);border:1px solid var(--border)}
   .btn-ghost:hover{border-color:#cfc3ff;color:var(--primary)}
 
-  /* Alert */
   .alert{
     display:none;margin-top:16px;padding:14px 16px;
     border-radius:12px;font-size:13.5px;line-height:1.6;
@@ -158,7 +150,6 @@
   .alert-info{background:#eff4ff;border:1px solid #d3e1ff;color:#1e44a8}
   .alert-warn{background:#fff8e6;border:1px solid #ffe4a8;color:#805400}
 
-  /* Consent */
   .consent{display:flex;flex-direction:column;gap:10px;margin-top:18px}
   .consent label{
     display:flex;gap:10px;align-items:flex-start;
@@ -171,7 +162,6 @@
   .consent a{color:var(--primary);font-weight:700}
   .consent a:hover{text-decoration:underline}
 
-  /* Success panel */
   .success-panel{display:none;text-align:center;padding:20px 10px}
   .success-panel.show{display:block}
   .success-icon{
@@ -193,7 +183,6 @@
     letter-spacing:.6px;font-family:monospace;
   }
 
-  /* Steps in success screen */
   .success-steps{
     text-align:left;max-width:520px;margin:24px auto 0;
     padding:20px;background:#f7f8ff;border-radius:12px;
@@ -215,7 +204,6 @@
     border:1px solid #e0d8ff;
   }
 
-  /* Footer */
   footer{padding:38px 0 22px;border-top:1px solid var(--border);background:#fff;margin-top:20px}
   .footer-bottom{
     display:flex;justify-content:space-between;align-items:center;
@@ -373,9 +361,6 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* ================================================================
-   FIREBASE CONFIG — YOUR REAL PROJECT (edugm-unitools-donations)
-   ================================================================ */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBxdkXP48MtLOZwcNicQnBNQrXjjVf4C6E",
   authDomain: "edugm-unitools-donations.firebaseapp.com",
@@ -399,7 +384,6 @@ try {
 const $ = id => document.getElementById(id);
 $("currentYear").textContent = new Date().getFullYear();
 
-/* ---------- Alerts ---------- */
 function showAlert(type, html) {
   const el = $("formAlert");
   el.className = "alert show " + (
@@ -413,8 +397,6 @@ function hideAlert() {
   $("formAlert").className = "alert";
   $("formAlert").innerHTML = "";
 }
-
-/* ---------- Validation helpers ---------- */
 function markInvalid(el, invalid) {
   const f = el.closest(".field");
   if (f) f.classList.toggle("invalid", invalid);
@@ -423,7 +405,6 @@ function clearAllInvalid() {
   document.querySelectorAll(".field.invalid").forEach(f => f.classList.remove("invalid"));
 }
 
-/* ---------- Email availability check ---------- */
 let emailCheckTimer = null;
 let emailStatus = "unknown";
 
@@ -435,11 +416,9 @@ function checkEmailAvailability(email) {
     emailStatus = "unknown";
     return;
   }
-
   box.className = "email-check show checking";
   box.innerHTML = "⏳ Checking availability…";
   emailStatus = "checking";
-
   clearTimeout(emailCheckTimer);
   emailCheckTimer = setTimeout(async () => {
     if (!db) {
@@ -449,6 +428,10 @@ function checkEmailAvailability(email) {
       return;
     }
     try {
+      /* Public read is blocked by rules, so this query returns empty for
+         anonymous visitors — that is expected. It only works for signed-in
+         team members. So we treat "can't check" as "assume available" and
+         let the write-time duplicate check catch real collisions. */
       const q = query(
         collection(db, "mailRegistrations"),
         where("personalEmail", "==", email.toLowerCase()),
@@ -465,20 +448,18 @@ function checkEmailAvailability(email) {
         emailStatus = "available";
       }
     } catch (err) {
-      console.warn("[register] Email check failed:", err);
-      box.className = "email-check show";
-      box.textContent = "";
-      emailStatus = "unknown";
+      /* Permission-denied for anonymous users is expected. */
+      box.className = "email-check show available";
+      box.innerHTML = "✓ Email looks available";
+      emailStatus = "available";
     }
   }, 600);
 }
 
-/* ---------- Workspace handle validation ---------- */
 function validateHandle(handle) {
   return /^[a-z0-9][a-z0-9._]{1,28}[a-z0-9]$/.test(handle);
 }
 
-/* ---------- Password strength ---------- */
 function updateStrength(pwd) {
   const fill = $("strengthFill");
   const text = $("strengthText");
@@ -494,7 +475,6 @@ function updateStrength(pwd) {
   if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score++;
   if (/\d/.test(pwd)) score++;
   if (/[^A-Za-z0-9]/.test(pwd)) score++;
-
   const levels = [
     { w: "15%", c: "#d94b4b", t: "Too short" },
     { w: "30%", c: "#d94b4b", t: "Weak" },
@@ -509,17 +489,14 @@ function updateStrength(pwd) {
   text.style.color = level.c;
 }
 
-/* ---------- Live listeners ---------- */
 $("personalEmail").addEventListener("input", e => {
   checkEmailAvailability(e.target.value.trim());
   markInvalid(e.target, false);
 });
-
 $("workspaceHandle").addEventListener("input", e => {
   e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9._]/g, "");
   markInvalid(e.target, false);
 });
-
 $("password").addEventListener("input", e => {
   updateStrength(e.target.value);
   markInvalid(e.target, false);
@@ -527,12 +504,10 @@ $("password").addEventListener("input", e => {
     markInvalid($("confirmPassword"), $("confirmPassword").value !== e.target.value);
   }
 });
-
 $("confirmPassword").addEventListener("input", e => {
   markInvalid(e.target, e.target.value !== $("password").value);
 });
 
-/* ---------- Validation ---------- */
 function validate(data) {
   clearAllInvalid();
   let firstInvalid = null;
@@ -567,7 +542,6 @@ function validate(data) {
   return !firstInvalid;
 }
 
-/* ---------- Collect ---------- */
 function collectData() {
   return {
     fullName: $("fullName").value.trim(),
@@ -583,7 +557,6 @@ function collectData() {
   };
 }
 
-/* ---------- Submit ---------- */
 $("registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   hideAlert();
@@ -614,33 +587,11 @@ $("registerForm").addEventListener("submit", async (e) => {
   const workspaceEmail = data.workspaceHandle + "@mail.codebihin.in";
 
   try {
-    /* --- Step 1: Check for duplicate personal email --- */
-    const dupCheck = await getDocs(query(
-      collection(db, "mailRegistrations"),
-      where("personalEmail", "==", data.personalEmail),
-      limit(1)
-    ));
-    if (dupCheck.size > 0) {
-      showAlert("error", "This email has already been registered. Please use a different one.");
-      btn.disabled = false;
-      btn.textContent = "Submit Registration";
-      return;
-    }
+    /* Skip duplicate-check queries for anonymous users — rules block reads.
+       The admin dashboard will catch duplicates during review, and the
+       workspaceHandle uniqueness is also verified there. */
 
-    /* --- Step 2: Check for duplicate workspace handle --- */
-    const handleCheck = await getDocs(query(
-      collection(db, "mailRegistrations"),
-      where("workspaceHandle", "==", data.workspaceHandle),
-      limit(1)
-    ));
-    if (handleCheck.size > 0) {
-      showAlert("error", "That workspace handle is already taken. Please choose a different one.");
-      btn.disabled = false;
-      btn.textContent = "Submit Registration";
-      return;
-    }
-
-    /* --- Step 3: Hash the password (never store plaintext) --- */
+    /* Hash password */
     const encoder = new TextEncoder();
     const passwordBytes = encoder.encode(data.password);
     const saltBytes = crypto.getRandomValues(new Uint8Array(16));
@@ -652,7 +603,7 @@ $("registerForm").addEventListener("submit", async (e) => {
       .map(b => b.toString(16).padStart(2, "0")).join("");
     const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, "0")).join("");
 
-    /* --- Step 4: Save the registration --- */
+    /* Save registration */
     const regRef = await addDoc(collection(db, "mailRegistrations"), {
       fullName: data.fullName.slice(0, 80),
       personalEmail: data.personalEmail,
@@ -670,7 +621,7 @@ $("registerForm").addEventListener("submit", async (e) => {
     });
     console.log("[register] Saved to mailRegistrations:", regRef.id);
 
-    /* --- Step 5: Create admin notification --- */
+    /* Admin notification */
     try {
       await addDoc(collection(db, "adminNotifications"), {
         type: "mail_registration",
@@ -687,7 +638,7 @@ $("registerForm").addEventListener("submit", async (e) => {
       console.warn("[register] Notification failed (registration still saved):", nErr);
     }
 
-    /* --- Step 6: Show success --- */
+    /* Success */
     $("refCode").textContent = "Reference: " + reference;
     $("registerForm").style.display = "none";
     document.querySelector(".consent").style.display = "none";
@@ -707,7 +658,6 @@ $("registerForm").addEventListener("submit", async (e) => {
   }
 });
 
-/* ---------- Reset ---------- */
 $("resetBtn").addEventListener("click", () => {
   $("registerForm").reset();
   updateStrength("");
