@@ -15,21 +15,7 @@
 
 <div id="shell" style="display:none">
   <div class="overlay" id="overlay"></div>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">EduGM <span>Team</span></div>
-    <nav class="sidebar-nav">
-      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
-      <a href="donations.html"><span class="nav-icon">₹</span> Donations</a>
-      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
-      <a href="team.html" class="active"><span class="nav-icon">◍</span> Team</a>
-      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
-    </nav>
-    <div class="sidebar-foot">
-      Signed in as team member
-      <button id="logoutBtn" type="button">Sign out</button>
-    </div>
-  </aside>
+  <div id="menu-mount"></div>
 
   <header class="topbar">
     <div class="topbar-left">
@@ -83,11 +69,11 @@
 </div>
 
 <script type="module">
-import {
-  guard, wireShell, AUTHORIZED_UIDS
-} from "./dashboard.js";
+import { loadMenu } from "./menu-loader.js";
+import { guard, wireShell, AUTHORIZED_UIDS } from "./dashboard.js";
 
 const user = await guard();
+await loadMenu();
 document.getElementById("gate").style.display = "none";
 document.getElementById("shell").style.display = "block";
 wireShell(user);
