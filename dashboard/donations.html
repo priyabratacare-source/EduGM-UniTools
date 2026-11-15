@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Donations | EduGM Team Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div id="gate" style="display:grid;place-items:center;min-height:100vh;color:#68778b;font-family:Arial,sans-serif;font-size:14px">
+  Verifying access…
+</div>
+
+<div id="shell" style="display:none">
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">EduGM <span>Team</span></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
+      <a href="donations.html" class="active"><span class="nav-icon">₹</span> Donations</a>
+      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
+      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
+      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-foot">
+      Signed in as team member
+      <button id="logoutBtn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">☰</button>
+      <h1>Donations</h1>
+    </div>
+    <div class="topbar-right">
+      <span id="userChip" class="user-chip"></span>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="content">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Donation Records</h2>
+            <p class="sub">Review and verify submissions.</p>
+          </div>
+          <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+        </div>
+
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search donor or transaction reference" aria-label="Search donations">
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="verified">Verified</option>
+            <option value="rejected">Rejected</option>
+            <option value="hold">Hold</option>
+          </select>
+        </div>
+
+        <p class="message" id="dashboardMessage" role="status" aria-live="polite"></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Donor</th>
+                <th>Amount</th>
+                <th>Transaction reference</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Review actions</th>
+              </tr>
+            </thead>
+            <tbody id="donationRows">
+              <tr><td colspan="6" class="empty">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="sub" style="margin-top:14px">
+          Verify a donation only after independently checking the payment.
+          A submitted screenshot or transaction reference alone is not proof of successful payment.
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import {
+  guard, wireShell, setMessage, clearMessage, formatDate,
+  safeText, statusClass, isAuthorized, kickOut,
+  auth, db, collection, getDocs, doc, updateDoc, setDoc, deleteDoc,
+  addDoc, serverTimestamp
+} from "./dashboard.js";
+
+const user = await guard();
+document.getElementById("gate").style.display = "none";
+document.getElementById("shell").style.display = "block";
+wireShell(user);
+
+const rows = document.getElementById("donationRows");
+const dashboardMessage = document.getElementById("dashboardMessage");
+let donations = [];
+let busy = false;
+
+function render() {
+  if (!isAuthorized()) { kickOut(); return; }
+
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  const filter = document.getElementById("statusFilter").value;
+
+  const filtered = donations.filter(d => {
+    const status = d.status || "pending";
+    const searchable = [d.donorName, d.transactionId, d.email]
+      .filter(Boolean).join(" ").toLowerCase();
+    return (filter === "all" || status === filter) && searchable.includes(query);
+  });
+
+  rows.replaceChildren();
+
+  if (!filtered.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 6; td.className = "empty";
+    td.innerHTML = donations.length
+      ? "<strong>No matches</strong>Try a different search or filter."
+      : "<strong>No records yet</strong>Donations will appear here once submitted.";
+    tr.appendChild(td); rows.appendChild(tr);
+    return;
+  }
+
+  for (const d of filtered) {
+    const tr = document.createElement("tr");
+    const cell = v => {
+      const td = document.createElement("td");
+      td.textContent = safeText(v);
+      tr.appendChild(td); return td;
+    };
+
+    cell(d.donorName);
+    cell(d.amount == null ? "—" : "₹" + d.amount);
+    cell(d.transactionId);
+
+    const statusCell = cell("");
+    const badge = document.createElement("span");
+    badge.className = "status " + statusClass(d.status || "pending");
+    badge.textContent = d.status || "pending";
+    statusCell.appendChild(badge);
+
+    cell(formatDate(d.submittedAt));
+
+    const actionCell = cell("");
+    const box = document.createElement("div");
+    box.className = "actions";
+
+    [
+      { status: "verified", label: "Verify", cls: "verify" },
+      { status: "hold",     label: "Hold",   cls: "hold" },
+      { status: "rejected", label: "Reject", cls: "reject" }
+    ].forEach(a => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = a.label;
+      btn.className = a.cls;
+      btn.disabled = busy || d.status === a.status;
+      btn.addEventListener("click", () => changeStatus(d.id, a.status));
+      box.appendChild(btn);
+    });
+
+    actionCell.appendChild(box);
+    rows.appendChild(tr);
+  }
+}
+
+async function loadDonations() {
+  if (!isAuthorized()) { kickOut(); return; }
+  clearMessage(dashboardMessage);
+  rows.replaceChildren();
+  const lr = document.createElement("tr");
+  const lc = document.createElement("td");
+  lc.colSpan = 6; lc.className = "empty";
+  lc.textContent = "Loading donations…";
+  lr.appendChild(lc); rows.appendChild(lr);
+
+  try {
+    const snap = await getDocs(collection(db, "donations"));
+    if (!isAuthorized()) { kickOut(); return; }
+    donations = snap.docs.map(i => ({ id: i.id, ...i.data() }));
+    donations.sort((a, b) => {
+      const t = v => v?.toMillis ? v.toMillis() : (Date.parse(v || "") || 0);
+      return t(b.submittedAt) - t(a.submittedAt);
+    });
+    render();
+    setMessage(dashboardMessage, "Records loaded.");
+  } catch (err) {
+    donations = []; render();
+    setMessage(dashboardMessage, "Could not load donations. " + err.message, true);
+  }
+}
+
+async function changeStatus(id, status) {
+  if (busy || !isAuthorized()) { if (!isAuthorized()) kickOut(); return; }
+  const donation = donations.find(d => d.id === id);
+  if (!donation) return;
+
+  if (status === "verified" &&
+      !confirm("Confirm you independently checked this payment before publishing?")) return;
+  if (status === "rejected" &&
+      !confirm("Reject this donation submission?")) return;
+
+  busy = true; render(); clearMessage(dashboardMessage);
+
+  try {
+    const user = auth.currentUser;
+    if (!user || !isAuthorized()) throw new Error("Authorization required.");
+
+    const reviewTime = new Date().toISOString();
+
+    await updateDoc(doc(db, "donations", id), {
+      status,
+      reviewedAt: serverTimestamp(),
+      reviewedBy: user.uid
+    });
+
+    if (status === "verified") {
+      await setDoc(doc(db, "publicDonations", id), {
+        donorName: String(donation.donorName || "Anonymous").slice(0, 80),
+        amount: Number(donation.amount) || 0,
+        status: "verified",
+        verifiedAt: reviewTime
+      });
+    } else {
+      await deleteDoc(doc(db, "publicDonations", id));
+    }
+
+    await addDoc(collection(db, "auditLogs"), {
+      donationId: id,
+      action: status,
+      adminUid: user.uid,
+      createdAt: serverTimestamp()
+    });
+
+    setMessage(dashboardMessage, "Status updated: " + status + ".");
+    await loadDonations();
+  } catch (err) {
+    setMessage(dashboardMessage,
+      "Operation may not have completed fully. Check the record before retrying. " + err.message, true);
+    await loadDonations();
+  } finally {
+    busy = false; render();
+  }
+}
+
+document.getElementById("refreshBtn").addEventListener("click", loadDonations);
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("statusFilter").addEventListener("change", render);
+
+await loadDonations();
+</script>
+</body>
+</html>
