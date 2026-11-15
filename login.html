@@ -5,111 +5,393 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="EduGM UniTools team login — authorized team members only.">
-<meta name="theme-color" content="#1769e0">
+<meta name="theme-color" content="#427594">
 <title>Team Login | EduGM UniTools</title>
 <style>
-:root{
-  --blue:#1769e0;--blue-dark:#1255b8;--dark:#12335b;--bg:#f4f7fc;
-  --border:#dce5f1;--text:#243449;--muted:#68778b;
-  --green:#137333;--red:#b42318;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column}
-header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px}
-.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand{font-size:20px;font-weight:bold;color:var(--dark);letter-spacing:-.3px}
-.brand span{color:var(--blue)}
-main{flex:1;max-width:1100px;margin:0 auto;padding:40px 16px;width:100%}
-.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px}
-.login{max-width:400px;margin:50px auto}
-h1{font-size:24px;color:var(--dark);margin:0 0 6px;letter-spacing:-.3px}
-label{display:block;font-size:14px;margin:14px 0 6px;font-weight:600}
-input{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px;font-family:inherit}
-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,224,.12)}
-button{border:0;border-radius:8px;padding:12px 14px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:14px;transition:background .15s}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:var(--blue);color:#fff;width:100%;margin-top:18px}
-.primary:hover:not(:disabled){background:var(--blue-dark)}
-.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere}
-.message:empty{display:none}
-.error{color:var(--red)}.success{color:var(--green)}
-.small{color:var(--muted);font-size:13px}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:13px}
+  :root{
+    --chrome:#427594;
+    --chrome-dark:#2f5a75;
+    --panel:#ffffff;
+    --text:#1a1a1a;
+    --muted:#5a6b78;
+    --green:#137333;
+    --red:#b42318;
+    --code-bg:#845f5f;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+
+  body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:13px;
+    color:var(--text);
+    line-height:1.5;
+    background:#ffffff;              /* ← plain white background */
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+
+  .router-card{
+    width:100%;
+    max-width:340px;
+    border:1px solid var(--chrome-dark);
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 4px 18px rgba(18,51,91,.18);
+    background:var(--panel);
+  }
+
+  .router-title{
+    background:var(--chrome);
+    color:#fff;
+    font-size:12px;
+    font-weight:bold;
+    padding:7px 10px;
+    letter-spacing:.2px;
+  }
+
+  .router-body{
+    padding:14px 16px 16px;
+    background:#fff;
+    border-left:3px solid var(--chrome);
+    border-right:3px solid var(--chrome);
+  }
+
+  .row{
+    display:flex;
+    align-items:center;
+    margin-bottom:9px;
+    font-size:12px;
+  }
+  .row label{
+    width:110px;
+    flex-shrink:0;
+    color:#333;
+  }
+  .row .field{flex:1}
+  .row input[type=text],
+  .row input[type=email],
+  .row input[type=password]{
+    width:100%;
+    padding:5px 7px;
+    border:1px solid #8ba6bb;
+    border-radius:2px;
+    font-size:12px;
+    font-family:inherit;
+    background:#fff;
+    color:#111;
+    outline:none;
+    transition:border-color .12s, box-shadow .12s;
+  }
+  .row input:focus{
+    border-color:var(--chrome);
+    box-shadow:0 0 0 2px rgba(66,117,148,.18);
+  }
+
+  .verif-row{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:10px;
+    font-size:12px;
+  }
+  .verif-row label{
+    width:110px;
+    flex-shrink:0;
+    color:#333;
+    padding-top:5px;
+  }
+  .verif-row .verif-field{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .verif-row input{
+    width:100%;
+    padding:5px 7px;
+    border:1px solid #8ba6bb;
+    border-radius:2px;
+    font-size:13px;
+    font-family:inherit;
+    background:#fff;
+    color:#111;
+    outline:none;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .verif-row input:focus{
+    border-color:var(--chrome);
+    box-shadow:0 0 0 2px rgba(66,117,148,.18);
+  }
+
+  .code-display{display:flex;gap:6px;align-items:stretch}
+  .code-chip{
+    flex:1;
+    padding:6px 8px;
+    background:var(--code-bg);
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    letter-spacing:4px;
+    text-align:center;
+    border-radius:2px;
+    border:1px solid #5e3e3e;
+    text-shadow:1px -1px 0 #000;
+    box-shadow:inset 2px -1px 4px rgba(0,0,0,.35);
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-user-drag:none;
+    font-family:"Courier New",monospace;
+    line-height:1.4;
+  }
+  .refresh-code{
+    padding:0 10px;
+    background:#f1f5f9;
+    border:1px solid #8ba6bb;
+    border-radius:2px;
+    color:var(--chrome-dark);
+    font-size:14px;
+    cursor:pointer;
+    transition:background .12s;
+    font-family:inherit;
+  }
+  .refresh-code:hover{background:#e2ebf2}
+  .refresh-code:active{background:#d4e0ea}
+
+  .router-foot{
+    background:var(--chrome);
+    padding:8px 10px;
+    display:flex;
+    gap:8px;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+  .router-btn{
+    font-family:inherit;
+    font-size:12px;
+    font-weight:bold;
+    padding:5px 14px;
+    border:1px solid #2c5068;
+    border-radius:2px;
+    background:#5a90b5;
+    color:#fff;
+    cursor:pointer;
+    text-shadow:0 1px 0 rgba(0,0,0,.25);
+    transition:background .12s;
+  }
+  .router-btn:hover:not(:disabled){background:#6aa0c5}
+  .router-btn:active:not(:disabled){background:#4a7fa4}
+  .router-btn:disabled{opacity:.55;cursor:not-allowed}
+  .router-btn.submit{background:#4a9b6d;border-color:#2f6b49}
+  .router-btn.submit:hover:not(:disabled){background:#57ad7d}
+
+  .message{
+    font-size:12px;
+    margin:0 0 10px;
+    padding:6px 8px;
+    border-radius:2px;
+    overflow-wrap:anywhere;
+    display:none;
+  }
+  .message.show{display:block}
+  .message.error{background:#fdecea;color:var(--red);border:1px solid #f5c2bd}
+  .message.success{background:#e8f6ee;color:var(--green);border:1px solid #b7e1c6}
+
+  @media (max-width:420px){
+    .row label,.verif-row label{width:92px;font-size:11.5px}
+    .router-card{max-width:100%}
+    .router-btn{padding:5px 10px}
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="nav">
-    <div class="brand">EduGM <span>UniTools</span> <small style="color:var(--muted);font-weight:normal">Team</small></div>
-  </div>
-</header>
 
-<main>
-  <section class="card login">
-    <h1>Team Login</h1>
-    <p class="small">Authorized EduGM team members only.</p>
-    <form id="loginForm" autocomplete="on" novalidate>
-      <label for="email">Email</label>
-      <input id="email" type="email" autocomplete="username" required>
-      <label for="password">Password</label>
-      <input id="password" type="password" autocomplete="current-password" required>
-      <button id="loginBtn" class="primary" type="submit">Sign in</button>
-    </form>
+<div class="router-card">
+
+  <div class="router-title">Web Login</div>
+
+  <div class="router-body">
+
     <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
-  </section>
-</main>
 
-<footer>
-  © 2026 EduGM UniTools. Maintained and developed by CodeBihin.
-</footer>
+    <form id="loginForm" autocomplete="on" novalidate>
 
+      <div class="row">
+        <label for="email">Username:</label>
+        <div class="field">
+          <input id="email" type="email" autocomplete="username" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="password">Password:</label>
+        <div class="field">
+          <input id="password" type="password" autocomplete="current-password" required>
+        </div>
+      </div>
+
+      <div class="verif-row">
+        <label for="verification_code">Code:</label>
+        <div class="verif-field">
+          <div class="code-display">
+            <div class="code-chip" id="codeChip" aria-live="polite">-----</div>
+            <button type="button" class="refresh-code" id="refreshCodeBtn" title="Generate a new code" aria-label="Generate a new verification code">⟳</button>
+          </div>
+          <input id="verification_code" type="text" name="verification_code"
+                 placeholder="Type the code above"
+                 autocomplete="off" spellcheck="false"
+                 maxlength="5"
+                 aria-label="Verification code">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="router-foot">
+    <button id="loginBtn" type="submit" form="loginForm" class="router-btn submit">Login</button>
+    <button id="resetBtn" type="reset" form="loginForm" class="router-btn">Rewrite</button>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     VERIFICATION CODE — runs immediately, independent of Firebase
+     ============================================================ -->
+<script>
+(function () {
+  "use strict";
+
+  var codeChip   = document.getElementById("codeChip");
+  var codeInput  = document.getElementById("verification_code");
+  var refreshBtn = document.getElementById("refreshCodeBtn");
+
+  /* Alphabet excludes confusing characters: no I, O, 0, 1 */
+  var CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  /* The currently active code — read by the login script below. */
+  window.currentVerificationCode = "";
+
+  function generateCode() {
+    var out = "";
+    // Prefer crypto for real randomness
+    if (window.crypto && window.crypto.getRandomValues) {
+      var arr = new Uint32Array(5);
+      window.crypto.getRandomValues(arr);
+      for (var i = 0; i < 5; i++) {
+        out += CHARS.charAt(arr[i] % CHARS.length);
+      }
+    } else {
+      // Fallback for very old browsers
+      for (var j = 0; j < 5; j++) {
+        out += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+      }
+    }
+    return out;
+  }
+
+  function refreshCode() {
+    var code = generateCode();
+    window.currentVerificationCode = code;
+    codeChip.textContent = code;
+    if (codeInput) codeInput.value = "";
+    if (codeInput) codeInput.focus();
+  }
+
+  /* Expose so the auth script can trigger a new code */
+  window.refreshVerificationCode = refreshCode;
+
+  /* Wire the refresh button */
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", function () {
+      refreshCode();
+    });
+  }
+
+  /* Generate on page load — runs no matter what */
+  refreshCode();
+})();
+</script>
+
+<!-- ============================================================
+     AUTH — Firebase login (module)
+     ============================================================ -->
 <script type="module">
 import {
   auth, signInWithEmailAndPassword, onAuthStateChanged, signOut
 } from "../firebase.js";
 
-/* Authorized team member UIDs — must match dashboard/index.html and Firestore rules. */
 const AUTHORIZED_UIDS = new Set([
   "xrQ5oHinaAaddySn09V3k8CRAo52"
 ]);
 
-const loginForm = document.getElementById("loginForm");
+const loginForm    = document.getElementById("loginForm");
 const loginMessage = document.getElementById("loginMessage");
-const loginBtn = document.getElementById("loginBtn");
+const loginBtn     = document.getElementById("loginBtn");
+const resetBtn     = document.getElementById("resetBtn");
+const emailInput   = document.getElementById("email");
+const pwdInput     = document.getElementById("password");
+const codeInput    = document.getElementById("verification_code");
 
 function setMsg(text, isError = false) {
   loginMessage.textContent = text;
-  loginMessage.className = "message " + (isError ? "error" : "success");
+  loginMessage.className = "message show " + (isError ? "error" : "success");
+}
+function clearMsg() {
+  loginMessage.textContent = "";
+  loginMessage.className = "message";
 }
 
-/* If already signed in as an authorized user, go straight to dashboard. */
+/* If already signed in, go to dashboard. */
 onAuthStateChanged(auth, user => {
   if (user && AUTHORIZED_UIDS.has(user.uid)) {
     window.location.replace("dashboard/index.html");
   } else if (user) {
-    /* Signed in but not authorized — force sign out so the session is clean. */
     signOut(auth);
   }
 });
 
+/* Submit */
 loginForm.addEventListener("submit", async e => {
   e.preventDefault();
-  setMsg("");
+  clearMsg();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const email    = emailInput.value.trim();
+  const password = pwdInput.value;
+  const entered  = codeInput.value.trim().toUpperCase();
+  const expected = (window.currentVerificationCode || "").toUpperCase();
 
   if (!email || !password) {
-    setMsg("Please enter your email and password.", true);
+    setMsg("Please enter your username and password.", true);
+    return;
+  }
+
+  if (!entered) {
+    setMsg("Please type the verification code shown above.", true);
+    codeInput.focus();
+    return;
+  }
+
+  if (entered !== expected) {
+    setMsg("Incorrect verification code. A new code has been generated.", true);
+    if (typeof window.refreshVerificationCode === "function") {
+      window.refreshVerificationCode();
+    }
     return;
   }
 
   loginBtn.disabled = true;
+  resetBtn.disabled = true;
+  loginBtn.textContent = "Signing in…";
 
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
 
-    /* Final authorization gate — never trust email alone. */
     if (!AUTHORIZED_UIDS.has(cred.user.uid)) {
       await signOut(auth);
       throw new Error("This account is not authorized for team access.");
@@ -118,10 +400,48 @@ loginForm.addEventListener("submit", async e => {
     setMsg("Login successful. Redirecting…");
     window.location.replace("dashboard/index.html");
   } catch (err) {
-    setMsg("Login failed: " + err.message, true);
+    let msg = err.message || "Login failed.";
+    if (msg.includes("auth/invalid-credential") ||
+        msg.includes("auth/wrong-password") ||
+        msg.includes("auth/user-not-found")) {
+      msg = "Incorrect username or password.";
+    } else if (msg.includes("auth/too-many-requests")) {
+      msg = "Too many attempts. Please try again later.";
+    } else if (msg.includes("auth/invalid-email")) {
+      msg = "Please enter a valid email address.";
+    }
+    setMsg(msg, true);
     loginBtn.disabled = false;
+    resetBtn.disabled = false;
+    loginBtn.textContent = "Login";
+    if (typeof window.refreshVerificationCode === "function") {
+      window.refreshVerificationCode();
+    }
   }
 });
+
+/* Reset */
+resetBtn.addEventListener("click", () => {
+  clearMsg();
+  loginBtn.disabled = false;
+  loginBtn.textContent = "Login";
+  if (typeof window.refreshVerificationCode === "function") {
+    window.refreshVerificationCode();
+  }
+  emailInput.focus();
+});
+
+/* Enter key */
+loginForm.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    loginForm.requestSubmit();
+  }
+});
+
+/* Focus first field */
+emailInput.focus();
 </script>
+
 </body>
 </html>
