@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="description" content="EduGM UniTools donation review — authorized team members only.">
 <title>Donations | EduGM Team Dashboard</title>
 <link rel="stylesheet" href="dashboard.css">
 </head>
@@ -15,21 +16,7 @@
 
 <div id="shell" style="display:none">
   <div class="overlay" id="overlay"></div>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">EduGM <span>Team</span></div>
-    <nav class="sidebar-nav">
-      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
-      <a href="donations.html" class="active"><span class="nav-icon">₹</span> Donations</a>
-      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
-      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
-      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
-    </nav>
-    <div class="sidebar-foot">
-      Signed in as team member
-      <button id="logoutBtn" type="button">Sign out</button>
-    </div>
-  </aside>
+  <div id="menu-mount"></div>
 
   <header class="topbar">
     <div class="topbar-left">
@@ -49,7 +36,7 @@
             <h2>Donation Records</h2>
             <p class="sub">Review and verify submissions.</p>
           </div>
-          <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+          <button class="btn btn-secondary" id="refreshBtn" type="button">↻ Refresh</button>
         </div>
 
         <div class="toolbar">
@@ -93,6 +80,7 @@
 </div>
 
 <script type="module">
+import { loadMenu } from "./menu-loader.js";
 import {
   guard, wireShell, setMessage, clearMessage, formatDate,
   safeText, statusClass, isAuthorized, kickOut,
@@ -101,6 +89,8 @@ import {
 } from "./dashboard.js";
 
 const user = await guard();
+await loadMenu();
+
 document.getElementById("gate").style.display = "none";
 document.getElementById("shell").style.display = "block";
 wireShell(user);
@@ -206,7 +196,9 @@ async function loadDonations() {
 }
 
 async function changeStatus(id, status) {
-  if (busy || !isAuthorized()) { if (!isAuthorized()) kickOut(); return; }
+  if (busy) return;
+  if (!isAuthorized()) { kickOut(); return; }
+
   const donation = donations.find(d => d.id === id);
   if (!donation) return;
 
@@ -218,15 +210,15 @@ async function changeStatus(id, status) {
   busy = true; render(); clearMessage(dashboardMessage);
 
   try {
-    const user = auth.currentUser;
-    if (!user || !isAuthorized()) throw new Error("Authorization required.");
+    const u = auth.currentUser;
+    if (!u || !isAuthorized()) throw new Error("Authorization required.");
 
     const reviewTime = new Date().toISOString();
 
     await updateDoc(doc(db, "donations", id), {
       status,
       reviewedAt: serverTimestamp(),
-      reviewedBy: user.uid
+      reviewedBy: u.uid
     });
 
     if (status === "verified") {
@@ -243,7 +235,7 @@ async function changeStatus(id, status) {
     await addDoc(collection(db, "auditLogs"), {
       donationId: id,
       action: status,
-      adminUid: user.uid,
+      adminUid: u.uid,
       createdAt: serverTimestamp()
     });
 
