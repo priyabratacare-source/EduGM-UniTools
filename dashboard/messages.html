@@ -8,259 +8,102 @@
 <title>Messages | EduGM Team Dashboard</title>
 <link rel="stylesheet" href="dashboard.css">
 <style>
-  /* ============================================================
-     MESSAGING LAYOUT — two-column inbox
-     ============================================================ */
   .msg-layout {
     display: grid;
     grid-template-columns: 340px 1fr;
-    gap: 0;
     border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
     background: #fff;
     min-height: 600px;
   }
-
-  /* ---------- Sidebar: message list ---------- */
   .msg-list-pane {
     border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    background: #fafbff;
-    min-width: 0;
+    display: flex; flex-direction: column;
+    background: #fafbff; min-width: 0;
   }
-  .msg-list-head {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    background: #fff;
-  }
-  .msg-list-head h3 {
-    margin: 0 0 10px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--dark);
-  }
+  .msg-list-head { padding: 14px 16px; border-bottom: 1px solid var(--border); background: #fff; }
+  .msg-list-head h3 { margin: 0 0 10px; font-size: 14px; font-weight: 700; color: var(--dark); }
   .msg-search {
-    width: 100%;
-    padding: 8px 11px;
-    border: 1px solid #cbd7e8;
-    border-radius: 7px;
-    font-size: 13px;
-    font-family: inherit;
-    outline: none;
+    width: 100%; padding: 8px 11px; border: 1px solid #cbd7e8;
+    border-radius: 7px; font-size: 13px; font-family: inherit; outline: none;
   }
-  .msg-search:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(23,105,224,.12);
-  }
-  .msg-filter-row {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-  }
+  .msg-search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(23,105,224,.12); }
+  .msg-filter-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
   .msg-filter-btn {
-    padding: 5px 10px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--muted);
-    font-size: 11.5px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: .15s;
+    padding: 5px 10px; border: 1px solid var(--border); border-radius: 999px;
+    background: #fff; color: var(--muted); font-size: 11.5px; font-weight: 700;
+    cursor: pointer; transition: .15s;
   }
   .msg-filter-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .msg-filter-btn.active {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-  }
+  .msg-filter-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-  .msg-list {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 640px;
-  }
-  .msg-item {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background .12s;
-    position: relative;
-  }
+  .msg-list { flex: 1; overflow-y: auto; max-height: 640px; }
+  .msg-item { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .12s; }
   .msg-item:hover { background: #f2f6fc; }
   .msg-item.active { background: #e8f0fd; border-left: 3px solid var(--blue); padding-left: 13px; }
   .msg-item.unread .msg-item-subject { font-weight: 700; }
   .msg-item-subject {
-    font-size: 13px;
-    color: var(--dark);
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 3px;
+    font-size: 13px; color: var(--dark); font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px;
   }
   .msg-item-from {
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 4px;
+    font-size: 12px; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;
   }
   .msg-item-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; font-size: 11px; color: var(--muted);
   }
-  .msg-item-time { flex-shrink: 0; }
   .msg-unread-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--blue);
-    margin-right: 5px;
-    vertical-align: middle;
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--blue); margin-right: 5px; vertical-align: middle;
   }
   .msg-item-cat {
-    display: inline-block;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .3px;
+    display: inline-block; padding: 2px 7px; border-radius: 4px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px;
   }
   .cat-contact { background: #e8f0fd; color: #1557c0; }
   .cat-donation { background: #e4f7e9; color: var(--green); }
 
-  /* ---------- Right pane: message detail ---------- */
-  .msg-detail-pane {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    background: #fff;
-  }
+  .msg-detail-pane { display: flex; flex-direction: column; min-width: 0; background: #fff; }
   .msg-detail-empty {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 14px;
-    padding: 40px;
-    text-align: center;
-    gap: 10px;
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px; padding: 40px; text-align: center; gap: 10px;
   }
-  .msg-detail-empty .icon {
-    font-size: 44px;
-    opacity: .35;
-  }
-
-  .msg-detail {
-    display: none;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-  }
+  .msg-detail-empty .icon { font-size: 44px; opacity: .35; }
+  .msg-detail { display: none; flex-direction: column; flex: 1; min-width: 0; }
   .msg-detail.show { display: flex; }
-
-  .msg-detail-head {
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid var(--border);
-    background: #fff;
-  }
-  .msg-detail-subject {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--dark);
-    margin: 0 0 8px;
-    word-break: break-word;
-  }
-  .msg-detail-from {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+  .msg-detail-head { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); background: #fff; }
+  .msg-detail-subject { font-size: 17px; font-weight: 700; color: var(--dark); margin: 0 0 8px; word-break: break-word; }
+  .msg-detail-from { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .msg-detail-from strong { color: var(--dark); }
   .msg-detail-from a { color: var(--blue); text-decoration: none; }
   .msg-detail-from a:hover { text-decoration: underline; }
-
-  .msg-detail-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-  }
-
+  .msg-detail-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
   .msg-detail-body {
-    padding: 22px;
-    flex: 1;
-    overflow-y: auto;
-    font-size: 14px;
-    line-height: 1.75;
-    color: #2a2a3a;
-    white-space: pre-wrap;
-    word-break: break-word;
-    background: #fafbff;
-    max-height: 400px;
+    padding: 22px; flex: 1; overflow-y: auto; font-size: 14px; line-height: 1.75;
+    color: #2a2a3a; white-space: pre-wrap; word-break: break-word;
+    background: #fafbff; max-height: 400px;
   }
 
-  /* ---------- Reply composer ---------- */
-  .msg-composer {
-    border-top: 1px solid var(--border);
-    padding: 16px 22px;
-    background: #fff;
-  }
+  .msg-composer { border-top: 1px solid var(--border); padding: 16px 22px; background: #fff; }
   .msg-composer label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    margin-bottom: 6px;
+    display: block; font-size: 12px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
   }
   .msg-composer textarea {
-    width: 100%;
-    min-height: 90px;
-    padding: 11px 13px;
-    border: 1px solid #cbd7e8;
-    border-radius: 8px;
-    font-size: 13.5px;
-    font-family: inherit;
-    outline: none;
-    resize: vertical;
+    width: 100%; min-height: 90px; padding: 11px 13px;
+    border: 1px solid #cbd7e8; border-radius: 8px; font-size: 13.5px;
+    font-family: inherit; outline: none; resize: vertical;
     transition: border-color .15s, box-shadow .15s;
   }
-  .msg-composer textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(23,105,224,.12);
-  }
-  .msg-composer-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
+  .msg-composer textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(23,105,224,.12); }
+  .msg-composer-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; flex-wrap: wrap; }
 
-  /* ---------- Status badges ---------- */
   .msg-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 9px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 700;
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700;
   }
   .msg-badge.new { background: #e8f0fd; color: #1557c0; }
   .msg-badge.read { background: #f0f0f5; color: #68778b; }
@@ -269,53 +112,23 @@
   .msg-badge.donation { background: #e4f7e9; color: var(--green); }
   .msg-badge.contact { background: #e8f0fd; color: #1557c0; }
 
-  /* ---------- Reply history ---------- */
   .reply-history {
-    border-top: 1px solid var(--border);
-    padding: 14px 22px;
-    background: #f7f9fd;
-    max-height: 200px;
-    overflow-y: auto;
+    border-top: 1px solid var(--border); padding: 14px 22px;
+    background: #f7f9fd; max-height: 200px; overflow-y: auto;
   }
   .reply-history h4 {
-    margin: 0 0 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .5px;
+    margin: 0 0 8px; font-size: 11px; font-weight: 700;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .5px;
   }
   .reply-item {
-    padding: 8px 12px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    margin-bottom: 6px;
-    font-size: 12.5px;
-    color: #444;
-    line-height: 1.5;
+    padding: 8px 12px; background: #fff; border: 1px solid var(--border);
+    border-radius: 7px; margin-bottom: 6px; font-size: 12.5px; color: #444; line-height: 1.5;
   }
-  .reply-item .reply-meta {
-    font-size: 10.5px;
-    color: var(--muted);
-    margin-bottom: 3px;
-  }
+  .reply-item .reply-meta { font-size: 10.5px; color: var(--muted); margin-bottom: 3px; }
 
-  /* ---------- Loading / empty ---------- */
-  .list-empty {
-    padding: 40px 16px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  .list-empty strong {
-    display: block;
-    color: var(--dark);
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
+  .list-empty { padding: 40px 16px; text-align: center; color: var(--muted); font-size: 13px; }
+  .list-empty strong { display: block; color: var(--dark); font-size: 14px; margin-bottom: 4px; }
 
-  /* ---------- Responsive ---------- */
   @media (max-width: 860px) {
     .msg-layout { grid-template-columns: 1fr; }
     .msg-list-pane { border-right: 0; border-bottom: 1px solid var(--border); }
@@ -332,22 +145,7 @@
 
 <div id="shell" style="display:none">
   <div class="overlay" id="overlay"></div>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">EduGM <span>Team</span></div>
-    <nav class="sidebar-nav">
-      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
-      <a href="donations.html"><span class="nav-icon">₹</span> Donations</a>
-      <a href="messages.html" class="active"><span class="nav-icon">✉</span> Messages</a>
-      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
-      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
-      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
-    </nav>
-    <div class="sidebar-foot">
-      Signed in as team member
-      <button id="logoutBtn" type="button">Sign out</button>
-    </div>
-  </aside>
+  <div id="menu-mount"></div>
 
   <header class="topbar">
     <div class="topbar-left">
@@ -361,20 +159,12 @@
 
   <main class="main">
     <div class="content">
-
       <div class="card" style="padding:0;overflow:hidden">
         <div class="msg-layout">
-
-          <!-- LEFT: message list -->
           <div class="msg-list-pane">
             <div class="msg-list-head">
               <h3>Inbox <span id="msgCount" style="color:var(--muted);font-weight:500"></span></h3>
-              <input
-                id="msgSearch"
-                class="msg-search"
-                type="search"
-                placeholder="Search by name, email or subject…"
-                aria-label="Search messages">
+              <input id="msgSearch" class="msg-search" type="search" placeholder="Search by name, email or subject…" aria-label="Search messages">
               <div class="msg-filter-row">
                 <button class="msg-filter-btn active" data-filter="all" type="button">All</button>
                 <button class="msg-filter-btn" data-filter="new" type="button">New</button>
@@ -384,22 +174,16 @@
               </div>
             </div>
             <div class="msg-list" id="msgList">
-              <div class="list-empty">
-                <strong>Loading messages…</strong>
-              </div>
+              <div class="list-empty"><strong>Loading messages…</strong></div>
             </div>
           </div>
 
-          <!-- RIGHT: detail -->
           <div class="msg-detail-pane">
-
-            <!-- Empty state -->
             <div class="msg-detail-empty" id="msgDetailEmpty">
               <div class="icon">✉</div>
               <div>Select a message to view it</div>
             </div>
 
-            <!-- Detail -->
             <div class="msg-detail" id="msgDetail">
               <div class="msg-detail-head">
                 <h2 class="msg-detail-subject" id="detailSubject">—</h2>
@@ -420,29 +204,341 @@
 
               <div class="msg-composer">
                 <label for="replyText">Reply</label>
-                <textarea
-                  id="replyText"
-                  placeholder="Type your reply… (sent via email, and stored here)"
-                  maxlength="4000"></textarea>
+                <textarea id="replyText" placeholder="Type your reply… (Ctrl+Enter to send)" maxlength="4000"></textarea>
                 <div class="msg-composer-actions">
                   <button class="btn btn-secondary" id="clearReplyBtn" type="button">Clear</button>
                   <button class="btn btn-primary" id="sendReplyBtn" type="button">✉ Send reply</button>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
 
       <p class="message" id="globalMessage" role="status" aria-live="polite"></p>
-
     </div>
   </main>
 </div>
 
-<!-- Firebase (for Firestore) + EmailJS (for sending replies) -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="module" src="messages.js"></script>
+<script type="module">
+import { loadMenu } from "./menu-loader.js";
+import {
+  guard, wireShell, setMessage, clearMessage, formatDate,
+  db, collection, getDocs, doc, updateDoc, serverTimestamp
+} from "./dashboard.js";
+
+const EMAILJS = {
+  publicKey:  "YOUR_EMAILJS_PUBLIC_KEY",
+  serviceId:  "YOUR_EMAILJS_SERVICE_ID",
+  replyTemplateId: "YOUR_REPLY_TEMPLATE_ID"
+};
+
+const user = await guard();
+await loadMenu();
+
+document.getElementById("gate").style.display = "none";
+document.getElementById("shell").style.display = "block";
+wireShell(user);
+
+let allMessages = [];
+let selectedId = null;
+let activeFilter = "all";
+let searchQuery = "";
+let emailjsReady = false;
+let busy = false;
+
+const $ = id => document.getElementById(id);
+const listEl = $("msgList");
+const detailEmpty = $("msgDetailEmpty");
+const detailEl = $("msgDetail");
+const globalMsg = $("globalMessage");
+
+function initEmailJS() {
+  if (!window.emailjs) return false;
+  try {
+    window.emailjs.init({ publicKey: EMAILJS.publicKey });
+    emailjsReady = true; return true;
+  } catch { return false; }
+}
+
+async function loadMessages() {
+  listEl.innerHTML = '<div class="list-empty"><strong>Loading messages…</strong></div>';
+  try {
+    const [contactSnap, donationSnap] = await Promise.all([
+      getDocs(collection(db, "contactMessages")),
+      getDocs(collection(db, "donations"))
+    ]);
+
+    const contacts = contactSnap.docs.map(d => {
+      const data = d.data();
+      return {
+        id: d.id, kind: "contact",
+        name: data.name || "—",
+        email: data.email || "—",
+        subject: data.subject || "Contact message",
+        body: data.message || "",
+        status: data.status || "new",
+        reference: data.reference || "",
+        createdAt: data.createdAt,
+        replies: data.replies || []
+      };
+    });
+
+    const donations = donationSnap.docs.map(d => {
+      const data = d.data();
+      const amt = Number(data.amount) || 0;
+      return {
+        id: d.id, kind: "donation",
+        name: data.donorName || "Anonymous",
+        email: data.email || "—",
+        subject: `Donation — ₹${amt.toLocaleString()}`,
+        body:
+          `Donor: ${data.donorName || "Anonymous"}\n` +
+          `Email: ${data.email || "—"}\n` +
+          `Amount: ₹${amt.toLocaleString()}\n` +
+          `Transaction reference: ${data.transactionId || "—"}\n` +
+          (data.message ? `\nMessage:\n${data.message}` : ""),
+        status: data.status === "verified" ? "replied" : (data.status || "new"),
+        reference: data.reference || "",
+        createdAt: data.submittedAt,
+        replies: data.replies || []
+      };
+    });
+
+    allMessages = [...contacts, ...donations];
+    allMessages.sort((a, b) => {
+      const t = v => {
+        if (!v) return 0;
+        if (typeof v.toMillis === "function") return v.toMillis();
+        if (typeof v.seconds === "number") return v.seconds * 1000;
+        if (typeof v === "string") return Date.parse(v) || 0;
+        return 0;
+      };
+      return t(b.createdAt) - t(a.createdAt);
+    });
+
+    renderList();
+    updateCount();
+    if (!allMessages.length) {
+      detailEmpty.querySelector("div:last-child").textContent =
+        "No messages yet — contact form and donation submissions will appear here.";
+    }
+  } catch (err) {
+    listEl.innerHTML = `<div class="list-empty"><strong>Could not load messages</strong>${err.message}</div>`;
+  }
+}
+
+function updateCount() {
+  const newCount = allMessages.filter(m => m.status === "new").length;
+  $("msgCount").textContent = newCount > 0
+    ? `· ${newCount} new`
+    : `· ${allMessages.length} total`;
+}
+
+function matchesFilter(m) {
+  if (activeFilter === "all") return true;
+  if (activeFilter === "contact" || activeFilter === "donation") return m.kind === activeFilter;
+  if (activeFilter === "new") return m.status === "new";
+  if (activeFilter === "replied") return m.status === "replied";
+  return true;
+}
+function matchesSearch(m) {
+  if (!searchQuery) return true;
+  const q = searchQuery.toLowerCase();
+  return (
+    (m.name || "").toLowerCase().includes(q) ||
+    (m.email || "").toLowerCase().includes(q) ||
+    (m.subject || "").toLowerCase().includes(q) ||
+    (m.body || "").toLowerCase().includes(q)
+  );
+}
+
+function renderList() {
+  const filtered = allMessages.filter(m => matchesFilter(m) && matchesSearch(m));
+  if (!filtered.length) {
+    listEl.innerHTML = `<div class="list-empty"><strong>No matches</strong>Try a different search or filter.</div>`;
+    return;
+  }
+  listEl.innerHTML = "";
+  filtered.forEach(m => {
+    const item = document.createElement("div");
+    item.className = "msg-item";
+    if (m.id === selectedId) item.classList.add("active");
+    if (m.status === "new") item.classList.add("unread");
+    item.dataset.id = m.id;
+    const timeStr = formatDate(m.createdAt);
+    const catClass = m.kind === "donation" ? "cat-donation" : "cat-contact";
+    const catLabel = m.kind === "donation" ? "Donation" : "Contact";
+    item.innerHTML = `
+      <div class="msg-item-subject">
+        ${m.status === "new" ? '<span class="msg-unread-dot"></span>' : ""}
+        ${escapeHtml(m.subject || "(no subject)")}
+      </div>
+      <div class="msg-item-from">${escapeHtml(m.name)} · ${escapeHtml(m.email)}</div>
+      <div class="msg-item-meta">
+        <span class="msg-item-cat ${catClass}">${catLabel}</span>
+        <span class="msg-item-time">${timeStr}</span>
+      </div>
+    `;
+    item.addEventListener("click", () => openMessage(m.id));
+    listEl.appendChild(item);
+  });
+}
+
+async function openMessage(id) {
+  const m = allMessages.find(x => x.id === id);
+  if (!m) return;
+  selectedId = id;
+  renderList();
+  detailEmpty.style.display = "none";
+  detailEl.classList.add("show");
+
+  $("detailSubject").textContent = m.subject || "(no subject)";
+  $("detailFrom").innerHTML = `
+    From <strong>${escapeHtml(m.name)}</strong>
+    &lt;<a href="mailto:${escapeHtml(m.email)}">${escapeHtml(m.email)}</a>&gt;<br>
+    <span class="msg-badge ${m.kind === 'donation' ? 'donation' : 'contact'}">${m.kind === 'donation' ? 'Donation' : 'Contact'}</span>
+    <span class="msg-badge ${m.status}">${m.status}</span>
+    ${m.reference ? `<span style="color:var(--muted);font-size:12px">Ref: ${escapeHtml(m.reference)}</span>` : ""}
+    · ${formatDate(m.createdAt)}
+  `;
+  $("detailBody").textContent = m.body || "(no content)";
+
+  const replies = Array.isArray(m.replies) ? m.replies : [];
+  const histEl = $("replyHistory");
+  const histList = $("replyHistoryList");
+  if (replies.length) {
+    histEl.style.display = "block";
+    histList.innerHTML = "";
+    replies.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "reply-item";
+      div.innerHTML = `
+        <div class="reply-meta">${escapeHtml(r.sentBy || "team")} · ${formatDate(r.sentAt)}</div>
+        ${escapeHtml(r.text || "")}
+      `;
+      histList.appendChild(div);
+    });
+  } else {
+    histEl.style.display = "none";
+  }
+
+  $("replyText").value = "";
+  if (m.status === "new") await markStatus(id, "read");
+}
+
+async function markStatus(id, status) {
+  const m = allMessages.find(x => x.id === id);
+  if (!m) return;
+  const collName = m.kind === "donation" ? "donations" : "contactMessages";
+  try {
+    await updateDoc(doc(db, collName, id), {
+      status, updatedAt: serverTimestamp(), updatedBy: user.uid
+    });
+    m.status = status;
+    updateCount();
+    renderList();
+    setMessage(globalMsg, "Message marked as " + status + ".", false);
+    setTimeout(() => clearMessage(globalMsg), 2000);
+  } catch (err) {
+    setMessage(globalMsg, "Could not update status: " + err.message, true);
+  }
+}
+
+async function sendReply() {
+  if (busy) return;
+  const m = allMessages.find(x => x.id === selectedId);
+  if (!m) return;
+  const text = $("replyText").value.trim();
+  if (!text) { setMessage(globalMsg, "Please type a reply before sending.", true); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.email)) {
+    setMessage(globalMsg, "This message has no valid email address to reply to.", true);
+    return;
+  }
+  busy = true;
+  $("sendReplyBtn").disabled = true;
+  $("sendReplyBtn").textContent = "Sending…";
+
+  try {
+    if (!emailjsReady) initEmailJS();
+    if (!emailjsReady) throw new Error("Email service not available.");
+
+    await window.emailjs.send(EMAILJS.serviceId, EMAILJS.replyTemplateId, {
+      to_email: m.email,
+      to_name: m.name,
+      subject: "Re: " + (m.subject || "Your message to EduGM UniTools"),
+      message: text,
+      from_name: "EduGM UniTools Team",
+      from_email: "admin@codebihin.in",
+      reference: m.reference || ""
+    });
+
+    const collName = m.kind === "donation" ? "donations" : "contactMessages";
+    const replyEntry = {
+      text,
+      sentAt: new Date().toISOString(),
+      sentBy: user.email || user.uid,
+      sentByUid: user.uid
+    };
+    const existingReplies = Array.isArray(m.replies) ? m.replies : [];
+    const updatedReplies = [...existingReplies, replyEntry];
+
+    await updateDoc(doc(db, collName, m.id), {
+      replies: updatedReplies,
+      status: "replied",
+      lastReplyAt: serverTimestamp()
+    });
+
+    m.replies = updatedReplies;
+    m.status = "replied";
+    openMessage(m.id);
+    updateCount();
+    $("replyText").value = "";
+    setMessage(globalMsg, "Reply sent successfully.", false);
+    setTimeout(() => clearMessage(globalMsg), 3000);
+  } catch (err) {
+    setMessage(globalMsg, "Reply failed: " + (err.message || err.text || "Unknown error"), true);
+  } finally {
+    busy = false;
+    $("sendReplyBtn").disabled = false;
+    $("sendReplyBtn").textContent = "✉ Send reply";
+  }
+}
+
+function escapeHtml(s) {
+  if (s == null) return "";
+  return String(s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+$("msgSearch").addEventListener("input", e => {
+  searchQuery = e.target.value.trim();
+  renderList();
+});
+document.querySelectorAll(".msg-filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".msg-filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    renderList();
+  });
+});
+$("archiveBtn").addEventListener("click", () => { if (selectedId) markStatus(selectedId, "archived"); });
+$("markReadBtn").addEventListener("click", () => { if (selectedId) markStatus(selectedId, "read"); });
+$("markUnreadBtn").addEventListener("click", () => { if (selectedId) markStatus(selectedId, "new"); });
+$("clearReplyBtn").addEventListener("click", () => {
+  $("replyText").value = ""; $("replyText").focus();
+});
+$("sendReplyBtn").addEventListener("click", sendReply);
+$("replyText").addEventListener("keydown", e => {
+  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); sendReply(); }
+});
+
+initEmailJS();
+await loadMessages();
+setInterval(loadMessages, 60000);
+</script>
 </body>
 </html>
