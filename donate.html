@@ -18,83 +18,415 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="email.css">
 
 <style>
-  /* Donation-specific styles */
-  .donation-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .donation-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
-  .donation-card h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px}
-  .donation-card p.lead{color:var(--muted);font-size:13.5px;line-height:1.8;margin-bottom:20px}
+  /* ============================================================
+     ROOT VARIABLES
+     ============================================================ */
+  :root{
+    --primary:#6546e8;--primary-dark:#4f32c7;--primary-light:#f0edff;
+    --navy:#211747;--text:#202036;--muted:#77768b;
+    --bg:#f8f9ff;--surface:#fff;--border:#e9e8f2;
+    --green:#138a60;--red:#b42318;--amber:#805400;
+    --shadow:0 16px 45px rgba(39,30,91,.07);
+    --radius:20px;
+  }
 
-  /* UPI payment block */
-  .payment-block{background:linear-gradient(135deg,#f5f2ff,#eff4ff);border:1px solid #e0d8ff;border-radius:14px;padding:20px;margin-bottom:18px}
-  .payment-block .lbl{font-size:11px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-  .payment-block .upi{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#fff;border:1px solid #e0d8ff;border-radius:10px;padding:12px 14px;flex-wrap:wrap}
-  .payment-block .upi-id{font-family:monospace;font-size:15px;font-weight:800;color:var(--navy);word-break:break-all}
-  .payment-block .copy-btn{padding:7px 14px;border:0;border-radius:8px;background:var(--primary);color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
+  /* ============================================================
+     RESET & BASE
+     ============================================================ */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:100px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    color:var(--text);background:var(--bg);line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  button,input,textarea,select{font:inherit}
+  button{cursor:pointer}
+  .container{width:min(1000px,calc(100% - 40px));margin:0 auto}
+
+  /* ============================================================
+     NAVBAR
+     ============================================================ */
+  .navbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(233,232,242,.9);
+  }
+  .header-inner{
+    min-height:78px;display:flex;align-items:center;
+    justify-content:space-between;gap:25px;
+  }
+  .brand{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:19px;font-weight:800;letter-spacing:-.7px;
+  }
+  .brand-icon{
+    display:grid;place-items:center;
+    width:43px;height:43px;border-radius:14px;color:#fff;
+    background:linear-gradient(135deg,#8c72ff,#5436d7);
+    box-shadow:0 7px 18px rgba(101,70,232,.23);
+    font-size:21px;font-weight:800;
+  }
+  .brand-text{color:var(--navy)}
+  .brand-text span{color:var(--primary)}
+  .nav-links{
+    display:flex;align-items:center;flex-wrap:wrap;
+    gap:10px 23px;
+  }
+  .nav-links a{
+    color:#646277;font-size:13px;font-weight:700;
+    transition:color .2s;
+  }
+  .nav-links a:hover,.nav-links a.active{color:var(--primary)}
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    padding:64px 0 48px;text-align:center;
+    background:
+      radial-gradient(ellipse at 20% 0%,rgba(174,157,255,.18),transparent 40%),
+      radial-gradient(ellipse at 90% 80%,rgba(166,202,255,.18),transparent 40%),
+      linear-gradient(180deg,#fff,#f7f8ff);
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:8px 13px;border:1px solid #e4deff;border-radius:999px;
+    color:var(--primary);background:rgba(255,255,255,.8);
+    font-size:11px;font-weight:800;letter-spacing:1.3px;
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    margin:20px 0 12px;color:var(--navy);
+    font-size:clamp(32px,5vw,46px);
+    font-weight:800;letter-spacing:-1.5px;line-height:1.15;
+  }
+  .hero p{
+    max-width:600px;margin:0 auto;
+    color:var(--muted);font-size:15px;line-height:1.85;
+  }
+  .gradient-text{
+    background:linear-gradient(110deg,#6546e8,#a05ded,#4c7be8);
+    background-clip:text;-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  /* ============================================================
+     MAIN & CARDS
+     ============================================================ */
+  main{padding:40px 0 80px}
+  .donation-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:30px;
+  }
+  .donation-card + .donation-card{margin-top:22px}
+  .donation-card h2{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:20px;font-weight:800;color:var(--navy);
+    margin-bottom:6px;
+  }
+  .donation-card p.lead{
+    color:var(--muted);font-size:13.5px;line-height:1.8;
+    margin-bottom:20px;
+  }
+
+  /* ============================================================
+     UPI PAYMENT BLOCK
+     ============================================================ */
+  .payment-block{
+    background:linear-gradient(135deg,#f5f2ff,#eff4ff);
+    border:1px solid #e0d8ff;border-radius:14px;
+    padding:20px;margin-bottom:18px;
+  }
+  .payment-block .lbl{
+    font-size:11px;font-weight:800;color:var(--primary);
+    text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;
+  }
+  .payment-block .upi{
+    display:flex;align-items:center;gap:10px;
+    justify-content:space-between;background:#fff;
+    border:1px solid #e0d8ff;border-radius:10px;
+    padding:12px 14px;flex-wrap:wrap;
+  }
+  .payment-block .upi-id{
+    font-family:monospace;font-size:15px;font-weight:800;
+    color:var(--navy);word-break:break-all;
+  }
+  .payment-block .copy-btn{
+    padding:7px 14px;border:0;border-radius:8px;
+    background:var(--primary);color:#fff;
+    font-size:12px;font-weight:700;cursor:pointer;
+    transition:.15s;
+  }
   .payment-block .copy-btn:hover{background:var(--primary-dark)}
   .payment-block .copy-btn.copied{background:var(--green)}
 
-  .qr-box{text-align:center;padding:16px;background:#fff;border:1px dashed #d9d4eb;border-radius:12px;margin-top:14px}
-  .qr-box .qr-img{width:180px;height:180px;margin:0 auto;display:block;background:#f0edff;border-radius:8px;display:grid;place-items:center;color:var(--primary);font-size:11px;font-weight:700;text-align:center;padding:10px}
-  .qr-box small{display:block;margin-top:10px;color:var(--muted);font-size:11px}
+  .qr-box{
+    text-align:center;padding:16px;background:#fff;
+    border:1px dashed #d9d4eb;border-radius:12px;margin-top:14px;
+  }
+  .qr-img{
+    width:180px;height:180px;margin:0 auto;display:grid;
+    place-items:center;background:#f0edff;border-radius:8px;
+    color:var(--primary);font-size:11px;font-weight:700;
+    text-align:center;padding:10px;
+  }
+  .qr-box small{
+    display:block;margin-top:10px;color:var(--muted);font-size:11px;
+  }
 
-  /* Amount quick-pick */
-  .amount-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .chip{padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:#fff;font-size:12.5px;font-weight:700;color:#555870;cursor:pointer;transition:.15s}
-  .chip:hover{border-color:#cfc3ff;color:var(--primary)}
-  .chip.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
-
-  /* Steps */
+  /* ============================================================
+     STEPS
+     ============================================================ */
   .steps{list-style:none;padding:0;margin:0;counter-reset:step}
-  .steps li{position:relative;padding:0 0 18px 40px;counter-increment:step;font-size:13px;color:#555870;line-height:1.6}
+  .steps li{
+    position:relative;padding:0 0 18px 40px;
+    counter-increment:step;font-size:13px;
+    color:#555870;line-height:1.6;
+  }
   .steps li:last-child{padding-bottom:0}
-  .steps li::before{content:counter(step);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:var(--primary);font-weight:800;font-size:12px;display:grid;place-items:center}
-  .steps li strong{display:block;color:var(--navy);font-size:13.5px;margin-bottom:2px}
+  .steps li::before{
+    content:counter(step);position:absolute;left:0;top:0;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--primary-light);color:var(--primary);
+    font-weight:800;font-size:12px;display:grid;place-items:center;
+  }
+  .steps li strong{
+    display:block;color:var(--navy);font-size:13.5px;margin-bottom:2px;
+  }
 
-  /* Consent checkboxes */
+  /* ============================================================
+     FORM
+     ============================================================ */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1/-1}
+  .field label{
+    font-size:13px;font-weight:700;color:#4a4c62;
+    letter-spacing:.2px;
+  }
+  .field label .req{color:var(--red);margin-left:3px}
+  .field input,.field textarea,.field select{
+    padding:12px 14px;border:1px solid #cbd7e8;
+    border-radius:10px;background:#fff;color:var(--text);
+    font-size:14px;outline:none;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(101,70,232,.12);
+  }
+  .field textarea{resize:vertical;min-height:80px;font-family:inherit}
+  .field .hint{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .field.invalid input,.field.invalid textarea{
+    border-color:var(--red);
+    box-shadow:0 0 0 3px rgba(217,75,75,.1);
+  }
+  .field .err{
+    font-size:11.5px;color:var(--red);display:none;margin-top:2px;
+  }
+  .field.invalid .err{display:block}
+
+  /* ============================================================
+     AMOUNT CHIPS
+     ============================================================ */
+  .amount-chips{
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;
+  }
+  .chip{
+    padding:8px 14px;border:1px solid var(--border);
+    border-radius:999px;background:#fff;
+    font-size:12.5px;font-weight:700;color:#555870;
+    cursor:pointer;transition:.15s;
+  }
+  .chip:hover{border-color:#cfc3ff;color:var(--primary)}
+  .chip.active{
+    background:var(--primary-light);border-color:var(--primary);
+    color:var(--primary-dark);
+  }
+
+  /* ============================================================
+     CONSENT CHECKBOXES
+     ============================================================ */
   .consent{display:flex;flex-direction:column;gap:10px;margin-top:16px}
-  .consent label{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#555870;line-height:1.6;cursor:pointer}
-  .consent input{margin-top:3px;width:16px;height:16px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
+  .consent label{
+    display:flex;gap:10px;align-items:flex-start;
+    font-size:12.5px;color:#555870;line-height:1.6;cursor:pointer;
+  }
+  .consent input{
+    margin-top:3px;width:16px;height:16px;
+    accent-color:var(--primary);cursor:pointer;flex-shrink:0;
+  }
   .consent a{color:var(--primary);font-weight:700}
   .consent a:hover{text-decoration:underline}
 
-  /* Donor preview list */
-  .donor-preview{background:#fafaff;border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:16px}
-  .donor-preview .lbl{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
-  .donor-preview ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
-  .donor-preview li{font-size:12.5px;color:#555870;display:flex;justify-content:space-between;gap:10px}
-  .donor-preview li strong{color:var(--navy)}
-  .donor-preview li .amt{color:var(--green);font-weight:800;font-family:'Plus Jakarta Sans',sans-serif}
-  .donor-preview .empty{color:var(--muted);font-size:12px;text-align:center;padding:8px}
+  /* ============================================================
+     BUTTONS
+     ============================================================ */
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    gap:9px;padding:12px 22px;border:0;border-radius:12px;
+    font-size:14px;font-weight:700;transition:.2s;
+    white-space:nowrap;text-decoration:none;
+  }
+  .btn-primary{
+    background:var(--primary);color:#fff;
+    box-shadow:0 6px 16px rgba(101,70,232,.22);
+  }
+  .btn-primary:hover:not(:disabled){
+    background:var(--primary-dark);transform:translateY(-1px);
+  }
+  .btn-primary:disabled{
+    opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;
+  }
+  .btn-ghost{
+    background:#fff;color:var(--text);border:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:#cfc3ff;color:var(--primary)}
+  .actions .btn-primary{flex:1;min-width:220px}
 
-  /* Success state */
-  .success-panel{display:none;text-align:center;padding:30px 10px}
-  .success-panel.show{display:block}
-  .success-icon{width:80px;height:80px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#159b69,#0e7a52);color:#fff;font-size:36px;box-shadow:0 12px 30px rgba(21,155,105,.3)}
-  .success-panel h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;color:var(--navy)}
-  .success-panel p{color:var(--muted);font-size:14px;max-width:480px;margin:0 auto 8px}
-  .ref-code{display:inline-block;margin-top:14px;padding:10px 18px;border-radius:10px;background:var(--primary-light);color:var(--primary-dark);font-weight:800;font-size:14px;letter-spacing:.6px;font-family:monospace}
-  .status-pill{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 14px;border-radius:999px;background:#fff2d9;color:#805400;font-size:12px;font-weight:800}
+  /* ============================================================
+     ALERT
+     ============================================================ */
+  .alert{
+    display:none;margin-top:16px;padding:14px 16px;
+    border-radius:12px;font-size:13.5px;line-height:1.6;
+  }
+  .alert.show{display:block}
+  .alert-error{background:#fff1f1;border:1px solid #ffd5d5;color:#a12323}
+  .alert-success{background:#ecfaf3;border:1px solid #bfefd8;color:#0e7a52}
+  .alert-info{background:#eff4ff;border:1px solid #d3e1ff;color:#1e44a8}
 
-  /* Notice */
-  .notice{display:flex;gap:10px;padding:12px 14px;border-radius:10px;background:#eff4ff;border:1px solid #d3e1ff;color:#1e44a8;font-size:12.5px;line-height:1.6;margin-bottom:18px}
-  .notice.warn{background:#fff8e6;border-color:#ffe4a8;color:#805400}
+  /* ============================================================
+     NOTICE
+     ============================================================ */
+  .notice{
+    display:flex;gap:10px;padding:12px 14px;
+    border-radius:10px;background:#eff4ff;
+    border:1px solid #d3e1ff;color:#1e44a8;
+    font-size:12.5px;line-height:1.6;margin-bottom:18px;
+  }
+  .notice.warn{
+    background:#fff8e6;border-color:#ffe4a8;color:#805400;
+  }
   .notice strong{font-weight:800}
 
-  @media(max-width:820px){
-    .donation-layout{grid-template-columns:1fr}
+  /* ============================================================
+     SUCCESS PANEL
+     ============================================================ */
+  .success-panel{display:none;text-align:center;padding:30px 10px}
+  .success-panel.show{display:block}
+  .success-icon{
+    width:80px;height:80px;margin:0 auto 18px;border-radius:50%;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#159b69,#0e7a52);
+    color:#fff;font-size:36px;
+    box-shadow:0 12px 30px rgba(21,155,105,.3);
   }
-  @media(max-width:520px){
+  .success-panel h2{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:24px;font-weight:800;margin-bottom:8px;color:var(--navy);
+  }
+  .success-panel p{
+    color:var(--muted);font-size:14px;max-width:480px;margin:0 auto 8px;
+  }
+  .ref-code{
+    display:inline-block;margin-top:14px;padding:10px 18px;
+    border-radius:10px;background:var(--primary-light);
+    color:var(--primary-dark);font-weight:800;font-size:14px;
+    letter-spacing:.6px;font-family:monospace;
+  }
+  .status-pill{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:14px;padding:6px 14px;border-radius:999px;
+    background:#fff2d9;color:#805400;font-size:12px;font-weight:800;
+  }
+
+  /* ============================================================
+     DONOR PREVIEW
+     ============================================================ */
+  .donor-preview{
+    background:#fafaff;border:1px solid var(--border);
+    border-radius:12px;padding:14px;margin-top:16px;
+  }
+  .donor-preview .lbl{
+    font-size:11px;font-weight:800;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;
+  }
+  .donor-preview ul{
+    list-style:none;padding:0;margin:0;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .donor-preview li{
+    font-size:12.5px;color:#555870;
+    display:flex;justify-content:space-between;gap:10px;
+  }
+  .donor-preview li strong{color:var(--navy)}
+  .donor-preview li .amt{
+    color:var(--green);font-weight:800;
+    font-family:'Plus Jakarta Sans',sans-serif;
+  }
+  .donor-preview .empty{
+    color:var(--muted);font-size:12px;text-align:center;
+    padding:8px;display:block;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    padding:38px 0 22px;border-top:1px solid var(--border);
+    background:#fff;margin-top:20px;
+  }
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11.5px;
+  }
+  .footer-bottom strong{color:var(--primary)}
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width:820px){
+    .form-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .container{width:min(100% - 30px,600px)}
+    .header-inner{
+      min-height:auto;padding:14px 0;
+      flex-direction:column;align-items:stretch;
+    }
+    .nav-links{justify-content:flex-start;gap:11px 17px}
+    .nav-links a{font-size:12px}
+    .hero{padding:48px 0 36px}
     .donation-card{padding:22px}
+    .actions .btn-primary{min-width:100%}
+  }
+  @media (max-width:520px){
     .payment-block .upi{flex-direction:column;align-items:stretch}
     .payment-block .copy-btn{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      scroll-behavior:auto!important;
+      transition-duration:.01ms!important;
+      animation-duration:.01ms!important;
+    }
   }
 </style>
 </head>
 <body>
 
+<!-- ==================== HEADER ==================== -->
 <header class="navbar">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="EduGM UniTools Home">
@@ -112,6 +444,7 @@
   </div>
 </header>
 
+<!-- ==================== HERO ==================== -->
 <section class="hero">
   <div class="container">
     <span class="eyebrow">Community Support</span>
@@ -120,9 +453,10 @@
   </div>
 </section>
 
+<!-- ==================== MAIN ==================== -->
 <main class="container">
 
-  <!-- ===== STEP 1: PAYMENT INSTRUCTIONS ===== -->
+  <!-- STEP 1: PAYMENT INSTRUCTIONS -->
   <div class="donation-card" id="payCard">
     <h2>1. Send your donation</h2>
     <p class="lead">Choose any amount, pay using UPI, then fill the form below with your transaction details so we can verify your support.</p>
@@ -167,8 +501,8 @@
     </div>
   </div>
 
-  <!-- ===== STEP 2: SUBMISSION FORM ===== -->
-  <div class="donation-card" id="formCard" style="margin-top:22px">
+  <!-- STEP 2: SUBMISSION FORM -->
+  <div class="donation-card" id="formCard">
     <h2>2. Submit your donation details</h2>
     <p class="lead">Fields marked <span style="color:var(--red)">*</span> are required. Please enter the exact transaction reference from your payment app.</p>
 
@@ -210,7 +544,7 @@
 
         <div class="field full">
           <label for="donorMessage">Message (optional)</label>
-          <textarea id="donorMessage" name="donorMessage" placeholder="A short note you'd like us to see (max 200 characters)." maxlength="200" style="min-height:80px"></textarea>
+          <textarea id="donorMessage" name="donorMessage" placeholder="A short note you'd like us to see (max 200 characters)." maxlength="200"></textarea>
           <div class="hint"><span id="msgCount">0</span> / 200 characters</div>
         </div>
       </div>
@@ -226,14 +560,14 @@
         </label>
       </div>
 
-      <!-- Honeypot -->
+      <!-- Honeypot anti-spam field (hidden from humans) -->
       <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"
              style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
       <div class="alert" id="formAlert" role="alert" aria-live="polite"></div>
 
       <div class="actions" style="margin-top:22px;padding-top:20px;border-top:1px solid var(--border)">
-        <button class="btn btn-primary" id="submitBtn" type="submit" style="flex:1;min-width:220px">
+        <button class="btn btn-primary" id="submitBtn" type="submit">
           <span>✓</span> Submit for verification
         </button>
         <button class="btn btn-ghost" id="resetBtn" type="button">Clear form</button>
@@ -254,8 +588,8 @@
     </div>
   </div>
 
-  <!-- ===== RECENT VERIFIED SUPPORTERS (preview) ===== -->
-  <div class="donation-card" style="margin-top:22px">
+  <!-- RECENT VERIFIED SUPPORTERS PREVIEW -->
+  <div class="donation-card">
     <h2>Recent verified supporters</h2>
     <p class="lead">A live preview of the latest verified donations. Full list is on the <a href="index.html#donations" style="color:var(--primary);font-weight:700">home page</a>.</p>
     <div class="donor-preview">
@@ -268,6 +602,7 @@
 
 </main>
 
+<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="container footer-bottom">
     <span>© <span id="currentYear"></span> <strong>EduGM UniTools</strong>. All rights reserved.</span>
@@ -275,7 +610,7 @@
   </div>
 </footer>
 
-<!-- Firebase SDK (modular) -->
+<!-- ==================== FIREBASE + LOGIC ==================== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
@@ -333,12 +668,6 @@ $("copyUpiBtn").addEventListener("click", async () => {
   const btn = $("copyUpiBtn");
   try {
     await navigator.clipboard.writeText(UPI_ID);
-    btn.textContent = "Copied!";
-    btn.classList.add("copied");
-    setTimeout(() => {
-      btn.textContent = "Copy UPI ID";
-      btn.classList.remove("copied");
-    }, 1800);
   } catch {
     /* Fallback for older browsers */
     const ta = document.createElement("textarea");
@@ -347,13 +676,13 @@ $("copyUpiBtn").addEventListener("click", async () => {
     ta.select();
     try { document.execCommand("copy"); } catch {}
     ta.remove();
-    btn.textContent = "Copied!";
-    btn.classList.add("copied");
-    setTimeout(() => {
-      btn.textContent = "Copy UPI ID";
-      btn.classList.remove("copied");
-    }, 1800);
   }
+  btn.textContent = "Copied!";
+  btn.classList.add("copied");
+  setTimeout(() => {
+    btn.textContent = "Copy UPI ID";
+    btn.classList.remove("copied");
+  }, 1800);
 });
 
 /* ---------- Amount quick-pick ---------- */
@@ -367,10 +696,9 @@ $("amountChips").addEventListener("click", (e) => {
 });
 
 $("donorAmount").addEventListener("input", () => {
-  document.querySelectorAll("#amountChips .chip").forEach(c => c.classList.remove("active"));
   const v = $("donorAmount").value;
   document.querySelectorAll("#amountChips .chip").forEach(c => {
-    if (c.dataset.amt === v) c.classList.add("active");
+    c.classList.toggle("active", c.dataset.amt === v);
   });
 });
 
@@ -386,8 +714,8 @@ function validate(data) {
   const fail = el => { markInvalid(el, true); if (!firstInvalid) firstInvalid = el; };
 
   if (!data.donorName || data.donorName.length < 2) fail($("donorName"));
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.donorEmail)) fail($("donorEmail"));
-  if (!data.donorAmount || data.donorAmount < 1) fail($("donorAmount"));
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) fail($("donorEmail"));
+  if (!data.amount || data.amount < 1) fail($("donorAmount"));
   if (!data.transactionId || data.transactionId.trim().length < 4) fail($("transactionId"));
 
   if (!data.consentAccurate) {
@@ -424,7 +752,7 @@ $("donationForm").addEventListener("submit", async (e) => {
 
   const data = collectData();
 
-  /* Honeypot */
+  /* Honeypot — bots fill this, humans don't */
   if (data.website) {
     showAlert("success", "Thank you! Your donation details have been received.");
     return;
