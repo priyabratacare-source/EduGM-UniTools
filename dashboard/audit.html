@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Audit Logs | EduGM Team Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div id="gate" style="display:grid;place-items:center;min-height:100vh;color:#68778b;font-family:Arial,sans-serif;font-size:14px">
+  Verifying access…
+</div>
+
+<div id="shell" style="display:none">
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">EduGM <span>Team</span></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
+      <a href="donations.html"><span class="nav-icon">₹</span> Donations</a>
+      <a href="audit.html" class="active"><span class="nav-icon">▤</span> Audit Logs</a>
+      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
+      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-foot">
+      Signed in as team member
+      <button id="logoutBtn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">☰</button>
+      <h1>Audit Logs</h1>
+    </div>
+    <div class="topbar-right">
+      <span id="userChip" class="user-chip"></span>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="content">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Action History</h2>
+            <p class="sub">Immutable record of every status change. Read-only.</p>
+          </div>
+          <button class="btn btn-secondary" id="refreshBtn" type="button">Refresh</button>
+        </div>
+
+        <p class="message" id="auditMessage" role="status" aria-live="polite"></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Action</th>
+                <th>Donation ID</th>
+                <th>Team member UID</th>
+              </tr>
+            </thead>
+            <tbody id="auditRows">
+              <tr><td colspan="4" class="empty">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import {
+  guard, wireShell, setMessage, clearMessage, formatDate, safeText,
+  db, collection, getDocs
+} from "./dashboard.js";
+
+const user = await guard();
+document.getElementById("gate").style.display = "none";
+document.getElementById("shell").style.display = "block";
+wireShell(user);
+
+const rows = document.getElementById("auditRows");
+const auditMessage = document.getElementById("auditMessage");
+
+async function loadLogs() {
+  clearMessage(auditMessage);
+  rows.replaceChildren();
+  const lr = document.createElement("tr");
+  const lc = document.createElement("td");
+  lc.colSpan = 4; lc.className = "empty"; lc.textContent = "Loading…";
+  lr.appendChild(lc); rows.appendChild(lr);
+
+  try {
+    const snap = await getDocs(collection(db, "auditLogs"));
+    const logs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    logs.sort((a, b) => {
+      const t = v => v?.toMillis ? v.toMillis() : (Date.parse(v || "") || 0);
+      return t(b.createdAt) - t(a.createdAt);
+    });
+
+    rows.replaceChildren();
+    if (!logs.length) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 4; td.className = "empty";
+      td.innerHTML = "<strong>No activity yet</strong>Every status change will appear here.";
+      tr.appendChild(td); rows.appendChild(tr);
+      return;
+    }
+
+    logs.forEach(l => {
+      const tr = document.createElement("tr");
+      const cls = l.action === "verified" ? "verified" : l.action === "rejected" ? "rejected" : "hold-status";
+      tr.innerHTML = `
+        <td>${formatDate(l.createdAt)}</td>
+        <td><span class="status ${cls}">${safeText(l.action)}</span></td>
+        <td style="font-family:monospace;font-size:12px;color:#68778b">${safeText(l.donationId)}</td>
+        <td style="font-family:monospace;font-size:12px;color:#68778b">${safeText(l.adminUid)}</td>
+      `;
+      rows.appendChild(tr);
+    });
+
+    setMessage(auditMessage, logs.length + " log entries loaded.");
+  } catch (err) {
+    rows.replaceChildren();
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 4; td.className = "empty";
+    td.innerHTML = "<strong>Could not load logs</strong>" + err.message;
+    tr.appendChild(td); rows.appendChild(tr);
+    setMessage(auditMessage, "Error: " + err.message, true);
+  }
+}
+
+document.getElementById("refreshBtn").addEventListener("click", loadLogs);
+await loadLogs();
+</script>
+</body>
+</html>
