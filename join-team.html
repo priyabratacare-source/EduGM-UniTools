@@ -254,14 +254,12 @@
 
       <div class="form-grid">
 
-        <!-- Full name -->
         <div class="field">
           <label for="fullName">Full name <span class="req">*</span></label>
           <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="e.g. Priya Sharma" maxlength="80">
           <div class="err">Please enter your full name.</div>
         </div>
 
-        <!-- Personal email with availability check -->
         <div class="field">
           <label for="personalEmail">Personal email <span class="req">*</span></label>
           <input id="personalEmail" name="personalEmail" type="email" autocomplete="email" placeholder="you@example.com" maxlength="120">
@@ -269,21 +267,18 @@
           <div class="err">Please enter a valid email address.</div>
         </div>
 
-        <!-- Phone -->
         <div class="field">
           <label for="phone">Phone / WhatsApp <span class="req">*</span></label>
           <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="20">
           <div class="err">Please enter a valid phone number.</div>
         </div>
 
-        <!-- Location -->
         <div class="field">
           <label for="location">City / Country <span class="req">*</span></label>
           <input id="location" name="location" type="text" autocomplete="address-level2" placeholder="e.g. Kolkata, India" maxlength="80">
           <div class="err">Please enter your city or country.</div>
         </div>
 
-        <!-- Desired workspace handle -->
         <div class="field full">
           <label for="workspaceHandle">Desired workspace email <span class="req">*</span></label>
           <div class="workspace-preview">
@@ -294,7 +289,6 @@
           <div class="err">Please enter a valid handle (3–30 characters, letters/numbers/dots/underscores).</div>
         </div>
 
-        <!-- Password -->
         <div class="field">
           <label for="password">Password <span class="req">*</span></label>
           <input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters">
@@ -303,7 +297,6 @@
           <div class="err">Password must be at least 8 characters.</div>
         </div>
 
-        <!-- Confirm password -->
         <div class="field">
           <label for="confirmPassword">Confirm password <span class="req">*</span></label>
           <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Re-enter password">
@@ -312,7 +305,6 @@
 
       </div>
 
-      <!-- Consent -->
       <div class="consent">
         <label>
           <input type="checkbox" id="consentTerms">
@@ -324,7 +316,6 @@
         </label>
       </div>
 
-      <!-- Honeypot -->
       <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"
              style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
@@ -337,7 +328,6 @@
 
     </form>
 
-    <!-- Success panel -->
     <div class="success-panel" id="successPanel">
       <div class="success-icon">✓</div>
       <h2>Registration submitted!</h2>
@@ -383,24 +373,27 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-/* ---------------------------------------------------------------
-   FIREBASE CONFIG
-   --------------------------------------------------------------- */
+/* ================================================================
+   FIREBASE CONFIG — YOUR REAL PROJECT
+   ================================================================ */
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBxdkXP48MtLOZwcNicQnBNQrXjjVf4C6E",
+  authDomain: "edugm-unitools-donations.firebaseapp.com",
+  projectId: "edugm-unitools-donations",
+  storageBucket: "edugm-unitools-donations.firebasestorage.app",
+  messagingSenderId: "359466843038",
+  appId: "1:359466843038:web:d39f7ed498c1c3836f348f"
 };
 
 let db = null;
+let firebaseError = null;
 try {
   const app = initializeApp(FIREBASE_CONFIG);
   db = getFirestore(app);
+  console.log("[register] Firestore ready");
 } catch (e) {
-  console.warn("Firebase init failed:", e);
+  firebaseError = e;
+  console.error("[register] Firebase init failed:", e);
 }
 
 const $ = id => document.getElementById(id);
@@ -421,7 +414,7 @@ function hideAlert() {
   $("formAlert").innerHTML = "";
 }
 
-/* ---------- Field validation helpers ---------- */
+/* ---------- Validation helpers ---------- */
 function markInvalid(el, invalid) {
   const f = el.closest(".field");
   if (f) f.classList.toggle("invalid", invalid);
@@ -472,6 +465,7 @@ function checkEmailAvailability(email) {
         emailStatus = "available";
       }
     } catch (err) {
+      console.warn("[register] Email check failed:", err);
       box.className = "email-check show";
       box.textContent = "";
       emailStatus = "unknown";
@@ -596,7 +590,6 @@ $("registerForm").addEventListener("submit", async (e) => {
 
   const data = collectData();
 
-  /* Honeypot */
   if (data.website) {
     showAlert("success", "Registration submitted.");
     return;
@@ -605,7 +598,11 @@ $("registerForm").addEventListener("submit", async (e) => {
   if (!validate(data)) return;
 
   if (!db) {
-    showAlert("error", "Registration service is currently unavailable. Please email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a>.");
+    const detail = firebaseError ? firebaseError.message : "Firestore not initialized";
+    showAlert("error",
+      "<strong>Registration service is not configured.</strong> " +
+      "Please email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a> with your details." +
+      "<br><small style='opacity:.7'>Debug: " + detail + "</small>");
     return;
   }
 
@@ -617,7 +614,7 @@ $("registerForm").addEventListener("submit", async (e) => {
   const workspaceEmail = data.workspaceHandle + "@mail.codebihin.in";
 
   try {
-    /* Double-check email isn't already used */
+    /* --- Step 1: Check for duplicate personal email --- */
     const dupCheck = await getDocs(query(
       collection(db, "mailRegistrations"),
       where("personalEmail", "==", data.personalEmail),
@@ -630,7 +627,20 @@ $("registerForm").addEventListener("submit", async (e) => {
       return;
     }
 
-    /* Hash password — never store plaintext */
+    /* --- Step 2: Check for duplicate workspace handle --- */
+    const handleCheck = await getDocs(query(
+      collection(db, "mailRegistrations"),
+      where("workspaceHandle", "==", data.workspaceHandle),
+      limit(1)
+    ));
+    if (handleCheck.size > 0) {
+      showAlert("error", "That workspace handle is already taken. Please choose a different one.");
+      btn.disabled = false;
+      btn.textContent = "Submit Registration";
+      return;
+    }
+
+    /* --- Step 3: Hash the password (never store plaintext) --- */
     const encoder = new TextEncoder();
     const passwordBytes = encoder.encode(data.password);
     const saltBytes = crypto.getRandomValues(new Uint8Array(16));
@@ -642,7 +652,8 @@ $("registerForm").addEventListener("submit", async (e) => {
       .map(b => b.toString(16).padStart(2, "0")).join("");
     const salt = Array.from(saltBytes).map(b => b.toString(16).padStart(2, "0")).join("");
 
-    await addDoc(collection(db, "mailRegistrations"), {
+    /* --- Step 4: Save the registration --- */
+    const regRef = await addDoc(collection(db, "mailRegistrations"), {
       fullName: data.fullName.slice(0, 80),
       personalEmail: data.personalEmail,
       phone: data.phone.slice(0, 20),
@@ -657,18 +668,26 @@ $("registerForm").addEventListener("submit", async (e) => {
       submittedAt: serverTimestamp(),
       userAgent: (navigator.userAgent || "").slice(0, 200)
     });
+    console.log("[register] Saved to mailRegistrations:", regRef.id);
 
-    await addDoc(collection(db, "adminNotifications"), {
-      type: "mail_registration",
-      reference: reference,
-      applicantName: data.fullName.slice(0, 80),
-      personalEmail: data.personalEmail,
-      workspaceEmail: workspaceEmail,
-      createdAt: serverTimestamp(),
-      read: false
-    });
+    /* --- Step 5: Create admin notification --- */
+    try {
+      await addDoc(collection(db, "adminNotifications"), {
+        type: "mail_registration",
+        registrationId: regRef.id,
+        reference: reference,
+        applicantName: data.fullName.slice(0, 80),
+        personalEmail: data.personalEmail,
+        workspaceEmail: workspaceEmail,
+        createdAt: serverTimestamp(),
+        read: false
+      });
+      console.log("[register] Admin notification created");
+    } catch (nErr) {
+      console.warn("[register] Notification failed (registration still saved):", nErr);
+    }
 
-    /* Show success */
+    /* --- Step 6: Show success --- */
     $("refCode").textContent = "Reference: " + reference;
     $("registerForm").style.display = "none";
     document.querySelector(".consent").style.display = "none";
@@ -676,11 +695,12 @@ $("registerForm").addEventListener("submit", async (e) => {
     $("successPanel").scrollIntoView({ behavior: "smooth", block: "start" });
 
   } catch (err) {
-    console.error("Registration failed:", err);
-    showAlert("error",
-      "<strong>Could not submit your registration.</strong> " +
-      (err.message || "Unknown error") +
-      "<br>Please try again, or email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a>.");
+    console.error("[register] Submission failed:", err);
+    let msg = err.message || "Unknown error";
+    if (msg.includes("permission-denied") || msg.includes("insufficient permissions")) {
+      msg = "The database is not accepting new registrations. Please email <a href='mailto:admin@codebihin.in' style='color:inherit;text-decoration:underline'>admin@codebihin.in</a> to register manually.";
+    }
+    showAlert("error", "<strong>Could not submit your registration.</strong> " + msg);
   } finally {
     btn.disabled = false;
     btn.textContent = "Submit Registration";
