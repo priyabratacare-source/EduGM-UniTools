@@ -8,210 +8,17 @@
 <meta name="theme-color" content="#1769e0">
 <title>Overview | EduGM Team Dashboard</title>
 <link rel="stylesheet" href="dashboard.css">
-
-<style>
-  /* ============================================================
-     OVERVIEW-SPECIFIC POLISH
-     Layered on top of dashboard.css — no conflicts.
-     ============================================================ */
-
-  /* Stat cards — gradient accents + icon */
-  .stat {
-    position: relative;
-    padding: 20px 20px 18px;
-    overflow: hidden;
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-  .stat:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(18,51,91,.10);
-  }
-  .stat::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--border);
-  }
-  .stat.green::before { background: var(--green); }
-  .stat.amber::before { background: var(--amber); }
-  .stat.red::before   { background: var(--red); }
-
-  .stat .lbl {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    letter-spacing: .6px;
-  }
-  .stat .lbl .dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--blue);
-  }
-  .stat.green .lbl .dot { background: var(--green); }
-  .stat.amber .lbl .dot { background: var(--amber); }
-  .stat.red   .lbl .dot { background: var(--red); }
-
-  .stat .val {
-    font-size: 30px;
-    font-weight: 800;
-    margin-top: 8px;
-    letter-spacing: -1px;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  }
-  .stat .delta {
-    font-size: 11.5px;
-    margin-top: 4px;
-    color: var(--muted);
-  }
-
-  /* Cards — subtle lift */
-  .card {
-    transition: box-shadow .18s ease;
-  }
-  .card:hover {
-    box-shadow: 0 6px 20px rgba(18,51,91,.06);
-  }
-
-  /* Quick action buttons — bigger, with icons */
-  .quick-actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-  .quick-action {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 18px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: #fff;
-    color: var(--dark);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 13.5px;
-    transition: transform .15s, border-color .15s, box-shadow .15s;
-  }
-  .quick-action:hover {
-    transform: translateY(-2px);
-    border-color: var(--blue);
-    box-shadow: 0 6px 18px rgba(23,105,224,.12);
-    text-decoration: none;
-    color: var(--dark);
-  }
-  .quick-action .qa-icon {
-    flex-shrink: 0;
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    background: #f0f5fd;
-    color: var(--blue);
-    font-size: 17px;
-    font-weight: 700;
-  }
-  .quick-action.primary {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-  }
-  .quick-action.primary .qa-icon {
-    background: rgba(255,255,255,.18);
-    color: #fff;
-  }
-  .quick-action.primary:hover {
-    background: var(--blue-dark, #1255b8);
-    border-color: var(--blue-dark, #1255b8);
-    color: #fff;
-  }
-
-  /* Activity table — cleaner rows */
-  .table-wrap {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  table th {
-    font-size: 11px;
-    letter-spacing: .6px;
-  }
-  table td {
-    padding: 13px 14px;
-  }
-  tbody tr {
-    transition: background .12s;
-  }
-  tbody tr:hover {
-    background: #f7faff;
-  }
-
-  /* Status pill inside activity table */
-  .status {
-    font-size: 11px;
-    padding: 3px 10px;
-    letter-spacing: .3px;
-  }
-
-  /* Section title */
-  .card-head h2 {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -.2px;
-  }
-  .card-head .sub {
-    font-size: 12.5px;
-    color: var(--muted);
-    margin-top: 3px;
-  }
-
-  /* Refresh button — accent on hover */
-  #refreshBtn {
-    transition: background .15s, border-color .15s, color .15s;
-  }
-  #refreshBtn:hover:not(:disabled) {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-  }
-
-  /* Empty state */
-  .empty strong {
-    font-size: 14.5px;
-  }
-</style>
 </head>
 <body>
 
-<!-- Gate shown until auth passes -->
 <div id="gate" style="display:grid;place-items:center;min-height:100vh;color:#68778b;font-family:Arial,sans-serif;font-size:14px">
   Verifying access…
 </div>
 
-<!-- Everything below stays hidden until auth passes -->
 <div id="shell" style="display:none">
-
   <div class="overlay" id="overlay"></div>
+  <div id="menu-mount"></div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">EduGM <span>Team</span></div>
-    <nav class="sidebar-nav">
-      <a href="index.html" class="active"><span class="nav-icon">▦</span> Overview</a>
-      <a href="donations.html"><span class="nav-icon">₹</span> Donations</a>
-      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
-      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
-      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
-    </nav>
-    <div class="sidebar-foot">
-      Signed in as team member
-      <button id="logoutBtn" type="button">Sign out</button>
-    </div>
-  </aside>
-
-  <!-- Topbar -->
   <header class="topbar">
     <div class="topbar-left">
       <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">☰</button>
@@ -222,11 +29,9 @@
     </div>
   </header>
 
-  <!-- Main -->
   <main class="main">
     <div class="content">
 
-      <!-- Stats card -->
       <div class="card">
         <div class="card-head">
           <div>
@@ -238,22 +43,22 @@
 
         <div class="stats">
           <div class="stat">
-            <div class="lbl"><span class="dot"></span> Total records</div>
+            <div class="lbl">Total records</div>
             <div class="val" id="totalCount">0</div>
             <div class="delta">All submissions</div>
           </div>
           <div class="stat amber">
-            <div class="lbl"><span class="dot"></span> Pending</div>
+            <div class="lbl">Pending</div>
             <div class="val" id="pendingCount">0</div>
             <div class="delta">Awaiting review</div>
           </div>
           <div class="stat green">
-            <div class="lbl"><span class="dot"></span> Verified</div>
+            <div class="lbl">Verified</div>
             <div class="val" id="verifiedCount">0</div>
             <div class="delta">Published publicly</div>
           </div>
           <div class="stat red">
-            <div class="lbl"><span class="dot"></span> Hold / Rejected</div>
+            <div class="lbl">Hold / Rejected</div>
             <div class="val" id="otherCount">0</div>
             <div class="delta">Not published</div>
           </div>
@@ -262,7 +67,6 @@
         <p class="message" id="overviewMessage" role="status" aria-live="polite"></p>
       </div>
 
-      <!-- Quick actions -->
       <div class="card">
         <div class="card-head">
           <div>
@@ -270,27 +74,14 @@
             <p class="sub">Jump straight to a section.</p>
           </div>
         </div>
-        <div class="quick-actions">
-          <a class="quick-action primary" href="donations.html">
-            <span class="qa-icon">₹</span>
-            Review Donations
-          </a>
-          <a class="quick-action" href="audit.html">
-            <span class="qa-icon">▤</span>
-            View Audit Logs
-          </a>
-          <a class="quick-action" href="team.html">
-            <span class="qa-icon">◍</span>
-            Manage Team
-          </a>
-          <a class="quick-action" href="settings.html">
-            <span class="qa-icon">⚙</span>
-            Settings
-          </a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="donations.html">Review Donations</a>
+          <a class="btn btn-secondary" href="messages.html">Open Messages</a>
+          <a class="btn btn-secondary" href="audit.html">View Audit Logs</a>
+          <a class="btn btn-secondary" href="team.html">Manage Team</a>
         </div>
       </div>
 
-      <!-- Recent activity -->
       <div class="card">
         <div class="card-head">
           <div>
@@ -315,26 +106,27 @@
 </div>
 
 <script type="module">
+import { loadMenu } from "./menu-loader.js";
 import {
   guard, wireShell, setMessage, clearMessage, formatDate,
   db, collection, getDocs
 } from "./dashboard.js";
 
-/* Guard first — nothing runs until an authorized user is confirmed. */
 const user = await guard();
+await loadMenu();
 
 document.getElementById("gate").style.display = "none";
 document.getElementById("shell").style.display = "block";
 wireShell(user);
 
-/* Load stats */
 async function loadOverview() {
   const msg = document.getElementById("overviewMessage");
   clearMessage(msg);
   try {
-    const [donSnap, auditSnap] = await Promise.all([
+    const [donSnap, auditSnap, contactSnap] = await Promise.all([
       getDocs(collection(db, "donations")),
-      getDocs(collection(db, "auditLogs"))
+      getDocs(collection(db, "auditLogs")),
+      getDocs(collection(db, "contactMessages"))
     ]);
 
     const donations = donSnap.docs.map(d => d.data());
@@ -359,7 +151,7 @@ async function loadOverview() {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = 3; td.className = "empty";
-      td.innerHTML = "<strong>No activity yet</strong>Status changes will appear here once donations are reviewed.";
+      td.innerHTML = "<strong>No activity yet</strong>Status changes will appear here.";
       tr.appendChild(td); rows.appendChild(tr);
     } else {
       recent.forEach(l => {
