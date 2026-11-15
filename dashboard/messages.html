@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="EduGM UniTools team messaging dashboard — authorized team members only.">
+<title>Messages | EduGM Team Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+<style>
+  /* ============================================================
+     MESSAGING LAYOUT — two-column inbox
+     ============================================================ */
+  .msg-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    min-height: 600px;
+  }
+
+  /* ---------- Sidebar: message list ---------- */
+  .msg-list-pane {
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    background: #fafbff;
+    min-width: 0;
+  }
+  .msg-list-head {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+  }
+  .msg-list-head h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .msg-search {
+    width: 100%;
+    padding: 8px 11px;
+    border: 1px solid #cbd7e8;
+    border-radius: 7px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+  }
+  .msg-search:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(23,105,224,.12);
+  }
+  .msg-filter-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .msg-filter-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .15s;
+  }
+  .msg-filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .msg-filter-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  .msg-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 640px;
+  }
+  .msg-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .12s;
+    position: relative;
+  }
+  .msg-item:hover { background: #f2f6fc; }
+  .msg-item.active { background: #e8f0fd; border-left: 3px solid var(--blue); padding-left: 13px; }
+  .msg-item.unread .msg-item-subject { font-weight: 700; }
+  .msg-item-subject {
+    font-size: 13px;
+    color: var(--dark);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+  }
+  .msg-item-from {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+  .msg-item-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .msg-item-time { flex-shrink: 0; }
+  .msg-unread-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .msg-item-cat {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+  .cat-contact { background: #e8f0fd; color: #1557c0; }
+  .cat-donation { background: #e4f7e9; color: var(--green); }
+
+  /* ---------- Right pane: message detail ---------- */
+  .msg-detail-pane {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #fff;
+  }
+  .msg-detail-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 40px;
+    text-align: center;
+    gap: 10px;
+  }
+  .msg-detail-empty .icon {
+    font-size: 44px;
+    opacity: .35;
+  }
+
+  .msg-detail {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  .msg-detail.show { display: flex; }
+
+  .msg-detail-head {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+  }
+  .msg-detail-subject {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 8px;
+    word-break: break-word;
+  }
+  .msg-detail-from {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .msg-detail-from strong { color: var(--dark); }
+  .msg-detail-from a { color: var(--blue); text-decoration: none; }
+  .msg-detail-from a:hover { text-decoration: underline; }
+
+  .msg-detail-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .msg-detail-body {
+    padding: 22px;
+    flex: 1;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #2a2a3a;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: #fafbff;
+    max-height: 400px;
+  }
+
+  /* ---------- Reply composer ---------- */
+  .msg-composer {
+    border-top: 1px solid var(--border);
+    padding: 16px 22px;
+    background: #fff;
+  }
+  .msg-composer label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 6px;
+  }
+  .msg-composer textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 11px 13px;
+    border: 1px solid #cbd7e8;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .msg-composer textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(23,105,224,.12);
+  }
+  .msg-composer-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Status badges ---------- */
+  .msg-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .msg-badge.new { background: #e8f0fd; color: #1557c0; }
+  .msg-badge.read { background: #f0f0f5; color: #68778b; }
+  .msg-badge.replied { background: #e4f7e9; color: var(--green); }
+  .msg-badge.archived { background: #fff2d9; color: var(--amber); }
+  .msg-badge.donation { background: #e4f7e9; color: var(--green); }
+  .msg-badge.contact { background: #e8f0fd; color: #1557c0; }
+
+  /* ---------- Reply history ---------- */
+  .reply-history {
+    border-top: 1px solid var(--border);
+    padding: 14px 22px;
+    background: #f7f9fd;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .reply-history h4 {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .reply-item {
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    margin-bottom: 6px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.5;
+  }
+  .reply-item .reply-meta {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  /* ---------- Loading / empty ---------- */
+  .list-empty {
+    padding: 40px 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .list-empty strong {
+    display: block;
+    color: var(--dark);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .msg-layout { grid-template-columns: 1fr; }
+    .msg-list-pane { border-right: 0; border-bottom: 1px solid var(--border); }
+    .msg-list { max-height: 320px; }
+    .msg-detail-body { max-height: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="gate" style="display:grid;place-items:center;min-height:100vh;color:#68778b;font-family:Arial,sans-serif;font-size:14px">
+  Verifying access…
+</div>
+
+<div id="shell" style="display:none">
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">EduGM <span>Team</span></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">▦</span> Overview</a>
+      <a href="donations.html"><span class="nav-icon">₹</span> Donations</a>
+      <a href="messages.html" class="active"><span class="nav-icon">✉</span> Messages</a>
+      <a href="audit.html"><span class="nav-icon">▤</span> Audit Logs</a>
+      <a href="team.html"><span class="nav-icon">◍</span> Team</a>
+      <a href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-foot">
+      Signed in as team member
+      <button id="logoutBtn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">☰</button>
+      <h1>Messages</h1>
+    </div>
+    <div class="topbar-right">
+      <span id="userChip" class="user-chip"></span>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="content">
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="msg-layout">
+
+          <!-- LEFT: message list -->
+          <div class="msg-list-pane">
+            <div class="msg-list-head">
+              <h3>Inbox <span id="msgCount" style="color:var(--muted);font-weight:500"></span></h3>
+              <input
+                id="msgSearch"
+                class="msg-search"
+                type="search"
+                placeholder="Search by name, email or subject…"
+                aria-label="Search messages">
+              <div class="msg-filter-row">
+                <button class="msg-filter-btn active" data-filter="all" type="button">All</button>
+                <button class="msg-filter-btn" data-filter="new" type="button">New</button>
+                <button class="msg-filter-btn" data-filter="contact" type="button">Contact</button>
+                <button class="msg-filter-btn" data-filter="donation" type="button">Donation</button>
+                <button class="msg-filter-btn" data-filter="replied" type="button">Replied</button>
+              </div>
+            </div>
+            <div class="msg-list" id="msgList">
+              <div class="list-empty">
+                <strong>Loading messages…</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: detail -->
+          <div class="msg-detail-pane">
+
+            <!-- Empty state -->
+            <div class="msg-detail-empty" id="msgDetailEmpty">
+              <div class="icon">✉</div>
+              <div>Select a message to view it</div>
+            </div>
+
+            <!-- Detail -->
+            <div class="msg-detail" id="msgDetail">
+              <div class="msg-detail-head">
+                <h2 class="msg-detail-subject" id="detailSubject">—</h2>
+                <div class="msg-detail-from" id="detailFrom"></div>
+                <div class="msg-detail-actions">
+                  <button class="btn btn-secondary" id="archiveBtn" type="button">📥 Archive</button>
+                  <button class="btn btn-secondary" id="markReadBtn" type="button">✓ Mark read</button>
+                  <button class="btn btn-secondary" id="markUnreadBtn" type="button">● Mark unread</button>
+                </div>
+              </div>
+
+              <div class="msg-detail-body" id="detailBody"></div>
+
+              <div class="reply-history" id="replyHistory" style="display:none">
+                <h4>Reply history</h4>
+                <div id="replyHistoryList"></div>
+              </div>
+
+              <div class="msg-composer">
+                <label for="replyText">Reply</label>
+                <textarea
+                  id="replyText"
+                  placeholder="Type your reply… (sent via email, and stored here)"
+                  maxlength="4000"></textarea>
+                <div class="msg-composer-actions">
+                  <button class="btn btn-secondary" id="clearReplyBtn" type="button">Clear</button>
+                  <button class="btn btn-primary" id="sendReplyBtn" type="button">✉ Send reply</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <p class="message" id="globalMessage" role="status" aria-live="polite"></p>
+
+    </div>
+  </main>
+</div>
+
+<!-- Firebase (for Firestore) + EmailJS (for sending replies) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="module" src="messages.js"></script>
+</body>
+</html>
