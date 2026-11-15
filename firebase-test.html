@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firebase Diagnostic — EduGM</title>
+<style>
+  body{font-family:Arial,sans-serif;background:#f8f9ff;color:#202036;padding:24px;line-height:1.6}
+  h1{font-size:20px;margin:0 0 16px}
+  .row{padding:12px 14px;border-radius:8px;margin-bottom:10px;font-size:14px;border:1px solid}
+  .pending{background:#eff4ff;border-color:#d3e1ff;color:#1e44a8}
+  .ok{background:#ecfaf3;border-color:#bfefd8;color:#0e7a52}
+  .fail{background:#fff1f1;border-color:#ffd5d5;color:#a12323}
+  code{background:#fff;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;border:1px solid #e0d8ff}
+  pre{background:#fff;border:1px solid #e0d8ff;border-radius:8px;padding:12px;overflow:auto;font-size:12px;margin-top:12px}
+  button{background:#6546e8;color:#fff;border:0;border-radius:8px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;margin-top:10px}
+</style>
+</head>
+<body>
+
+<h1>Firebase Diagnostic</h1>
+<p style="color:#77768b;font-size:13px;margin-bottom:16px">
+  Tests Firebase init → Firestore read → Firestore write. Open DevTools (F12) Console too.
+</p>
+
+<div id="results"></div>
+
+<button id="runBtn">▶ Run diagnostic</button>
+<pre id="log" style="display:none"></pre>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, getDocs, limit, query, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ---- YOUR REAL CONFIG ---- */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBxdkXP48MtLOZwcNicQnBNQrXjjVf4C6E",
+  authDomain: "edugm-unitools-donations.firebaseapp.com",
+  projectId: "edugm-unitools-donations",
+  storageBucket: "edugm-unitools-donations.firebasestorage.app",
+  messagingSenderId: "359466843038",
+  appId: "1:359466843038:web:d39f7ed498c1c3836f348f"
+};
+
+const results = document.getElementById("results");
+const logEl = document.getElementById("log");
+const runBtn = document.getElementById("runBtn");
+
+function row(status, title, detail) {
+  const d = document.createElement("div");
+  d.className = "row " + status;
+  d.innerHTML = `<strong>${title}</strong>${detail ? " — " + detail : ""}`;
+  results.appendChild(d);
+}
+function log(msg) {
+  logEl.style.display = "block";
+  logEl.textContent += msg + "\n";
+}
+function clearAll() {
+  results.innerHTML = "";
+  logEl.textContent = "";
+}
+
+async function run() {
+  clearAll();
+  runBtn.disabled = true;
+  results.innerHTML = '<div class="row pending"><strong>Running…</strong> see below</div>';
+
+  let db;
+
+  /* 1. Init */
+  try {
+    const app = initializeApp(FIREBASE_CONFIG);
+    db = getFirestore(app);
+    clearAll();
+    row("ok", "✓ Firebase init", "project: " + FIREBASE_CONFIG.projectId);
+    log("[1] Firebase init OK");
+  } catch (e) {
+    clearAll();
+    row("fail", "✗ Firebase init", e.message);
+    log("[1] FAIL " + e.message);
+    runBtn.disabled = false;
+    return;
+  }
+
+  /* 2. Read mailRegistrations */
+  try {
+    const snap = await getDocs(query(collection(db, "mailRegistrations"), limit(1)));
+    row("ok", "✓ Read mailRegistrations", "docs: " + snap.size);
+    log("[2] Read OK — docs: " + snap.size);
+  } catch (e) {
+    row("fail", "✗ Read mailRegistrations", "code: <code>" + e.code + "</code> — " + e.message);
+    log("[2] FAIL code=" + e.code + " msg=" + e.message);
+  }
+
+  /* 3. Write to mailRegistrations */
+  try {
+    const ref = await addDoc(collection(db, "mailRegistrations"), {
+      fullName: "TEST — ignore",
+      personalEmail: "diagnostic@test.local",
+      phone: "0000000000",
+      location: "Test",
+      workspaceHandle: "diagnostic-test",
+      workspaceEmail: "diagnostic-test@mail.codebihin.in",
+      status: "pending",
+      reference: "DIAG-" + Date.now(),
+      submittedAt: serverTimestamp(),
+      _diagnostic: true
+    });
+    row("ok", "✓ Write mailRegistrations", "doc id: <code>" + ref.id + "</code>");
+    log("[3] Write OK — id: " + ref.id);
+  } catch (e) {
+    row("fail", "✗ Write mailRegistrations", "code: <code>" + e.code + "</code> — " + e.message);
+    log("[3] FAIL code=" + e.code + " msg=" + e.message);
+
+    if (e.code === "permission-denied") {
+      row("fail", "→ Fix", "Publish the Firestore rules. The write is blocked by security rules.");
+    }
+  }
+
+  /* 4. Write to adminNotifications */
+  try {
+    const ref = await addDoc(collection(db, "adminNotifications"), {
+      type: "diagnostic",
+      createdAt: serverTimestamp(),
+      read: false,
+      _diagnostic: true
+    });
+    row("ok", "✓ Write adminNotifications", "doc id: <code>" + ref.id + "</code>");
+    log("[4] Write OK — id: " + ref.id);
+  } catch (e) {
+    row("fail", "✗ Write adminNotifications", "code: <code>" + e.code + "</code> — " + e.message);
+    log("[4] FAIL code=" + e.code + " msg=" + e.message);
+  }
+
+  row("pending", "Done", "Check Firestore Console for <code>_diagnostic: true</code> documents, then delete them.");
+  runBtn.disabled = false;
+}
+
+runBtn.addEventListener("click", run);
+run();
+</script>
+</body>
+</html>
