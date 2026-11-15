@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="EduGM UniTools team login — authorized team members only.">
+<meta name="theme-color" content="#1769e0">
+<title>Team Login | EduGM UniTools</title>
+<style>
+:root{
+  --blue:#1769e0;--blue-dark:#1255b8;--dark:#12335b;--bg:#f4f7fc;
+  --border:#dce5f1;--text:#243449;--muted:#68778b;
+  --green:#137333;--red:#b42318;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:flex;flex-direction:column}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px}
+.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:20px;font-weight:bold;color:var(--dark);letter-spacing:-.3px}
+.brand span{color:var(--blue)}
+main{flex:1;max-width:1100px;margin:0 auto;padding:40px 16px;width:100%}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px}
+.login{max-width:400px;margin:50px auto}
+h1{font-size:24px;color:var(--dark);margin:0 0 6px;letter-spacing:-.3px}
+label{display:block;font-size:14px;margin:14px 0 6px;font-weight:600}
+input{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:8px;font-size:15px;font-family:inherit}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,224,.12)}
+button{border:0;border-radius:8px;padding:12px 14px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:14px;transition:background .15s}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:var(--blue);color:#fff;width:100%;margin-top:18px}
+.primary:hover:not(:disabled){background:var(--blue-dark)}
+.message{font-size:14px;margin-top:12px;overflow-wrap:anywhere}
+.message:empty{display:none}
+.error{color:var(--red)}.success{color:var(--green)}
+.small{color:var(--muted);font-size:13px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">EduGM <span>UniTools</span> <small style="color:var(--muted);font-weight:normal">Team</small></div>
+  </div>
+</header>
+
+<main>
+  <section class="card login">
+    <h1>Team Login</h1>
+    <p class="small">Authorized EduGM team members only.</p>
+    <form id="loginForm" autocomplete="on" novalidate>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button id="loginBtn" class="primary" type="submit">Sign in</button>
+    </form>
+    <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<footer>
+  © 2026 EduGM UniTools. Maintained and developed by CodeBihin.
+</footer>
+
+<script type="module">
+import {
+  auth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "../firebase.js";
+
+/* Authorized team member UIDs — must match dashboard/index.html and Firestore rules. */
+const AUTHORIZED_UIDS = new Set([
+  "xrQ5oHinaAaddySn09V3k8CRAo52"
+]);
+
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+const loginBtn = document.getElementById("loginBtn");
+
+function setMsg(text, isError = false) {
+  loginMessage.textContent = text;
+  loginMessage.className = "message " + (isError ? "error" : "success");
+}
+
+/* If already signed in as an authorized user, go straight to dashboard. */
+onAuthStateChanged(auth, user => {
+  if (user && AUTHORIZED_UIDS.has(user.uid)) {
+    window.location.replace("dashboard/index.html");
+  } else if (user) {
+    /* Signed in but not authorized — force sign out so the session is clean. */
+    signOut(auth);
+  }
+});
+
+loginForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  setMsg("");
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    setMsg("Please enter your email and password.", true);
+    return;
+  }
+
+  loginBtn.disabled = true;
+
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+
+    /* Final authorization gate — never trust email alone. */
+    if (!AUTHORIZED_UIDS.has(cred.user.uid)) {
+      await signOut(auth);
+      throw new Error("This account is not authorized for team access.");
+    }
+
+    setMsg("Login successful. Redirecting…");
+    window.location.replace("dashboard/index.html");
+  } catch (err) {
+    setMsg("Login failed: " + err.message, true);
+    loginBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
